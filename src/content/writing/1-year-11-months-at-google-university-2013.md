@@ -1,12 +1,10 @@
 ---
 title: "1 year, 11 months at Google University"
 date: "2013-01-31"
-image: "https://the-distance-between-dreams.ghost.io/content/images/2025/01/Untitled.png"
+image: "/images/posts/google.png"
 ---
 
 I feel so fortunate to have spent the last 1 year, 11 months as a student at the most forward thinking company in the world. Working at Google, I was surrounded with incredibly talented people solving difficult problems in a culture of creativity, learning and personal growth.
-
-![](https://the-distance-between-dreams.ghost.io/content/images/2025/01/Untitled.png)
 
 Today is my last day at Google and, while I am incredibly sad to leave, I am, "uncomfortably excited" about what the future holds. The relationships, experience and skills that I gained during my time at Google have given me the confidence to pursue my dreams of being a startup co-founder.
 

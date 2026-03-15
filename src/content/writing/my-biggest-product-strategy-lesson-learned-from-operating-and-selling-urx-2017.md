@@ -1,9 +1,10 @@
 ---
 title: "URX retro: business model-vision fit"
 date: "2017-05-02"
+image: "/images/posts/urx-lesson.png"
 ---
 
-On May 2, 2016, we announced Pinterest's acquisition of URX and began the next step in our journey. In that moment it was hard to comprehend how different this chapter would be from the one before it, and I'm grateful that I've gained some of this perspective in the first year being, "on the other side".
+It's been one year since I was a startup founder/CEO. On May 2, 2016, we announced Pinterest's acquisition of URX and began the next step in our journey. In that moment it was hard to comprehend how different this chapter would be from the one before it, and I'm grateful that I've gained some of this perspective over the last year.
 
 In short- **my biggest learning about product strategy from URX is the importance of aligning your vision with your business model.** As with so many things in life, there's a big difference between understanding things with your head, and knowing them with your heart. I think this is especially true for the "resilient founder" persona who has the fortitude to endure the endless sea of challenges that plague early stage startups.
 
@@ -25,19 +26,19 @@ The best way to make sure your business stays inline with your mission is by mak
 
 To tell if your business model and mission are misaligned, go through the exercise of asking yourself these questions regularly:
 
-**To achieve our mission:**
+To achieve our mission:
 
 1. What are the various products or technologies that we could build?
 2. Who is the primary benefactor of this product(s)?
 3. What is the most ideal way we would make money?
 
-**If we're successful in executing our current business plan:**
+If we're successful in executing our current business plan:
 
 1. What is the specific pain point we solve for our customers?
 2. What is the impact our company has on the world?
 3. What is our strategic differentiator within the market?
 
-**If we're successful in achieving our mission:**
+If we're successful in achieving our mission:
 
 1. What is the specific pain point we solve for our customers?
 2. What is the impact our company has on the world?
@@ -45,10 +46,10 @@ To tell if your business model and mission are misaligned, go through the exerci
 
 The goal of asking these questions is to identify the gaps/misalignments between the near- and long-term viewpoints on your business. No company has ever been able to constantly pivot its value prop to create its strategic differentiator. The most successful tech companies of all time have been able to expand upon the same customer pain point and value prop through the duration of their business:
 
-* Google still helps people search for answers to their questions
-* AirBnB still helps people make supplemental income by renting their houses
-* Pinterest still helps people discover and do things they love
-* Netflix still helps people watch movies in their homes
+- Google still helps people search for answers to their questions
+- AirBnB still helps people make supplemental income by renting their houses
+- Pinterest still helps people discover and do things they love
+- Netflix still helps people watch movies in their homes
 
 In order to create lasting value for your business and your customers, you have to make sure that your near- and long-term goals are inline with each other. This is a difficult balance to maintain, but is arguably one of the most important things you can do to ensure your company's success.
 
@@ -58,12 +59,12 @@ In answering these questions if you identify a misalignment between your busines
 
 ### Changing your business model
 
-* If you have an established business, changing your business model creates serious customer risk and is probably not the right idea. In this case, you should evaluate changing your mission to better reflect your current business model.
-* If you have a nascent business, changing your business model is something you can validate by talking to your existing/prospective customers. How is each business model perceived by your customers? Is one more preferable than the other?
+- If you have an established business, changing your business model creates serious customer risk and is probably not the right idea. In this case, you should evaluate changing your mission to better reflect your current business model.
+- If you have a nascent business, changing your business model is something you can validate by talking to your existing/prospective customers. How is each business model perceived by your customers? Is one more preferable than the other?
 
 ### Changing your mission statement
 
-* If you have an established business, what would the impact be to your team if you change your mission statement? If you're a mission driven culture, do you risk attrition if you change your mission? Talk to your executive team to get their feedback on this.
-* If you have a nascent business, your mission statement should be considered a "work in progress" that is likely to change as you learn more about your customers.
+- If you have an established business, what would the impact be to your team if you change your mission statement? If you're a mission driven culture, do you risk attrition if you change your mission? Talk to your executive team to get their feedback on this.
+- If you have a nascent business, your mission statement should be considered a "work in progress" that is likely to change as you learn more about your customers.
 
 Maintaining state between the near- and long-term identify of your business is one of the most difficult jobs of any founder. You only have one chance at a first impression, and getting this right will help create a cohesive story for your company to employees, recruits, customers and investors. If you get this wrong, you will find yourself in a constant identify crisis, which will consistently cause confusion and may never be able to be corrected.

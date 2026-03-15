@@ -1,13 +1,12 @@
 ---
 title: "How to ace your YC interview"
 date: "2016-04-15"
+image: "/images/posts/ace-yc-interview.png"
 ---
 
 Spring has sprung, and the smell of fresh YC applications is in the air. It's that special time that happens twice a year where thousands of budding entrepreneurs vie for a spot in the upcoming Y Combinator class.
 
 For those among you who are preparing for your interviews over the next few days, I wanted to share some of the best practices that helped Andrew, Nate, James and me pass our interview and earn URX's place in the Summer 2013 batch.
-
-<!-- Image unavailable: original URL was https://images.spr.so/cdn-cgi/imagedelivery/j42No7y-dcokJuNgXeA0ig/1ee45d92-6c36-43b3-bdb8-8b4196074fcc/Untitled/w=3840,quality=90,fit=scale-down -->
 
 ## Quick, concise answers are key
 
@@ -16,7 +15,6 @@ Each interview lasts about 10 minutes and the interviewers' goal is to get as mu
 ## Know your 5 points, and make sure you speak to them
 
 In any interview, it's crucial that your personal narrative shines through. Unfortunately, the rapid fire nature of YC interviews makes this difficult. In your prep, it's crucial that you identify the 3-5 most important points about your business/team that you need the YC interviewers to hear. These can be things about your backgrounds, user growth, revenue, or the like, and together should tell the best version of your story. For our team, these were:
-
 1. We've known each other for a long time, and have lots of experience in the space.
 2. We've already built the first version of our product
 3. We already have customers
@@ -40,4 +38,4 @@ Y Combinator emphasizes the strength of the founding team above most other thing
 
 I've heard many people debate whether the interviews should include a demo or not. The general convention is that the partners are more interested in hearing people talk about the thing, as opposed to seeing the thing itself. That said, there seems to be no consistency as to whether a team actually gets to show a demo. In our case, we were introducing a new concept that was too abstract for most people to understand so we had a <30 second demo in place to make it clear exactly what we were talking about. We were able to show it, but only after trying about 3–4 times :). So, don't rely on your demo as a crutch to tell your story.
 
-The YC interview process is as challenging as it is invigorating, and I hope these 6 tips help you in your journey. Questions/feedback? Find me on Twitter [@jmilinovich](http://twitter.com/jmilinovich?ref=jmilinovich.com)
+The YC interview process is as challenging as it is invigorating, and I hope these 6 tips help you in your journey. Questions/feedback? Find me on Twitter [@jmilinovich](http://twitter.com/jmilinovich)

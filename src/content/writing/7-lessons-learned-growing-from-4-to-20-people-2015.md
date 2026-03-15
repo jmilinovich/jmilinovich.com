@@ -1,45 +1,71 @@
 ---
 title: "Small is fast"
 date: "2015-05-24"
+image: "/images/posts/mitosis.png"
 ---
 
-At 4 people, we moved like lightning. At 20, we felt stuck in mud. Here's what broke and why.
+In URX's first 2 years, we grew from 4 co-founders to a 20-person engineering, product and business team. With this growth, many of our internal processes and communication channels broke. It didn't feel like we were moving as fast as we were before, and it took longer to get everyone on the same page.
 
-You start as a single brain with eight hands. Every decision happens over lunch. Problems get solved in real time. Information flows naturally. Speed isn't something you think about—you're simply moving.
+## How can we grow startups as efficiently as living organisms?
 
-_Then you grow._
+After analyzing our current processes, I came up with a new set of tenets that guide how I operate as a CEO. Thanks to the way communication overhead scales exponentially as a team grows, I expect to have to revisit these continuously along our growth curve.
 
-A standup that took 10 minutes now eats an hour. People miss context. Code conflicts with other teams' work. Small decisions spawn meetings. Your calendar fills with "quick syncs" that aren't quick.
+Here are the 7 lessons I learned growing URX from 4 to 20 people.
 
-You blame process. You're half right.
+## Lesson 1: Learn to delegate.
 
-The real problem is math. Four people need 6 connections to stay in sync. Twenty people need 190. Information that once flowed naturally now needs channels, and those channels clog. Fast.
+Learn the difference between things that are important enough for someone to do, and things that you should do. As a founding CEO in a growing company, your job changes continuously and success is determined in part by how quickly one can delegate responsibilities to others.
 
-Most companies respond by adding meetings. More standups. More syncs. More updates. They try to simulate the information flow they had at four people. It never works. You can't solve exponential growth with linear tools.
+Generally speaking, as soon as you'd consider yourself, "good at something" you should hire someone to do it, or have someone else on the team own it. It's important to keep your time free to find the, "unknown unknowns."
 
-_Here's what does work:_
+Ben Horowitz talks more about this in Do You Feel Pressure Or Do You Apply Pressure.
 
-Split information into need-to-know and nice-to-know. At four people, this distinction didn't matter. At twenty, it's survival. Most decisions don't need everyone. Most meetings shouldn't exist. Most syncs can be emails. Most emails can be docs.
+## Lesson 2: Stay highly leveraged.
 
-Your job as CEO transforms. At four people, you're a player. At twenty, you're a referee. Stop solving known problems—that's your team's job now. Your work is finding the unknown ones. The fires no one sees yet. The opportunities everyone else is too busy to notice.
+As a CEO, it is your responsibility to balance enabling your team to stay focused on execution while still having time to triage the most important issues in your business. It requires a high degree of discipline making sure that your time is always well spent.
 
-Say no ruthlessly. Each yes costs more than you think. "A 30-minute meeting with 6 people isn't 30 minutes—it's 3 hours of company time." Time isn't your scarcest resource—attention is. Guard it.
+For me, I gained a lot of leverage when I learned to say no. Whether it be internal meetings, "coffee invites", or decisions you think others should make- learn to say no.
 
-Build processes before you need them. We didn't, and paid for it. Write things down. Make the obvious explicit. Then repeat it until people roll their eyes. What feels like over-communication to you feels like barely enough to everyone else.
+Jessica Stillman talks more about this in Why You Need to Stop Being So Nice.
 
-Your mood is contagious, and the infection rate doubles with each hire. One anxious comment spawns a dozen side conversations you'll never hear. One moment of panic creates ripples that last weeks. Stay steady.
+## Lesson 3: Own your schedule.
 
-These problems hit every company at the same size. It's not you—it's physics. Growing a team means fighting information entropy. Structure doesn't kill speed—it enables it. But only if you build the right kind.
+It's well known that time is everyone's most limited resource. This is even more true as a startup CEO, as there is never any shortage of things that, "could" be done. It's crucial that you clearly define your priorities and reflect that in how you spend your time.
 
-_What worked for us:_
+For me, a part of this was doubling down on becoming an email machine. I pride myself on being an email expert that is able to process 100's of emails per day using a combination of filters, rules, and reminders. My calendar's been referred to as the, "Mona Lisa" of calendars — ok, maybe that's just what I call it — and I've really taken pride in my productivity. I've developed my own "stack" that includes products like SaneLater, ClaraLabs and Boomerang.
 
-- Write daily updates instead of having meetings. Make them scannable. Bullet points over paragraphs. Numbers over words.
-- Kill any meeting that's for "sharing updates." Updates should be written. Meetings are for decisions or debates.
-- Build public dashboards for everything that matters. Numbers don't need meetings to be shared.
-- Create clear ownership for every project and metric. "Everyone's responsible" means no one is responsible.
+David Allen talks more about this in Getting Things Done.
 
-Growing slowly isn't failure—it's often survival. Speed comes from knowing where you're going, not from rushing to get there. A smaller team moving in the right direction beats a bigger team running in circles.
+## Lesson 4: Manage your emotions.
 
-Sometimes that means saying no to good opportunities because you haven't built the systems to handle them yet. That feels wrong. Do it anyway.
+As a founding CEO, your emotions are amplified throughout the organization. Everyone looks to the founders to know whether things are going well or not. The worst thing that could happen is you spook the team because you're having a bad day. Whether you like it or not, you are the barometer for the company's anxiety level.
 
-You'll see competitors hiring faster, launching more, making noise. Ignore it. Speed is not progress. The goal isn't to be the fastest moving—it's to be the furthest ahead.
+The hardest part of building a startup is how quickly things change. It's an emotional rollercoaster, and if not managed well will get the best of you. For me, this involves trying to live an integrated life that also leaves time for loved ones, working out, writing, sleeping and friends.
+
+Ben Horowitz talks more about this in Managing Your Own Psychology.
+
+## Lesson 5: Repeat yourself.
+
+As a team grows, it becomes increasingly difficult to keep everyone on the same page. Make a point to repeat yourself and hammer home the company's goals and vision through well-defined communication channels. Invest into well-maintained internal documentation- you can never have "too good" of an internal knowledge base.
+
+At URX, I send a Monday email to start the week, and we do an all-team retro on Fridays where we talk through our goals, successes, launches, announcements, and wins for the week. We've built this into a part of our culture, and our Weekly Retro is a highlight of the week.
+
+Peter Drucker talks more about this in The Effective Executive.
+
+## Lesson 6: Align your vision with your goals.
+
+Make your company's vision tangible by connecting it to actionable goals. In parallel, gut check that every goal is on the right scalars and vectors to help you properly measure success against your mission. Be careful not to overly optimize for either the near- or long-term.
+
+At URX, we're building a very complex technology, and I've learned first-hand the importance of having a clearly defined vision that the team can rally around. A well-defined mission statement is the only way a leadership team can build a cohesive plan that is aligned across the company. This plan can be used to then define your team's goals, priorities and hiring needs.
+
+Jim Collins talks more about this in The Hedgehog Concept.
+
+## Lesson 7: Know your precedents.
+
+The beauty of the software industry is that it is built on the shoulders of giants. Whether we like it or not, our world is framed within the work of those that came before us.
+
+It's important to take a step back from the day-to-day to put your company and your problems into the broader context of the world around us. Practically speaking, this means that you're likely not the first person to face some seemingly obscure problem. Chances are, some abstraction of the same type of challenge have been dealt with before.
+
+URX is creating a new kind of marketplace for mobile commerce built with a technology that has never existed before. That said, I consider myself a student of the precedents for all facets of our business. From the history of how the internet was born, to the early days of search engines, to emerging mobile business models and their desktop equivalent- I strive to maximize the potential of URX by deeply understanding the world around us.
+
+Kevin Owocki talks more about this in Running a Startup? You're standing on the shoulders of giants.
