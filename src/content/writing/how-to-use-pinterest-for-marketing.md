@@ -15,7 +15,7 @@ Pinterest is a powerful tool that helps people all over the world discover ideas
 
 While search engines like Google focus on the bottom of the purchase funnel (ie, once someone knows that they have a need and are actively looking for it) and social networks like Facebook and Instagram focus on the top of the funnel (ie, when customers are passively looking to consume content with no intent), Pinterest is the only place on the internet that lets marketers reach consumer in the consideration phase.
 
-![consideration phase](https://images.spr.so/cdn-cgi/imagedelivery/j42No7y-dcokJuNgXeA0ig/54fa2c7f-3fce-4e2a-9ef9-c8115cd25f7e/consideration/w=2048,quality=90,fit=scale-down)
+<!-- Image unavailable: original URL was https://images.spr.so/cdn-cgi/imagedelivery/j42No7y-dcokJuNgXeA0ig/54fa2c7f-3fce-4e2a-9ef9-c8115cd25f7e/consideration/w=2048,quality=90,fit=scale-down -->
 
 This creates a big opportunity for businesses to get their products, goods and services in front of potential buyers while they're deciding what they want to buy, but haven't made the decision yet. That's one of the most powerful things about Pinterest- people go there to find ideas, not just to make purchasing decisions. This means that marketers are able to reach consumers before they've made up their mind on what they're looking to do.
 
@@ -27,7 +27,7 @@ Have you noticed how no matter what you search for, it seems that you almost alw
 
 As your content becomes more popular, it will begin showing up on more of Pinterest's SEO pages, which means that it will be more readily indexed by Google. Since Google gives Pinterest's domain a high authority and quality score, this means that over time you will start to accumulate some of this authority if your Pins are shown in prominent places. So, getting good at Pinterest doesn't just help improve your Pinterest referral traffic, it can also improve your traffic from places like Google!
 
-![Pinterest search results](https://images.spr.so/cdn-cgi/imagedelivery/j42No7y-dcokJuNgXeA0ig/9a687286-6695-49b7-90f6-578e48d17767/pinterest-results/w=2048,quality=90,fit=scale-down)
+<!-- Image unavailable: original URL was https://images.spr.so/cdn-cgi/imagedelivery/j42No7y-dcokJuNgXeA0ig/9a687286-6695-49b7-90f6-578e48d17767/pinterest-results/w=2048,quality=90,fit=scale-down -->
 
 ## How does Pinterest marketing work?
 
@@ -43,7 +43,7 @@ Once Pinterest understands what a given Pin is about, it can start showing it to
 
 As such, one of the most important things to get right is having a clear strategy for how to communicate to Pinterest what your Pins are about and getting engagement signals on the Pins early.
 
-![Pinterest interests](https://images.spr.so/cdn-cgi/imagedelivery/j42No7y-dcokJuNgXeA0ig/9fa89ec9-a810-4688-82dc-0ee9e3770621/pinterest-interests/w=2048,quality=90,fit=scale-down)
+<!-- Image unavailable: original URL was https://images.spr.so/cdn-cgi/imagedelivery/j42No7y-dcokJuNgXeA0ig/9fa89ec9-a810-4688-82dc-0ee9e3770621/pinterest-interests/w=2048,quality=90,fit=scale-down -->
 
 ## How to create a Pinterest marketing plan?
 
@@ -57,7 +57,7 @@ Once you've chosen the interests that you want to focus on, the next step is to 
 
 Start by creating boards whose names are the same as the 10-15 interests you chose to focus on. It's OK if they have more words in them as well, but make sure that the Interest name itself is very prominent. Make sure that each board has a very specific description that explains the core ideas that you'll be pinning to the board.
 
-![boards](https://images.spr.so/cdn-cgi/imagedelivery/j42No7y-dcokJuNgXeA0ig/8f7bea30-eb08-4480-8391-d4535be6ca1a/boards/w=2048,quality=90,fit=scale-down)
+<!-- Image unavailable: original URL was https://images.spr.so/cdn-cgi/imagedelivery/j42No7y-dcokJuNgXeA0ig/8f7bea30-eb08-4480-8391-d4535be6ca1a/boards/w=2048,quality=90,fit=scale-down -->
 
 Next, you need to decide what content to start posting onto these boards.
 
@@ -67,7 +67,7 @@ There are only two kinds of Pins on Pinterest: Pins from your own website, and P
 
 The reason you're seeing the Pins that Pinterest is recommending to you is because Pinterest already knows a lot about them and has a high confidence that users like you will find them interesting. When you save them to your boards, you're giving Pinterest even more signal about what your board is about. This is extremely important, because Pinterest learns a lot about new Pins based on the other Pins that it shows up on boards with.
 
-![existing pin](https://images.spr.so/cdn-cgi/imagedelivery/j42No7y-dcokJuNgXeA0ig/73de7025-2161-4b02-bdc3-46a5460ea765/existing-pin/w=2048,quality=90,fit=scale-down)
+<!-- Image unavailable: original URL was https://images.spr.so/cdn-cgi/imagedelivery/j42No7y-dcokJuNgXeA0ig/73de7025-2161-4b02-bdc3-46a5460ea765/existing-pin/w=2048,quality=90,fit=scale-down -->
 
 Each week you should also continue to save new, existing content to your boards to keep giving Pinterest more signal and context for what your Pins are about.
 
@@ -87,7 +87,7 @@ The Pins that perform best on Pinterest have been created specifically for Pinte
 
 Once you've created your Pin graphics, you can upload them into the Pinterest system. Add the URL for each Pin along with a detailed description that touches upon what the Pins about and ideally mentions the specific interests that it's related to. Post these to the right boards, and you're off to the races!
 
-![aesthetic pins](https://images.spr.so/cdn-cgi/imagedelivery/j42No7y-dcokJuNgXeA0ig/18a3b1ac-8a5e-4e09-97ba-652859b6e1bc/aesthetic-pins/w=2048,quality=90,fit=scale-down)
+<!-- Image unavailable: original URL was https://images.spr.so/cdn-cgi/imagedelivery/j42No7y-dcokJuNgXeA0ig/18a3b1ac-8a5e-4e09-97ba-652859b6e1bc/aesthetic-pins/w=2048,quality=90,fit=scale-down -->
 
 ## How to make Pinterest Pins popular?
 
@@ -95,7 +95,7 @@ Once you've uploaded your content to Pinterest, you will see the impressions slo
 
 Another option to fast track the distribution of your Pins is to run small budget ads for your own Pins, targeting the Interests that they're related to. Spending $2-3 per Pin per day should be enough to start getting 100,000's of paid monthly impressions of your content. This is enough for the content that truly resonates with the market to start being shown more organically.
 
-![pinterest ads](https://images.spr.so/cdn-cgi/imagedelivery/j42No7y-dcokJuNgXeA0ig/0b258a07-cf44-4d8e-87a3-8f00f5d720c1/pinterest-ads/w=2048,quality=90,fit=scale-down)
+<!-- Image unavailable: original URL was https://images.spr.so/cdn-cgi/imagedelivery/j42No7y-dcokJuNgXeA0ig/0b258a07-cf44-4d8e-87a3-8f00f5d720c1/pinterest-ads/w=2048,quality=90,fit=scale-down -->
 
 An interesting phenomenon is that once your own Pins are deemed popular and start to be shown to more people, other content from your boards will start to show up more prominently as well. Pinterest will begin recommending other content from your boards to relevant users, and will also start suggesting people follow your boards more prominently.
 

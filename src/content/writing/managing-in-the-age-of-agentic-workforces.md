@@ -1,7 +1,7 @@
 ---
 title: "Managing in the Age of Agentic Workforces"
 date: "2025-07-30"
-image: "https://www.jmilinovich.com/content/images/size/w1200/2025/07/af7c8f5e-3da0-48a2-829a-a365b32cc588.png"
+image: "/images/posts/af7c8f5e-3da0-48a2-829a-a365b32cc588.png"
 ---
 
 Historically, the main constraint on software teams has been their ability to ship software. Teams could start with extremely ambitious missions that translated into clear visions of the future. They'd set roadmaps and goals managed by layers of managers, and then individuals on the team would translate those ideas, visions, and direction into something tangible that delivered value to customers.

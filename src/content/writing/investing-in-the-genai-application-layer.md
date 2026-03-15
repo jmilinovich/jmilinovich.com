@@ -1,14 +1,14 @@
 ---
 title: "The real AI goldrush"
 date: "2024-09-18"
-image: "https://www.jmilinovich.com/content/images/2025/01/image-3.png"
+image: "/images/posts/image-3.png"
 ---
 
 AI infrastructure represents an enormous and rapidly expanding market, yet it remains dwarfed by the potential at the application layer.
 
 Consider capital allocation: Chips. Cloud. Models. These are foundational infrastructure plays.
 
-![](https://www.jmilinovich.com/content/images/2025/01/image-4.png)
+![](/images/posts/image-4.png)
 
 Historical tech cycles reveal a consistent pattern: pioneers construct the underlying systems, but genuine value accrues at the periphery -- where actual users engage with solutions.
 

@@ -1,7 +1,7 @@
 ---
 title: "The Agentic Web"
 date: "2026-01-31"
-image: "https://www.jmilinovich.com/content/images/size/w1200/2026/01/IMG_4810-1.png"
+image: "/images/posts/IMG_4810-1.png"
 ---
 
 In December I predicted a computer-use-first company would hit a $1B valuation by end of 2026. Eight days later, Meta bought Manus for $2.5B.

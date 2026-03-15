@@ -3,7 +3,7 @@ title: "On Chain Conglomerates"
 date: "2022-07-10"
 ---
 
-![](https://images.spr.so/cdn-cgi/imagedelivery/j42No7y-dcokJuNgXeA0ig/ee8ceb87-fd0b-4288-bf9f-f94b40b16ffd/Untitled/w=3840,quality=90,fit=scale-down)
+<!-- Image unavailable: original URL was https://images.spr.so/cdn-cgi/imagedelivery/j42No7y-dcokJuNgXeA0ig/ee8ceb87-fd0b-4288-bf9f-f94b40b16ffd/Untitled/w=3840,quality=90,fit=scale-down -->
 
 [Crypto Mullets](https://mirror.xyz/jrm.eth/sc2O_cxkJ_npiC17HwUQMvhaoSMe227pIVcgoIC5yUY?ref=jmilinovich.com) are the next wave of multibillion dollar web3 companies, and one way they'll come to market is through on chain conglomerates powered by annuity-bearing NFTs.
 

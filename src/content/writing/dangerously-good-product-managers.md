@@ -5,7 +5,7 @@ date: "2023-03-01"
 
 Product managers play a crucial role in consumer product companies as they serve as the central point of contact between the company's users, product development teams, cross-functional teams, and leadership team. While a product manager's success is dependent on the impact and quality of their team's work, it's easy to fall into the trap of being a bad PM who contributes little to the team beyond attending meetings and writing a few documents.
 
-![Untitled](https://images.spr.so/cdn-cgi/imagedelivery/j42No7y-dcokJuNgXeA0ig/7b3613b1-bda9-4f39-a1ea-f386aaa6be4c/Untitled/w=3840,quality=90,fit=scale-down)
+<!-- Image unavailable: original URL was https://images.spr.so/cdn-cgi/imagedelivery/j42No7y-dcokJuNgXeA0ig/7b3613b1-bda9-4f39-a1ea-f386aaa6be4c/Untitled/w=3840,quality=90,fit=scale-down -->
 
 However, an exceptional product manager can be a significant force multiplier for the entire organization. During our work at Clubhouse, Harsan coined the term "dangerous product managers" to describe these exceptional individuals.
 

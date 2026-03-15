@@ -1,10 +1,10 @@
 ---
 title: "The great acceleration"
 date: "2025-01-22"
-image: "https://www.jmilinovich.com/content/images/2025/01/A-solitary-human-figure-stands-before-an-enormous-circular-gateway-of-light--its-edges-defined-by-intricate-mathematical-patterns-that-transition-from-organic-curves-to-precise-geometric-forms.-The-gateway-emanates-a-warm--dawn-like-glow-th-1.jpg"
+image: "/images/posts/A-solitary-human-figure-stands-before-an-enormous-circular-gateway-of-light--its-edges-defined-by-intricate-mathematical-patterns-that-transition-from-organic-curves-to-precise-geometric-forms.-The-gateway-emanates-a-warm--dawn-like-glow-th-1.jpg"
 ---
 
-_This is the first essay in a [series](https://www.jmilinovich.com/tag/agi/) about living with AGI in society_
+_This is the first essay in a [series](/writing) about living with AGI in society_
 
 ---
 
@@ -16,7 +16,7 @@ We are living in such a moment -- and now we can see it unfolding in real time.
 
 Earlier this week, a coalition of the world's most powerful technology companies [announced](https://openai.com/index/announcing-the-stargate-project/?ref=jmilinovich.com) a $500 billion investment in AI infrastructure -- the largest industrial mobilization since World War II. They called it The Stargate Project, and its goal was explicit: to build the foundation for artificial general intelligence. This isn't speculation about future possibilities. This is the present rushing to meet a future that's arriving faster than anyone expected.
 
-![](https://www.jmilinovich.com/content/images/2025/01/A-solitary-human-figure-stands-before-an-enormous-circular-gateway-of-light--its-edges-defined-by-intricate-mathematical-patterns-that-transition-from-organic-curves-to-precise-geometric-forms.-The-gateway-emanates-a-warm--dawn-like-glow-th-1.jpg)
+![](/images/posts/A-solitary-human-figure-stands-before-an-enormous-circular-gateway-of-light--its-edges-defined-by-intricate-mathematical-patterns-that-transition-from-organic-curves-to-precise-geometric-forms.-The-gateway-emanates-a-warm--dawn-like-glow-th-1.jpg)
 
 ## Patterns Emerging
 

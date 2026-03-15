@@ -9,7 +9,7 @@ Smart creators found a better way. They take their strongest content and transfo
 
 The old approach was dead simple: create new content for every platform. Write a blog post. Start fresh on a video. Build slides from scratch. Repeat until burnt out. It worked when we had two channels. It breaks completely with ten.
 
-![image](https://images.spr.so/cdn-cgi/imagedelivery/j42No7y-dcokJuNgXeA0ig/87a23e9b-2a46-4e23-ab53-3493a517ed80/Untitled/w=3840,quality=90,fit=scale-down)
+<!-- Image unavailable: original URL was https://images.spr.so/cdn-cgi/imagedelivery/j42No7y-dcokJuNgXeA0ig/87a23e9b-2a46-4e23-ab53-3493a517ed80/Untitled/w=3840,quality=90,fit=scale-down -->
 
 Tools changed everything. Headliner grabs your two-hour podcast and extracts the perfect 2-minute video clip. Designrr takes your sprawling research and builds a clean PDF that looks professional. Your messy Notion database becomes a polished landing page. The mechanical work happens automatically.
 

@@ -1,7 +1,7 @@
 ---
 title: "Creative compression"
 date: "2025-03-31"
-image: "https://www.jmilinovich.com/content/images/2025/03/ChatGPT-Image-Mar-31--2025--12_10_41-PM.png"
+image: "/images/posts/ChatGPT-Image-Mar-31--2025--12_10_41-PM.png"
 ---
 
 Multimodal language models have fundamentally compressed the software development lifecycle. The traditional sequence -- product manager writes requirements, designer creates wireframes, engineer builds prototype, team gathers feedback, repeat -- has collapsed. Product managers now skip specifications and wireframes, moving directly to functional prototypes. This hasn't eliminated jobs but dramatically accelerated development from months to hours.
@@ -14,7 +14,7 @@ The strategy of building single, larger unified models rather than domain-specif
 
 The full implications remain elusive, but we're clearly experiencing another ChatGPT-level inflection point in creative production.
 
-![](https://www.jmilinovich.com/content/images/2025/03/ChatGPT-Image-Mar-31--2025--12_10_41-PM.png)
+![](/images/posts/ChatGPT-Image-Mar-31--2025--12_10_41-PM.png)
 
 [ChatGPT adds 1 million users in 1 hour (31 March 2025)](https://x.com/sama/status/1906771292390666325?ref=jmilinovich.com)
 

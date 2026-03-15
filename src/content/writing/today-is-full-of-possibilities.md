@@ -1,7 +1,7 @@
 ---
 title: "Today is Full of Possibilities"
 date: "2025-12-01"
-image: "https://www.jmilinovich.com/content/images/size/w1200/2025/12/IMG_3793.jpeg"
+image: "/images/posts/IMG_3793.jpeg"
 ---
 
 I have my mother's last words tattooed on my arm.

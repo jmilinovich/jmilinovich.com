@@ -11,7 +11,7 @@ As with all leaders and people managers, one of the most obvious bottlenecks is 
 
 Alongside an incredibly gifted team of leaders, we've developed a simple and scalable model for organizational cadence and process that I think will translate well to organizations of all sizes, colocated or fully remote.
 
-![Organizational OODA Loop Diagram](https://images.spr.so/cdn-cgi/imagedelivery/j42No7y-dcokJuNgXeA0ig/b8e748a2-d47b-4e23-91ee-cec9a817826a/Untitled/w=3840,quality=90,fit=scale-down)
+<!-- Image unavailable: original URL was https://images.spr.so/cdn-cgi/imagedelivery/j42No7y-dcokJuNgXeA0ig/b8e748a2-d47b-4e23-91ee-cec9a817826a/Untitled/w=3840,quality=90,fit=scale-down -->
 
 ## The Organizational OODA Loop
 
@@ -21,7 +21,7 @@ This iterative process, where a pilot observes the situation, orients themselves
 
 While the context is obviously very different, this mental model also works well within fast-scaling companies as a way to continuously assess a quickly changing business context to help you make better decisions.
 
-![OODA Loop Stages Diagram](https://images.spr.so/cdn-cgi/imagedelivery/j42No7y-dcokJuNgXeA0ig/979148a1-79c9-4256-9006-621def8c0286/Untitled/w=3840,quality=90,fit=scale-down)
+<!-- Image unavailable: original URL was https://images.spr.so/cdn-cgi/imagedelivery/j42No7y-dcokJuNgXeA0ig/979148a1-79c9-4256-9006-621def8c0286/Untitled/w=3840,quality=90,fit=scale-down -->
 
 ## Observe, Orient, Decide, Act
 
@@ -53,7 +53,7 @@ We can tell the process is working when teams are able to swiftly resolve issues
 
 The most critical cadence for our Organizational OODA Loop is Fortnightly project check-ins for key projects across the organization. For Discovery, my leads and I have fifteen 15-minute back-to-back meetings with the leads of our major project areas. Each set of leads fills out a doc 24 hours ahead of time calling out their progress, plans, and blockers. Then, ahead of the meeting, the leads review and write out a set of discussion items for the team. These meetings start and end promptly on time, and we will cancel them if there are no critical discussion items (spoiler alert: there almost always are!)
 
-![Project Leads Documentation](https://images.spr.so/cdn-cgi/imagedelivery/j42No7y-dcokJuNgXeA0ig/406ac848-0d3f-4664-8e3a-36076240f8d5/Filled_out_by_project_leads_24H_of_meeting/w=3840,quality=90,fit=scale-down)
+<!-- Image unavailable: original URL was https://images.spr.so/cdn-cgi/imagedelivery/j42No7y-dcokJuNgXeA0ig/406ac848-0d3f-4664-8e3a-36076240f8d5/Filled_out_by_project_leads_24H_of_meeting/w=3840,quality=90,fit=scale-down -->
 
 An additional benefit of these Fortnightly project check-ins is that it gives our organization a clear cadence for documenting and sharing our wins. After these meetings I'm able to compile a list of our top Highlights, which gets shared to the broader group as well as our stakeholders across the company.
 

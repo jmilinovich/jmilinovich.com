@@ -9,7 +9,7 @@ I called 2023 the year of natural language interfaces. I was wrong -- it was big
 
 Today, I saw something bigger coming: AI that works with images, video, and sound as naturally as it does with text.
 
-![](https://images.spr.so/cdn-cgi/imagedelivery/j42No7y-dcokJuNgXeA0ig/62bb2a82-4e17-429c-9968-f37295f82eb2/Screenshot_2023-12-20_at_4.46.10_AM/w=3840,quality=90,fit=scale-down)
+<!-- Image unavailable: original URL was https://images.spr.so/cdn-cgi/imagedelivery/j42No7y-dcokJuNgXeA0ig/62bb2a82-4e17-429c-9968-f37295f82eb2/Screenshot_2023-12-20_at_4.46.10_AM/w=3840,quality=90,fit=scale-down -->
 
 I tested the early versions: showed an AI my fridge and a recipe (it told me what to buy), gave it rough wireframes (it drew a data model), photographed a French menu with my allergies (it found safe dishes).
 

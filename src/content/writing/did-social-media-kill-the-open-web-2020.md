@@ -1,7 +1,7 @@
 ---
 title: "Web in chains"
 date: "2020-11-18"
-image: "https://www.jmilinovich.com/content/images/2025/01/image-2.png"
+image: "/images/posts/image-2.png"
 ---
 
 Social media didn't kill the web. It imprisoned content.

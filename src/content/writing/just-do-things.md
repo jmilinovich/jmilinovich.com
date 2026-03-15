@@ -1,7 +1,7 @@
 ---
 title: "Just do things"
 date: "2025-04-25"
-image: "https://www.jmilinovich.com/content/images/2025/04/ChatGPT-Image-Apr-25--2025--03_34_16-PM.png"
+image: "/images/posts/ChatGPT-Image-Apr-25--2025--03_34_16-PM.png"
 ---
 
 You can literally just do things. This tech-world mantra captures a profound truth about our modern capability landscape. What began in tech circles now represents a fundamental shift in how we conceptualize personal agency.

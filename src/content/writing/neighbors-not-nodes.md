@@ -1,7 +1,7 @@
 ---
 title: "Neighbors, Not Nodes"
 date: "2025-11-21"
-image: "https://www.jmilinovich.com/content/images/size/w1200/2025/11/IMG_3621.jpeg"
+image: "/images/posts/IMG_3621.jpeg"
 ---
 
 **The Acceleration**

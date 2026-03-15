@@ -7,7 +7,7 @@ Spring has sprung, and the smell of fresh YC applications is in the air. It's th
 
 For those among you who are preparing for your interviews over the next few days, I wanted to share some of the best practices that helped Andrew, Nate, James and me pass our interview and earn URX's place in the Summer 2013 batch.
 
-![YC Interview preparation](https://images.spr.so/cdn-cgi/imagedelivery/j42No7y-dcokJuNgXeA0ig/1ee45d92-6c36-43b3-bdb8-8b4196074fcc/Untitled/w=3840,quality=90,fit=scale-down)
+<!-- Image unavailable: original URL was https://images.spr.so/cdn-cgi/imagedelivery/j42No7y-dcokJuNgXeA0ig/1ee45d92-6c36-43b3-bdb8-8b4196074fcc/Untitled/w=3840,quality=90,fit=scale-down -->
 
 ## Quick, concise answers are key
 

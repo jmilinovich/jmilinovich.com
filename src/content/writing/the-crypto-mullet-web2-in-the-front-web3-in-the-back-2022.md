@@ -5,7 +5,7 @@ date: "2022-06-11"
 
 The next wave of $1B+ crypto companies will disrupt incumbents by keeping an existing consumer experience in web2 while rebuilding its back office in web3.
 
-![](https://images.spr.so/cdn-cgi/imagedelivery/j42No7y-dcokJuNgXeA0ig/2912dbf9-33d3-40bc-b69f-684c044fad18/Untitled/w=3840,quality=90,fit=scale-down)
+<!-- Image unavailable: original URL was https://images.spr.so/cdn-cgi/imagedelivery/j42No7y-dcokJuNgXeA0ig/2912dbf9-33d3-40bc-b69f-684c044fad18/Untitled/w=3840,quality=90,fit=scale-down -->
 
 Disruptive technologies create transformative business models when they enable a 10x better consumer experience (ie, Netflix with streaming tech vs. going to Blockbuster) or a 10x cheaper back office (ie, Instacart with mobile tech vs operating a grocery store).
 

@@ -1,7 +1,7 @@
 ---
 title: "Product sense"
 date: "2024-09-25"
-image: "https://www.jmilinovich.com/content/images/2025/01/image.png"
+image: "/images/posts/image.png"
 ---
 
 That screech of a 14.4k modem in my first-grade bedroom changed everything. Each night I'd wait for that digital handshake, knowing it meant I could explore something new.

@@ -5,7 +5,7 @@ date: "2013-10-17"
 
 > "Andrew, this is it — we've got the right team, and the timing's perfect. If we don't go for this now, we will regret it for the rest of our lives." I could feel him thinking through the silence. "Alright dude, I'm in. Let's talk to Nate and James and make this happen."
 
-![](https://images.spr.so/cdn-cgi/imagedelivery/j42No7y-dcokJuNgXeA0ig/c7fffc2c-4766-4692-88d2-c6f2df616b7c/Untitled/w=3840,quality=90,fit=scale-down)
+![](/images/posts/spr-pine-cones-yc.png)
 
 ## Deciding to Go for It
 

@@ -1,7 +1,7 @@
 ---
 title: "Simulating reality"
 date: "2024-12-22"
-image: "https://www.jmilinovich.com/content/images/2025/01/image-1.png"
+image: "/images/posts/image-1.png"
 ---
 
 Last week, I sat down with a simulation of my family at dinner, ten years in the future. My daughter was twelve, discussing her summer plans. We talked about AI-powered education and her experiences growing up with it. This wasn't a daydream -- it was a sophisticated world simulation powered by AI.

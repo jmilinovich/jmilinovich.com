@@ -17,7 +17,7 @@ _Looking back grade: 38%_
 
 For the least few years I've written out my own tech industry predictions, but I've never been bold enough to publish them externally. After spending the last 9 months going down the web3 rabbit hole, I thought it'd be worthwhile to call out 5 ways I think web3 will influence the software industry in 2022:
 
-![](https://images.spr.so/cdn-cgi/imagedelivery/j42No7y-dcokJuNgXeA0ig/f4e565cf-b2cb-46e3-b6a6-ec0a066b4ce3/Untitled/w=3840,quality=90,fit=scale-down)
+<!-- Image unavailable: original URL was https://images.spr.so/cdn-cgi/imagedelivery/j42No7y-dcokJuNgXeA0ig/f4e565cf-b2cb-46e3-b6a6-ec0a066b4ce3/Untitled/w=3840,quality=90,fit=scale-down -->
 
 ## **At least 2 of the top 10 projects on OpenSea will be powered by on-chain SVGs.**
 

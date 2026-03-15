@@ -1,7 +1,7 @@
 ---
 title: "2026: The Year of Autonomous Computing"
 date: "2025-12-22"
-image: "https://www.jmilinovich.com/content/images/size/w1200/2025/12/IMG_4029.png"
+image: "/images/posts/IMG_4029.png"
 ---
 
 Last week I pointed Claude Code at my Dropbox, a graveyard of half-organized folders I'd ignored for years, and it fixed the whole thing in one shot. Not "here's a script you could run." It ran the script. Renamed files, created folders, moved everything. Done.

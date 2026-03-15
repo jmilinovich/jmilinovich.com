@@ -1,7 +1,7 @@
 ---
 title: "The future of generative interfaces"
 date: "2024-07-03"
-image: "https://www.jmilinovich.com/content/images/2025/02/w-640-quality-90-fit-scale-down.png"
+image: "/images/posts/w-640-quality-90-fit-scale-down.png"
 ---
 
 I saw my first [processing.js](https://processing.org/?ref=jmilinovich.com) demo at UCLA in 2012. [Casey Reas](https://reas.com/?ref=jmilinovich.com) made me question everything I thought I knew about making art. Who's the real artist -- the person who writes the code, or the code itself?
@@ -12,7 +12,7 @@ Most AI tools today work like a waiter -- you order something, wait, and get wha
 
 This isn't science fiction. Figma already previewed something like this at Config. Design a layout, and the interface grows new controls specifically for that design. Not preset options -- tools born from your work.
 
-![Figma's Writing Tone Dial](https://www.jmilinovich.com/content/images/2025/02/w-640-quality-90-fit-scale-down.png)
+![Figma's Writing Tone Dial](/images/posts/w-640-quality-90-fit-scale-down.png)
 
 *Figma's Writing Tone Dial (Figma Connect 2024)*
 
@@ -20,7 +20,7 @@ The real magic is speed. Today's AI often feels like talking to someone on a lag
 
 Projects like [ComfyUI](https://github.com/comfyanonymous/ComfyUI?ref=jmilinovich.com) and [GLIGEN](https://gligen.github.io/?ref=jmilinovich.com) are already pushing this direction. [Krea](https://www.krea.ai/home?ref=jmilinovich.com) lets you use anything on your screen as input, updating in real-time. We're building tools that don't just understand what you want -- they evolve to help you create it.
 
-![Krea's Realtime Generation Feature](https://assets.super.so/a552cc9d-75a0-4c81-bdd0-edbe3eec9f99/images/912fd865-75b9-4cb0-a05d-b049bafc7ebf/download.gif?w=708)
+<!-- Image unavailable: original URL was https://assets.super.so/a552cc9d-75a0-4c81-bdd0-edbe3eec9f99/images/912fd865-75b9-4cb0-a05d-b049bafc7ebf/download.gif?w=708 -->
 
 *Krea's Realtime Generation Feature*
 
