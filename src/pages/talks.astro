@@ -20,14 +20,16 @@ const talks = [
 <BaseLayout title="Talks - John Milinovich">
   <h1>Talks</h1>
 
-  <ul class="talks-list">
+  <section class="talks-list">
     {talks.map(talk => (
-      <li class="talk-item">
-        <a href={talk.url} target="_blank" rel="noopener">{talk.title}</a>
-        <span class="talk-date">({talk.date})</span>
-      </li>
+      <article class="talk-item">
+        <a href={talk.url} target="_blank" rel="noopener" class="talk-link">
+          <h2 class="talk-title">{talk.title}</h2>
+        </a>
+        <span class="talk-date">{talk.date}</span>
+      </article>
     ))}
-  </ul>
+  </section>
 </BaseLayout>
 
 <style>
@@ -37,31 +39,31 @@ const talks = [
     margin-bottom: 2rem;
   }
 
-  .talks-list {
-    list-style: none;
-    padding: 0;
-  }
-
   .talk-item {
-    font-size: clamp(1.7rem, 0.38vw + 1.4rem, 2rem);
-    line-height: 1.7;
-    margin-bottom: 1.5rem;
-    padding-bottom: 1.5rem;
-    border-bottom: 1px solid #e6e6e6;
+    margin-bottom: 2rem;
   }
 
-  .talk-item a {
-    color: #1a4dc2;
+  .talk-link {
     text-decoration: none;
+    color: #1a4dc2;
   }
 
-  .talk-item a:hover {
+  .talk-link:hover {
     text-decoration: underline;
   }
 
+  .talk-title {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: clamp(1.8rem, 1.2rem + 0.8vw, 2.4rem);
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    margin: 0 0 0.4rem;
+    color: #15171a;
+  }
+
   .talk-date {
-    color: #999;
     font-size: 1.4rem;
-    margin-left: 0.5rem;
+    color: #999;
+    font-weight: 500;
   }
 </style>
