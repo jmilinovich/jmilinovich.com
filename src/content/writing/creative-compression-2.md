@@ -14,4 +14,8 @@ The strategy of building single, larger unified models rather than domain-specif
 
 The full implications remain elusive, but we're clearly experiencing another ChatGPT-level inflection point in creative production.
 
-This inflection point is particularly thrilling for those of us building at the application layer in visual communication. Companies that create intuitive interfaces between these unified models and everyday users stand to transform how we communicate visually. The acceleration isn't just in production speed -- it's in democratizing sophisticated visual creation. By abstracting away technical complexity while expanding creative possibilities, we're entering an era where the bottleneck shifts from technical ability to imagination.
+![](https://www.jmilinovich.com/content/images/2025/03/ChatGPT-Image-Mar-31--2025--12_10_41-PM.png)
+
+[ChatGPT adds 1 million users in 1 hour (31 March 2025)](https://x.com/sama/status/1906771292390666325?ref=jmilinovich.com)
+
+This inflection point is particularly thrilling for those of us building at the application layer in visual communication. Companies that create intuitive interfaces between these unified models and everyday users stand to transform how we communicate visually. The acceleration isn't just in production speed -- it's in democratizing sophisticated visual creation. By abstracting away technical complexity while expanding creative possibilities, we're entering an era where the bottleneck shifts from technical ability to imagination. For anyone passionate about amplifying human creativity, there has never been a more exciting time to build.

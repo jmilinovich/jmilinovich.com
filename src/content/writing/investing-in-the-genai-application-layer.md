@@ -8,6 +8,8 @@ AI infrastructure represents an enormous and rapidly expanding market, yet it re
 
 Consider capital allocation: Chips. Cloud. Models. These are foundational infrastructure plays.
 
+![](https://www.jmilinovich.com/content/images/2025/01/image-4.png)
+
 Historical tech cycles reveal a consistent pattern: pioneers construct the underlying systems, but genuine value accrues at the periphery -- where actual users engage with solutions.
 
 Cloud computing exemplifies this dynamic. AWS engineered the infrastructure while enterprises like Stripe and Dropbox captured market value through application-layer innovation.
