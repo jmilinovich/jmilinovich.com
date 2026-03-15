@@ -19,19 +19,19 @@ function formatDate(dateStr: string): string {
 
 <article class="post-card">
   <a href={`/writing/${slug}`} class="post-card-link">
-    <h2 class="post-card-title">{title}</h2>
+    <span class="post-card-title">{title}</span>
   </a>
   <time class="post-card-date" datetime={date}>{formatDate(date)}</time>
 </article>
 
 <style>
   .post-card {
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
   }
 
   .post-card-link {
     text-decoration: none;
-    color: #1a4dc2;
+    color: #333;
   }
 
   .post-card-link:hover {
@@ -39,17 +39,13 @@ function formatDate(dateStr: string): string {
   }
 
   .post-card-title {
-    font-family: Georgia, 'Times New Roman', serif;
-    font-size: clamp(1.8rem, 1.2rem + 0.8vw, 2.4rem);
-    letter-spacing: -0.02em;
-    line-height: 1.15;
-    margin: 0 0 0.4rem;
-    color: #15171a;
+    font-size: 1.6rem;
+    line-height: 1.4;
   }
 
   .post-card-date {
-    font-size: 1.4rem;
+    font-size: 1.3rem;
     color: #999;
-    font-weight: 500;
+    margin-left: 0.8rem;
   }
 </style>

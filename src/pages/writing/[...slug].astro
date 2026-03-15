@@ -27,11 +27,7 @@ function formatDate(dateStr: string): string {
   <article class="post">
     <header class="post-header">
       <h1 class="post-title">{post.data.title}</h1>
-      <div class="post-meta">
-        <time class="post-date" datetime={post.data.date}>{formatDate(post.data.date)}</time>
-        <span class="post-tag-sep">&mdash;</span>
-        <a href="/writing" class="post-tag">writing</a>
-      </div>
+      <time class="post-date" datetime={post.data.date}>{formatDate(post.data.date)}</time>
     </header>
     {post.data.image && (
       <figure class="post-image">
@@ -46,44 +42,21 @@ function formatDate(dateStr: string): string {
 
 <style>
   .post-header {
-    margin-bottom: 3.6rem;
+    margin-bottom: 3rem;
   }
 
   .post-title {
-    font-size: clamp(3.2rem, 2.7rem + 1.5625vw, 5.2rem);
+    font-size: clamp(2.8rem, 2rem + 1.5vw, 4rem);
     margin-bottom: 0.8rem;
-  }
-
-  .post-meta {
-    display: flex;
-    align-items: center;
-    gap: 0.8rem;
   }
 
   .post-date {
     font-size: 1.4rem;
     color: #999;
-    font-weight: 500;
-  }
-
-  .post-tag-sep {
-    color: #999;
-    font-size: 1.4rem;
-  }
-
-  .post-tag {
-    font-size: 1.4rem;
-    color: #999;
-    font-weight: 500;
-    text-decoration: none;
-  }
-
-  .post-tag:hover {
-    color: #1a4dc2;
   }
 
   .post-image {
-    margin-bottom: 3.6rem;
+    margin-bottom: 3rem;
   }
 
   .post-image img {
@@ -93,7 +66,7 @@ function formatDate(dateStr: string): string {
   }
 
   .post-content {
-    font-size: clamp(1.7rem, 0.38vw + 1.4rem, 2rem);
+    font-size: 1.6rem;
     line-height: 1.7;
   }
 
@@ -103,8 +76,9 @@ function formatDate(dateStr: string): string {
   }
 
   .post-content :global(pre) {
+    font-family: 'Berkeley Mono', monospace;
     background: #f5f5f5;
-    padding: 1.6rem 2.4rem;
+    padding: 1.6rem 2rem;
     overflow-x: scroll;
     line-height: 1.5;
     border-radius: 4px;
@@ -112,10 +86,11 @@ function formatDate(dateStr: string): string {
   }
 
   .post-content :global(code) {
+    font-family: 'Berkeley Mono', monospace;
     background: #f5f5f5;
-    padding: 0.4rem;
+    padding: 0.2rem 0.4rem;
     border-radius: 3px;
-    font-size: 1.5rem;
+    font-size: 1.4rem;
   }
 
   .post-content :global(pre code) {
@@ -126,11 +101,6 @@ function formatDate(dateStr: string): string {
   }
 
   .post-content :global(a) {
-    color: #1a4dc2;
-    text-decoration: none;
-  }
-
-  .post-content :global(a:hover) {
     text-decoration: underline;
   }
 
@@ -145,8 +115,8 @@ function formatDate(dateStr: string): string {
   }
 
   .post-content :global(h2) {
-    margin-top: 3.2rem;
-    margin-bottom: 1.2rem;
+    margin-top: 3rem;
+    margin-bottom: 1rem;
   }
 
   .post-content :global(h3) {

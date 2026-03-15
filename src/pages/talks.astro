@@ -20,50 +20,43 @@ const talks = [
 <BaseLayout title="Talks - John Milinovich">
   <h1>Talks</h1>
 
-  <section class="talks-list">
+  <ul class="talks-list">
     {talks.map(talk => (
-      <article class="talk-item">
-        <a href={talk.url} target="_blank" rel="noopener" class="talk-link">
-          <h2 class="talk-title">{talk.title}</h2>
-        </a>
+      <li class="talk-item">
+        <a href={talk.url} target="_blank" rel="noopener">{talk.title}</a>
         <span class="talk-date">{talk.date}</span>
-      </article>
+      </li>
     ))}
-  </section>
+  </ul>
 </BaseLayout>
 
 <style>
   h1 {
-    font-family: Georgia, 'Times New Roman', serif;
-    font-size: clamp(2.4rem, 1vw + 2rem, 3.2rem);
     margin-bottom: 2rem;
+  }
+
+  .talks-list {
+    list-style: none;
+    padding: 0;
   }
 
   .talk-item {
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
+    font-size: 1.6rem;
+    line-height: 1.4;
   }
 
-  .talk-link {
+  .talk-item a {
     text-decoration: none;
-    color: #1a4dc2;
   }
 
-  .talk-link:hover {
+  .talk-item a:hover {
     text-decoration: underline;
   }
 
-  .talk-title {
-    font-family: Georgia, 'Times New Roman', serif;
-    font-size: clamp(1.8rem, 1.2rem + 0.8vw, 2.4rem);
-    letter-spacing: -0.02em;
-    line-height: 1.15;
-    margin: 0 0 0.4rem;
-    color: #15171a;
-  }
-
   .talk-date {
-    font-size: 1.4rem;
     color: #999;
-    font-weight: 500;
+    font-size: 1.3rem;
+    margin-left: 0.8rem;
   }
 </style>

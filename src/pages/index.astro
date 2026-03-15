@@ -8,20 +8,18 @@ const sortedPosts = posts.sort((a, b) => new Date(b.data.date).getTime() - new D
 ---
 
 <BaseLayout title="John Milinovich">
-  <section class="hero">
-    <h1><span class="wave">👋🏼</span> I'm John Milinovich,</h1>
-    <p>an enthusiastic entrepreneur and technology executive working at the intersection of AI and design.</p>
-  </section>
+  <h1>John Milinovich</h1>
 
-  <section class="social-links">
-    <a href="https://x.com/jmilinovich" target="_blank" rel="noopener">X</a>
-    <span class="dot">&middot;</span>
-    <a href="https://www.linkedin.com/in/jmilinovich/" target="_blank" rel="noopener">LinkedIn</a>
-    <span class="dot">&middot;</span>
-    <a href="https://github.com/jmilinovich/" target="_blank" rel="noopener">GitHub</a>
-  </section>
+  <ul class="facts">
+    <li>Leading Generative AI Product at <a href="https://www.canva.com/">Canva</a>, where I helped build <a href="https://www.canva.com/newsroom/news/magic-studio/">Magic Studio</a> (<a href="https://time.com/7094550/canva-magic-studio/">Time's Best Inventions 2024</a>)</li>
+    <li>Previously: founded <a href="https://techcrunch.com/2013/10/16/urx-ads/">URX</a> (acquired by Pinterest), led discovery at <a href="https://www.nytimes.com/2021/02/15/business/clubhouse.html">Clubhouse</a>, co-founded <a href="https://www.axios.com/2020/04/30/aesthetic-seed-funding-ai-brand-design">Aesthetic</a></li>
+    <li>Early career at Google and Yahoo</li>
+    <li>UCLA architecture &mdash; got hooked on code after seeing <a href="https://www.youtube.com/watch?v=_8DMEHxOLQE">Casey Reas</a> demo Processing.js</li>
+    <li>Interested in AI-human collaboration, product craft, and building things</li>
+  </ul>
 
-  <section class="posts">
+  <section class="recent-writing">
+    <h2>Writing</h2>
     {sortedPosts.map(post => (
       <PostCard title={post.data.title} date={post.data.date} slug={post.id} />
     ))}
@@ -29,47 +27,33 @@ const sortedPosts = posts.sort((a, b) => new Date(b.data.date).getTime() - new D
 </BaseLayout>
 
 <style>
-  .hero {
-    margin-bottom: 1rem;
+  h1 {
+    margin-bottom: 2rem;
   }
 
-  .hero h1 {
-    font-family: Georgia, 'Times New Roman', serif;
-    font-size: clamp(3.2rem, 2.7rem + 1.5625vw, 5.2rem);
-    letter-spacing: -0.02em;
-    line-height: 1.15;
-    margin-bottom: 0.8rem;
-    color: #15171a;
+  .facts {
+    list-style: disc;
+    padding-left: 2rem;
+    font-size: 1.6rem;
+    line-height: 1.7;
+    color: #333;
+    margin-bottom: 4rem;
   }
 
-  .hero p {
-    font-size: clamp(1.7rem, 0.38vw + 1.4rem, 2rem);
-    line-height: 1.5;
-    margin-bottom: 0;
-    color: #999;
+  .facts li {
+    margin-bottom: 0.6rem;
   }
 
-  .social-links {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
+  .facts a {
+    text-decoration: underline;
+  }
+
+  .recent-writing h2 {
     font-size: 1.4rem;
     font-weight: 500;
-    margin-bottom: 4rem;
-    margin-top: 2rem;
-  }
-
-  .social-links a {
-    color: #15171a;
-    text-decoration: none;
-    transition: opacity 0.2s;
-  }
-
-  .social-links a:hover {
-    opacity: 0.8;
-  }
-
-  .dot {
     color: #999;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 1.5rem;
   }
 </style>
