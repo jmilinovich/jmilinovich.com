@@ -1,6 +1,7 @@
 ---
 title: "I Love You, Mom"
 date: "2012-12-17"
+image: "/images/posts/susan-and-john.jpg"
 draft: true
 ---
 

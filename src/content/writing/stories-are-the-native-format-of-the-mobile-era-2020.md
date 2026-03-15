@@ -6,7 +6,7 @@ draft: true
 
 When Snapchat launched Stories in October 2013, no one could have anticipated the ripple effect this would have across the software ecosystem. In the 7-years since its launch, every major consumer internet company has adopted its own flavor of Stories to give its users that familiar, lean back content consumption experience that they've grown accustomed to. Even though there's no singular app that has monopolized consumer attention, it's clear that the Story content format is the real winner of the mobile-first world.
 
-![image](https://web.archive.org/web/20240227092150/https://images.spr.so/cdn-cgi/imagedelivery/j42No7y-dcokJuNgXeA0ig/72f2117b-5cf9-42fe-ba78-13a987294d6c/Untitled/public)
+![Stories across platforms](/images/posts/stories-mobile-era.png)
 
 ## **Why Stories Won the Internet**
 
