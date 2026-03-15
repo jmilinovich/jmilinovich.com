@@ -1,0 +1,68 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const talks = [
+  { title: "Canva Create Panel", date: "April 2025", url: "https://www.youtube.com/watch?v=-IZ7qRTK_x8&list=PLATYfhN6gQz_Bv-sX25EIHiFVlJJfsCJ9&index=3" },
+  { title: "HumanX Talk on Canva's AI Products", date: "February 2024", url: "https://www.youtube.com/watch?v=KF28xdk_m8M" },
+  { title: "Cognitive Revolution Podcast", date: "November 2024", url: "https://open.spotify.com/episode/5SlYFzcImLjWHRg1X1ibEu" },
+  { title: "AWS AI Day Keynote", date: "June 2024", url: "https://youtu.be/6wJ6iZEELY8" },
+  { title: "Northeastern AI Club", date: "March 2024", url: "https://www.youtube.com/watch?v=3rszD-MmRpw" },
+  { title: "Bessemer State of Cloud", date: "May 2023", url: "https://www.youtube.com/watch?v=tTPHk_O__ks" },
+  { title: "UCLA Guest Lecture", date: "February 2015", url: "https://www.youtube.com/watch?v=JnrpXGUWvs4" },
+  { title: "Betaworks Notifs Summit", date: "October 2015", url: "https://www.youtube.com/watch?v=NJGgahydp74" },
+  { title: "How Deep Linking is Upending Mobile Search", date: "2015", url: "https://www.youtube.com/watch?v=wrq_iu7xApU" },
+  { title: "Mobile is about Now and Next", date: "2015", url: "https://www.youtube.com/watch?v=ymi2hBo6IMU" },
+  { title: "Guest Speaker for UCLA Bruin Entrepreneurs Club", date: "2015", url: "https://www.youtube.com/watch?v=zQEYGzsGBNc" },
+  { title: "Deep Linking Webinar with TUNE", date: "2014", url: "https://www.youtube.com/watch?v=ymi2hBo6IMU" },
+];
+---
+
+<BaseLayout title="Talks - John Milinovich">
+  <h1>Talks</h1>
+
+  <ul class="talks-list">
+    {talks.map(talk => (
+      <li class="talk-item">
+        <a href={talk.url} target="_blank" rel="noopener">{talk.title}</a>
+        <span class="talk-date">({talk.date})</span>
+      </li>
+    ))}
+  </ul>
+</BaseLayout>
+
+<style>
+  h1 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(2.4rem, 1vw + 2rem, 3.2rem);
+    margin-bottom: 2rem;
+  }
+
+  .talks-list {
+    list-style: none;
+    padding: 0;
+  }
+
+  .talk-item {
+    font-size: clamp(1.7rem, 0.38vw + 1.4rem, 2rem);
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid #e6e6e6;
+  }
+
+  .talk-item a {
+    color: #333;
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  .talk-item a:hover {
+    color: #FF1A75;
+  }
+
+  .talk-date {
+    color: #999;
+    font-size: 1.4rem;
+    margin-left: 0.5rem;
+  }
+</style>

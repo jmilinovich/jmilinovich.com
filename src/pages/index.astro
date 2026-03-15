@@ -1,0 +1,75 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PostCard from '../components/PostCard.astro';
+import { getCollection } from 'astro:content';
+
+const posts = await getCollection('writing');
+const sortedPosts = posts.sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
+---
+
+<BaseLayout title="John Milinovich">
+  <section class="hero">
+    <h1><span class="wave">👋🏼</span> I'm John Milinovich,</h1>
+    <p>an enthusiastic entrepreneur and technology executive working at the intersection of AI and design.</p>
+  </section>
+
+  <section class="social-links">
+    <a href="https://x.com/jmilinovich" target="_blank" rel="noopener">X</a>
+    <span class="dot">&middot;</span>
+    <a href="https://www.linkedin.com/in/jmilinovich/" target="_blank" rel="noopener">LinkedIn</a>
+    <span class="dot">&middot;</span>
+    <a href="https://github.com/jmilinovich/" target="_blank" rel="noopener">GitHub</a>
+  </section>
+
+  <section class="posts">
+    {sortedPosts.map(post => (
+      <PostCard title={post.data.title} date={post.data.date} slug={post.id} />
+    ))}
+  </section>
+</BaseLayout>
+
+<style>
+  .hero {
+    margin-bottom: 1rem;
+  }
+
+  .hero h1 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(3.2rem, 2.7rem + 1.5625vw, 5.2rem);
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    margin-bottom: 0.8rem;
+    color: #15171a;
+  }
+
+  .hero p {
+    font-size: clamp(1.7rem, 0.38vw + 1.4rem, 2rem);
+    line-height: 1.5;
+    margin-bottom: 0;
+    color: #999;
+  }
+
+  .social-links {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-size: 1.4rem;
+    font-weight: 500;
+    margin-bottom: 4rem;
+    margin-top: 2rem;
+  }
+
+  .social-links a {
+    color: #15171a;
+    text-decoration: none;
+    transition: opacity 0.2s;
+  }
+
+  .social-links a:hover {
+    opacity: 0.8;
+  }
+
+  .dot {
+    color: #999;
+  }
+</style>

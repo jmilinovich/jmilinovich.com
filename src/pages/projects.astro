@@ -1,0 +1,136 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const projects = [
+  {
+    name: "stylegen",
+    description: "A Python library for generating cohesive Stable Diffusion prompts",
+    url: "https://github.com/jmilinovich/stylegen",
+    language: "Python",
+    stars: 9,
+  },
+  {
+    name: "agents.json",
+    description: "Teaching websites how to talk to AI agents",
+    url: "https://github.com/jmilinovich/agents.json",
+    language: null,
+    stars: 6,
+  },
+  {
+    name: "goal-md",
+    description: "A goal-specification file for autonomous coding agents",
+    url: "https://github.com/jmilinovich/goal-md",
+    language: "Shell",
+    stars: 2,
+  },
+  {
+    name: "browser-grid",
+    description: "Tile Playwright browser windows in a grid for watching parallel tests run",
+    url: "https://github.com/jmilinovich/browser-grid",
+    language: "TypeScript",
+    stars: 0,
+  },
+  {
+    name: "comicgen",
+    description: "AI comic book generator using Google Gemini with character consistency",
+    url: "https://github.com/jmilinovich/comicgen",
+    language: "Python",
+    stars: 0,
+  },
+  {
+    name: "worldmorph",
+    description: "Multi-agent world simulations",
+    url: "https://github.com/jmilinovich/worldmorph",
+    language: "Python",
+    stars: 0,
+  },
+];
+---
+
+<BaseLayout title="Projects - John Milinovich">
+  <h1>Projects</h1>
+
+  <div class="projects-list">
+    {projects.map(project => (
+      <div class="project-card">
+        <a href={project.url} target="_blank" rel="noopener" class="project-name">{project.name}</a>
+        <p class="project-description">{project.description}</p>
+        <div class="project-meta">
+          {project.language && (
+            <span class="language-pill">{project.language}</span>
+          )}
+          {project.stars > 0 && (
+            <span class="stars">{project.stars}</span>
+          )}
+        </div>
+      </div>
+    ))}
+  </div>
+</BaseLayout>
+
+<style>
+  h1 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(2.4rem, 1vw + 2rem, 3.2rem);
+    margin-bottom: 2rem;
+  }
+
+  .projects-list {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .project-card {
+    margin-bottom: 3rem;
+    padding-bottom: 3rem;
+    border-bottom: 1px solid #e6e6e6;
+  }
+
+  .project-card:last-child {
+    border-bottom: none;
+  }
+
+  .project-name {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 2rem;
+    color: #333;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.2s ease;
+  }
+
+  .project-name:hover {
+    color: #FF1A75;
+  }
+
+  .project-description {
+    font-size: 1.6rem;
+    color: #333;
+    line-height: 1.5;
+    margin-top: 0.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .project-meta {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .language-pill {
+    background: #f5f5f5;
+    padding: 0.3rem 0.8rem;
+    border-radius: 100px;
+    font-size: 1.2rem;
+    color: #666;
+  }
+
+  .stars {
+    font-size: 1.2rem;
+    color: #666;
+  }
+
+  .stars::before {
+    content: "\2605 ";
+  }
+</style>

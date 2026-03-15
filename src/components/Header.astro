@@ -1,0 +1,189 @@
+---
+const pathname = Astro.url.pathname;
+
+const navLinks = [
+  { href: '/about', label: 'About' },
+  { href: '/writing', label: 'Writing' },
+  { href: '/talks', label: 'Talks' },
+  { href: '/projects', label: 'Projects' },
+];
+
+function isActive(href: string): boolean {
+  if (href === '/') return pathname === '/';
+  return pathname.startsWith(href);
+}
+---
+
+<header class="site-header">
+  <div class="header-inner">
+    <a href="/" class="logo">
+      <img src="/favicon.png" alt="Home" width="60" height="60" />
+    </a>
+    <nav class="nav-desktop">
+      {navLinks.map((link) => (
+        <a href={link.href} class:list={['nav-link', { active: isActive(link.href) }]}>
+          {link.label}
+        </a>
+      ))}
+    </nav>
+    <input type="checkbox" id="menu-toggle" class="menu-toggle" aria-label="Toggle menu" />
+    <label for="menu-toggle" class="hamburger" aria-label="Open menu">
+      <span class="hamburger-line"></span>
+      <span class="hamburger-line"></span>
+      <span class="hamburger-line"></span>
+    </label>
+    <nav class="nav-mobile">
+      <label for="menu-toggle" class="nav-mobile-close" aria-label="Close menu">&times;</label>
+      {navLinks.map((link) => (
+        <a href={link.href} class:list={['nav-link', { active: isActive(link.href) }]}>
+          {link.label}
+        </a>
+      ))}
+    </nav>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 100px;
+    background: #fff;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+  }
+
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+  }
+
+  .logo img {
+    width: 60px;
+    height: 60px;
+    display: block;
+  }
+
+  .nav-desktop {
+    display: flex;
+    gap: 2.4rem;
+    align-items: center;
+  }
+
+  .nav-link {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 500;
+    font-size: 1.5rem;
+    color: #15171a;
+    text-decoration: none;
+    transition: opacity 0.2s;
+  }
+
+  .nav-link:hover {
+    opacity: 0.8;
+  }
+
+  .nav-link.active {
+    opacity: 0.6;
+  }
+
+  .menu-toggle {
+    display: none;
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    cursor: pointer;
+    width: 24px;
+    height: 24px;
+  }
+
+  .hamburger-line {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: #15171a;
+    border-radius: 1px;
+  }
+
+  .nav-mobile {
+    display: none;
+  }
+
+  .nav-mobile-close {
+    display: none;
+  }
+
+  @media (max-width: 767px) {
+    .site-header {
+      height: 64px;
+    }
+
+    .logo img {
+      width: 40px;
+      height: 40px;
+    }
+
+    .nav-desktop {
+      display: none;
+    }
+
+    .hamburger {
+      display: flex;
+    }
+
+    .menu-toggle:checked ~ .nav-mobile {
+      display: flex;
+    }
+
+    .nav-mobile {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: #fff;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 3.2rem;
+      z-index: 10000;
+    }
+
+    .nav-mobile .nav-link {
+      font-size: 2.4rem;
+    }
+
+    .nav-mobile-close {
+      display: block;
+      position: absolute;
+      top: 1.6rem;
+      right: 2rem;
+      font-size: 3.2rem;
+      cursor: pointer;
+      color: #15171a;
+      line-height: 1;
+      background: none;
+      border: none;
+    }
+  }
+</style>

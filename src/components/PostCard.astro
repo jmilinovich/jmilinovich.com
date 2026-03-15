@@ -1,0 +1,56 @@
+---
+interface Props {
+  title: string;
+  date: string;
+  slug: string;
+}
+
+const { title, date, slug } = Astro.props;
+
+function formatDate(dateStr: string): string {
+  const d = new Date(dateStr);
+  const day = d.getUTCDate().toString().padStart(2, '0');
+  const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  const month = months[d.getUTCMonth()];
+  const year = d.getUTCFullYear();
+  return `${day} ${month} ${year}`;
+}
+---
+
+<article class="post-card">
+  <a href={`/writing/${slug}`} class="post-card-link">
+    <h2 class="post-card-title">{title}</h2>
+  </a>
+  <time class="post-card-date" datetime={date}>{formatDate(date)}</time>
+</article>
+
+<style>
+  .post-card {
+    margin-bottom: 2rem;
+  }
+
+  .post-card-link {
+    text-decoration: none;
+    color: inherit;
+    transition: opacity 0.2s;
+  }
+
+  .post-card-link:hover {
+    opacity: 0.8;
+  }
+
+  .post-card-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(1.8rem, 1.2rem + 0.8vw, 2.4rem);
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    margin: 0 0 0.4rem;
+    color: #15171a;
+  }
+
+  .post-card-date {
+    font-size: 1.4rem;
+    color: #999;
+    font-weight: 500;
+  }
+</style>

@@ -1,0 +1,169 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('writing');
+  return posts.map((post) => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+
+function formatDate(dateStr: string): string {
+  const d = new Date(dateStr);
+  const day = d.getUTCDate().toString().padStart(2, '0');
+  const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  const month = months[d.getUTCMonth()];
+  const year = d.getUTCFullYear();
+  return `${day} ${month} ${year}`;
+}
+---
+
+<BaseLayout title={post.data.title}>
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">{post.data.title}</h1>
+      <div class="post-meta">
+        <time class="post-date" datetime={post.data.date}>{formatDate(post.data.date)}</time>
+        <span class="post-tag-sep">&mdash;</span>
+        <a href="/writing" class="post-tag">writing</a>
+      </div>
+    </header>
+    {post.data.image && (
+      <figure class="post-image">
+        <img src={post.data.image} alt={post.data.title} />
+      </figure>
+    )}
+    <div class="post-content">
+      <Content />
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .post-header {
+    margin-bottom: 3.6rem;
+  }
+
+  .post-title {
+    font-size: clamp(3.2rem, 2.7rem + 1.5625vw, 5.2rem);
+    margin-bottom: 0.8rem;
+  }
+
+  .post-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+
+  .post-date {
+    font-size: 1.4rem;
+    color: #999;
+    font-weight: 500;
+  }
+
+  .post-tag-sep {
+    color: #999;
+    font-size: 1.4rem;
+  }
+
+  .post-tag {
+    font-size: 1.4rem;
+    color: #999;
+    font-weight: 500;
+    text-decoration: none;
+  }
+
+  .post-tag:hover {
+    color: #FF1A75;
+  }
+
+  .post-image {
+    margin-bottom: 3.6rem;
+  }
+
+  .post-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 4px;
+  }
+
+  .post-content {
+    font-size: clamp(1.7rem, 0.38vw + 1.4rem, 2rem);
+    line-height: 1.7;
+  }
+
+  .post-content :global(img) {
+    max-width: 100%;
+    height: auto;
+  }
+
+  .post-content :global(pre) {
+    background: #f5f5f5;
+    padding: 1.6rem 2.4rem;
+    overflow-x: scroll;
+    line-height: 1.5;
+    border-radius: 4px;
+    margin: 2rem 0;
+  }
+
+  .post-content :global(code) {
+    background: #f5f5f5;
+    padding: 0.4rem;
+    border-radius: 3px;
+    font-size: 15px;
+  }
+
+  .post-content :global(pre code) {
+    background: none;
+    padding: 0;
+    border-radius: 0;
+    font-size: inherit;
+  }
+
+  .post-content :global(a) {
+    text-decoration: underline;
+  }
+
+  .post-content :global(a:hover) {
+    opacity: 0.8;
+  }
+
+  .post-content :global(hr) {
+    border: none;
+    border-top: 1px solid #e6e6e6;
+    margin: 3rem 0;
+  }
+
+  .post-content :global(p) {
+    margin-bottom: 1.6rem;
+  }
+
+  .post-content :global(h2) {
+    margin-top: 3.2rem;
+    margin-bottom: 1.2rem;
+  }
+
+  .post-content :global(h3) {
+    margin-top: 2.4rem;
+    margin-bottom: 1rem;
+  }
+
+  .post-content :global(ul),
+  .post-content :global(ol) {
+    margin-bottom: 1.6rem;
+    padding-left: 2.4rem;
+  }
+
+  .post-content :global(blockquote) {
+    border-left: 3px solid #e6e6e6;
+    padding-left: 2rem;
+    margin: 2rem 0;
+    color: #666;
+    font-style: italic;
+  }
+</style>
