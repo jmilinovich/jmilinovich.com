@@ -16,7 +16,9 @@ function isActive(href: string): boolean {
 
 <header class="site-header">
   <div class="header-inner container">
-    <a href="/" class="logo">JM</a>
+    <a href="/" class="logo">
+      <img src="/favicon.png" alt="Home" width="48" height="48" />
+    </a>
     <nav class="nav-desktop">
       {navLinks.map((link) => (
         <a href={link.href} class:list={['nav-link', { active: isActive(link.href) }]}>
@@ -53,17 +55,20 @@ function isActive(href: string): boolean {
   }
 
   .logo {
-    font-family: 'Berkeley Mono', monospace;
-    font-size: 1.6rem;
-    font-weight: 700;
-    color: #111;
+    display: flex;
+    align-items: center;
     text-decoration: none;
-    letter-spacing: -0.02em;
   }
 
   .logo:hover {
     text-decoration: none;
-    opacity: 0.6;
+    opacity: 0.7;
+  }
+
+  .logo img {
+    width: 48px;
+    height: 48px;
+    display: block;
   }
 
   .nav-desktop {
@@ -137,6 +142,11 @@ function isActive(href: string): boolean {
     .header-inner {
       width: 100%;
       padding: 0 2rem;
+    }
+
+    .logo img {
+      width: 36px;
+      height: 36px;
     }
 
     .nav-desktop {
