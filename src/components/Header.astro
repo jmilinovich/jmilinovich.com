@@ -25,7 +25,15 @@ function isActive(href: string): boolean {
           {link.label}
         </a>
       ))}
+      <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+        <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
     </nav>
+    <button class="theme-toggle theme-toggle-mobile" id="theme-toggle-mobile" aria-label="Toggle theme">
+      <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+    </button>
     <input type="checkbox" id="menu-toggle" class="menu-toggle" aria-label="Toggle menu" />
     <label for="menu-toggle" class="hamburger" aria-label="Open menu">
       <span class="hamburger-line"></span>
@@ -42,6 +50,62 @@ function isActive(href: string): boolean {
     </nav>
   </div>
 </header>
+
+<script>
+  function setupThemeToggle() {
+    function handleToggle(event: MouseEvent) {
+      const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+
+      // Feature detect View Transitions API
+      if (
+        !document.startViewTransition ||
+        window.matchMedia('(prefers-reduced-motion: reduce)').matches
+      ) {
+        document.documentElement.setAttribute('data-theme', newTheme);
+        localStorage.setItem('theme', newTheme);
+        return;
+      }
+
+      const x = event.clientX;
+      const y = event.clientY;
+
+      const transition = document.startViewTransition(() => {
+        document.documentElement.setAttribute('data-theme', newTheme);
+        localStorage.setItem('theme', newTheme);
+      });
+
+      transition.ready.then(() => {
+        const right = window.innerWidth - x;
+        const bottom = window.innerHeight - y;
+        const maxRadius = Math.hypot(
+          Math.max(x, right),
+          Math.max(y, bottom)
+        );
+
+        document.documentElement.animate(
+          {
+            clipPath: [
+              `circle(0px at ${x}px ${y}px)`,
+              `circle(${maxRadius}px at ${x}px ${y}px)`,
+            ],
+          },
+          {
+            duration: 500,
+            easing: 'ease-in-out',
+            pseudoElement: '::view-transition-new(root)',
+          }
+        );
+      });
+    }
+
+    document.getElementById('theme-toggle')?.addEventListener('click', handleToggle);
+    document.getElementById('theme-toggle-mobile')?.addEventListener('click', handleToggle);
+  }
+
+  setupThemeToggle();
+  document.addEventListener('astro:after-swap', setupThemeToggle);
+</script>
 
 <style>
   .site-header {
@@ -71,6 +135,10 @@ function isActive(href: string): boolean {
     display: block;
   }
 
+  [data-theme="dark"] .logo img {
+    filter: invert(1);
+  }
+
   .nav-desktop {
     display: flex;
     gap: 2rem;
@@ -80,7 +148,7 @@ function isActive(href: string): boolean {
   .nav-link {
     font-family: 'Berkeley Mono', monospace;
     font-size: 1.4rem;
-    color: #333;
+    color: var(--color-text);
     text-decoration: none;
   }
 
@@ -89,7 +157,34 @@ function isActive(href: string): boolean {
   }
 
   .nav-link.active {
-    color: #999;
+    color: var(--color-muted);
+  }
+
+  .theme-toggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--color-muted);
+    padding: 0.4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    transition: color 0.2s;
+  }
+
+  .theme-toggle:hover {
+    color: var(--color-text);
+  }
+
+  /* Show sun in dark mode, moon in light mode */
+  .icon-sun { display: none; }
+  .icon-moon { display: block; }
+  [data-theme="dark"] .icon-sun { display: block; }
+  [data-theme="dark"] .icon-moon { display: none; }
+
+  .theme-toggle-mobile {
+    display: none;
   }
 
   .menu-toggle {
@@ -113,7 +208,7 @@ function isActive(href: string): boolean {
     display: block;
     width: 24px;
     height: 2px;
-    background: #111;
+    background: var(--color-heading);
     border-radius: 1px;
   }
 
@@ -133,7 +228,7 @@ function isActive(href: string): boolean {
       right: 0;
       padding: 0;
       height: 64px;
-      background: #fff;
+      background: var(--color-bg);
       z-index: 9999;
       display: flex;
       align-items: center;
@@ -167,7 +262,7 @@ function isActive(href: string): boolean {
       left: 0;
       right: 0;
       bottom: 0;
-      background: #fff;
+      background: var(--color-bg);
       flex-direction: column;
       align-items: center;
       justify-content: center;
@@ -186,10 +281,14 @@ function isActive(href: string): boolean {
       right: 2rem;
       font-size: 3.2rem;
       cursor: pointer;
-      color: #111;
+      color: var(--color-heading);
       line-height: 1;
       background: none;
       border: none;
+    }
+
+    .theme-toggle-mobile {
+      display: flex;
     }
   }
 </style>

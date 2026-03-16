@@ -1,4 +1,6 @@
 ---
+import { ClientRouter } from 'astro:transitions';
+import type { TransitionAnimationPair } from 'astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 
@@ -8,10 +10,44 @@ interface Props {
 }
 
 const { title, description = "John Milinovich - entrepreneur and technology executive" } = Astro.props;
+
+const forwards: TransitionAnimationPair = {
+  old: {
+    name: 'fadeOutUp',
+    duration: '0.2s',
+    easing: 'ease-in',
+    fillMode: 'forwards',
+  },
+  new: {
+    name: 'fadeInUp',
+    duration: '0.3s',
+    delay: '0.2s',
+    easing: 'ease-out',
+    fillMode: 'backwards',
+  },
+};
+
+const backwards: TransitionAnimationPair = {
+  old: {
+    name: 'fadeOutDown',
+    duration: '0.2s',
+    easing: 'ease-in',
+    fillMode: 'forwards',
+  },
+  new: {
+    name: 'fadeInDown',
+    duration: '0.3s',
+    delay: '0.2s',
+    easing: 'ease-out',
+    fillMode: 'backwards',
+  },
+};
+
+const viewTransition = { forwards, backwards };
 ---
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" transition:animate="none">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -22,17 +58,49 @@ const { title, description = "John Milinovich - entrepreneur and technology exec
     <link rel="icon" type="image/png" href="/favicon.png" />
     <link rel="preconnect" href="https://cdn.jsdelivr.net" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/geist@1/dist/fonts/geist-sans/style.css" />
+    <ClientRouter />
+    <script is:inline>
+      // Apply theme before paint to prevent flash
+      (function() {
+        const stored = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const theme = stored || (prefersDark ? 'dark' : 'light');
+        document.documentElement.setAttribute('data-theme', theme);
+      })();
+    </script>
   </head>
   <body>
-    <Header />
-    <main class="container">
+    <Header transition:persist />
+    <main class="container" transition:animate={viewTransition}>
       <slot />
     </main>
-    <Footer />
+    <Footer transition:persist />
   </body>
 </html>
 
 <style is:global>
+  :root {
+    --color-bg: #fff;
+    --color-text: #333;
+    --color-heading: #111;
+    --color-muted: #999;
+    --color-subtle: #666;
+    --color-border: #ccc;
+    --color-border-light: #e6e6e6;
+    --color-code-bg: #f5f5f5;
+  }
+
+  [data-theme="dark"] {
+    --color-bg: #0a0a0a;
+    --color-text: #c8c8c8;
+    --color-heading: #e8e8e8;
+    --color-muted: #777;
+    --color-subtle: #999;
+    --color-border: #333;
+    --color-border-light: #222;
+    --color-code-bg: #1a1a1a;
+  }
+
   @font-face {
     font-family: 'Berkeley Mono';
     src: url('/fonts/BerkeleyMono-Regular.otf') format('opentype');
@@ -79,8 +147,8 @@ const { title, description = "John Milinovich - entrepreneur and technology exec
     font-family: 'Geist Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     font-size: 1.6rem;
     line-height: 1.6;
-    color: #333;
-    background: #fff;
+    color: var(--color-text);
+    background: var(--color-bg);
     padding-top: 0;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -90,7 +158,7 @@ const { title, description = "John Milinovich - entrepreneur and technology exec
     font-family: 'Geist Sans', -apple-system, BlinkMacSystemFont, sans-serif;
     letter-spacing: -0.02em;
     line-height: 1.15;
-    color: #111;
+    color: var(--color-heading);
   }
 
   h1 {
@@ -107,7 +175,7 @@ const { title, description = "John Milinovich - entrepreneur and technology exec
   }
 
   a {
-    color: #333;
+    color: var(--color-text);
     text-decoration: none;
   }
 
@@ -126,9 +194,34 @@ const { title, description = "John Milinovich - entrepreneur and technology exec
     padding: 0 2rem;
   }
 
+  /* View transition ripple override for theme toggle */
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none;
+    mix-blend-mode: normal;
+  }
+
   @media (max-width: 767px) {
     body {
       padding-top: 64px;
     }
+  }
+
+  /* View transition keyframes */
+  @keyframes fadeOutUp {
+    from { opacity: 1; transform: translateY(0); }
+    to   { opacity: 0; transform: translateY(-8px); }
+  }
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeOutDown {
+    from { opacity: 1; transform: translateY(0); }
+    to   { opacity: 0; transform: translateY(8px); }
+  }
+  @keyframes fadeInDown {
+    from { opacity: 0; transform: translateY(-16px); }
+    to   { opacity: 1; transform: translateY(0); }
   }
 </style>
