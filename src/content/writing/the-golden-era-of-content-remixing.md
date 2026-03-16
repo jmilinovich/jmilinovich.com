@@ -11,7 +11,7 @@ The old approach was dead simple: create new content for every platform. Write a
 
 <!-- Image unavailable: original URL was https://images.spr.so/cdn-cgi/imagedelivery/j42No7y-dcokJuNgXeA0ig/87a23e9b-2a46-4e23-ab53-3493a517ed80/Untitled/w=3840,quality=90,fit=scale-down -->
 
-Tools changed everything. Headliner grabs your two-hour podcast and extracts the perfect 2-minute video clip. Designrr takes your sprawling research and builds a clean PDF that looks professional. Your messy Notion database becomes a polished landing page. The mechanical work happens automatically.
+Tools changed everything. [Headliner](https://www.headliner.app) grabs your two-hour podcast and extracts the perfect 2-minute video clip. [Designrr](https://designrr.io) takes your sprawling research and builds a clean PDF that looks professional. Your messy Notion database becomes a polished landing page. The mechanical work happens automatically.
 
 But tools alone don't solve it. You need a system. Start with your tentpole content - the pieces worth transforming. The research that changed minds. The stories that sparked real conversations. The frameworks people actually use. Transform these first.
 

@@ -6,7 +6,7 @@ image: "/images/posts/image-1.png"
 
 Last week, I sat down with a simulation of my family at dinner, ten years in the future. My daughter was twelve, discussing her summer plans. We talked about AI-powered education and her experiences growing up with it. This wasn't a daydream -- it was a sophisticated world simulation powered by AI.
 
-WorldSim and WebSim are pushing simulation in radical directions. One creates detailed social scenarios using prompt engineering; the other builds entire simulated internets. Meanwhile, Genesis is running physics 500 times faster than ever before. We're not just predicting the future -- we're running it in advance.
+WorldSim and [WebSim](https://websim.ai) are pushing simulation in radical directions. One creates detailed social scenarios using prompt engineering; the other builds entire simulated internets. Meanwhile, [Genesis](https://genesis-embodied-ai.github.io/) is running physics 500 times faster than ever before. We're not just predicting the future -- we're running it in advance.
 
 O3 changes the game entirely. It doesn't just make predictions; it generates multiple solutions and verifies them against each other. Think of the implications: "AI that can actually check its own work."
 

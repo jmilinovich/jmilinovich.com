@@ -10,7 +10,7 @@ ChatGPT's unified image generation model extends this compression beyond softwar
 
 What we're witnessing is a Cambrian explosion of use cases through the fusion of diffusion models and language models into unified systems. The outer boundaries remain unclear, but they suggest a profound shift.
 
-The strategy of building single, larger unified models rather than domain-specific ones aligns with Richard Sutton's "Bitter Lesson" and delivers superior outcomes. This trajectory points toward models that will natively produce video, 3D models, audio, complete applications, CAD drawings, and virtually any digital media -- where each new capability compounds on existing world knowledge captured in the models' latent space.
+The strategy of building single, larger unified models rather than domain-specific ones aligns with Richard Sutton's ["Bitter Lesson"](http://www.incompleteideas.net/IncIdeas/BitterLesson.html) and delivers superior outcomes. This trajectory points toward models that will natively produce video, 3D models, audio, complete applications, CAD drawings, and virtually any digital media -- where each new capability compounds on existing world knowledge captured in the models' latent space.
 
 The full implications remain elusive, but we're clearly experiencing another ChatGPT-level inflection point in creative production.
 

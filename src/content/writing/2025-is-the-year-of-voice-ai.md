@@ -7,7 +7,7 @@ My aunt had a conversation with an AI in Serbian last week. She talked naturally
 
 Voice AI works now because the tech finally caught up to how humans actually talk. No more robot voices or weird pauses. No more having to repeat yourself three times. The AI gets your "ums" and "ahs" and keeps the conversation flowing.
 
-We're seeing this everywhere. Lindy lets you run surveys through voice calls. Drillbit handles customer service conversations. ChatGPT just launched a phone number you can call directly.
+We're seeing this everywhere. [Lindy](https://www.lindy.ai) lets you run surveys through voice calls. [Drillbit](https://drillbit.com) handles customer service conversations. ChatGPT just launched a phone number you can call directly.
 
 This matters because most people hate typing. They hate navigating menus. They hate learning new interfaces. But everyone knows how to talk.
 

@@ -19,17 +19,17 @@ For the least few years I've written out my own tech industry predictions, but I
 
 <!-- Image unavailable: original URL was https://images.spr.so/cdn-cgi/imagedelivery/j42No7y-dcokJuNgXeA0ig/f4e565cf-b2cb-46e3-b6a6-ec0a066b4ce3/Untitled/w=3840,quality=90,fit=scale-down -->
 
-## **At least 2 of the top 10 projects on OpenSea will be powered by on-chain SVGs.**
+## **At least 2 of the top 10 projects on [OpenSea](https://opensea.io) will be powered by on-chain SVGs.**
 
-Most NFTs' image assets live off-chain using something like IPFS. While this makes sense in many cases where the assets remain static, these projects are only using a fraction of the potential enabled by the blockchain.
+Most NFTs' image assets live off-chain using something like [IPFS](https://ipfs.tech). While this makes sense in many cases where the assets remain static, these projects are only using a fraction of the potential enabled by the blockchain.
 
-In 2021 we've seen a few projects emerge where the image files are actually encoded into the smart contracts using SVGs (ie, Nouns DAO, Blockheads, ChainRunners) which enables a whole new level of functionality and composability. I believe this is going to be a critical part of NFT infrastructure moving forward, and 2 of these projects will break into the OpenSea Top 10.
+In 2021 we've seen a few projects emerge where the image files are actually encoded into the smart contracts using SVGs (ie, [Nouns DAO](https://nouns.wtf), Blockheads, ChainRunners) which enables a whole new level of functionality and composability. I believe this is going to be a critical part of NFT infrastructure moving forward, and 2 of these projects will break into the OpenSea Top 10.
 
 ## **2 large (50M+ DAU) social networks will launch token-gated functionality.**
 
 Discord is the de facto home for NFT communities today because it lets a dedicated group of fans interact with each other around a niche topic. However, there's so much left to be desired in order to enable authentic community building on the web.
 
-In 2021 some forward-thinking startups (ie, CollabLand, Aesthetic) brought token-gated functionality to the world and in 2022 I believe we'll see mass-scale adoption of token-gated access to communities across the internet.
+In 2021 some forward-thinking startups (ie, [CollabLand](https://collab.land), Aesthetic) brought token-gated functionality to the world and in 2022 I believe we'll see mass-scale adoption of token-gated access to communities across the internet.
 
 ## **2 large ($1b+ valuation) web 2 companies will launch web3 business models.**
 
@@ -39,7 +39,7 @@ In particular, I think 1 creator platform (ie, Substack, Patreon) and 1 real est
 
 ## **Olympus DAO will reach 500,000 holders, signaling that DeFi 2.0 has entered its next phase of adoption.**
 
-Olympus DAO is a partially collateralized, floating price currency that aims to be the de facto reserve currency for all crypto projects in the future. When it was released in April '21 it introduced many new DeFi primitives to the world and is credited with creating, "DeFi 2.0".
+[Olympus DAO](https://www.olympusdao.finance/) is a partially collateralized, floating price currency that aims to be the de facto reserve currency for all crypto projects in the future. When it was released in April '21 it introduced many new DeFi primitives to the world and is credited with creating, "DeFi 2.0".
 
 There are currently ~100,000 "OHMies" who are currently holding and staking OHM—referred to as (3,3)—and I believe that the number of OHMies will quintuple in 2022.
 
@@ -47,4 +47,4 @@ There are currently ~100,000 "OHMies" who are currently holding and staking OHM�
 
 Wikipedia remains one of the best examples in the world of internet-scale collaboration. Roughly 100,000 people are active contributors to Wikipedia today, with no clear incentive to do so other than to feel a part of something bigger than themselves.
 
-In 2022 a new, real threat to Wikipedia will emerge that combines modern web2 technology with a web3 incentive structure. I believe Golden is best positioned to do this but think there's also room for a new incumbent to go to market and gain traction here quickly.
+In 2022 a new, real threat to Wikipedia will emerge that combines modern web2 technology with a web3 incentive structure. I believe [Golden](https://golden.com) is best positioned to do this but think there's also room for a new incumbent to go to market and gain traction here quickly.

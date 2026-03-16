@@ -12,7 +12,7 @@ In most of the current 'Quantified Self' products, the most compelling use cases
 
 **My Measurement Framework**
 
-My "Quantified Me" exists through 5 main interfaces: Fitocracy, The Eatery, RunKeeper, Withings and Fitbit. Each attempts to measure a specific part of my activity, either implicitly through sensors or explicitly through an interface. The goal of measurement in each context is to help you move towards certain milestones or achievements. This could be getting to your ideal weight or setting new weightlifting max's.
+My "Quantified Me" exists through 5 main interfaces: [Fitocracy](https://www.fitocracy.com), The Eatery, [RunKeeper](https://runkeeper.com), [Withings](https://www.withings.com) and [Fitbit](https://www.fitbit.com). Each attempts to measure a specific part of my activity, either implicitly through sensors or explicitly through an interface. The goal of measurement in each context is to help you move towards certain milestones or achievements. This could be getting to your ideal weight or setting new weightlifting max's.
 
 Some of the applications (RunKeeper, Withings, Fitbit) have API's that allow me to connect one product to another. Fitbit integrates with Withings to more accurately measure calories burned, while Fitocracy lets me get Points for Runkeeper runs. There is a certian data economy that is starting to emerge but hasn't quite hit ubiquity (more on this later).
 

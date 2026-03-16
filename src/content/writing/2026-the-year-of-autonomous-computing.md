@@ -4,7 +4,7 @@ date: "2025-12-22"
 image: "/images/posts/IMG_4029.png"
 ---
 
-Last week I pointed Claude Code at my Dropbox, a graveyard of half-organized folders I'd ignored for years, and it fixed the whole thing in one shot. Not "here's a script you could run." It ran the script. Renamed files, created folders, moved everything. Done.
+Last week I pointed [Claude Code](https://docs.anthropic.com/en/docs/claude-code) at my Dropbox, a graveyard of half-organized folders I'd ignored for years, and it fixed the whole thing in one shot. Not "here's a script you could run." It ran the script. Renamed files, created folders, moved everything. Done.
 
 I'm a programmer, but I didn't write any code. I just told the AI what I wanted, and it operated my computer to make it happen.
 
@@ -24,7 +24,7 @@ He argues OpenAI made a strategic mistake. They focused on cloud deployments, co
 
 What changed technically? Models can now observe state mid-task, reason about what they're seeing, and take corrective action. They don't just blindly run a script. Combined with much better code generation, you get AI that can operate a computer reliably enough to be useful. Not perfect. But useful.
 
-Anthropic is furthest ahead. They've built a full stack.
+[Anthropic](https://anthropic.com) is furthest ahead. They've built a full stack.
 
 Code execution shipped in September. Claude runs code to create Excel spreadsheets, PowerPoints, and PDFs directly from chat. Upload your raw data, describe what you want, get back a polished report.
 
@@ -36,7 +36,7 @@ These pieces now connect. Build in terminal, test in browser, debug together.
 
 Others are building for everyone.
 
-Manus gives you an AI agent with its own computer. Tell it "create a competitive analysis deck for my pitch next week" and watch it research, write, and design slides. About $2 per task.
+[Manus](https://manus.im) gives you an AI agent with its own computer. Tell it "create a competitive analysis deck for my pitch next week" and watch it research, write, and design slides. About $2 per task.
 
 Zo Computer positions itself as "AWS for my mom." The founder's mother, a biologist running a research lab, uses it to manage her schedule and run code from her grad students. She texts it like a personal assistant.
 

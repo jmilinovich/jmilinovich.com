@@ -41,7 +41,7 @@ The traditional Engineer:PM ratio of 6:1 that Ng mentions? That's already obsole
 
 This world brings up fascinating questions about the future. Do we need new Peter Drucker-style management books written specifically for managing agents? Or does all our prior art in behavioral science and management theory apply to this new world?
 
-Does Andy Grove's definition of high output management -- where "your measure of success is the output of your team and the teams around you" -- map to what's required now?
+Does Andy Grove's definition of [high output management](https://www.amazon.com/High-Output-Management-Andrew-Grove/dp/0679762884) -- where "your measure of success is the output of your team and the teams around you" -- map to what's required now?
 
 Consider these very real management challenges I'm already facing with agents:
 

@@ -18,7 +18,7 @@ Learn the difference between things that are important enough for someone to do,
 
 Generally speaking, as soon as you'd consider yourself, "good at something" you should hire someone to do it, or have someone else on the team own it. It's important to keep your time free to find the, "unknown unknowns."
 
-Ben Horowitz talks more about this in Do You Feel Pressure Or Do You Apply Pressure.
+Ben Horowitz talks more about this in [Do You Feel Pressure Or Do You Apply Pressure](https://a16z.com/do-you-feel-pressure-or-do-you-apply-pressure/).
 
 ## Lesson 2: Stay highly leveraged.
 
@@ -26,7 +26,7 @@ As a CEO, it is your responsibility to balance enabling your team to stay focuse
 
 For me, I gained a lot of leverage when I learned to say no. Whether it be internal meetings, "coffee invites", or decisions you think others should make- learn to say no.
 
-Jessica Stillman talks more about this in Why You Need to Stop Being So Nice.
+Jessica Stillman talks more about this in [Why You Need to Stop Being So Nice](https://www.inc.com/jessica-stillman/why-you-need-to-stop-being-so-nice.html).
 
 ## Lesson 3: Own your schedule.
 
@@ -34,7 +34,7 @@ It's well known that time is everyone's most limited resource. This is even more
 
 For me, a part of this was doubling down on becoming an email machine. I pride myself on being an email expert that is able to process 100's of emails per day using a combination of filters, rules, and reminders. My calendar's been referred to as the, "Mona Lisa" of calendars — ok, maybe that's just what I call it — and I've really taken pride in my productivity. I've developed my own "stack" that includes products like SaneLater, ClaraLabs and Boomerang.
 
-David Allen talks more about this in Getting Things Done.
+David Allen talks more about this in [Getting Things Done](https://www.amazon.com/Getting-Things-Done-Stress-Free-Productivity/dp/0143126563).
 
 ## Lesson 4: Manage your emotions.
 
@@ -42,7 +42,7 @@ As a founding CEO, your emotions are amplified throughout the organization. Ever
 
 The hardest part of building a startup is how quickly things change. It's an emotional rollercoaster, and if not managed well will get the best of you. For me, this involves trying to live an integrated life that also leaves time for loved ones, working out, writing, sleeping and friends.
 
-Ben Horowitz talks more about this in Managing Your Own Psychology.
+Ben Horowitz talks more about this in [Managing Your Own Psychology](https://a16z.com/managing-your-own-psychology/).
 
 ## Lesson 5: Repeat yourself.
 
@@ -50,7 +50,7 @@ As a team grows, it becomes increasingly difficult to keep everyone on the same 
 
 At URX, I send a Monday email to start the week, and we do an all-team retro on Fridays where we talk through our goals, successes, launches, announcements, and wins for the week. We've built this into a part of our culture, and our Weekly Retro is a highlight of the week.
 
-Peter Drucker talks more about this in The Effective Executive.
+Peter Drucker talks more about this in [The Effective Executive](https://www.amazon.com/Effective-Executive-Definitive-Hacking-Leadership/dp/0060833459).
 
 ## Lesson 6: Align your vision with your goals.
 
@@ -58,7 +58,7 @@ Make your company's vision tangible by connecting it to actionable goals. In par
 
 At URX, we're building a very complex technology, and I've learned first-hand the importance of having a clearly defined vision that the team can rally around. A well-defined mission statement is the only way a leadership team can build a cohesive plan that is aligned across the company. This plan can be used to then define your team's goals, priorities and hiring needs.
 
-Jim Collins talks more about this in The Hedgehog Concept.
+Jim Collins talks more about this in [The Hedgehog Concept](https://www.jimcollins.com/concepts/the-hedgehog-concept.html).
 
 ## Lesson 7: Know your precedents.
 
@@ -68,4 +68,4 @@ It's important to take a step back from the day-to-day to put your company and y
 
 URX is creating a new kind of marketplace for mobile commerce built with a technology that has never existed before. That said, I consider myself a student of the precedents for all facets of our business. From the history of how the internet was born, to the early days of search engines, to emerging mobile business models and their desktop equivalent- I strive to maximize the potential of URX by deeply understanding the world around us.
 
-Kevin Owocki talks more about this in Running a Startup? You're standing on the shoulders of giants.
+Kevin Owocki talks more about this in [Running a Startup? You're standing on the shoulders of giants](https://medium.com/@owocki/running-a-startup-youre-standing-on-the-shoulders-of-giants-f46cd2e9c63e).

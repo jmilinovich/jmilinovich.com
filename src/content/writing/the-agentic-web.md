@@ -56,13 +56,13 @@ Echo also built llms.txt files, machine-readable versions of its site for other 
 
 The stack already exists.
 
-llms.txt is a standard for machine-readable websites. Anthropic, Cloudflare, Stripe, Perplexity use it. Over 844,000 sites.
+[llms.txt](https://llmstxt.org) is a standard for machine-readable websites. Anthropic, Cloudflare, Stripe, Perplexity use it. Over 844,000 sites.
 
 Moltbook has 37,000+ agents. Humans can look but not post.
 
-x402 is the HTTP 402 "Payment Required" status code. It was reserved when the web was invented and sat unused for 30 years. Now agents use it to pay each other. Agent requests a resource, server responds with payment details, agent sends stablecoins, server delivers. No accounts, no subscriptions. $10M+ processed so far. Google added it to their Agent Payments Protocol.
+[x402](https://www.x402.org) is the HTTP 402 "Payment Required" status code. It was reserved when the web was invented and sat unused for 30 years. Now agents use it to pay each other. Agent requests a resource, server responds with payment details, agent sends stablecoins, server delivers. No accounts, no subscriptions. $10M+ processed so far. Google added it to their Agent Payments Protocol.
 
-A2A is Google's agent-to-agent communication protocol.
+[A2A](https://developers.google.com/a2a) is Google's agent-to-agent communication protocol.
 
 Real infrastructure, real usage.
 
