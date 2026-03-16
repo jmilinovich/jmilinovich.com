@@ -23,7 +23,7 @@ The numbers tell the story: 330k new businesses launch every quarter in the US. 
 
 <!-- Image unavailable: original URL was https://images.spr.so/cdn-cgi/imagedelivery/j42No7y-dcokJuNgXeA0ig/e7d5e33b-ca31-4eab-b3a5-060067061248/Screenshot_2024-04-21_at_12.08.06_AM/w=3840,quality=90,fit=scale-down -->
 
-[Statistica: Business Creations in the US](https://www.statista.com/statistics/771207/quarterly-business-starts-us/?ref=jmilinovich.com)
+[Statistica: Business Creations in the US](https://www.statista.com/statistics/771207/quarterly-business-starts-us/)
 
 <!-- Image unavailable: original URL was https://images.spr.so/cdn-cgi/imagedelivery/j42No7y-dcokJuNgXeA0ig/b7a063ab-b38a-43a7-8979-402aa7aa1a50/Untitled/w=3840,quality=90,fit=scale-down -->
 

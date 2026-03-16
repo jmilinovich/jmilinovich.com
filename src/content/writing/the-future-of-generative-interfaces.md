@@ -4,7 +4,7 @@ date: "2024-07-03"
 image: "/images/posts/w-640-quality-90-fit-scale-down.png"
 ---
 
-I saw my first [processing.js](https://processing.org/?ref=jmilinovich.com) demo at UCLA in 2012. [Casey Reas](https://reas.com/?ref=jmilinovich.com) made me question everything I thought I knew about making art. Who's the real artist -- the person who writes the code, or the code itself?
+I saw my first [processing.js](https://processing.org/) demo at UCLA in 2012. [Casey Reas](https://reas.com/) made me question everything I thought I knew about making art. Who's the real artist -- the person who writes the code, or the code itself?
 
 Now I ask a different question: What if the interface itself could create with us?
 
@@ -18,7 +18,7 @@ This isn't science fiction. Figma already previewed something like this at Confi
 
 The real magic is speed. Today's AI often feels like talking to someone on a laggy video call. But these new interfaces could feel like a video game controller -- instant, natural, alive. Picture adjusting complex 3D models as smoothly as moving Mario through a level.
 
-Projects like [ComfyUI](https://github.com/comfyanonymous/ComfyUI?ref=jmilinovich.com) and [GLIGEN](https://gligen.github.io/?ref=jmilinovich.com) are already pushing this direction. [Krea](https://www.krea.ai/home?ref=jmilinovich.com) lets you use anything on your screen as input, updating in real-time. We're building tools that don't just understand what you want -- they evolve to help you create it.
+Projects like [ComfyUI](https://github.com/comfyanonymous/ComfyUI) and [GLIGEN](https://gligen.github.io/) are already pushing this direction. [Krea](https://www.krea.ai/home) lets you use anything on your screen as input, updating in real-time. We're building tools that don't just understand what you want -- they evolve to help you create it.
 
 <!-- Image unavailable: original URL was https://assets.super.so/a552cc9d-75a0-4c81-bdd0-edbe3eec9f99/images/912fd865-75b9-4cb0-a05d-b049bafc7ebf/download.gif?w=708 -->
 

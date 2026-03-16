@@ -8,9 +8,9 @@ Historically, the main constraint on software teams has been their ability to sh
 
 But in the age of AI agents, I don't believe this is the constraint anymore.
 
-I've been using Claude Code's new [subagents feature](https://docs.anthropic.com/en/docs/claude-code/sub-agents?ref=jmilinovich.com) quite a bit lately. For me, it feels like the ChatGPT moment for agents -- creating a multi-agent system that can operate on complex tasks autonomously no longer requires tremendous amounts of custom software. You can literally create one with a few markdown files.
+I've been using Claude Code's new [subagents feature](https://docs.anthropic.com/en/docs/claude-code/sub-agents) quite a bit lately. For me, it feels like the ChatGPT moment for agents -- creating a multi-agent system that can operate on complex tasks autonomously no longer requires tremendous amounts of custom software. You can literally create one with a few markdown files.
 
-This shift perfectly illustrates what Andrew Ng calls the ["Product Management Bottleneck"](https://www.deeplearning.ai/the-batch/issue-310/?ref=jmilinovich.com). As he points out, "Because highly agentic coding accelerates the writing of software to a given product specification, deciding what to build is the new bottleneck."
+This shift perfectly illustrates what Andrew Ng calls the ["Product Management Bottleneck"](https://www.deeplearning.ai/the-batch/issue-310/). As he points out, "Because highly agentic coding accelerates the writing of software to a given product specification, deciding what to build is the new bottleneck."
 
 ## The New Shape of Management
 
@@ -27,7 +27,7 @@ What we've classically called the science of management becomes the bottleneck. 
 
 ## Convergence of Product and People Management
 
-This brings us to an interesting convergence. As Ng notes in his piece on [AI Product Managers](https://www.deeplearning.ai/the-batch/ai-product-managers-will-be-in-demand/?ref=jmilinovich.com), "Given a clear specification for what to build, AI is making the building itself much faster and cheaper. This will significantly increase demand for people who can come up with clear specs for valuable things to build."
+This brings us to an interesting convergence. As Ng notes in his piece on [AI Product Managers](https://www.deeplearning.ai/the-batch/ai-product-managers-will-be-in-demand/), "Given a clear specification for what to build, AI is making the building itself much faster and cheaper. This will significantly increase demand for people who can come up with clear specs for valuable things to build."
 
 But here's what I'm seeing: in the agent world, product management and people management are becoming the same discipline. When you're orchestrating agents, you're simultaneously:
 

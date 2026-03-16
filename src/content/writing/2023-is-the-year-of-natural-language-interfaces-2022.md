@@ -3,7 +3,7 @@ title: "2023: the year of natural language interfaces"
 date: "2023-01-09"
 ---
 
-_**Retroactive Grade (December 2023)**: Correct. ChatGPT and its competitors now see over [2 billion](https://github.com/jmilinovich/public/blob/main/2023-12-20-chatbot-pageviews.png?ref=jmilinovich.com) monthly page views._
+_**Retroactive Grade (December 2023)**: Correct. ChatGPT and its competitors now see over [2 billion](https://github.com/jmilinovich/public/blob/main/2023-12-20-chatbot-pageviews.png) monthly page views._
 
 We're about to see the biggest change in how we use computers since the iPhone's App Store in 2008. Natural Language Interfaces (NLIs) will become the default way we interact with software.
 

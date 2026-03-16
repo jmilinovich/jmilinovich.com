@@ -63,4 +63,4 @@ Formalizing our Organizational OODA Loops has been an absolute game changer for 
 
 Give it a go, and let me know how it goes!
 
-[Share feedback and discuss on LinkedIn](https://www.linkedin.com/feed/update/urn:li:share:7166727018884124672/?ref=jmilinovich.com)
+[Share feedback and discuss on LinkedIn](https://www.linkedin.com/feed/update/urn:li:share:7166727018884124672/)

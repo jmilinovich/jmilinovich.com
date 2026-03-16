@@ -9,7 +9,7 @@ Remember when Apple turned messaging upside down? iMessage wasn't just "SMS with
 
 That's the difference between AI-native and AI-enhanced. One adds features. The other changes how you work.
 
-Take Cursor. It's not just another code editor with some AI sprinkled on top. It fundamentally changes how people create software. Users rave about it. They can't imagine going back to their old workflow. That's the signal you're looking for.
+Take [Cursor](https://www.cursor.com/). It's not just another code editor with some AI sprinkled on top. It fundamentally changes how people create software. Users rave about it. They can't imagine going back to their old workflow. That's the signal you're looking for.
 
 Many builders get seduced by the "AI everything" dream. They sprinkle AI features everywhere, hoping something sticks. Their apps end up feeling like every other product with a chatbot bolted on.
 

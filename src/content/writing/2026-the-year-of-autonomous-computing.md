@@ -18,7 +18,7 @@ Organizing your Dropbox. Cleaning the 2,000 browser bookmarks you've accumulated
 
 These are chores, not apps. The backlog of "I should really fix that someday" that never gets done.
 
-Andrej Karpathy named it: Claude Code is "a little spirit/ghost that lives on your computer. This is a new, distinct paradigm of interaction with an AI."
+Andrej Karpathy [named it](https://x.com/karpathy/status/2002118205729562949): Claude Code is "a little spirit/ghost that lives on your computer. This is a new, distinct paradigm of interaction with an AI."
 
 He argues OpenAI made a strategic mistake. They focused on cloud deployments, containers orchestrated from ChatGPT, instead of localhost. Cloud agents are sandboxed and generic. Local agents have your files, your context, your tools.
 
@@ -26,11 +26,11 @@ What changed technically? Models can now observe state mid-task, reason about wh
 
 [Anthropic](https://anthropic.com) is furthest ahead. They've built a full stack.
 
-Code execution shipped in September. Claude runs code to create Excel spreadsheets, PowerPoints, and PDFs directly from chat. Upload your raw data, describe what you want, get back a polished report.
+[Code execution](https://www.anthropic.com/news/create-files) shipped in September. Claude runs code to create Excel spreadsheets, PowerPoints, and PDFs directly from chat. Upload your raw data, describe what you want, get back a polished report.
 
 Claude Code runs in your terminal (the command line interface developers use). Composable, scriptable, local. It sees your actual files and runs on your actual machine.
 
-Claude for Chrome just expanded to all paid users. Navigate sites, fill forms, manage calendar and email. The killer feature for non-developers: record a workflow once and Claude learns it.
+[Claude for Chrome](https://www.anthropic.com/news/claude-for-chrome) just expanded to all paid users. Navigate sites, fill forms, manage calendar and email. The killer feature for non-developers: record a workflow once and Claude learns it.
 
 These pieces now connect. Build in terminal, test in browser, debug together.
 
@@ -38,7 +38,7 @@ Others are building for everyone.
 
 [Manus](https://manus.im) gives you an AI agent with its own computer. Tell it "create a competitive analysis deck for my pitch next week" and watch it research, write, and design slides. About $2 per task.
 
-Zo Computer positions itself as "AWS for my mom." The founder's mother, a biologist running a research lab, uses it to manage her schedule and run code from her grad students. She texts it like a personal assistant.
+[Zo Computer](https://www.zo.computer/) positions itself as "AWS for my mom." The founder's mother, a biologist running a research lab, uses it to manage her schedule and run code from her grad students. She texts it like a personal assistant.
 
 Both are early. But computer-using AI is becoming a product category.
 

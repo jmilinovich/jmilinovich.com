@@ -5,15 +5,15 @@ date: "2022-07-10"
 
 <!-- Image unavailable: original URL was https://images.spr.so/cdn-cgi/imagedelivery/j42No7y-dcokJuNgXeA0ig/ee8ceb87-fd0b-4288-bf9f-f94b40b16ffd/Untitled/w=3840,quality=90,fit=scale-down -->
 
-[Crypto Mullets](https://mirror.xyz/jrm.eth/sc2O_cxkJ_npiC17HwUQMvhaoSMe227pIVcgoIC5yUY?ref=jmilinovich.com) are the next wave of multibillion dollar web3 companies, and one way they'll come to market is through on chain conglomerates powered by annuity-bearing NFTs.
+[Crypto Mullets](https://mirror.xyz/jrm.eth/sc2O_cxkJ_npiC17HwUQMvhaoSMe227pIVcgoIC5yUY) are the next wave of multibillion dollar web3 companies, and one way they'll come to market is through on chain conglomerates powered by annuity-bearing NFTs.
 
-Traditional conglomerates are, "a combination of multiple business entities operating in entirely different industries under one corporate group, usually involving a parent company and many subsidiaries" ([source](https://en.wikipedia.org/wiki/Conglomerate_(company)?ref=jmilinovich.com)).
+Traditional conglomerates are, "a combination of multiple business entities operating in entirely different industries under one corporate group, usually involving a parent company and many subsidiaries" ([source](https://en.wikipedia.org/wiki/Conglomerate_(company))).
 
 I believe this same model will come to fruition on chain to fund and create niche DAOs that generate on chain revenue streams. This model will be highly useful for music labels, movie studios and other forms of small creator collectives that can produce work that's monetized through the blockchain.
 
 ## Architecture
 
-The basic architecture of an On Chain Conglomerate will look like a Hub and Spoke model that's interconnected through a series of [ownership splits](https://0xsplits.xyz/?ref=jmilinovich.com) managed by NFTs:
+The basic architecture of an On Chain Conglomerate will look like a Hub and Spoke model that's interconnected through a series of [ownership splits](https://0xsplits.xyz/) managed by NFTs:
 
 *   First comes the Hub, which mints ~1000 NFTs and sells ~1/3 to third parties while issuing another 1/3 to operators and retaining the last 1/3 for its treasury.
 *   Then comes the Spoke, which is created for each business entity or subsidiary. Upon Spoke formation the Hub agrees to a price per NFT which effectively sets a valuation on the original Spoke entity. Then, similar to the Hub, the Spoke mints ~1000 NFTs which are split between third party sales, DAO operators, the DAO treasury and sales to the Hub.
@@ -45,4 +45,4 @@ On Chain Conglomerates can be started in 4 steps:
 3.  Use business operations from first Spoke to subsidize purchase/creation of second Spoke.
 4.  Repeat, repeat, repeat.
 
-Are you working on or thinking about creating an on chain conglomerate? I'd love to hear from you on [Twitter](https://twitter.com/jmilinovich?ref=jmilinovich.com) or Farcaster!
+Are you working on or thinking about creating an on chain conglomerate? I'd love to hear from you on [Twitter](https://twitter.com/jmilinovich) or Farcaster!

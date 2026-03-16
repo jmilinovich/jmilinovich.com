@@ -5,7 +5,7 @@ date: "2020-12-10"
 
 Pinterest is an extraordinarily powerful tool for consumers, but is still misunderstood by marketers. I worked at Pinterest for 2 years helping build their core content understanding technology, and learned a lot about what makes for a successful Pinterest marketing strategy. I hope this guide helps demystify how marketers can get the most from Pinterest as a marketing channel.
 
-If you have any questions, please [Tweet @jmilinovich](https://web.archive.org/web/20201226213727/https://twitter.com/intent/tweet?text=Hey%20@jmilinovich)!
+If you have any questions, please [Tweet @jmilinovich](https://twitter.com/intent/tweet?text=Hey%20@jmilinovich)!
 
 ## Why is Pinterest marketing important?
 
@@ -49,7 +49,7 @@ As such, one of the most important things to get right is having a clear strateg
 
 ### Choose your Interests
 
-The most critical thing to get right in your Pinterest marketing plan is determining what Interests are most important to your business. There are [over 10,000 interests on Pinterest today](https://web.archive.org/web/20201226213727/https://docs.google.com/spreadsheets/d/1HxL-0Z3p2fgxis9YBP2HWC3tvPrs1hAuHDRtH-NJTIM/edit#gid=118370875), ranging from highly broad to highly specific. Start by brainstorming what interests your target audience has today, as well as what interests your content is actually about. Look for the overlap of these two sets and choose the 10-15 that have the most promise to focus in on first.
+The most critical thing to get right in your Pinterest marketing plan is determining what Interests are most important to your business. There are [over 10,000 interests on Pinterest today](https://docs.google.com/spreadsheets/d/1HxL-0Z3p2fgxis9YBP2HWC3tvPrs1hAuHDRtH-NJTIM/edit#gid=118370875), ranging from highly broad to highly specific. Start by brainstorming what interests your target audience has today, as well as what interests your content is actually about. Look for the overlap of these two sets and choose the 10-15 that have the most promise to focus in on first.
 
 ### Create your Boards
 
@@ -81,9 +81,9 @@ You should post all of your existing, relevant content to Pinterest upfront and 
 
 ## How to make Pinterest Pins?
 
-The Pins that perform best on Pinterest have been created specifically for Pinterest following their [creative best practices](https://web.archive.org/web/20201226213727/https://business.pinterest.com/en-gb/content/creative-best-practices/). Practically speaking this means that each Pin will require some editing work within a graphics editor tool. Generally speaking, each Pin can take anywhere from 5-20 minutes to create by hand if using a tool like Photoshop, Canva or Adobe Spark. This can be quite burdensome, especially if you're trying to create dozens or hundreds of Pins for your site.
+The Pins that perform best on Pinterest have been created specifically for Pinterest following their [creative best practices](https://business.pinterest.com/en-gb/content/creative-best-practices/). Practically speaking this means that each Pin will require some editing work within a graphics editor tool. Generally speaking, each Pin can take anywhere from 5-20 minutes to create by hand if using a tool like Photoshop, Canva or Adobe Spark. This can be quite burdensome, especially if you're trying to create dozens or hundreds of Pins for your site.
 
-[Aesthetic's software](https://web.archive.org/web/20201226213727/https://www.aesthetic.com/?utm_source=blog&utm_medium=post&utm_campaign=pinterest-guide) is able to generate on-brand Pinterest Pins from a company's website automatically. Simply enter a URL, and our app will create dozens of variations of graphics to promote that webpage, including several that follow Pinterest's best practices guide. We've seen our users cut down the time it takes to create a Pin by 95% using our tool.
+[Aesthetic's software](https://www.aesthetic.com/?utm_source=blog&utm_medium=post&utm_campaign=pinterest-guide) is able to generate on-brand Pinterest Pins from a company's website automatically. Simply enter a URL, and our app will create dozens of variations of graphics to promote that webpage, including several that follow Pinterest's best practices guide. We've seen our users cut down the time it takes to create a Pin by 95% using our tool.
 
 Once you've created your Pin graphics, you can upload them into the Pinterest system. Add the URL for each Pin along with a detailed description that touches upon what the Pins about and ideally mentions the specific interests that it's related to. Post these to the right boards, and you're off to the races!
 

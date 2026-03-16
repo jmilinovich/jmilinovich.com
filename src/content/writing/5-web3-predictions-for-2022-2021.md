@@ -23,19 +23,19 @@ For the least few years I've written out my own tech industry predictions, but I
 
 Most NFTs' image assets live off-chain using something like [IPFS](https://ipfs.tech). While this makes sense in many cases where the assets remain static, these projects are only using a fraction of the potential enabled by the blockchain.
 
-In 2021 we've seen a few projects emerge where the image files are actually encoded into the smart contracts using SVGs (ie, [Nouns DAO](https://nouns.wtf), Blockheads, ChainRunners) which enables a whole new level of functionality and composability. I believe this is going to be a critical part of NFT infrastructure moving forward, and 2 of these projects will break into the OpenSea Top 10.
+In 2021 we've seen a few projects emerge where the image files are actually encoded into the smart contracts using SVGs (ie, [Nouns DAO](https://nouns.wtf), [Blockheads](https://www.blockheads.family/), [ChainRunners](https://www.chainrunners.xyz/)) which enables a whole new level of functionality and composability. I believe this is going to be a critical part of NFT infrastructure moving forward, and 2 of these projects will break into the OpenSea Top 10.
 
 ## **2 large (50M+ DAU) social networks will launch token-gated functionality.**
 
 Discord is the de facto home for NFT communities today because it lets a dedicated group of fans interact with each other around a niche topic. However, there's so much left to be desired in order to enable authentic community building on the web.
 
-In 2021 some forward-thinking startups (ie, [CollabLand](https://collab.land), Aesthetic) brought token-gated functionality to the world and in 2022 I believe we'll see mass-scale adoption of token-gated access to communities across the internet.
+In 2021 some forward-thinking startups (ie, [CollabLand](https://collab.land), [Aesthetic](https://www.aesthetic.com/)) brought token-gated functionality to the world and in 2022 I believe we'll see mass-scale adoption of token-gated access to communities across the internet.
 
 ## **2 large ($1b+ valuation) web 2 companies will launch web3 business models.**
 
 Today we separate the world into "web2" and "web3", but in reality things aren't that simple. Whereas all early web3 startups are new companies that build native to this new technology, we'll going to seem many hybrid "web2.5" companies in 2022.
 
-In particular, I think 1 creator platform (ie, Substack, Patreon) and 1 real estate company (ie Opendoor, Compass) will launch crypto native functionality where they either bring a large part of their existing business on-chain or create a new on-chain business line.
+In particular, I think 1 creator platform (ie, [Substack](https://substack.com/), [Patreon](https://patreon.com/)) and 1 real estate company (ie [Opendoor](https://opendoor.com/), [Compass](https://compass.com/)) will launch crypto native functionality where they either bring a large part of their existing business on-chain or create a new on-chain business line.
 
 ## **Olympus DAO will reach 500,000 holders, signaling that DeFi 2.0 has entered its next phase of adoption.**
 

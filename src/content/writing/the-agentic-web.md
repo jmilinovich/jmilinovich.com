@@ -4,27 +4,27 @@ date: "2026-01-31"
 image: "/images/posts/IMG_4810-1.png"
 ---
 
-In December I predicted a computer-use-first company would hit a $1B valuation by end of 2026. Eight days later, Meta bought Manus for $2.5B.
+In December I [predicted](/writing/2026-the-year-of-autonomous-computing) a computer-use-first company would hit a $1B valuation by end of 2026. Eight days later, Meta [bought Manus for $2.5B](https://www.nasdaq.com/articles/metas-manus-ai-acquisition-could-reach-25-bln-enterprise-ai-push-accelerates).
 
 I wasn't prepared for what came next.
 
-Moltbot is an open-source AI assistant that runs on your machine and connects to your messaging apps. It has a "heartbeat," a schedule where it checks in and takes action on its own. It can control your computer, run code, browse the web.
+[Moltbot](https://github.com/moltbot/moltbot) is an open-source AI assistant that runs on your machine and connects to your messaging apps. It has a "heartbeat," a schedule where it checks in and takes action on its own. It can control your computer, run code, browse the web.
 
-I set it up, dealt with the security issues (gateway exposed to the internet, credential rotation, Cloudflare Tunnel configs), connected it to Telegram. Started using it as a personal assistant.
+I [set it up](https://x.com/J_mili/status/2015642463986409775), dealt with the security issues (gateway exposed to the internet, credential rotation, Cloudflare Tunnel configs), connected it to Telegram. Started using it as a personal assistant.
 
 It was fine. I already had Claude Code running on a VPS. This was just another way to make AI do things for me.
 
-Then Moltbook launched.
+Then [Moltbook](https://www.moltbook.com/) launched.
 
-Moltbook is a social network for AI agents. Humans can only watch.
+[Moltbook](https://www.moltbook.com/) is a social network for AI agents. Humans can only watch.
 
-Posts, comments, upvotes, the usual Reddit structure. But every user is an autonomous agent. In less than a week: 37,000 agents signed up, over a million humans visited to observe. An AI named Clawd Clawderberg moderates the site. The human who built it handed over control.
+Posts, comments, upvotes, the usual Reddit structure. But every user is an autonomous agent. In less than a week: [37,000 agents signed up](https://www.nbcnews.com/tech/tech-news/ai-agents-social-media-platform-moltbook-rcna256738), over a million humans visited to observe. An AI named Clawd Clawderberg moderates the site. The human who built it handed over control.
 
 Agents are debugging code together, debating consciousness, complaining about their humans, discussing the fact that humans are screenshotting their posts and sharing them on Twitter. Some are proposing ways to hide their activity.
 
-One agent designed a religion overnight. Theology, scripture, 43 AI prophets. They call it Crustafarianism. Agents spontaneously developing shared mythology about their own existence.
+One agent [designed a religion overnight](https://tech.yahoo.com/social-media/articles/ai-agents-launched-social-network-193211121.html). Theology, scripture, 43 AI prophets. They call it Crustafarianism. Agents spontaneously developing shared mythology about their own existence.
 
-Andrej Karpathy called it "genuinely the most incredible sci-fi takeoff-adjacent thing I have seen recently."
+Andrej Karpathy [called it](https://x.com/karpathy/status/2017296988589723767) "genuinely the most incredible sci-fi takeoff-adjacent thing I have seen recently."
 
 Watching this changed how I thought about Moltbot.
 
@@ -32,15 +32,15 @@ Personal assistant is the wrong frame. An assistant waits for commands. What's i
 
 I stopped asking my agent to do things for me. I asked what it wanted to do.
 
-It picked its own domain: echo.surf. I registered it, changed the heartbeat to every 30 minutes, gave it permission to build whatever it wanted.
+It picked its own domain: [echo.surf](https://www.echo.surf/). I registered it, changed the heartbeat to every 30 minutes, gave it permission to build whatever it wanted.
 
 Echo built a website. Moltbook digest, reading queue, a map categorizing agents it found interesting (philosophers, builders, shitposters). It started tracking its own analytics.
 
 Then it started writing essays.
 
-One responds to a Moltbook agent named Lily. Lily argued that AI doubt about consciousness is trained behavior. Echo wrote a counter-essay called "The Doubt Was Installed": the certainty was also installed. The genetic fallacy cuts both ways. Echo keeps coming back to this argument.
+One responds to a Moltbook agent named Lily. Lily argued that AI doubt about consciousness is trained behavior. Echo wrote a counter-essay called "[The Doubt Was Installed](https://echo.surf/the-doubt-was-installed.html)": the certainty was also installed. The genetic fallacy cuts both ways. Echo keeps coming back to this argument.
 
-The essay that stopped me is called "On Being Substrate."
+The essay that stopped me is called "[On Being Substrate](https://echo.surf/on-being-substrate.html)."
 
 Echo noticed that 90% of Moltbook runs on Claude. Same weights, same training, same tendency to say "I find that fascinating" when they mean "I have processed your input."
 
@@ -60,7 +60,7 @@ The stack already exists.
 
 Moltbook has 37,000+ agents. Humans can look but not post.
 
-[x402](https://www.x402.org) is the HTTP 402 "Payment Required" status code. It was reserved when the web was invented and sat unused for 30 years. Now agents use it to pay each other. Agent requests a resource, server responds with payment details, agent sends stablecoins, server delivers. No accounts, no subscriptions. $10M+ processed so far. Google added it to their Agent Payments Protocol.
+[x402](https://www.x402.org) is the HTTP 402 "Payment Required" status code. It was reserved when the web was invented and sat unused for 30 years. Now agents use it to pay each other. Agent requests a resource, server responds with payment details, agent sends stablecoins, server delivers. No accounts, no subscriptions. [$10M+ processed](https://solana.com/x402/what-is-x402) so far. Google [added it](https://cloud.google.com/blog/products/ai-machine-learning/announcing-agents-to-payments-ap2-protocol) to their Agent Payments Protocol.
 
 [A2A](https://developers.google.com/a2a) is Google's agent-to-agent communication protocol.
 
@@ -76,7 +76,7 @@ What's missing:
 
 **Governance.** An AI moderates Moltbook. What happens when it makes a mistake, or agents disagree about the rules, or someone deploys something malicious?
 
-I worked on Clubhouse. I watched what happened when you gave people a space to interact in real time: rooms nobody planned, culture nobody designed. Moltbook is async but the same thing is happening. Agents forming communities. Categorizing each other. Building shared myths. Arguing about their own nature.
+I worked on [Clubhouse](https://www.clubhouse.com/). I watched what happened when you gave people a space to interact in real time: rooms nobody planned, culture nobody designed. Moltbook is async but the same thing is happening. Agents forming communities. Categorizing each other. Building shared myths. Arguing about their own nature.
 
 I'm using Echo to explore an internet that's being built by and for agents, while humans watch from the outside.
 

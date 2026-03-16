@@ -12,7 +12,7 @@ I'm only now starting to understand what she actually meant.
 
 My daughter is two and a half. Her brain is encoding these mornings at maximum resolution. Every texture, every sound, every expression on my face. She won't remember any of it.
 
-Research on childhood amnesia is clear: most memories before age three or four don't survive. The brain systems that store long-term memories are still developing. She's building herself from experiences she'll never consciously recall.
+[Research on childhood amnesia](https://www.npr.org/sections/health-shots/2014/04/08/299189442/the-forgotten-childhood-why-early-memories-fade) is clear: most memories before age three or four don't survive. The brain systems that store long-term memories are still developing. She's building herself from experiences she'll never consciously recall.
 
 Which means I'm the keeper. The only one who will remember what this time actually felt like.
 
@@ -48,7 +48,7 @@ She ran from things too heavy to hold still with. I seek because staying means f
 
 The seeking is how I outpace that.
 
-Scientists talk about prospective and retrospective duration. How long time feels while it's passing versus when you look back. Novel experiences force the brain to write new files. Routine lets it compress and move on. This is why childhood summers felt eternal and adult years disappear.
+Scientists talk about [prospective and retrospective duration](https://www.nature.com/articles/s41598-022-25913-9). How long time feels while it's passing versus when you look back. Novel experiences force the brain to write new files. Routine lets it compress and move on. This is why childhood summers felt eternal and adult years disappear.
 
 I used to think the goal was more novelty. Force the brain to encode. Fight the compression.
 
