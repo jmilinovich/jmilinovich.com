@@ -1,7 +1,7 @@
 import { defineConfig } from 'astro/config';
 
 export default defineConfig({
-  site: 'https://jmilinovich.com',
+  site: 'https://mili.dev',
   redirects: {
     '/about': '/',
   },

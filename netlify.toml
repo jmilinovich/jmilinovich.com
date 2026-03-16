@@ -9,6 +9,13 @@
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin"
 
+# Redirect old domain to new domain
+[[redirects]]
+  from = "https://jmilinovich.com/*"
+  to = "https://mili.dev/:splat"
+  status = 301
+  force = true
+
 # Redirect old Ghost post URLs to new /writing/ prefix
 # status 301 + force false means it only fires if the "from" path doesn't exist
 [[redirects]]
