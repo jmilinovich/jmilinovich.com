@@ -135,7 +135,7 @@ function isActive(href: string): boolean {
     display: block;
   }
 
-  [data-theme="dark"] .logo img {
+  :global([data-theme="dark"]) .logo img {
     filter: invert(1);
   }
 
@@ -180,8 +180,8 @@ function isActive(href: string): boolean {
   /* Show sun in dark mode, moon in light mode */
   .icon-sun { display: none; }
   .icon-moon { display: block; }
-  [data-theme="dark"] .icon-sun { display: block; }
-  [data-theme="dark"] .icon-moon { display: none; }
+  :global([data-theme="dark"]) .icon-sun { display: block; }
+  :global([data-theme="dark"]) .icon-moon { display: none; }
 
   .theme-toggle-mobile {
     display: none;
