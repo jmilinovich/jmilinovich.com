@@ -14,12 +14,12 @@ function isActive(href: string): boolean {
 }
 ---
 
-<header class="site-header">
+<header class="site-header" id="site-header">
   <div class="header-inner container">
     <a href="/" class="logo" aria-label="Home">
       <Logo />
     </a>
-    <nav class="nav-desktop">
+    <nav class="nav" aria-label="Main">
       {navLinks.map((link) => (
         <a href={link.href} class:list={['nav-link', { active: isActive(link.href) }]}>
           {link.label}
@@ -30,34 +30,16 @@ function isActive(href: string): boolean {
         <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
       </button>
     </nav>
-    <button class="theme-toggle theme-toggle-mobile" id="theme-toggle-mobile" aria-label="Toggle theme">
-      <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
-      <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-    </button>
-    <input type="checkbox" id="menu-toggle" class="menu-toggle" aria-label="Toggle menu" />
-    <label for="menu-toggle" class="hamburger" aria-label="Open menu">
-      <span class="hamburger-line"></span>
-      <span class="hamburger-line"></span>
-      <span class="hamburger-line"></span>
-    </label>
-    <nav class="nav-mobile">
-      <label for="menu-toggle" class="nav-mobile-close" aria-label="Close menu">&times;</label>
-      {navLinks.map((link) => (
-        <a href={link.href} class:list={['nav-link', { active: isActive(link.href) }]}>
-          {link.label}
-        </a>
-      ))}
-    </nav>
   </div>
 </header>
 
 <script>
-  function setupThemeToggle() {
+  function setupHeader() {
+    // ── Theme toggle ──
     function handleToggle(event: MouseEvent) {
       const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
       const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
 
-      // Feature detect View Transitions API
       if (
         !document.startViewTransition ||
         window.matchMedia('(prefers-reduced-motion: reduce)').matches
@@ -100,11 +82,58 @@ function isActive(href: string): boolean {
     }
 
     document.getElementById('theme-toggle')?.addEventListener('click', handleToggle);
-    document.getElementById('theme-toggle-mobile')?.addEventListener('click', handleToggle);
+
+    // ── Scroll show/hide (mobile only) ──
+    const header = document.getElementById('site-header');
+    if (!header) return;
+
+    let lastScrollY = 0;
+    let ticking = false;
+    const THRESHOLD = 8;
+
+    function onScroll() {
+      if (ticking) return;
+      ticking = true;
+
+      requestAnimationFrame(() => {
+        // Only apply scroll behavior on mobile
+        if (window.innerWidth > 767) {
+          header.classList.remove('header--hidden');
+          ticking = false;
+          return;
+        }
+
+        const y = window.scrollY;
+        const delta = y - lastScrollY;
+
+        if (y < 100) {
+          header.classList.remove('header--hidden');
+        } else if (delta > THRESHOLD) {
+          header.classList.add('header--hidden');
+        } else if (delta < -THRESHOLD) {
+          header.classList.remove('header--hidden');
+        }
+
+        lastScrollY = y;
+        ticking = false;
+      });
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    // Reset header on page navigation (short pages)
+    function resetHeader() {
+      if (header) {
+        header.classList.remove('header--hidden');
+        lastScrollY = 0;
+      }
+    }
+
+    document.addEventListener('astro:page-load', resetHeader);
   }
 
-  setupThemeToggle();
-  document.addEventListener('astro:after-swap', setupThemeToggle);
+  setupHeader();
+  document.addEventListener('astro:after-swap', setupHeader);
 </script>
 
 <style>
@@ -134,7 +163,7 @@ function isActive(href: string): boolean {
     height: 28px;
   }
 
-  .nav-desktop {
+  .nav {
     display: flex;
     gap: 2rem;
     align-items: center;
@@ -145,14 +174,27 @@ function isActive(href: string): boolean {
     font-size: 1.4rem;
     color: var(--color-text);
     text-decoration: none;
+    position: relative;
   }
 
   .nav-link:hover {
-    text-decoration: underline;
+    text-decoration: none;
+    color: var(--color-heading);
   }
 
   .nav-link.active {
-    color: var(--color-muted);
+    color: var(--color-heading);
+  }
+
+  .nav-link.active::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    right: 0;
+    height: 1.5px;
+    background: var(--color-heading);
+    border-radius: 1px;
   }
 
   .theme-toggle {
@@ -178,43 +220,6 @@ function isActive(href: string): boolean {
   :global([data-theme="dark"]) .icon-sun { display: block; }
   :global([data-theme="dark"]) .icon-moon { display: none; }
 
-  .theme-toggle-mobile {
-    display: none;
-  }
-
-  .menu-toggle {
-    display: none;
-    position: absolute;
-    opacity: 0;
-    pointer-events: none;
-  }
-
-  .hamburger {
-    display: none;
-    flex-direction: column;
-    justify-content: center;
-    gap: 5px;
-    cursor: pointer;
-    width: 24px;
-    height: 24px;
-  }
-
-  .hamburger-line {
-    display: block;
-    width: 24px;
-    height: 2px;
-    background: var(--color-heading);
-    border-radius: 1px;
-  }
-
-  .nav-mobile {
-    display: none;
-  }
-
-  .nav-mobile-close {
-    display: none;
-  }
-
   @media (max-width: 767px) {
     .site-header {
       position: fixed;
@@ -223,10 +228,24 @@ function isActive(href: string): boolean {
       right: 0;
       padding: 0;
       height: 64px;
-      background: var(--color-bg);
+      background: rgba(255, 255, 255, 0.88);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      box-shadow: 0 1px 8px rgba(0, 0, 0, 0.06);
       z-index: 9999;
       display: flex;
       align-items: center;
+      transition: transform 300ms ease;
+      will-change: transform;
+    }
+
+    :global([data-theme="dark"]) .site-header {
+      background: rgba(10, 10, 10, 0.88);
+      box-shadow: 0 1px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .site-header.header--hidden {
+      transform: translateY(-100%);
     }
 
     .header-inner {
@@ -239,51 +258,33 @@ function isActive(href: string): boolean {
       height: 24px;
     }
 
-    .nav-desktop {
-      display: none;
+    .nav {
+      gap: 0;
+      height: 64px;
     }
 
-    .hamburger {
+    .nav-link {
+      font-size: 1.3rem;
       display: flex;
-    }
-
-    .menu-toggle:checked ~ .nav-mobile {
-      display: flex;
-    }
-
-    .nav-mobile {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: var(--color-bg);
-      flex-direction: column;
       align-items: center;
-      justify-content: center;
-      gap: 3.2rem;
-      z-index: 10000;
+      height: 64px;
+      padding: 0 1rem;
     }
 
-    .nav-mobile .nav-link {
-      font-size: 2.4rem;
+    .nav-link.active::after {
+      bottom: 16px;
     }
 
-    .nav-mobile-close {
-      display: block;
-      position: absolute;
-      top: 1.6rem;
-      right: 2rem;
-      font-size: 3.2rem;
-      cursor: pointer;
-      color: var(--color-heading);
-      line-height: 1;
-      background: none;
-      border: none;
+    .theme-toggle {
+      margin-left: 0.2rem;
+      height: 64px;
+      padding: 0 0.4rem;
     }
+  }
 
-    .theme-toggle-mobile {
-      display: flex;
+  @media (prefers-reduced-motion: reduce) {
+    .site-header {
+      transition: none !important;
     }
   }
 </style>

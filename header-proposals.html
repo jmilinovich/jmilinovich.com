@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>mili.dev — Header Proposals</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap');
+
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --mono: 'JetBrains Mono', monospace;
+    --serif: 'Instrument Serif', serif;
+    --bg: #0e0e0e;
+    --surface: #1a1a1a;
+    --border: #2a2a2a;
+    --text: #999;
+    --text-bright: #e0e0e0;
+    --accent: #fff;
+    --phone-w: 375px;
+    --phone-h: 667px;
+  }
+
+  html { font-size: 16px; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--mono);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Page header */
+  .page-header {
+    text-align: center;
+    padding: 4rem 2rem 1rem;
+    position: relative;
+  }
+
+  .page-header::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 300px;
+    background: radial-gradient(ellipse 60% 50% at 50% 0%, rgba(255,255,255,0.03) 0%, transparent 100%);
+    pointer-events: none;
+  }
+
+  .page-title {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text);
+    margin-bottom: 1rem;
+    position: relative;
+  }
+
+  .page-headline {
+    font-family: var(--serif);
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    color: var(--accent);
+    font-weight: 400;
+    line-height: 1.15;
+    position: relative;
+    margin-bottom: 0.5rem;
+  }
+
+  .page-headline em {
+    font-style: italic;
+    color: var(--text);
+  }
+
+  .page-sub {
+    font-size: 0.72rem;
+    color: #555;
+    letter-spacing: 0.02em;
+    max-width: 480px;
+    margin: 0 auto;
+    line-height: 1.7;
+    position: relative;
+  }
+
+  /* Proposals grid */
+  .proposals {
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    padding: 2.5rem 2rem 5rem;
+    flex-wrap: wrap;
+  }
+
+  .proposal {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.2rem;
+  }
+
+  .proposal-label {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text);
+    text-align: center;
+    line-height: 1.6;
+  }
+
+  .proposal-label .rec {
+    display: inline-block;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 3px;
+    padding: 0.15em 0.5em;
+    margin-left: 0.5em;
+    font-size: 0.85em;
+    color: var(--text-bright);
+    letter-spacing: 0.08em;
+  }
+
+  /* Phone frame */
+  .phone {
+    width: var(--phone-w);
+    height: var(--phone-h);
+    border-radius: 40px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    position: relative;
+    overflow: hidden;
+    box-shadow:
+      0 0 0 1px rgba(255,255,255,0.04),
+      0 25px 60px rgba(0,0,0,0.5),
+      0 4px 12px rgba(0,0,0,0.3),
+      inset 0 1px 0 rgba(255,255,255,0.05);
+  }
+
+  .phone::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 50%;
+    transform: translateX(-50%);
+    width: 120px;
+    height: 28px;
+    background: var(--surface);
+    border-radius: 0 0 18px 18px;
+    z-index: 100;
+    border-bottom: 1px solid var(--border);
+    border-left: 1px solid var(--border);
+    border-right: 1px solid var(--border);
+  }
+
+  /* Screen inside phone */
+  .screen {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    border-radius: 39px;
+    overflow: hidden;
+    background: #fff;
+  }
+
+  .screen-scroll {
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+  }
+
+  .screen-scroll::-webkit-scrollbar { display: none; }
+
+  /* ============================================ */
+  /* SHARED CONTENT STYLES (inside phones)        */
+  /* ============================================ */
+
+  .content {
+    padding: 80px 20px 60px;
+    color: #333;
+    font-family: -apple-system, 'Helvetica Neue', sans-serif;
+  }
+
+  .content-b { padding-top: 64px; }
+  .content-c { padding-top: 72px; }
+
+  .content h2 {
+    font-family: var(--mono);
+    font-size: 22px;
+    color: #111;
+    line-height: 1.2;
+    margin-bottom: 6px;
+    letter-spacing: -0.02em;
+  }
+
+  .content .date {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: #999;
+    margin-bottom: 20px;
+    display: block;
+  }
+
+  .content p {
+    font-size: 15px;
+    line-height: 1.7;
+    color: #444;
+    margin-bottom: 18px;
+  }
+
+  .content .section-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #999;
+    margin: 32px 0 14px;
+    padding-top: 24px;
+    border-top: 1px solid #eee;
+  }
+
+  .content blockquote {
+    border-left: 2px solid #ddd;
+    padding-left: 16px;
+    margin: 20px 0;
+    font-style: italic;
+    color: #666;
+    font-size: 14px;
+    line-height: 1.7;
+  }
+
+  /* ============================================ */
+  /* PROPOSAL A — Inline Everything               */
+  /* ============================================ */
+
+  .header-a {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    background: rgba(255,255,255,0.88);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+    z-index: 50;
+    transition: transform 300ms ease;
+    will-change: transform;
+  }
+
+  .header-a.hidden {
+    transform: translateY(-100%);
+  }
+
+  .header-a .logo {
+    font-family: var(--mono);
+    font-size: 16px;
+    font-weight: 700;
+    color: #111;
+    text-decoration: none;
+    letter-spacing: -0.03em;
+  }
+
+  .header-a .nav-right {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    height: 64px;
+  }
+
+  .header-a .nav-link {
+    font-family: var(--mono);
+    font-size: 11.5px;
+    color: #333;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    height: 64px;
+    padding: 0 10px;
+    position: relative;
+    transition: color 0.15s;
+  }
+
+  .header-a .nav-link:hover { color: #000; }
+
+  .header-a .nav-link.active {
+    color: #111;
+  }
+
+  .header-a .nav-link.active::after {
+    content: '';
+    position: absolute;
+    bottom: 16px;
+    left: 10px;
+    right: 10px;
+    height: 1.5px;
+    background: #111;
+    border-radius: 1px;
+  }
+
+  .header-a .theme-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 64px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #999;
+    margin-left: 4px;
+    transition: color 0.15s;
+  }
+
+  .header-a .theme-btn:hover { color: #333; }
+
+  /* ============================================ */
+  /* PROPOSAL B — Bottom Bar                      */
+  /* ============================================ */
+
+  .header-b-top {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    background: rgba(255,255,255,0.88);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+    z-index: 50;
+    transition: transform 300ms ease;
+    will-change: transform;
+  }
+
+  .header-b-top.hidden { transform: translateY(-100%); }
+
+  .header-b-top .logo {
+    font-family: var(--mono);
+    font-size: 15px;
+    font-weight: 700;
+    color: #111;
+    text-decoration: none;
+    letter-spacing: -0.03em;
+  }
+
+  .header-b-top .theme-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px; height: 48px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #999;
+    transition: color 0.15s;
+  }
+
+  .bottom-bar {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    background: rgba(255,255,255,0.90);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-top: 1px solid rgba(0,0,0,0.06);
+    z-index: 50;
+    transition: transform 300ms ease;
+    will-change: transform;
+  }
+
+  .bottom-bar.hidden { transform: translateY(100%); }
+
+  .bottom-bar .tab {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: #555;
+    text-decoration: none;
+    padding: 0 20px;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    position: relative;
+    transition: color 0.15s;
+  }
+
+  .bottom-bar .tab.active {
+    color: #111;
+  }
+
+  .bottom-bar .tab.active::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 20px; right: 20px;
+    height: 2px;
+    background: #111;
+    border-radius: 0 0 2px 2px;
+  }
+
+  .bottom-bar .tab-sep {
+    width: 1px;
+    height: 16px;
+    background: rgba(0,0,0,0.08);
+  }
+
+  /* ============================================ */
+  /* PROPOSAL C — Floating Pill                   */
+  /* ============================================ */
+
+  .pill {
+    position: absolute;
+    top: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 44px;
+    display: flex;
+    align-items: center;
+    gap: 0;
+    padding: 0 6px;
+    background: rgba(255,255,255,0.90);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid rgba(0,0,0,0.08);
+    border-radius: 999px;
+    z-index: 50;
+    transition: all 400ms cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: transform, width, opacity;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    overflow: hidden;
+  }
+
+  .pill.collapsed {
+    transform: translateX(-50%) translateY(-60px);
+    opacity: 0;
+  }
+
+  .pill.mini {
+    gap: 0;
+    padding: 0 14px;
+  }
+
+  .pill.mini .pill-nav,
+  .pill.mini .pill-sep,
+  .pill.mini .pill-theme {
+    width: 0;
+    opacity: 0;
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+  }
+
+  .pill .logo {
+    font-family: var(--mono);
+    font-size: 14px;
+    font-weight: 700;
+    color: #111;
+    text-decoration: none;
+    letter-spacing: -0.03em;
+    padding: 0 10px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+  }
+
+  .pill-sep {
+    width: 1px;
+    height: 18px;
+    background: rgba(0,0,0,0.10);
+    flex-shrink: 0;
+    transition: all 400ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .pill-nav {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    transition: all 400ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .pill .nav-link {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: #555;
+    text-decoration: none;
+    padding: 0 10px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    transition: color 0.15s, opacity 400ms, width 400ms, padding 400ms;
+  }
+
+  .pill .nav-link.active { color: #111; font-weight: 600; }
+  .pill .nav-link:hover { color: #111; }
+
+  .pill-theme {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px; height: 34px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #999;
+    flex-shrink: 0;
+    border-radius: 50%;
+    transition: all 400ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .pill-theme:hover { color: #333; background: rgba(0,0,0,0.04); }
+
+  /* ============================================ */
+  /* Responsive                                   */
+  /* ============================================ */
+
+  @media (max-width: 1280px) {
+    .proposals { gap: 2rem; }
+    .phone {
+      --phone-w: 340px;
+      --phone-h: 620px;
+      width: var(--phone-w);
+      height: var(--phone-h);
+    }
+  }
+
+  @media (max-width: 1100px) {
+    .proposals {
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+
+  /* Fade in animation */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .proposal {
+    opacity: 0;
+    animation: fadeUp 0.6s ease forwards;
+  }
+  .proposal:nth-child(1) { animation-delay: 0.1s; }
+  .proposal:nth-child(2) { animation-delay: 0.25s; }
+  .proposal:nth-child(3) { animation-delay: 0.4s; }
+
+  .page-header > * {
+    opacity: 0;
+    animation: fadeUp 0.5s ease forwards;
+  }
+  .page-header > *:nth-child(1) { animation-delay: 0s; }
+  .page-header > *:nth-child(2) { animation-delay: 0.08s; }
+  .page-header > *:nth-child(3) { animation-delay: 0.16s; }
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <div class="page-title">mili.dev</div>
+  <h1 class="page-headline">Header <em>Proposals</em></h1>
+  <p class="page-sub">Three approaches to mobile navigation — scroll each mockup to feel the interaction. Proposal A is the panel's unanimous recommendation.</p>
+</div>
+
+<div class="proposals">
+
+  <!-- ====== PROPOSAL A ====== -->
+  <div class="proposal">
+    <div class="proposal-label">A: Inline Everything <span class="rec">★ Recommended</span></div>
+    <div class="phone" id="phone-a">
+      <div class="screen">
+        <div class="header-a" id="header-a">
+          <a class="logo" href="#">mili</a>
+          <div class="nav-right">
+            <a class="nav-link active" href="#">Writing</a>
+            <a class="nav-link" href="#">Talks</a>
+            <a class="nav-link" href="#">Projects</a>
+            <button class="theme-btn" aria-label="Toggle theme">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+            </button>
+          </div>
+        </div>
+        <div class="screen-scroll" id="scroll-a">
+          <div class="content">
+            <h2>The Agentic Web</h2>
+            <span class="date">31 Jan 2026</span>
+            <p>We're entering a new era of the web — one where AI agents don't just assist humans, they navigate, negotiate, and transact on our behalf. This shift is as fundamental as the move from desktop to mobile.</p>
+            <p>Think about what happened with mobile. We didn't just shrink websites — we rebuilt the entire interaction model. Touch replaced clicks. Apps replaced bookmarks. Location became a first-class input. The "mobile web" wasn't the web made smaller; it was a new medium.</p>
+            <p>The agentic web will be similarly transformative. When your AI agent visits a website, it doesn't need beautiful typography or clever animations. It needs structured data, clear capabilities, and machine-readable intent.</p>
+            <div class="section-label">What changes</div>
+            <p>First, discovery changes completely. Today, SEO is about ranking in a list of ten blue links. Tomorrow, it's about being the service an agent selects from a capability registry. The competitive moat shifts from brand recall to API quality.</p>
+            <blockquote>The best interface for an AI agent is no interface at all — just a well-documented protocol.</blockquote>
+            <p>Second, trust and authentication become critical infrastructure. When an agent books a flight on your behalf, how does the airline know it's authorized? How do you verify the agent chose the best option? We need new primitives for delegated authority.</p>
+            <p>Third, the economics of attention collapse. If agents handle routine browsing, the remaining human-directed web traffic becomes extremely high-intent. Every click becomes more valuable because it represents a deliberate choice to engage personally rather than delegate.</p>
+            <div class="section-label">Building for agents</div>
+            <p>At Canva, we've been thinking about this from both sides. Our Magic Studio tools help humans create — but increasingly, agents need to create too. An agent scheduling social media posts needs to generate graphics. An agent planning an event needs to design invitations.</p>
+            <p>The pattern we're seeing is that agents want the same capabilities as humans, but through different interfaces. They don't need drag-and-drop; they need parameters. They don't need previews; they need guarantees about output quality.</p>
+            <p>This is why I created the agents.json specification — a simple way for websites to declare their capabilities to AI agents. Think of it as robots.txt for the agentic era, but instead of saying "don't crawl this," it says "here's what I can do for you."</p>
+            <p>The web has always been about connecting humans to information and to each other. The agentic web extends this to connecting humans to capabilities, mediated by intelligent agents that understand our preferences and constraints. It's not the end of the human web — it's the beginning of something much larger.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ====== PROPOSAL B ====== -->
+  <div class="proposal">
+    <div class="proposal-label">B: Bottom Bar</div>
+    <div class="phone" id="phone-b">
+      <div class="screen">
+        <div class="header-b-top" id="header-b-top">
+          <a class="logo" href="#">mili</a>
+          <button class="theme-btn" aria-label="Toggle theme">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+          </button>
+        </div>
+        <div class="bottom-bar" id="bottom-bar">
+          <a class="tab active" href="#">Writing</a>
+          <span class="tab-sep"></span>
+          <a class="tab" href="#">Talks</a>
+          <span class="tab-sep"></span>
+          <a class="tab" href="#">Projects</a>
+        </div>
+        <div class="screen-scroll" id="scroll-b">
+          <div class="content content-b">
+            <h2>The Agentic Web</h2>
+            <span class="date">31 Jan 2026</span>
+            <p>We're entering a new era of the web — one where AI agents don't just assist humans, they navigate, negotiate, and transact on our behalf. This shift is as fundamental as the move from desktop to mobile.</p>
+            <p>Think about what happened with mobile. We didn't just shrink websites — we rebuilt the entire interaction model. Touch replaced clicks. Apps replaced bookmarks. Location became a first-class input. The "mobile web" wasn't the web made smaller; it was a new medium.</p>
+            <p>The agentic web will be similarly transformative. When your AI agent visits a website, it doesn't need beautiful typography or clever animations. It needs structured data, clear capabilities, and machine-readable intent.</p>
+            <div class="section-label">What changes</div>
+            <p>First, discovery changes completely. Today, SEO is about ranking in a list of ten blue links. Tomorrow, it's about being the service an agent selects from a capability registry. The competitive moat shifts from brand recall to API quality.</p>
+            <blockquote>The best interface for an AI agent is no interface at all — just a well-documented protocol.</blockquote>
+            <p>Second, trust and authentication become critical infrastructure. When an agent books a flight on your behalf, how does the airline know it's authorized? How do you verify the agent chose the best option? We need new primitives for delegated authority.</p>
+            <p>Third, the economics of attention collapse. If agents handle routine browsing, the remaining human-directed web traffic becomes extremely high-intent. Every click becomes more valuable because it represents a deliberate choice to engage personally rather than delegate.</p>
+            <div class="section-label">Building for agents</div>
+            <p>At Canva, we've been thinking about this from both sides. Our Magic Studio tools help humans create — but increasingly, agents need to create too. An agent scheduling social media posts needs to generate graphics. An agent planning an event needs to design invitations.</p>
+            <p>The pattern we're seeing is that agents want the same capabilities as humans, but through different interfaces. They don't need drag-and-drop; they need parameters. They don't need previews; they need guarantees about output quality.</p>
+            <p>This is why I created the agents.json specification — a simple way for websites to declare their capabilities to AI agents. Think of it as robots.txt for the agentic era, but instead of saying "don't crawl this," it says "here's what I can do for you."</p>
+            <p style="padding-bottom: 52px;">The web has always been about connecting humans to information and to each other. The agentic web extends this to connecting humans to capabilities, mediated by intelligent agents that understand our preferences and constraints. It's not the end of the human web — it's the beginning of something much larger.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ====== PROPOSAL C ====== -->
+  <div class="proposal">
+    <div class="proposal-label">C: Floating Pill</div>
+    <div class="phone" id="phone-c">
+      <div class="screen">
+        <div class="pill" id="pill">
+          <a class="logo" href="#">mili</a>
+          <div class="pill-sep"></div>
+          <div class="pill-nav">
+            <a class="nav-link active" href="#">Writing</a>
+            <a class="nav-link" href="#">Talks</a>
+            <a class="nav-link" href="#">Projects</a>
+          </div>
+          <button class="pill-theme" aria-label="Toggle theme">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+          </button>
+        </div>
+        <div class="screen-scroll" id="scroll-c">
+          <div class="content content-c">
+            <h2>The Agentic Web</h2>
+            <span class="date">31 Jan 2026</span>
+            <p>We're entering a new era of the web — one where AI agents don't just assist humans, they navigate, negotiate, and transact on our behalf. This shift is as fundamental as the move from desktop to mobile.</p>
+            <p>Think about what happened with mobile. We didn't just shrink websites — we rebuilt the entire interaction model. Touch replaced clicks. Apps replaced bookmarks. Location became a first-class input. The "mobile web" wasn't the web made smaller; it was a new medium.</p>
+            <p>The agentic web will be similarly transformative. When your AI agent visits a website, it doesn't need beautiful typography or clever animations. It needs structured data, clear capabilities, and machine-readable intent.</p>
+            <div class="section-label">What changes</div>
+            <p>First, discovery changes completely. Today, SEO is about ranking in a list of ten blue links. Tomorrow, it's about being the service an agent selects from a capability registry. The competitive moat shifts from brand recall to API quality.</p>
+            <blockquote>The best interface for an AI agent is no interface at all — just a well-documented protocol.</blockquote>
+            <p>Second, trust and authentication become critical infrastructure. When an agent books a flight on your behalf, how does the airline know it's authorized? How do you verify the agent chose the best option? We need new primitives for delegated authority.</p>
+            <p>Third, the economics of attention collapse. If agents handle routine browsing, the remaining human-directed web traffic becomes extremely high-intent. Every click becomes more valuable because it represents a deliberate choice to engage personally rather than delegate.</p>
+            <div class="section-label">Building for agents</div>
+            <p>At Canva, we've been thinking about this from both sides. Our Magic Studio tools help humans create — but increasingly, agents need to create too. An agent scheduling social media posts needs to generate graphics. An agent planning an event needs to design invitations.</p>
+            <p>The pattern we're seeing is that agents want the same capabilities as humans, but through different interfaces. They don't need drag-and-drop; they need parameters. They don't need previews; they need guarantees about output quality.</p>
+            <p>This is why I created the agents.json specification — a simple way for websites to declare their capabilities to AI agents. Think of it as robots.txt for the agentic era, but instead of saying "don't crawl this," it says "here's what I can do for you."</p>
+            <p>The web has always been about connecting humans to information and to each other. The agentic web extends this to connecting humans to capabilities, mediated by intelligent agents that understand our preferences and constraints. It's not the end of the human web — it's the beginning of something much larger.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+// ── Scroll behavior for Proposal A ──
+(function() {
+  const scroll = document.getElementById('scroll-a');
+  const header = document.getElementById('header-a');
+  let lastY = 0;
+  let ticking = false;
+  const THRESHOLD = 10;
+
+  scroll.addEventListener('scroll', () => {
+    if (!ticking) {
+      requestAnimationFrame(() => {
+        const y = scroll.scrollTop;
+        const delta = y - lastY;
+
+        if (y < 100) {
+          header.classList.remove('hidden');
+        } else if (delta > THRESHOLD) {
+          header.classList.add('hidden');
+        } else if (delta < -THRESHOLD) {
+          header.classList.remove('hidden');
+        }
+
+        lastY = y;
+        ticking = false;
+      });
+      ticking = true;
+    }
+  }, { passive: true });
+})();
+
+// ── Scroll behavior for Proposal B ──
+(function() {
+  const scroll = document.getElementById('scroll-b');
+  const top = document.getElementById('header-b-top');
+  const bot = document.getElementById('bottom-bar');
+  let lastY = 0;
+  let ticking = false;
+  const THRESHOLD = 10;
+
+  scroll.addEventListener('scroll', () => {
+    if (!ticking) {
+      requestAnimationFrame(() => {
+        const y = scroll.scrollTop;
+        const delta = y - lastY;
+
+        if (y < 80) {
+          top.classList.remove('hidden');
+          bot.classList.remove('hidden');
+        } else if (delta > THRESHOLD) {
+          top.classList.add('hidden');
+          bot.classList.add('hidden');
+        } else if (delta < -THRESHOLD) {
+          top.classList.remove('hidden');
+          bot.classList.remove('hidden');
+        }
+
+        lastY = y;
+        ticking = false;
+      });
+      ticking = true;
+    }
+  }, { passive: true });
+})();
+
+// ── Scroll behavior for Proposal C ──
+(function() {
+  const scroll = document.getElementById('scroll-c');
+  const pill = document.getElementById('pill');
+  let lastY = 0;
+  let ticking = false;
+  const THRESHOLD = 10;
+
+  scroll.addEventListener('scroll', () => {
+    if (!ticking) {
+      requestAnimationFrame(() => {
+        const y = scroll.scrollTop;
+        const delta = y - lastY;
+
+        if (y < 80) {
+          pill.classList.remove('collapsed', 'mini');
+        } else if (delta > THRESHOLD) {
+          pill.classList.add('collapsed');
+        } else if (delta < -THRESHOLD) {
+          pill.classList.remove('collapsed');
+          pill.classList.remove('mini');
+        }
+
+        lastY = y;
+        ticking = false;
+      });
+      ticking = true;
+    }
+  }, { passive: true });
+})();
+
+// prevent link clicks from navigating
+document.querySelectorAll('.screen a, .screen button').forEach(el => {
+  el.addEventListener('click', e => e.preventDefault());
+});
+</script>
+
+</body>
+</html>
