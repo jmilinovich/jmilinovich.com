@@ -13,6 +13,27 @@ export async function getStaticPaths() {
 const { post } = Astro.props;
 const { Content } = await render(post);
 
+// Auto-extract description from first paragraph of markdown
+function extractDescription(body: string): string {
+  const lines = body.split('\n');
+  for (const line of lines) {
+    const trimmed = line.trim();
+    // Skip frontmatter, headings, images, empty lines, and HTML
+    if (!trimmed || trimmed.startsWith('#') || trimmed.startsWith('!') || trimmed.startsWith('<') || trimmed.startsWith('---') || trimmed.startsWith('_')) continue;
+    // Strip markdown links and formatting
+    const plain = trimmed
+      .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')
+      .replace(/[*_~`]/g, '')
+      .trim();
+    if (plain.length > 20) {
+      return plain.length > 160 ? plain.slice(0, 157) + '...' : plain;
+    }
+  }
+  return '';
+}
+
+const postDescription = extractDescription(post.body || '');
+
 function formatDate(dateStr: string): string {
   const d = new Date(dateStr);
   const day = d.getUTCDate().toString().padStart(2, '0');
@@ -23,7 +44,7 @@ function formatDate(dateStr: string): string {
 }
 ---
 
-<BaseLayout title={post.data.title}>
+<BaseLayout title={post.data.title} description={postDescription || undefined} ogImage={post.data.image || undefined}>
   <article class="post">
     <header class="post-header">
       <h1 class="post-title">{post.data.title}</h1>

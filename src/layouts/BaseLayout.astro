@@ -7,9 +7,11 @@ import Footer from '../components/Footer.astro';
 interface Props {
   title: string;
   description?: string;
+  ogImage?: string;
 }
 
-const { title, description = "John Milinovich - entrepreneur and technology executive" } = Astro.props;
+const { title, description = "John Milinovich - entrepreneur and technology executive", ogImage } = Astro.props;
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
 const forwards: TransitionAnimationPair = {
   old: {
@@ -53,8 +55,17 @@ const viewTransition = { forwards, backwards };
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalURL} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
+    {ogImage && <meta property="og:image" content={new URL(ogImage, Astro.site)} />}
+    <meta name="twitter:card" content={ogImage ? "summary_large_image" : "summary"} />
+    <meta name="twitter:site" content="@jmilinovich" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    {ogImage && <meta name="twitter:image" content={new URL(ogImage, Astro.site)} />}
     <link rel="icon" type="image/png" href="/favicon.png" />
     <link rel="preconnect" href="https://cdn.jsdelivr.net" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/geist@1/dist/fonts/geist-sans/style.css" />
@@ -82,6 +93,8 @@ const viewTransition = { forwards, backwards };
       <slot />
     </main>
     <Footer transition:persist />
+    <!-- Cloudflare Web Analytics -->
+    <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "2c11168663d1411ebc876290998bee7d"}'></script>
   </body>
 </html>
 
