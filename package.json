@@ -13,7 +13,8 @@
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.1",
-    "astro": "^6.0.4"
+    "astro": "^6.0.4",
+    "logo-animations": "github:jmilinovich/logo-animations"
   },
   "devDependencies": {
     "@playwright/test": "^1.58.2",
