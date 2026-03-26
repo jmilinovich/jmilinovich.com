@@ -1,0 +1,359 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Commits - John Milinovich" description="GitHub commit history visualized as a radial heatmap">
+  <h1>Commits</h1>
+  <p class="page-subtitle">GitHub contribution history, weekly.</p>
+
+  <div class="chart-wrapper">
+    <div class="radial-container" id="radialChart"></div>
+  </div>
+
+  <div class="tip" id="tip"><b></b><br><span></span></div>
+</BaseLayout>
+
+<style>
+  h1 {
+    margin-bottom: 0.4rem;
+  }
+
+  .page-subtitle {
+    font-size: 1.4rem;
+    color: var(--color-muted);
+    margin-bottom: 2rem;
+  }
+
+  .chart-wrapper {
+    width: 100vw;
+    max-width: 680px;
+    margin-left: 50%;
+    transform: translateX(-50%);
+    padding: 0 2rem;
+    margin-bottom: 4rem;
+  }
+
+  .radial-container {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1;
+  }
+
+  .radial-container :global(svg) {
+    width: 100%;
+    height: 100%;
+  }
+
+  .radial-container :global(.month-label-radial) {
+    fill: var(--color-muted);
+  }
+
+  .radial-container :global(.year-label-radial) {
+    fill: var(--color-muted);
+    font-weight: 600;
+    letter-spacing: 0.5px;
+  }
+
+  .radial-container :global(.arc:hover) {
+    opacity: 0.75;
+    filter: brightness(1.3);
+  }
+
+  .tip {
+    display: none;
+    position: fixed;
+    background: var(--color-code-bg);
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+    padding: 6px 10px;
+    font-size: 1.2rem;
+    pointer-events: none;
+    z-index: 100;
+    white-space: nowrap;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  }
+
+  .tip :global(b) {
+    color: var(--color-heading);
+    font-weight: 600;
+  }
+
+  .tip :global(span) {
+    color: var(--color-muted);
+    font-size: 1.1rem;
+  }
+
+  @media (max-width: 767px) {
+    .chart-wrapper {
+      padding: 0 1rem;
+    }
+  }
+</style>
+
+<script>
+async function init() {
+  const resp = await fetch('/data/contributions.json');
+  const DATA = await resp.json();
+
+  const byDate = {};
+  DATA.forEach(d => { byDate[d.date] = d.count; });
+  const today = new Date().toISOString().split('T')[0];
+  const years = [...new Set(DATA.map(d => +d.date.slice(0,4)))].sort((a,b) => a - b);
+
+  const totalAll = DATA.reduce((s,d) => s + d.count, 0);
+  const currentYear = new Date().getFullYear();
+  const ytd = DATA.filter(d => d.date.startsWith(String(currentYear))).reduce((s,d) => s + d.count, 0);
+  const active = DATA.filter(d => d.count > 0).length;
+
+  // Streak
+  const sorted = [...DATA].sort((a,b) => a.date.localeCompare(b.date));
+  const weekMap = {};
+  sorted.forEach(d => {
+    const dt = new Date(d.date + 'T12:00:00');
+    const jan1 = new Date(dt.getFullYear(), 0, 1);
+    const weekNum = Math.ceil(((dt - jan1) / 86400000 + jan1.getDay() + 1) / 7);
+    const key = dt.getFullYear() + '-W' + weekNum;
+    weekMap[key] = (weekMap[key] || 0) + d.count;
+  });
+  const weekKeys = Object.keys(weekMap).sort().reverse();
+  let streak = 0;
+  for (const wk of weekKeys) { if (weekMap[wk] > 0) streak++; else break; }
+  const totalWeeksCount = Math.ceil(DATA.length / 7);
+  const avgActiveDaysPerWeek = (active / totalWeeksCount).toFixed(1);
+
+  // Get theme colors from CSS vars
+  function getColors() {
+    const style = getComputedStyle(document.documentElement);
+    const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+    return {
+      muted: style.getPropertyValue('--color-muted').trim(),
+      heading: style.getPropertyValue('--color-heading').trim(),
+      bg: style.getPropertyValue('--color-bg').trim(),
+      border: style.getPropertyValue('--color-border').trim(),
+      // Green scale always stays green
+      empty: isDark ? '#161b22' : '#ebedf0',
+    };
+  }
+
+  function drawRadial() {
+    const container = document.getElementById('radialChart');
+    const size = container.clientWidth;
+    if (!size) return;
+
+    const colors = getColors();
+    const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+
+    const ns = 'http://www.w3.org/2000/svg';
+    const svg = document.createElementNS(ns, 'svg');
+    svg.setAttribute('viewBox', `0 0 ${size} ${size}`);
+    svg.setAttribute('width', size);
+    svg.setAttribute('height', size);
+
+    const cx = size / 2;
+    const cy = size / 2;
+    const yearsSorted = [...years].sort((a, b) => a - b);
+    const numYears = yearsSorted.length;
+
+    const outerMax = size * 0.42;
+    const innerMin = size * 0.2;
+    const ringGap = Math.max(2, size * 0.008);
+    const ringThick = (outerMax - innerMin - ringGap * (numYears - 1)) / numYears;
+
+    const gapRad = Math.PI * 2 * (14 / 360);
+    const arcSpan = Math.PI * 2 - gapRad;
+    const startAngle = -Math.PI / 2 + gapRad / 2;
+
+    function colorFor(count) {
+      if (count === 0) return colors.empty;
+      const t = Math.min(1, Math.log(count + 1) / Math.log(80));
+      const r = Math.round(14 + t * (57 - 14));
+      const g = Math.round(68 + t * (211 - 68));
+      const b = Math.round(41 + t * (83 - 41));
+      return `rgb(${r},${g},${b})`;
+    }
+
+    const monthFs = Math.max(7, size * 0.022);
+    const yearFs = Math.min(9, Math.max(5, ringThick * 0.45));
+
+    const monthNames = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    const labelR = outerMax + Math.max(10, size * 0.03);
+    monthNames.forEach((m, i) => {
+      const angle = startAngle + (i / 12) * arcSpan;
+      const label = document.createElementNS(ns, 'text');
+      label.setAttribute('x', cx + Math.cos(angle) * labelR);
+      label.setAttribute('y', cy + Math.sin(angle) * labelR);
+      label.setAttribute('text-anchor', 'middle');
+      label.setAttribute('dominant-baseline', 'middle');
+      label.setAttribute('class', 'month-label-radial');
+      label.setAttribute('font-size', monthFs + 'px');
+      label.textContent = m;
+      svg.appendChild(label);
+
+      const spokeInner = innerMin - 2;
+      const spokeOuter = outerMax + 4;
+      const spoke = document.createElementNS(ns, 'line');
+      spoke.setAttribute('x1', cx + Math.cos(angle) * spokeInner);
+      spoke.setAttribute('y1', cy + Math.sin(angle) * spokeInner);
+      spoke.setAttribute('x2', cx + Math.cos(angle) * spokeOuter);
+      spoke.setAttribute('y2', cy + Math.sin(angle) * spokeOuter);
+      spoke.setAttribute('stroke', colors.border);
+      spoke.setAttribute('stroke-opacity', '0.12');
+      spoke.setAttribute('stroke-width', '0.5');
+      svg.appendChild(spoke);
+    });
+
+    const _labels = [];
+
+    yearsSorted.forEach((year, yi) => {
+      const rInner = innerMin + yi * (ringThick + ringGap);
+      const rOuter = rInner + ringThick;
+
+      const sep = document.createElementNS(ns, 'circle');
+      sep.setAttribute('cx', cx); sep.setAttribute('cy', cy); sep.setAttribute('r', rInner);
+      sep.setAttribute('fill', 'none'); sep.setAttribute('stroke', colors.border);
+      sep.setAttribute('stroke-opacity', '0.15'); sep.setAttribute('stroke-width', '0.5');
+      svg.appendChild(sep);
+
+      const midR = rInner + ringThick / 2;
+      const yt = document.createElementNS(ns, 'text');
+      yt.setAttribute('x', cx); yt.setAttribute('y', cy - midR);
+      yt.setAttribute('text-anchor', 'middle'); yt.setAttribute('dominant-baseline', 'central');
+      yt.setAttribute('class', 'year-label-radial'); yt.setAttribute('font-size', yearFs + 'px');
+      yt.textContent = "'" + String(year).slice(2);
+      _labels.push(yt);
+
+      const isLeap = year % 4 === 0 && (year % 100 !== 0 || year % 400 === 0);
+      const daysInYear = isLeap ? 366 : 365;
+      const isCurrentYear = year === currentYear;
+      const lastDay = isCurrentYear
+        ? Math.ceil((new Date(today + 'T12:00:00') - new Date(year, 0, 1)) / 86400000) + 1
+        : daysInYear;
+
+      // Weekly segments
+      let segments = [];
+      let weekStart = 0, weekCount = 0, weekDates = [];
+      for (let d = 0; d < lastDay; d++) {
+        const dt = new Date(year, 0, 1 + d);
+        const ds = dt.toISOString().split('T')[0];
+        weekCount += byDate[ds] || 0;
+        weekDates.push(ds);
+        if (dt.getDay() === 6 || d === lastDay - 1) {
+          segments.push({
+            s: weekStart / daysInYear, e: (d + 1) / daysInYear,
+            count: weekCount,
+            date: weekDates[0] + ' \u2013 ' + weekDates[weekDates.length - 1]
+          });
+          weekStart = d + 1;
+          weekCount = 0;
+          weekDates = [];
+        }
+      }
+
+      segments.forEach(seg => {
+        const a1 = startAngle + seg.s * arcSpan;
+        const a2 = startAngle + seg.e * arcSpan;
+        const fill = colorFor(seg.count);
+
+        const x1i = cx + Math.cos(a1) * rInner, y1i = cy + Math.sin(a1) * rInner;
+        const x1o = cx + Math.cos(a1) * rOuter, y1o = cy + Math.sin(a1) * rOuter;
+        const x2i = cx + Math.cos(a2) * rInner, y2i = cy + Math.sin(a2) * rInner;
+        const x2o = cx + Math.cos(a2) * rOuter, y2o = cy + Math.sin(a2) * rOuter;
+        const largeArc = (a2 - a1) > Math.PI ? 1 : 0;
+
+        const path = document.createElementNS(ns, 'path');
+        path.setAttribute('d', [
+          `M${x1i},${y1i}`, `L${x1o},${y1o}`,
+          `A${rOuter},${rOuter} 0 ${largeArc},1 ${x2o},${y2o}`,
+          `L${x2i},${y2i}`,
+          `A${rInner},${rInner} 0 ${largeArc},0 ${x1i},${y1i}`, 'Z'
+        ].join(' '));
+        path.setAttribute('fill', fill);
+        path.setAttribute('class', 'arc');
+        path.dataset.date = seg.date;
+        path.dataset.count = seg.count;
+        path.style.cursor = 'crosshair';
+        svg.appendChild(path);
+      });
+    });
+
+    _labels.forEach(l => svg.appendChild(l));
+
+    const outerSep = document.createElementNS(ns, 'circle');
+    outerSep.setAttribute('cx', cx); outerSep.setAttribute('cy', cy);
+    outerSep.setAttribute('r', outerMax); outerSep.setAttribute('fill', 'none');
+    outerSep.setAttribute('stroke', colors.border); outerSep.setAttribute('stroke-opacity', '0.15');
+    outerSep.setAttribute('stroke-width', '0.5');
+    svg.appendChild(outerSep);
+
+    // Center stats
+    const centerR = innerMin - 6;
+    if (centerR > 20) {
+      const bigFs = Math.max(20, centerR * 0.38);
+      const medFs = Math.max(10, centerR * 0.15);
+      const smFs = Math.max(9, centerR * 0.12);
+
+      function addText(x, y, text, fill, fs, weight) {
+        const el = document.createElementNS(ns, 'text');
+        el.setAttribute('x', x); el.setAttribute('y', y);
+        el.setAttribute('text-anchor', 'middle'); el.setAttribute('dominant-baseline', 'central');
+        el.setAttribute('fill', fill); el.setAttribute('font-size', fs + 'px');
+        if (weight) el.setAttribute('font-weight', weight);
+        el.textContent = text;
+        svg.appendChild(el);
+      }
+
+      addText(cx, cy - centerR * 0.42, 'GITHUB COMMITS', colors.muted, smFs);
+      addText(cx, cy - centerR * 0.1, totalAll.toLocaleString(), '#39d353', bigFs, '700');
+      addText(cx, cy + centerR * 0.15, 'weekly \u00b7 2022\u201326', colors.muted, smFs);
+
+      const statSpacing = centerR * 0.6;
+      const valY = cy + centerR * 0.45;
+      const lblY = cy + centerR * 0.62;
+      const stats = [
+        { val: streak + 'wk', label: 'streak' },
+        { val: avgActiveDaysPerWeek, label: 'days/wk' },
+        { val: ytd.toLocaleString(), label: String(currentYear) },
+      ];
+      stats.forEach((s, i) => {
+        const sx = cx + (i - 1) * statSpacing;
+        addText(sx, valY, s.val, colors.heading, medFs, '600');
+        addText(sx, lblY, s.label, colors.muted, smFs * 0.85);
+      });
+    }
+
+    container.innerHTML = '';
+    container.appendChild(svg);
+  }
+
+  // Tooltip
+  const tip = document.getElementById('tip');
+  document.addEventListener('mouseover', e => {
+    if (e.target.classList.contains('arc')) {
+      const c = +e.target.dataset.count;
+      tip.querySelector('b').textContent = c === 0 ? 'No contributions' : `${c} contribution${c!==1?'s':''}`;
+      tip.querySelector('span').textContent = e.target.dataset.date;
+      tip.style.display = 'block';
+    }
+  });
+  document.addEventListener('mousemove', e => {
+    if (tip.style.display === 'block') {
+      tip.style.left = (e.clientX + 12) + 'px';
+      tip.style.top = (e.clientY - 36) + 'px';
+    }
+  });
+  document.addEventListener('mouseout', e => {
+    if (e.target.classList.contains('arc')) tip.style.display = 'none';
+  });
+
+  drawRadial();
+  window.addEventListener('resize', drawRadial);
+
+  // Redraw on theme change
+  const observer = new MutationObserver(() => drawRadial());
+  observer.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+}
+
+// Run on initial load and on Astro view transitions
+init();
+document.addEventListener('astro:page-load', init);
+</script>
