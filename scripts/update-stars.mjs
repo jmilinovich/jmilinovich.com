@@ -2,7 +2,7 @@
 
 /**
  * Fetches current GitHub star counts for all projects and updates projects.astro.
- * Uses the unauthenticated GitHub API (60 req/hr limit — fine for a handful of repos).
+ * Set GITHUB_TOKEN env var to avoid the 60 req/hr unauthenticated rate limit.
  */
 
 import { readFileSync, writeFileSync } from 'node:fs';
@@ -12,10 +12,12 @@ import { dirname, join } from 'node:path';
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const PROJECTS_FILE = join(__dirname, '..', 'src', 'pages', 'projects.astro');
 
+const TOKEN = process.env.GITHUB_TOKEN;
+
 async function getStars(owner, repo) {
-  const res = await fetch(`https://api.github.com/repos/${owner}/${repo}`, {
-    headers: { 'User-Agent': 'mili-dev-star-updater' },
-  });
+  const headers = { 'User-Agent': 'mili-dev-star-updater' };
+  if (TOKEN) headers['Authorization'] = `Bearer ${TOKEN}`;
+  const res = await fetch(`https://api.github.com/repos/${owner}/${repo}`, { headers });
   if (!res.ok) {
     console.error(`Failed to fetch ${owner}/${repo}: ${res.status}`);
     return null;
