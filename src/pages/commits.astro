@@ -20,7 +20,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
   .page-subtitle {
     font-size: 1.4rem;
-    color: var(--color-muted);
+    color: var(--muted);
     margin-bottom: 2rem;
   }
 
@@ -45,11 +45,11 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   }
 
   .radial-container :global(.month-label-radial) {
-    fill: var(--color-muted);
+    fill: var(--muted);
   }
 
   .radial-container :global(.year-label-radial) {
-    fill: var(--color-muted);
+    fill: var(--muted);
     font-weight: 600;
     letter-spacing: 0.5px;
   }
@@ -62,8 +62,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   .tip {
     display: none;
     position: fixed;
-    background: var(--color-code-bg);
-    border: 1px solid var(--color-border);
+    background: var(--code-bg);
+    border: 1px solid var(--hairline);
     border-radius: 6px;
     padding: 6px 10px;
     font-size: 1.2rem;
@@ -74,12 +74,12 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   }
 
   .tip :global(b) {
-    color: var(--color-heading);
+    color: var(--ink-strong);
     font-weight: 600;
   }
 
   .tip :global(span) {
-    color: var(--color-muted);
+    color: var(--muted);
     font-size: 1.1rem;
   }
 
@@ -91,7 +91,11 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 </style>
 
 <script>
+let bound = false;   // global listeners register once per session
+let redraw = null;   // latest page's drawRadial
+
 async function init() {
+  if (!document.getElementById('radialChart')) return; // not on /commits
   const resp = await fetch('/data/contributions.json');
   const DATA = await resp.json();
 
@@ -126,10 +130,10 @@ async function init() {
     const style = getComputedStyle(document.documentElement);
     const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
     return {
-      muted: style.getPropertyValue('--color-muted').trim(),
-      heading: style.getPropertyValue('--color-heading').trim(),
-      bg: style.getPropertyValue('--color-bg').trim(),
-      border: style.getPropertyValue('--color-border').trim(),
+      muted: style.getPropertyValue('--muted').trim(),
+      heading: style.getPropertyValue('--ink-strong').trim(),
+      bg: style.getPropertyValue('--paper').trim(),
+      border: style.getPropertyValue('--hairline').trim(),
       // Green scale always stays green
       empty: isDark ? '#161b22' : '#ebedf0',
     };
@@ -137,6 +141,7 @@ async function init() {
 
   function drawRadial() {
     const container = document.getElementById('radialChart');
+    if (!container) return;
     const size = container.clientWidth;
     if (!size) return;
 
@@ -325,35 +330,43 @@ async function init() {
     container.appendChild(svg);
   }
 
-  // Tooltip
-  const tip = document.getElementById('tip');
-  document.addEventListener('mouseover', e => {
-    if (e.target.classList.contains('arc')) {
-      const c = +e.target.dataset.count;
-      tip.querySelector('b').textContent = c === 0 ? 'No contributions' : `${c} contribution${c!==1?'s':''}`;
-      tip.querySelector('span').textContent = e.target.dataset.date;
-      tip.style.display = 'block';
-    }
-  });
-  document.addEventListener('mousemove', e => {
-    if (tip.style.display === 'block') {
-      tip.style.left = (e.clientX + 12) + 'px';
-      tip.style.top = (e.clientY - 36) + 'px';
-    }
-  });
-  document.addEventListener('mouseout', e => {
-    if (e.target.classList.contains('arc')) tip.style.display = 'none';
-  });
-
   drawRadial();
-  window.addEventListener('resize', drawRadial);
+  redraw = drawRadial;
 
-  // Redraw on theme change
-  const observer = new MutationObserver(() => drawRadial());
-  observer.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+  // Global listeners register once; handlers query the DOM live so they
+  // survive view-transition swaps without leaking or going stale.
+  if (!bound) {
+    bound = true;
+    document.addEventListener('mouseover', e => {
+      const tip = document.getElementById('tip');
+      if (tip && e.target.classList.contains('arc')) {
+        const c = +e.target.dataset.count;
+        tip.querySelector('b').textContent = c === 0 ? 'No contributions' : `${c} contribution${c!==1?'s':''}`;
+        tip.querySelector('span').textContent = e.target.dataset.date;
+        tip.style.display = 'block';
+      }
+    });
+    document.addEventListener('mousemove', e => {
+      const tip = document.getElementById('tip');
+      if (tip && tip.style.display === 'block') {
+        tip.style.left = (e.clientX + 12) + 'px';
+        tip.style.top = (e.clientY - 36) + 'px';
+      }
+    });
+    document.addEventListener('mouseout', e => {
+      const tip = document.getElementById('tip');
+      if (tip && e.target.classList.contains('arc')) tip.style.display = 'none';
+    });
+    window.addEventListener('resize', () => {
+      if (document.getElementById('radialChart') && redraw) redraw();
+    });
+    new MutationObserver(() => {
+      if (document.getElementById('radialChart') && redraw) redraw();
+    }).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+  }
 }
 
-// Run on initial load and on Astro view transitions
+// Run on initial load and on Astro view transitions (init self-guards by page)
 init();
 document.addEventListener('astro:page-load', init);
 </script>

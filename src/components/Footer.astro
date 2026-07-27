@@ -4,17 +4,20 @@
 <footer class="site-footer">
   <div class="footer-inner container">
     <a href="https://linkedin.com/in/jmilinovich" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-    <span class="dot">&middot;</span>
+    <span class="dot" aria-hidden="true">&middot;</span>
     <a href="https://x.com/jmilinovich" target="_blank" rel="noopener noreferrer">X</a>
-    <span class="dot">&middot;</span>
+    <span class="dot" aria-hidden="true">&middot;</span>
     <a href="https://github.com/jmilinovich" target="_blank" rel="noopener noreferrer">GitHub</a>
+    <span class="dot" aria-hidden="true">&middot;</span>
+    <a href="/rss.xml">RSS</a>
   </div>
 </footer>
 
 <style>
   .site-footer {
     padding: 4rem 0;
-    font-size: 1.4rem;
+    font-size: 1.25rem;
+    font-family: 'Berkeley Mono', monospace;
   }
 
   .footer-inner {
@@ -25,16 +28,16 @@
   }
 
   .site-footer a {
-    color: var(--color-muted);
+    color: var(--muted);
     text-decoration: none;
   }
 
   .site-footer a:hover {
     text-decoration: underline;
-    color: var(--color-text);
+    color: var(--ink);
   }
 
   .dot {
-    color: var(--color-border);
+    color: var(--muted);
   }
 </style>

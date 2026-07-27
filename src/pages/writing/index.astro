@@ -10,14 +10,21 @@ const sortedPosts = posts.sort((a, b) => new Date(b.data.date).getTime() - new D
 <BaseLayout title="Writing - John Milinovich">
   <h1>Writing</h1>
   <section class="posts">
-    {sortedPosts.map(post => (
-      <PostCard title={post.data.title} date={post.data.date} slug={post.id} />
-    ))}
+    <ul class="rows">
+      {sortedPosts.map(post => (
+        <PostCard title={post.data.title} date={post.data.date} slug={post.id} />
+      ))}
+    </ul>
   </section>
 </BaseLayout>
 
 <style>
   h1 {
     margin-bottom: 2rem;
+  }
+
+  .rows {
+    list-style: none;
+    padding: 0;
   }
 </style>

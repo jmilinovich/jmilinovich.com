@@ -1,7 +1,7 @@
 ---
 title: "Glass minds"
 date: "2025-01-31"
-image: "/images/posts/IMG_9834.jpeg"
+
 ---
 
 This is the second essay in a series about AGI in society.

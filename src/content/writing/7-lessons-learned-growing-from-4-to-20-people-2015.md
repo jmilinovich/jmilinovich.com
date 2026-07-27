@@ -1,7 +1,7 @@
 ---
 title: "Small is fast"
 date: "2015-05-24"
-image: "/images/posts/mitosis.png"
+
 ---
 
 In URX's first 2 years, we grew from 4 co-founders to a 20-person engineering, product and business team. With this growth, many of our internal processes and communication channels broke. It didn't feel like we were moving as fast as we were before, and it took longer to get everyone on the same page.

@@ -1,7 +1,7 @@
 ---
 title: "Web in chains"
 date: "2020-11-18"
-image: "/images/posts/image-2.png"
+
 ---
 
 Social media didn't [kill the web](https://www.wired.com/2010/08/ff-webrip/). It imprisoned content.

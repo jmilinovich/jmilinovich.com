@@ -1,7 +1,7 @@
 ---
 title: "Creative compression"
 date: "2025-03-31"
-image: "/images/posts/ChatGPT-Image-Mar-31--2025--12_10_41-PM.png"
+
 ---
 
 Multimodal language models have fundamentally compressed the software development lifecycle. The traditional sequence -- product manager writes requirements, designer creates wireframes, engineer builds prototype, team gathers feedback, repeat -- has collapsed. Product managers now [skip specifications and wireframes](https://x.com/lm_braswell/status/1887554617166471202), moving directly to functional prototypes. This hasn't eliminated jobs but dramatically accelerated development from months to hours.

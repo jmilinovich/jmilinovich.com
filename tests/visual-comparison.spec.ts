@@ -31,7 +31,7 @@ async function getStyles(locator: Locator, properties: string[]) {
 // ────────────────────────────────────────────────────────────
 const allPages = [
   { name: 'home', path: '/' },
-  { name: 'about', path: '/about' },
+  
   { name: 'writing', path: '/writing' },
   { name: 'talks', path: '/talks' },
   { name: 'projects', path: '/projects' },
@@ -72,17 +72,17 @@ test.describe('Self-consistency across pages', () => {
   test('page headings (h1) have consistent styling across section pages', async ({ page }) => {
     const headingStyles: Record<string, Record<string, string>> = {};
 
-    for (const p of ['about', 'writing', 'talks', 'projects']) {
+    for (const p of ['home', 'writing', 'talks', 'projects']) {
       await page.goto(`${BASE}/${p}`, { waitUntil: 'networkidle' });
       const h1 = page.locator('main h1').first();
       headingStyles[p] = await getStyles(h1, styleProps);
     }
 
     // All section h1s should match
-    const reference = headingStyles['about'];
+    const reference = headingStyles['home'];
     for (const [pageName, styles] of Object.entries(headingStyles)) {
       for (const prop of styleProps) {
-        expect(styles[prop], `h1 ${prop} on /${pageName} vs /about`).toBe(reference[prop]);
+        expect(styles[prop], `h1 ${prop} on /${pageName} vs /home`).toBe(reference[prop]);
       }
     }
   });
@@ -164,12 +164,12 @@ test.describe('Self-consistency across pages', () => {
     }
   });
 
-  test('body text uses Geist Sans on all pages', async ({ page }) => {
+  test('body text uses Source Serif on all pages', async ({ page }) => {
     for (const p of allPages) {
       await page.goto(`${BASE}${p.path}`, { waitUntil: 'networkidle' });
       const body = page.locator('body');
       const styles = await getStyles(body, ['font-family']);
-      expect(styles['font-family'], `body font on ${p.name}`).toContain('Geist Sans');
+      expect(styles['font-family'], `body font on ${p.name}`).toContain('Source Serif');
     }
   });
 
@@ -234,7 +234,7 @@ test.describe('List structure consistency', () => {
   });
 
   test('no broken images on key pages', async ({ page }) => {
-    for (const p of ['/writing/the-agentic-web', '/writing/the-great-acceleration', '/about']) {
+    for (const p of ['/writing/the-agentic-web', '/writing/the-great-acceleration', '/']) {
       await page.goto(`${BASE}${p}`, { waitUntil: 'networkidle' });
       const images = await page.locator('img').all();
       for (const img of images) {

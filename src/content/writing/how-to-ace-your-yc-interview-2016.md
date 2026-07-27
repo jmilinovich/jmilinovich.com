@@ -1,7 +1,7 @@
 ---
 title: "How to ace your YC interview"
 date: "2016-04-15"
-image: "/images/posts/ace-yc-interview.png"
+
 ---
 
 Spring has sprung, and the smell of fresh YC applications is in the air. It's that special time that happens twice a year where thousands of budding entrepreneurs vie for a spot in the upcoming Y Combinator class.

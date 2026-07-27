@@ -1,7 +1,7 @@
 ---
 title: "URX's YC story"
 date: "2013-10-17"
-image: "/images/posts/pinecones.png"
+
 ---
 
 ## Deciding to Go for It

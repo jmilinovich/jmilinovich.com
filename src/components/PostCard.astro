@@ -1,4 +1,6 @@
 ---
+import { glyphPath, fmtDate } from '../lib/process';
+
 interface Props {
   title: string;
   date: string;
@@ -6,46 +8,57 @@ interface Props {
 }
 
 const { title, date, slug } = Astro.props;
-
-function formatDate(dateStr: string): string {
-  const d = new Date(dateStr);
-  const day = d.getUTCDate().toString().padStart(2, '0');
-  const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-  const month = months[d.getUTCMonth()];
-  const year = d.getUTCFullYear();
-  return `${day} ${month} ${year}`;
-}
+const glyph = glyphPath(slug);
 ---
 
-<article class="post-card">
-  <a href={`/writing/${slug}`} class="post-card-link">
-    <span class="post-card-title">{title}</span>
-  </a>
-  <time class="post-card-date" datetime={date}>{formatDate(date)}</time>
-</article>
+<li class="row">
+  <svg class="glyph" viewBox="0 0 24 24" aria-hidden="true"><path d={glyph} /></svg>
+  <a href={`/writing/${slug}`} class="row-title">{title}</a>
+  <time class="row-date" datetime={date}>{fmtDate(date)}</time>
+</li>
 
 <style>
-  .post-card {
-    margin-bottom: 1.5rem;
+  .row {
+    display: flex;
+    align-items: baseline;
+    gap: 1.2rem;
+    padding: 0.55rem 0;
   }
 
-  .post-card-link {
-    text-decoration: none;
-    color: var(--color-text);
+  .glyph {
+    width: 20px;
+    height: 20px;
+    flex: none;
+    align-self: center;
   }
 
-  .post-card-link:hover {
-    text-decoration: underline;
-  }
-
-  .post-card-title {
-    font-size: 1.6rem;
+  .row-title {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 1.7rem;
+    color: var(--ink-strong);
     line-height: 1.4;
   }
 
-  .post-card-date {
-    font-size: 1.3rem;
-    color: var(--color-muted);
-    margin-left: 0.8rem;
+  .row-date {
+    font-family: 'Berkeley Mono', monospace;
+    font-size: 1.2rem;
+    color: var(--muted);
+    margin-left: auto;
+    flex: none;
+    padding-left: 1.2rem;
+  }
+
+  @media (max-width: 767px) {
+    .row {
+      flex-wrap: wrap;
+      padding: 0.8rem 0;
+    }
+    .row-title {
+      width: calc(100% - 20px - 1.2rem);
+    }
+    .row-date {
+      margin-left: calc(20px + 1.2rem);
+      padding-left: 0;
+    }
   }
 </style>

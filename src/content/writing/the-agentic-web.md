@@ -1,7 +1,7 @@
 ---
 title: "The Agentic Web"
 date: "2026-01-31"
-image: "/images/posts/IMG_4810-1.png"
+
 ---
 
 In December I [predicted](/writing/2026-the-year-of-autonomous-computing) a computer-use-first company would hit a $1B valuation by end of 2026. Eight days later, Meta [bought Manus for $2.5B](https://www.nasdaq.com/articles/metas-manus-ai-acquisition-could-reach-25-bln-enterprise-ai-push-accelerates).

@@ -1,6 +1,7 @@
 ---
 import { getCollection, render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import { glyphPath, fmtDate } from '../../lib/process';
 
 export async function getStaticPaths() {
   const posts = await getCollection('writing', ({ data }) => !data.draft);
@@ -12,6 +13,7 @@ export async function getStaticPaths() {
 
 const { post } = Astro.props;
 const { Content } = await render(post);
+const glyph = glyphPath(post.id);
 
 // Auto-extract description from first paragraph of markdown
 function extractDescription(body: string): string {
@@ -33,102 +35,123 @@ function extractDescription(body: string): string {
 }
 
 const postDescription = extractDescription(post.body || '');
-
-function formatDate(dateStr: string): string {
-  const d = new Date(dateStr);
-  const day = d.getUTCDate().toString().padStart(2, '0');
-  const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-  const month = months[d.getUTCMonth()];
-  const year = d.getUTCFullYear();
-  return `${day} ${month} ${year}`;
-}
 ---
 
-<BaseLayout title={post.data.title} description={postDescription || undefined} ogImage={post.data.image || undefined}>
+<BaseLayout title={post.data.title} description={postDescription || undefined}>
   <article class="post">
     <header class="post-header">
       <h1 class="post-title">{post.data.title}</h1>
-      <time class="post-date" datetime={post.data.date}>{formatDate(post.data.date)}</time>
+      <p class="byline">
+        <svg class="glyph" viewBox="0 0 24 24" aria-hidden="true"><path d={glyph} /></svg>
+        <time datetime={post.data.date}>{fmtDate(post.data.date)}</time>
+      </p>
     </header>
-    {post.data.image && (
-      <figure class="post-image">
-        <img src={post.data.image} alt={post.data.title} />
-      </figure>
-    )}
     <div class="post-content">
       <Content />
     </div>
+    <footer class="end-mark" aria-hidden="true">
+      <svg class="glyph glyph-end" viewBox="0 0 24 24"><path d={glyph} /></svg>
+    </footer>
   </article>
 </BaseLayout>
 
 <style>
   .post-header {
-    margin-bottom: 3rem;
+    margin-bottom: 3.6rem;
   }
 
   .post-title {
-    font-size: clamp(2.8rem, 2rem + 1.5vw, 4rem);
-    margin-bottom: 0.8rem;
+    font-size: clamp(2.8rem, 2.1rem + 1.4vw, 3.8rem);
+    line-height: 1.15;
+    margin-bottom: 1.4rem;
   }
 
-  .post-date {
-    font-size: 1.4rem;
-    color: var(--color-muted);
+  .byline {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-family: 'Berkeley Mono', monospace;
+    font-size: 1.2rem;
+    color: var(--muted);
   }
 
-  .post-image {
-    margin-bottom: 3rem;
+  .byline .glyph,
+  .end-mark .glyph {
+    width: 20px;
+    height: 20px;
+    flex: none;
   }
 
-  .post-image img {
-    width: 100%;
-    height: auto;
-    border-radius: 4px;
+  .end-mark {
+    display: flex;
+    justify-content: center;
+    margin-top: 5rem;
+  }
+
+  .end-mark .glyph-end {
+    width: 28px;
+    height: 28px;
   }
 
   .post-content {
-    font-size: 1.6rem;
-    line-height: 1.7;
+    font-size: 1.7rem;
+    line-height: 1.65;
   }
 
   .post-content :global(img) {
     max-width: 100%;
     height: auto;
+    border: 1px solid var(--hairline);
   }
 
+  /* Shiki ships hardcoded inline styles; the direction wants monochrome,
+     tokenized code — machine voice, achromatic chrome. */
   .post-content :global(pre) {
     font-family: 'Berkeley Mono', monospace;
-    background: var(--color-code-bg);
+    background: var(--code-bg) !important;
     padding: 1.6rem 2rem;
-    overflow-x: scroll;
+    overflow-x: auto;
     line-height: 1.5;
-    border-radius: 4px;
     margin: 2rem 0;
+    font-size: 1.35rem;
+  }
+
+  .post-content :global(pre span) {
+    color: var(--ink) !important;
+    background: none !important;
   }
 
   .post-content :global(code) {
     font-family: 'Berkeley Mono', monospace;
-    background: var(--color-code-bg);
+    background: var(--code-bg);
     padding: 0.2rem 0.4rem;
-    border-radius: 3px;
-    font-size: 1.4rem;
+    font-size: 1.35rem;
   }
 
   .post-content :global(pre code) {
     background: none;
     padding: 0;
-    border-radius: 0;
     font-size: inherit;
   }
 
   .post-content :global(a) {
     text-decoration: underline;
+    text-decoration-color: var(--muted);
+    text-underline-offset: 0.2em;
+  }
+
+  .post-content :global(a:hover) {
+    text-decoration-color: var(--ink-strong);
+  }
+
+  .post-content :global(strong) {
+    color: var(--ink-strong);
   }
 
   .post-content :global(hr) {
     border: none;
-    border-top: 1px solid var(--color-border-light);
-    margin: 3rem 0;
+    border-top: 1px solid var(--hairline);
+    margin: 3.2rem 0;
   }
 
   .post-content :global(p) {
@@ -136,26 +159,30 @@ function formatDate(dateStr: string): string {
   }
 
   .post-content :global(h2) {
-    margin-top: 3rem;
+    margin-top: 4rem;
     margin-bottom: 1rem;
   }
 
   .post-content :global(h3) {
-    margin-top: 2.4rem;
+    margin-top: 3.2rem;
     margin-bottom: 1rem;
   }
 
   .post-content :global(ul),
   .post-content :global(ol) {
     margin-bottom: 1.5rem;
-    padding-left: 2rem;
+    padding-left: 2.4rem;
+  }
+
+  .post-content :global(li) {
+    margin-top: 0.6rem;
   }
 
   .post-content :global(blockquote) {
-    border-left: 3px solid var(--color-border-light);
-    padding-left: 2rem;
+    border-left: 2px solid var(--hairline);
+    padding-left: 1.8rem;
     margin: 2rem 0;
-    color: var(--color-subtle);
+    color: var(--muted);
     font-style: italic;
   }
 </style>

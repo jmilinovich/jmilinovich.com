@@ -1,7 +1,7 @@
 ---
 title: "Neighbors, Not Nodes"
 date: "2025-11-21"
-image: "/images/posts/IMG_3621.jpeg"
+
 ---
 
 **The Acceleration**

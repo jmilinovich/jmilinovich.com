@@ -1,7 +1,7 @@
 ---
 title: "1 year, 11 months at Google University"
 date: "2013-01-31"
-image: "/images/posts/google.png"
+
 ---
 
 I feel so fortunate to have spent the last 1 year, 11 months as a student at the most forward thinking company in the world. Working at Google, I was surrounded with incredibly talented people solving difficult problems in a culture of creativity, learning and personal growth.

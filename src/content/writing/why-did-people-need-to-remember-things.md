@@ -1,7 +1,7 @@
 ---
 title: "\"Why did people need to remember things?\""
 date: "2025-02-20"
-image: "/images/posts/A-minimalist-illustration-of-an-open-book-transforming-into-flying-birds--done-in-clean-black-silhouettes-1.jpg"
+
 ---
 
 _This is the third essay in a [series](/writing) about living with AGI in society_

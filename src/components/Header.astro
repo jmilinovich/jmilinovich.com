@@ -172,18 +172,18 @@ function isActive(href: string): boolean {
   .nav-link {
     font-family: 'Berkeley Mono', monospace;
     font-size: 1.4rem;
-    color: var(--color-text);
+    color: var(--ink);
     text-decoration: none;
     position: relative;
   }
 
   .nav-link:hover {
     text-decoration: none;
-    color: var(--color-heading);
+    color: var(--ink-strong);
   }
 
   .nav-link.active {
-    color: var(--color-heading);
+    color: var(--ink-strong);
   }
 
   .nav-link.active::after {
@@ -193,7 +193,7 @@ function isActive(href: string): boolean {
     left: 0;
     right: 0;
     height: 1.5px;
-    background: var(--color-heading);
+    background: var(--ink-strong);
     border-radius: 1px;
   }
 
@@ -201,7 +201,7 @@ function isActive(href: string): boolean {
     background: none;
     border: none;
     cursor: pointer;
-    color: var(--color-muted);
+    color: var(--muted);
     padding: 0.4rem;
     display: flex;
     align-items: center;
@@ -211,7 +211,7 @@ function isActive(href: string): boolean {
   }
 
   .theme-toggle:hover {
-    color: var(--color-text);
+    color: var(--ink);
   }
 
   /* Show sun in dark mode, moon in light mode */

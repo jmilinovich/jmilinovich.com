@@ -1,7 +1,7 @@
 ---
 title: "The real AI goldrush"
 date: "2024-09-18"
-image: "/images/posts/image-3.png"
+
 ---
 
 AI infrastructure represents an enormous and rapidly expanding market, yet it remains dwarfed by the potential at the application layer.

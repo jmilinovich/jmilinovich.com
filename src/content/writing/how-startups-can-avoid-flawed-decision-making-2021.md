@@ -1,7 +1,7 @@
 ---
 title: "The courage to course correct"
 date: "2021-01-02"
-image: "/images/posts/strategy.jpg"
+
 ---
 
 As a startup founder, it's mission critical to know what decisions you should make quickly, and which you should make slowly. It's common to think that at the earliest stage your approach should be to, "move fast and break things", but not only did Facebook ditch that approach, there's mounting evidence that it was never a good idea in the first place.

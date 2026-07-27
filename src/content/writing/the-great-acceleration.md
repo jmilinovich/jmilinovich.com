@@ -1,7 +1,7 @@
 ---
 title: "The great acceleration"
 date: "2025-01-22"
-image: "/images/posts/A-solitary-human-figure-stands-before-an-enormous-circular-gateway-of-light--its-edges-defined-by-intricate-mathematical-patterns-that-transition-from-organic-curves-to-precise-geometric-forms.-The-gateway-emanates-a-warm--dawn-like-glow-th-1.jpg"
+
 ---
 
 _This is the first essay in a [series](/writing) about living with AGI in society_

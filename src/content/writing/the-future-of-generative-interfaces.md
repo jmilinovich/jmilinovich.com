@@ -1,7 +1,7 @@
 ---
 title: "The future of generative interfaces"
 date: "2024-07-03"
-image: "/images/posts/w-640-quality-90-fit-scale-down.png"
+
 ---
 
 I saw my first [processing.js](https://processing.org/) demo at UCLA in 2012. [Casey Reas](https://reas.com/) made me question everything I thought I knew about making art. Who's the real artist -- the person who writes the code, or the code itself?
