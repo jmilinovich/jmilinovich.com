@@ -3,7 +3,7 @@ title: "Canva is one percent of the way there"
 date: "2026-07-27"
 ---
 
-*Three years inside the magic factory that grew up around Melanie Perkins.*
+*Three years inside the machine built around Melanie Perkins.*
 
 Canva is a harness, and Melanie Perkins is the model inside it.
 
