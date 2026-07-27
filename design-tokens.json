@@ -19,6 +19,7 @@
       "root": "62.5%",
       "body": { "size": "1.7rem", "lineHeight": 1.65, "family": "serif" },
       "h1": { "size": "clamp(3rem, 2.2rem + 1.6vw, 4.2rem)", "weight": 600, "lineHeight": 1.1, "letterSpacing": "-0.015em", "family": "serif" },
+      "essayTitle": { "size": "clamp(2.8rem, 2.1rem + 1.4vw, 3.8rem)", "weight": 600, "lineHeight": 1.15, "letterSpacing": "-0.015em", "family": "serif" },
       "rowTitle": { "size": "1.7rem", "lineHeight": 1.4, "family": "serif" },
       "eyebrow": { "size": "1.2rem", "transform": "uppercase", "letterSpacing": "0.12em", "family": "mono" },
       "date": { "size": "1.2rem", "family": "mono" },
@@ -33,6 +34,7 @@
       "ink-strong": "#111111",
       "muted": "#666666",
       "hairline": "#e6e6e6",
+      "code-bg": "#f5f5f5",
       "sig": "#1a7f37",
       "glyph": "rgba(26, 26, 26, 0.85)"
     },
@@ -42,13 +44,15 @@
       "ink-strong": "#e8e8e8",
       "muted": "#8a8a8a",
       "hairline": "#222222",
+      "code-bg": "#1a1a1a",
       "sig": "#53d339",
       "glyph": "#53d339"
     },
     "rules": [
       "chrome is achromatic; sig appears only in drawings, ::selection, :focus-visible",
-      "links are underline-distinguished, never coloured",
-      "muted must hold >= 4.5:1 on paper in both themes"
+      "links carry a visible underline in muted (>= 3:1), darkening to ink-strong on hover; never coloured",
+      "muted must hold >= 4.5:1 on paper in both themes",
+      "code renders monochrome: ink on code-bg, no syntax colours"
     ]
   },
   "space": {
@@ -56,14 +60,17 @@
     "containerPadding": "2rem",
     "sectionGap": "4rem",
     "rowPadding": "0.55rem 0",
+    "rowPaddingMobile": "0.8rem 0",
     "breakpoint": "767px"
   },
   "motion": {
-    "budget": "one settle-to-rest instrument on the homepage; essay pages are still",
-    "instrument": { "durationMs": 7000, "onSettle": "cancelAnimationFrame", "maxParticles": 620, "dprCap": 2 },
-    "reducedMotion": "render settled frame synchronously",
-    "noJs": "build-time static frame",
-    "lifecycle": "teardown on astro:before-swap; pause on hidden/off-viewport",
+    "budget": "one settle-to-rest instrument on the homepage, animated once per arrival; essay pages are still; sole standing exception: the living logo",
+    "instrument": { "durationMs": 7000, "stepsTotal": 840, "onSettle": "cancelAnimationFrame", "maxParticles": 480, "dprCap": 2 },
+    "determinism": "settle is the fixed 840-step budget, never a wall-clock cutoff — identical drawing at any refresh rate",
+    "reducedMotion": "the same 840-step settled frame, rendered synchronously; honors mid-session changes",
+    "noJs": "build-time static frame as inline SVG in <noscript>, same seed",
+    "themeOrResize": "re-render the settled frame synchronously; never replay the animation",
+    "lifecycle": "pause on hidden, resume on visible; teardown on astro:before-swap",
     "viewTransitions": { "out": "0.2s ease-in", "in": "0.3s ease-out 0.2s delay" }
   },
   "surface": {

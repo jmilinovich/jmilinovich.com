@@ -35,13 +35,15 @@ chasing a novel face.
   *Reason:* a writing site needs a reading voice, and the site had none; SS4 is free,
   excellent at text sizes, and deliberately nobody's signature.
 - **Machine output — Berkeley Mono** (licensed, self-hosted). Nav, dates, seeds, counts,
-  eyebrows, code, captions, the record.
+  eyebrows, code, captions.
   *Reason:* mono is the machine speaking — the split maps onto the site's actual subject,
   AI-human collaboration. Berkeley Mono is demoted from display face to instrument labels;
   as a display face it is the 2026 design-engineer uniform.
 - **Deleted: Geist** (and its render-blocking jsdelivr stylesheet). No CDN fonts, no Inter.
 - Scale: `html` 62.5%; body 1.7rem/1.65; h1 `clamp(3rem, 2.2rem + 1.6vw, 4.2rem)` at 600;
-  eyebrows 1.2rem mono uppercase `0.12em`; dates 1.2–1.35rem mono.
+  essay titles one notch smaller — `clamp(2.8rem, 2.1rem + 1.4vw, 3.8rem)`/1.15 — because
+  essay titles run long and share the fold with the opening paragraph; eyebrows 1.2rem
+  mono uppercase `0.12em`; dates 1.2rem mono everywhere; captions 1.15rem mono.
 
 ## Colour
 
@@ -55,6 +57,8 @@ Tokens are named by intent. There is no `primary`.
 | `muted` | `#666666` | `#8a8a8a` | dates, captions, nav |
 | `hairline` | `#e6e6e6` | `#222222` | borders, separators |
 | `sig` | `#1a7f37` | `#53d339` | the signature colour |
+| `glyph` | `rgba(26,26,26,0.85)` | `#53d339` | stroke of every drawing (plotter ink / phosphor) |
+| `code-bg` | `#f5f5f5` | `#1a1a1a` | code blocks; code renders monochrome in `ink` |
 
 *Reason for `sig`:* derived from the commit chart's green but transposed off GitHub's
 swatch (`#39d353` → `#53d339`), out of the mint band and toward actual P1 CRT phosphor.
@@ -70,19 +74,29 @@ which failed WCAG AA on every date on the site.
 
 - Container `575px`, `2rem` side padding — kept from the current site (~68ch at 1.7rem
   serif). Single breakpoint at 767px.
-- Spacious list rhythm: ~0.55rem vertical padding per row; sections separated by 4rem.
+- Spacious list rhythm: 0.55rem vertical padding per row (0.8rem under 767px, where rows
+  wrap to two lines and become the touch target); sections separated by 4rem.
 - *Reason:* the register is a quiet page with one living element; compression would fight it.
 
 ## Motion
 
-- **Budget: one settle-to-rest moment.** The homepage instrument draws itself for ~7s on
-  arrival, then the animation loop is cancelled — not slowed, cancelled. Essay pages are
-  completely still. Existing view transitions may remain.
-- `prefers-reduced-motion`: the settled frame renders synchronously — identity retained,
-  motion removed. No-JS: a build-time static frame.
-- Lifecycle: any canvas must tear down on `astro:before-swap` and pause when hidden or
-  off-viewport. (The `/commits` page currently leaks listeners on every navigation — fix,
-  and don't reintroduce.)
+- **Budget: one settle-to-rest moment.** The homepage instrument draws itself over ~7s on
+  first arrival, then the animation loop is cancelled — not slowed, cancelled. Essay pages
+  are still. Existing view transitions may remain.
+- **The settle is a fixed step count (840), not a wall-clock cutoff** — the same seed must
+  produce the identical settled drawing on a 60Hz laptop, a 120Hz phone, and under
+  reduced-motion. Time only paces the steps; it never changes their total.
+- Theme toggles, resizes, and mid-session reduced-motion changes re-render the settled
+  frame *synchronously* — the animation plays once per arrival, never again.
+- `prefers-reduced-motion`: the same 840-step settled frame, rendered synchronously.
+  No-JS: a build-time static frame (inline SVG in `<noscript>`), same seed.
+- Lifecycle: pause when the document hides, resume when it returns; tear down on
+  `astro:before-swap`. (The `/commits` page currently leaks listeners on every
+  navigation — fix, and don't reintroduce.)
+- **The one standing exception: the living logo.** John's animated mili wordmark blinks
+  on every page — it is the site's oldest handmade artifact and is exempt from the
+  no-infinite-loops rule by owner decision. It must still respect
+  `prefers-reduced-motion` (implementation item in the logo-animations package).
 - *Reason:* panel numbers — an infinite loop costs 8–15% sustained phone CPU; settling
   costs ~2s of CPU once.
 
@@ -113,9 +127,10 @@ before ship; `seedOverride` frontmatter exists for duds. Algorithmic slop is sti
 
 ## Component vocabulary
 
-`row` (glyph + serif title + mono date) · `eyebrow` (mono section label) · `instrument`
-(canvas + caption) · `facts` (the bio bullets) · `footer strip`. That's the whole kit;
-new surfaces compose these before inventing.
+`logo` (the living mili wordmark, `Logo.astro`) · `row` (glyph + serif title + mono date)
+· `eyebrow` (mono section label) · `instrument` (canvas + caption) · `facts` (the bio
+bullets) · `footer strip`. That's the whole kit; new surfaces compose these before
+inventing.
 
 ## Anti-patterns (the audit checks these)
 
@@ -123,7 +138,10 @@ new surfaces compose these before inventing.
 - No gradients, no cards, no bento grids, no border-radius above 2px, no drop shadows.
 - No second accent colour; no colour in chrome; no coloured links.
 - No CDN-loaded assets of any kind (fonts, CSS, JS).
-- No infinite animation loops; nothing animates on essay pages.
+- No infinite animation loops (sole exception: the living logo, see §Motion); nothing
+  else animates on essay pages.
+- Links are identified by a visible underline in `muted` (≥3:1), darkening on hover —
+  never by colour, and never by a hairline too faint to see.
 - No terminal-typing effects, no Matrix-rain framing — the instrument is bordered,
   captioned, and data-fed precisely so it reads as an instrument, not a screensaver.
 - No self-scoreboards, badges, or "called it" marks — nothing that grades John's own

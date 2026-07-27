@@ -4,7 +4,7 @@
 import { getEntry, render } from 'astro:content';
 import Logo from '../components/Logo.astro';
 
-const entry = await getEntry('writing', 'the-agentic-web');
+const entry = await getEntry('writing', 'my-ai-native-creative-workflow');
 if (!entry) throw new Error('proof essay not found');
 const { Content } = await render(entry);
 
@@ -93,10 +93,12 @@ const glyph = glyphPath(entry.id);
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Design proof — essay page</title>
+    <title>{entry.data.title} — design proof (Process)</title>
     <meta name="robots" content="noindex" />
     <link rel="preload" href="/fonts/source-serif/ss4-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="/fonts/source-serif/ss4-latin-600-normal.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/source-serif/ss4-latin-400-italic.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/BerkeleyMono-Regular.otf" as="font" type="font/otf" crossorigin />
     <script is:inline>
       (function () {
         const stored = localStorage.getItem('theme');
@@ -135,17 +137,22 @@ const glyph = glyphPath(entry.id);
     </main>
 
     <footer class="site-footer">
-      <a href="https://www.linkedin.com/in/johnmilinovich/">linkedin</a><span>·</span>
-      <a href="https://x.com/jmilinovich">x</a><span>·</span>
-      <a href="https://github.com/jmilinovich">github</a><span>·</span>
+      <a href="https://www.linkedin.com/in/johnmilinovich/">linkedin</a><span aria-hidden="true">·</span>
+      <a href="https://x.com/jmilinovich">x</a><span aria-hidden="true">·</span>
+      <a href="https://github.com/jmilinovich">github</a><span aria-hidden="true">·</span>
       <a href="/rss.xml">rss</a>
     </footer>
 
     <script>
-      document.getElementById('theme-toggle')!.addEventListener('click', () => {
+      const toggle = document.getElementById('theme-toggle')!;
+      const syncPressed = () =>
+        toggle.setAttribute('aria-pressed', String(document.documentElement.getAttribute('data-theme') === 'dark'));
+      syncPressed();
+      toggle.addEventListener('click', () => {
         const next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
         document.documentElement.setAttribute('data-theme', next);
         localStorage.setItem('theme', next);
+        syncPressed();
       });
     </script>
 
@@ -169,6 +176,19 @@ const glyph = glyphPath(entry.id);
         --code-bg: #1a1a1a;
         --sig: #53d339;
         --glyph: #53d339;
+      }
+      /* no-JS: honor the OS scheme (JS sets data-theme before paint when present) */
+      @media (prefers-color-scheme: dark) {
+        :root:not([data-theme]) {
+          --paper: #0a0a0a;
+          --ink: #c8c8c8;
+          --ink-strong: #e8e8e8;
+          --muted: #8a8a8a;
+          --hairline: #222;
+          --code-bg: #1a1a1a;
+          --sig: #53d339;
+          --glyph: #53d339;
+        }
       }
 
       @font-face {
@@ -197,7 +217,7 @@ const glyph = glyphPath(entry.id);
       body {
         font-family: 'Source Serif 4', Georgia, serif;
         font-size: 1.7rem;
-        line-height: 1.7;
+        line-height: 1.65;
         color: var(--ink);
         background: var(--paper);
         -webkit-font-smoothing: antialiased;
@@ -210,16 +230,20 @@ const glyph = glyphPath(entry.id);
         max-width: 575px; margin: 0 auto; padding: 3rem 2rem 2.4rem;
         display: flex; align-items: center; justify-content: space-between;
       }
-      nav { display: flex; gap: 1.8rem; align-items: baseline; }
+      nav { display: flex; gap: 1.8rem; align-items: center; }
       nav a, #theme-toggle {
         font-family: 'Berkeley Mono', monospace; font-size: 1.3rem; color: var(--muted);
         text-decoration: none;
+        padding: 1.4rem 0.5rem; margin: -1.4rem -0.5rem; /* ≥44px touch targets, unchanged optics */
       }
       nav a:hover { color: var(--ink-strong); }
       #theme-toggle { background: none; border: none; cursor: pointer; font-size: 1.4rem; }
-      .logo { display: flex; align-items: center; color: var(--ink-strong); }
+      .logo { display: flex; align-items: center; color: var(--ink-strong); padding: 0.8rem; margin: -0.8rem; }
       .logo:hover { opacity: 0.7; }
       .logo .logo-container { width: 42px; height: 28px; }
+      @media (max-width: 767px) {
+        .logo .logo-container { width: 36px; height: 24px; }
+      }
 
       .container { max-width: 575px; margin: 0 auto; padding: 0 2rem 6rem; }
 
@@ -234,7 +258,7 @@ const glyph = glyphPath(entry.id);
       }
       .byline {
         display: flex; align-items: center; gap: 1rem;
-        font-family: 'Berkeley Mono', monospace; font-size: 1.25rem; color: var(--muted);
+        font-family: 'Berkeley Mono', monospace; font-size: 1.2rem; color: var(--muted);
       }
       .glyph { width: 20px; height: 20px; overflow: visible; }
       .glyph path {
@@ -245,8 +269,8 @@ const glyph = glyphPath(entry.id);
       .essay-body > * + * { margin-top: 2rem; }
       .essay-body h2 { font-size: 2.3rem; font-weight: 600; color: var(--ink-strong); margin-top: 4rem; line-height: 1.25; }
       .essay-body h3 { font-size: 1.9rem; font-weight: 600; color: var(--ink-strong); margin-top: 3.2rem; }
-      .essay-body a { text-decoration: underline; text-decoration-color: var(--hairline); text-underline-offset: 0.2em; }
-      .essay-body a:hover { text-decoration-color: var(--sig); }
+      .essay-body a { text-decoration: underline; text-decoration-color: var(--muted); text-underline-offset: 0.2em; }
+      .essay-body a:hover { text-decoration-color: var(--ink-strong); }
       .essay-body strong { color: var(--ink-strong); }
       .essay-body em { font-style: italic; }
       .essay-body ul, .essay-body ol { padding-left: 2.4rem; }
@@ -259,8 +283,16 @@ const glyph = glyphPath(entry.id);
         font-family: 'Berkeley Mono', monospace; font-size: 1.35rem;
         background: var(--code-bg); padding: 0.2rem 0.5rem;
       }
-      .essay-body pre { background: var(--code-bg); padding: 1.6rem; overflow-x: auto; }
-      .essay-body pre code { background: none; padding: 0; }
+      /* Shiki ships hardcoded github-dark inline styles; the direction wants
+         monochrome, tokenized code — machine voice, achromatic chrome. */
+      .essay-body pre,
+      .essay-body pre.astro-code {
+        background: var(--code-bg) !important;
+        padding: 1.6rem; overflow-x: auto;
+        font-size: 1.35rem;
+      }
+      .essay-body pre code { background: none; padding: 0; font-size: inherit; }
+      .essay-body pre.astro-code span { color: var(--ink) !important; background: none !important; }
       .essay-body img { max-width: 100%; height: auto; border: 1px solid var(--hairline); }
       .essay-body hr { border: none; border-top: 1px solid var(--hairline); margin: 3.2rem 0; }
 

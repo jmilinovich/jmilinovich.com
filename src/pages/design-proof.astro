@@ -91,16 +91,49 @@ function glyphPath(slug: string): string {
 }
 const glyphs = new Map(sorted.map((p) => [p.id, glyphPath(p.id)]));
 
-// ---- commit history → 48 amplitude buckets for the instrument ---------------
+// ---- commit history → 48 amplitude buckets, behind the 30-day freshness guard
 const days = (contributions as { date: string; count: number }[]).slice();
 days.sort((a, b) => a.date.localeCompare(b.date));
+const seedDate = new Date().toISOString().slice(0, 10); // build-time fallback; client re-seeds daily
+const lastDataDate = days[days.length - 1]?.date ?? '1970-01-01';
+const dataAgeDays = Math.floor((Date.parse(seedDate) - Date.parse(lastDataDate)) / 86400000);
+const fresh = dataAgeDays <= 30;
 const B = 48;
-const buckets = new Array(B).fill(0);
-days.forEach((d, i) => { buckets[Math.min(B - 1, Math.floor((i / days.length) * B))] += d.count; });
-const maxB = Math.max(...buckets, 1);
-const amplitude = buckets.map((v) => +(0.25 + 0.75 * Math.sqrt(v / maxB)).toFixed(3));
+let amplitude: number[];
+if (fresh) {
+  const buckets = new Array(B).fill(0);
+  days.forEach((d, i) => { buckets[Math.min(B - 1, Math.floor((i / days.length) * B))] += d.count; });
+  const maxB = Math.max(...buckets, 1);
+  amplitude = buckets.map((v) => +(0.25 + 0.75 * Math.sqrt(v / maxB)).toFixed(3));
+} else {
+  amplitude = new Array(B).fill(1); // stale data → pure date-seed field (DESIGN.md freshness guard)
+}
 const totalCommits = days.reduce((s, d) => s + d.count, 0);
-const seedDate = new Date().toISOString().slice(0, 10);
+
+// ---- no-JS fallback: the settled frame rendered at build as inline SVG ------
+function settledFrameSvg(seed: string): string {
+  const W = 575, H = 136;
+  const rand = mulberry32(xmur3(seed)());
+  const noise = makeNoise(xmur3(seed)());
+  const lines: string[] = [];
+  for (let i = 0; i < 80; i++) {
+    let x = rand() * W, y = H * 0.12 + rand() * H * 0.76;
+    const pts: string[] = [`${x.toFixed(0)},${y.toFixed(0)}`];
+    for (let s = 0; s < 55; s++) {
+      const bpos = Math.max(0, Math.min(46.999, (x / W) * 47));
+      const bi = Math.floor(bpos), bf = bpos - bi;
+      const amp = amplitude[bi] * (1 - bf) + amplitude[bi + 1] * bf;
+      const a = (noise(x * 0.011, y * 0.011 * 2.2) - 0.5) * Math.PI * 2.6 * amp;
+      x += Math.cos(a) * 2.1 + 0.8;
+      y += Math.sin(a) * 2.1 * amp;
+      if (x > W + 2 || y < -2 || y > H + 2) break;
+      pts.push(`${x.toFixed(0)},${y.toFixed(0)}`);
+    }
+    if (pts.length > 6) lines.push(`<polyline points="${pts.join(' ')}"/>`);
+  }
+  return `<svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="none" style="display:block;width:100%;height:136px" fill="none" stroke="var(--glyph)" stroke-opacity="0.28" stroke-width="1">${lines.join('')}</svg>`;
+}
+const noscriptFrame = settledFrameSvg(seedDate);
 
 const starts = [
   'the-agentic-web',
@@ -109,7 +142,6 @@ const starts = [
   'just-do-things',
 ];
 const startPicks = starts.map((s) => sorted.find((p) => p.id === s)).filter(Boolean);
-
 ---
 
 <!DOCTYPE html>
@@ -121,6 +153,7 @@ const startPicks = starts.map((s) => sorted.find((p) => p.id === s)).filter(Bool
     <meta name="robots" content="noindex" />
     <link rel="preload" href="/fonts/source-serif/ss4-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="/fonts/source-serif/ss4-latin-600-normal.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/BerkeleyMono-Regular.otf" as="font" type="font/otf" crossorigin />
     <script is:inline>
       (function () {
         const stored = localStorage.getItem('theme');
@@ -145,7 +178,8 @@ const startPicks = starts.map((s) => sorted.find((p) => p.id === s)).filter(Bool
 
       <figure class="instrument">
         <canvas id="field" height="136" aria-hidden="true"></canvas>
-        <figcaption>seed {seedDate} · {totalCommits.toLocaleString()} commits · 2022→26</figcaption>
+        <noscript set:html={noscriptFrame} />
+        <figcaption>seed <span id="seed-date">{seedDate}</span>{fresh && ` · ${totalCommits.toLocaleString()} commits · 2022→26`}</figcaption>
       </figure>
 
       <ul class="facts">
@@ -158,41 +192,54 @@ const startPicks = starts.map((s) => sorted.find((p) => p.id === s)).filter(Bool
 
       <section class="writing">
         <h2 class="eyebrow">Start here</h2>
-        {startPicks.map((p) => (
-          <article class="row">
-            <svg class="glyph" viewBox="0 0 24 24" aria-hidden="true"><path d={glyphs.get(p!.id)} /></svg>
-            <a href={`/writing/${p!.id}`} class="row-title">{p!.data.title}</a>
-            <time class="row-date" datetime={p!.data.date}>{fmtDate(p!.data.date)}</time>
-          </article>
-        ))}
+        <ul class="rows">
+          {startPicks.map((p) => (
+            <li class="row">
+              <svg class="glyph" viewBox="0 0 24 24" aria-hidden="true"><path d={glyphs.get(p!.id)} /></svg>
+              <a href={`/writing/${p!.id}`} class="row-title">{p!.data.title}</a>
+              <time class="row-date" datetime={p!.data.date}>{fmtDate(p!.data.date)}</time>
+            </li>
+          ))}
+        </ul>
       </section>
 
       <section class="writing">
         <h2 class="eyebrow">All writing</h2>
-        {sorted.map((p) => (
-          <article class="row">
-            <svg class="glyph" viewBox="0 0 24 24" aria-hidden="true"><path d={glyphs.get(p.id)} /></svg>
-            <a href={`/writing/${p.id}`} class="row-title">{p.data.title}</a>
-            <time class="row-date" datetime={p.data.date}>{fmtDate(p.data.date)}</time>
-          </article>
-        ))}
+        <ul class="rows">
+          {sorted.map((p) => (
+            <li class="row">
+              <svg class="glyph" viewBox="0 0 24 24" aria-hidden="true"><path d={glyphs.get(p.id)} /></svg>
+              <a href={`/writing/${p.id}`} class="row-title">{p.data.title}</a>
+              <time class="row-date" datetime={p.data.date}>{fmtDate(p.data.date)}</time>
+            </li>
+          ))}
+        </ul>
       </section>
     </main>
 
     <footer class="site-footer">
-      <a href="https://www.linkedin.com/in/johnmilinovich/">linkedin</a><span>·</span>
-      <a href="https://x.com/jmilinovich">x</a><span>·</span>
-      <a href="https://github.com/jmilinovich">github</a><span>·</span>
+      <a href="https://www.linkedin.com/in/johnmilinovich/">linkedin</a><span aria-hidden="true">·</span>
+      <a href="https://x.com/jmilinovich">x</a><span aria-hidden="true">·</span>
+      <a href="https://github.com/jmilinovich">github</a><span aria-hidden="true">·</span>
       <a href="/rss.xml">rss</a>
     </footer>
 
-    <script define:vars={{ amplitude, seedDate }}>
-      // ---- the instrument: a settling field recording of 2022→26 ------------
+    <script define:vars={{ amplitude }}>
+      // ---- the instrument: a settling field recording -------------------------
+      // Contract (DESIGN.md §Motion): animates once on arrival, settles at a fixed
+      // 840-step budget (identical drawing at any refresh rate), then the loop is
+      // cancelled. Theme/resize/reduced-motion re-render the settled frame
+      // synchronously. Pauses when hidden, resumes when visible.
       const canvas = document.getElementById('field');
       const ctx = canvas.getContext('2d');
-      const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const reducedMq = window.matchMedia('(prefers-reduced-motion: reduce)');
+      let reduced = reducedMq.matches;
       const DURATION = 7000;
-      let raf = 0, running = false;
+      const STEPS_TOTAL = 840;
+      const seed = new Date().toISOString().slice(0, 10); // client date → changes daily on a static build
+      const seedEl = document.getElementById('seed-date');
+      if (seedEl) seedEl.textContent = seed;
+      let raf = 0, running = false, sim = null;
 
       function xmur3(str) {
         let h = 1779033703 ^ str.length;
@@ -230,9 +277,8 @@ const startPicks = starts.map((s) => sorted.find((p) => p.id === s)).filter(Bool
         };
       }
 
-      let sim = null;
       function build() {
-        const w = canvas.clientWidth, h = canvas.clientHeight;
+        const w = canvas.clientWidth || 575, h = canvas.clientHeight || 136;
         const dpr = Math.min(window.devicePixelRatio || 1, 2);
         canvas.width = w * dpr;
         canvas.height = h * dpr;
@@ -240,7 +286,7 @@ const startPicks = starts.map((s) => sorted.find((p) => p.id === s)).filter(Bool
         ctx.clearRect(0, 0, w, h);
         const dark = document.documentElement.getAttribute('data-theme') === 'dark';
         ctx.globalCompositeOperation = dark ? 'lighter' : 'source-over';
-        const seedInt = xmur3(seedDate)();
+        const seedInt = xmur3(seed)();
         const rand = mulberry32(seedInt);
         const noise = makeNoise(seedInt);
         const P = 480;
@@ -249,11 +295,12 @@ const startPicks = starts.map((s) => sorted.find((p) => p.id === s)).filter(Bool
           parts.push({ x: rand() * w, y: h * 0.12 + rand() * h * 0.76, life: 40 + rand() * 160 });
         }
         sim = {
-          w, h, rand, noise, parts, dark,
+          w, h, rand, noise, parts,
           color: dark ? '83,211,57' : '26,26,26',
           baseAlpha: dark ? 0.038 : 0.045,
           freq: 0.011,
           elapsed: 0,
+          drawn: 0,
         };
       }
 
@@ -283,35 +330,66 @@ const startPicks = starts.map((s) => sorted.find((p) => p.id === s)).filter(Bool
         }
       }
 
-      function start() {
-        stop();
-        build();
-        if (reduced) { step(420); return; }
+      function pause() { running = false; cancelAnimationFrame(raf); }
+
+      function runLoop() {
+        if (running) return;
         running = true;
         let last = performance.now();
         const loop = (now) => {
           if (!running) return;
-          const dt = now - last; last = now;
+          const dt = Math.min(now - last, 100); // clamp: background-tab gaps must not expire the budget
+          last = now;
           sim.elapsed += dt;
-          step(2);
-          if (sim.elapsed >= DURATION) { running = false; return; }  // settled — loop cancelled
+          const target = Math.min(STEPS_TOTAL, Math.round((sim.elapsed / DURATION) * STEPS_TOTAL));
+          if (target > sim.drawn) { step(target - sim.drawn); sim.drawn = target; }
+          if (sim.drawn >= STEPS_TOTAL) { running = false; return; } // settled — loop cancelled
           raf = requestAnimationFrame(loop);
         };
         raf = requestAnimationFrame(loop);
       }
-      function stop() { running = false; cancelAnimationFrame(raf); }
 
-      document.addEventListener('visibilitychange', () => { if (document.hidden) stop(); });
-      new MutationObserver(() => start())
+      function start() {
+        pause(); build();
+        if (reduced) { settleNow(); return; }
+        runLoop();
+      }
+      function settleNow() {
+        step(STEPS_TOTAL - sim.drawn);
+        sim.drawn = STEPS_TOTAL;
+        sim.elapsed = DURATION;
+      }
+      function renderSettled() { pause(); build(); settleNow(); }
+      function resume() {
+        if (sim && sim.drawn < STEPS_TOTAL && !reduced) runLoop();
+      }
+
+      document.addEventListener('visibilitychange', () => {
+        if (document.hidden) pause();
+        else resume();
+      });
+      new MutationObserver(() => renderSettled())
         .observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
       let rt;
-      window.addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(start, 200); });
+      window.addEventListener('resize', () => {
+        clearTimeout(rt);
+        rt = setTimeout(() => { if (!sim || canvas.clientWidth !== sim.w) renderSettled(); }, 200);
+      });
+      reducedMq.addEventListener('change', (e) => {
+        reduced = e.matches;
+        if (reduced) renderSettled();
+      });
       start();
 
-      document.getElementById('theme-toggle').addEventListener('click', () => {
+      const toggle = document.getElementById('theme-toggle');
+      const syncPressed = () =>
+        toggle.setAttribute('aria-pressed', String(document.documentElement.getAttribute('data-theme') === 'dark'));
+      syncPressed();
+      toggle.addEventListener('click', () => {
         const next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
         document.documentElement.setAttribute('data-theme', next);
         localStorage.setItem('theme', next);
+        syncPressed();
       });
     </script>
 
@@ -322,6 +400,7 @@ const startPicks = starts.map((s) => sorted.find((p) => p.id === s)).filter(Bool
         --ink-strong: #111;
         --muted: #666;
         --hairline: #e6e6e6;
+        --code-bg: #f5f5f5;
         --sig: #1a7f37;           /* moss — the light-mode voice of the system */
         --glyph: rgba(26, 26, 26, 0.85); /* plotter ink */
       }
@@ -331,8 +410,22 @@ const startPicks = starts.map((s) => sorted.find((p) => p.id === s)).filter(Bool
         --ink-strong: #e8e8e8;
         --muted: #8a8a8a;
         --hairline: #222;
+        --code-bg: #1a1a1a;
         --sig: #53d339;           /* phosphor — off GitHub's swatch, onto the CRT */
         --glyph: #53d339;
+      }
+      /* no-JS: honor the OS scheme (JS sets data-theme before paint when present) */
+      @media (prefers-color-scheme: dark) {
+        :root:not([data-theme]) {
+          --paper: #0a0a0a;
+          --ink: #c8c8c8;
+          --ink-strong: #e8e8e8;
+          --muted: #8a8a8a;
+          --hairline: #222;
+          --code-bg: #1a1a1a;
+          --sig: #53d339;
+          --glyph: #53d339;
+        }
       }
 
       @font-face {
@@ -375,18 +468,16 @@ const startPicks = starts.map((s) => sorted.find((p) => p.id === s)).filter(Bool
         max-width: 575px; margin: 0 auto; padding: 3rem 2rem 2.4rem;
         display: flex; align-items: center; justify-content: space-between;
       }
+      nav { display: flex; gap: 1.8rem; align-items: center; }
       nav a, #theme-toggle {
         font-family: 'Berkeley Mono', monospace; font-size: 1.3rem; color: var(--muted);
+        padding: 1.4rem 0.5rem; margin: -1.4rem -0.5rem; /* ≥44px touch targets, unchanged optics */
       }
-      .logo { display: flex; align-items: center; color: var(--ink-strong); }
-      .logo:hover { text-decoration: none; opacity: 0.7; }
-      .logo .logo-container { width: 42px; height: 28px; }
-      @media (max-width: 767px) {
-        .logo .logo-container { width: 36px; height: 24px; }
-      }
-      nav { display: flex; gap: 1.8rem; align-items: baseline; }
       nav a:hover { color: var(--ink-strong); text-decoration: none; }
       #theme-toggle { background: none; border: none; cursor: pointer; font-size: 1.4rem; }
+      .logo { display: flex; align-items: center; color: var(--ink-strong); padding: 0.8rem; margin: -0.8rem; }
+      .logo:hover { text-decoration: none; opacity: 0.7; }
+      .logo .logo-container { width: 42px; height: 28px; }
 
       .container { max-width: 575px; margin: 0 auto; padding: 0 2rem 6rem; }
 
@@ -405,6 +496,7 @@ const startPicks = starts.map((s) => sorted.find((p) => p.id === s)).filter(Bool
         display: block; width: 100%; height: 136px;
         border: 1px solid var(--hairline);
       }
+      .instrument noscript svg { border: 1px solid var(--hairline); }
       .instrument figcaption {
         font-family: 'Berkeley Mono', monospace;
         font-size: 1.15rem; color: var(--muted);
@@ -413,8 +505,8 @@ const startPicks = starts.map((s) => sorted.find((p) => p.id === s)).filter(Bool
 
       .facts { list-style: disc; padding-left: 2rem; margin-bottom: 4rem; }
       .facts li { margin-bottom: 0.7rem; }
-      .facts a { text-decoration: underline; text-decoration-color: var(--hairline); text-underline-offset: 0.2em; }
-      .facts a:hover { text-decoration-color: var(--sig); }
+      .facts a { text-decoration: underline; text-decoration-color: var(--muted); text-underline-offset: 0.2em; }
+      .facts a:hover { text-decoration-color: var(--ink-strong); }
 
       .eyebrow {
         font-family: 'Berkeley Mono', monospace;
@@ -423,9 +515,9 @@ const startPicks = starts.map((s) => sorted.find((p) => p.id === s)).filter(Bool
         text-transform: uppercase; letter-spacing: 0.12em;
         margin-bottom: 1.6rem;
       }
-      .eyebrow-note { text-transform: none; letter-spacing: 0.02em; }
 
       .writing { margin-bottom: 4rem; }
+      .rows { list-style: none; padding: 0; }
       .row { display: flex; align-items: baseline; gap: 1.2rem; padding: 0.55rem 0; }
       .glyph {
         width: 20px; height: 20px; flex: none; align-self: center;
@@ -447,13 +539,15 @@ const startPicks = starts.map((s) => sorted.find((p) => p.id === s)).filter(Bool
 
       .site-footer {
         max-width: 575px; margin: 0 auto; padding: 0 2rem 5rem;
-        display: flex; justify-content: center; gap: 1rem;
+        display: flex; justify-content: center; align-items: center; gap: 1rem;
         font-family: 'Berkeley Mono', monospace; font-size: 1.25rem; color: var(--muted);
       }
-      .site-footer span { color: var(--hairline); }
+      .site-footer span { color: var(--muted); }
+      .site-footer a { padding: 1.4rem 0.5rem; margin: -1.4rem -0.5rem; }
       .site-footer a:hover { color: var(--ink-strong); text-decoration: none; }
 
       @media (max-width: 767px) {
+        .logo .logo-container { width: 36px; height: 24px; }
         .row { flex-wrap: wrap; padding: 0.8rem 0; }
         .row-title { width: calc(100% - 20px - 1.2rem); }
         .row-date { margin-left: calc(20px + 1.2rem); padding-left: 0; }
