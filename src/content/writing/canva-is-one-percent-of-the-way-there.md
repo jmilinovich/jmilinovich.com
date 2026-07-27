@@ -3,7 +3,7 @@ title: "Canva is one percent of the way there"
 date: "2026-07-27"
 ---
 
-*Three years inside the machine built around Melanie Perkins.*
+*Three years inside the machine built around Melanie Perkins, and why "one percent of the way there" is a mantra, not a verdict.*
 
 Canva is a harness, and Melanie Perkins is the model inside it.
 
@@ -17,7 +17,7 @@ Three roles and three org shapes in three years, all pointed at the same problem
 
 ## It should not have worked
 
-You've probably read the origin story. Perth, which Cliff Obrecht describes as [the most isolated city in the world](https://techcrunch.com/2022/09/13/canva-moves-beyond-graphic-design-to-launch-a-visual-worksuite/), where he says they didn't know what venture capital was. [More than a hundred investor rejections](https://www.lennysnewsletter.com/p/the-making-of-canva). Mel [learning to kitesurf](https://www.npr.org/2019/01/24/688299882/canva-melanie-perkins) to get in front of an investor who ran his networking events at kitesurfing retreats. Two things came out of it.
+None of the machinery makes sense without the conditions that produced it. You've probably read the origin story. Perth, which Cliff Obrecht describes as [the most isolated city in the world](https://techcrunch.com/2022/09/13/canva-moves-beyond-graphic-design-to-launch-a-visual-worksuite/), where he says they didn't know what venture capital was. [More than a hundred investor rejections](https://www.lennysnewsletter.com/p/the-making-of-canva). Mel [learning to kitesurf](https://www.npr.org/2019/01/24/688299882/canva-melanie-perkins) to get in front of an investor who ran his networking events at kitesurfing retreats. Two things came out of it.
 
 The first is profitability, because when capital is hard to get you build something that doesn't need it. Canva has now been [profitable for eight straight years](https://sacra.com/c/canva/) at a growth rate where almost nobody is. That isn't thrift. Canva spends hard when it decides to. What profitability buys is independence from everyone else's clock, and the clearest proof is a bet that almost never comes up when people write about Canva: the company once spent [two years rewriting its entire codebase](https://www.lennysnewsletter.com/p/the-making-of-canva) and shipped almost no new features while it happened. You can only do that if nobody in the room is running on a runway. It's also why you can't win an argument at Canva by pointing at what a competitor just raised. Arguments get won by pointing at users.
 
@@ -59,7 +59,7 @@ That instinct is the one I most want to keep. Memory in LLM products is an insid
 
 Here's the part I've been leaving out. A team had spent weeks on the design we brought into that room. It was good work. Ten minutes later it wasn't the plan anymore.
 
-That happens at Canva more than anywhere else I've worked, and it is hard on people. Not because anyone's ego is bruised. Because the thing that keeps a team fast is believing that the work they're doing now is the work that ships, and every time the founder redraws something that belief takes a small hit. Do it enough times without care and you get a team that hedges, that holds back its best thinking, that waits to find out what the real plan is before committing.
+That happens at Canva more than anywhere else I've worked, and it can be hard on people. Not because anyone's ego is bruised. Because the thing that keeps a team fast is believing that the work they're doing now is the work that ships, and every time the founder redraws something that belief takes a small hit. Do it enough times without care and you get a team that hedges, that holds back its best thinking, that waits to find out what the real plan is before committing.
 
 Absorbing that is most of the job for everyone sitting between Mel and the team. Not by softening the decision, which wastes it. By making sure the team sees the reasoning and not just the outcome, fast enough that nobody spends a week wondering whether their last month counted. When it goes well people come out of a review like that energized, because the new idea is obviously better and they can see why. When it goes badly you have quietly taught a group of very good people that their judgment doesn't matter.
 
