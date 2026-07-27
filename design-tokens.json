@@ -1,0 +1,77 @@
+{
+  "$description": "Design tokens for mili.dev — direction 'Process'. See DESIGN.md for reasons. Themes: light = plotter ink on paper, dark = phosphor on black.",
+  "type": {
+    "families": {
+      "serif": {
+        "stack": "'Source Serif 4', Georgia, serif",
+        "role": "human words: h1, essay titles, body, bio",
+        "files": "public/fonts/source-serif/*.woff2",
+        "license": "SIL OFL 1.1"
+      },
+      "mono": {
+        "stack": "'Berkeley Mono', ui-monospace, monospace",
+        "role": "machine output: nav, dates, seeds, counts, eyebrows, code, captions",
+        "files": "public/fonts/BerkeleyMono-*.otf",
+        "license": "commercial (owned)"
+      }
+    },
+    "scale": {
+      "root": "62.5%",
+      "body": { "size": "1.7rem", "lineHeight": 1.65, "family": "serif" },
+      "h1": { "size": "clamp(3rem, 2.2rem + 1.6vw, 4.2rem)", "weight": 600, "lineHeight": 1.1, "letterSpacing": "-0.015em", "family": "serif" },
+      "rowTitle": { "size": "1.7rem", "lineHeight": 1.4, "family": "serif" },
+      "eyebrow": { "size": "1.2rem", "transform": "uppercase", "letterSpacing": "0.12em", "family": "mono" },
+      "date": { "size": "1.2rem", "family": "mono" },
+      "caption": { "size": "1.15rem", "letterSpacing": "0.02em", "family": "mono" },
+      "nav": { "size": "1.3rem", "family": "mono" }
+    }
+  },
+  "palette": {
+    "light": {
+      "paper": "#ffffff",
+      "ink": "#333333",
+      "ink-strong": "#111111",
+      "muted": "#666666",
+      "hairline": "#e6e6e6",
+      "sig": "#1a7f37",
+      "glyph": "rgba(26, 26, 26, 0.85)"
+    },
+    "dark": {
+      "paper": "#0a0a0a",
+      "ink": "#c8c8c8",
+      "ink-strong": "#e8e8e8",
+      "muted": "#8a8a8a",
+      "hairline": "#222222",
+      "sig": "#53d339",
+      "glyph": "#53d339"
+    },
+    "rules": [
+      "chrome is achromatic; sig appears only in drawings, ::selection, :focus-visible, record marks",
+      "links are underline-distinguished, never coloured",
+      "muted must hold >= 4.5:1 on paper in both themes"
+    ]
+  },
+  "space": {
+    "container": "575px",
+    "containerPadding": "2rem",
+    "sectionGap": "4rem",
+    "rowPadding": "0.55rem 0",
+    "breakpoint": "767px"
+  },
+  "motion": {
+    "budget": "one settle-to-rest instrument on the homepage; essay pages are still",
+    "instrument": { "durationMs": 7000, "onSettle": "cancelAnimationFrame", "maxParticles": 620, "dprCap": 2 },
+    "reducedMotion": "render settled frame synchronously",
+    "noJs": "build-time static frame",
+    "lifecycle": "teardown on astro:before-swap; pause on hidden/off-viewport",
+    "viewTransitions": { "out": "0.2s ease-in", "in": "0.3s ease-out 0.2s delay" }
+  },
+  "surface": {
+    "borderRadius": "0 (max 2px on focus ring)",
+    "borders": "1px hairline only",
+    "shadows": "none",
+    "gradients": "none",
+    "imagery": "generative only — no AI-generated images, no stock; photos only when the essay is about the photo",
+    "instrumentFrame": { "height": "136px", "border": "1px solid hairline", "caption": "mono, right-aligned, seed + data provenance" }
+  }
+}

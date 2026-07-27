@@ -1,0 +1,494 @@
+---
+// DESIGN PROOF — direction "Process". Standalone page, does not touch the live app.
+// One generative system, two materials: phosphor (dark) / plotter ink (light).
+import { getCollection } from 'astro:content';
+import contributions from '../../public/data/contributions.json';
+
+const posts = await getCollection('writing', ({ data }) => !data.draft);
+const sorted = posts.sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
+
+const fmtDate = (d: string) =>
+  new Date(d).toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric', timeZone: 'UTC' });
+
+// ---- deterministic PRNG -----------------------------------------------------
+function xmur3(str: string) {
+  let h = 1779033703 ^ str.length;
+  for (let i = 0; i < str.length; i++) {
+    h = Math.imul(h ^ str.charCodeAt(i), 3432918353);
+    h = (h << 13) | (h >>> 19);
+  }
+  return () => {
+    h = Math.imul(h ^ (h >>> 16), 2246822507);
+    h = Math.imul(h ^ (h >>> 13), 3266489909);
+    return (h ^= h >>> 16) >>> 0;
+  };
+}
+function mulberry32(a: number) {
+  return () => {
+    a |= 0; a = (a + 0x6d2b79f5) | 0;
+    let t = Math.imul(a ^ (a >>> 15), 1 | a);
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
+// value noise on a hashed lattice — no arrays, fully deterministic per seed
+function makeNoise(seedInt: number) {
+  const lattice = (ix: number, iy: number) => {
+    let h = Math.imul(ix, 374761393) + Math.imul(iy, 668265263) + Math.imul(seedInt, 2246822519);
+    h = Math.imul(h ^ (h >>> 13), 1274126177);
+    return (((h ^ (h >>> 16)) >>> 0) % 100000) / 100000;
+  };
+  const smooth = (t: number) => t * t * (3 - 2 * t);
+  return (x: number, y: number) => {
+    const ix = Math.floor(x), iy = Math.floor(y);
+    const fx = smooth(x - ix), fy = smooth(y - iy);
+    const a = lattice(ix, iy), b = lattice(ix + 1, iy);
+    const c = lattice(ix, iy + 1), d = lattice(ix + 1, iy + 1);
+    return a + (b - a) * fx + (c + (d - c) * fx - (a + (b - a) * fx)) * fy;
+  };
+}
+
+// ---- build-time glyphs: one streamline per essay, seeded by its slug --------
+function glyphPath(slug: string): string {
+  const seedInt = xmur3(slug)();
+  const rand = mulberry32(seedInt);
+  const noise = makeNoise(seedInt);
+  const freq = 0.055 + rand() * 0.05;
+  const turb = 1.7 + rand() * 1.1;
+  const S = 40, STEPS = 84;
+  let best: { pts: [number, number][]; span: number } = { pts: [], span: 0 };
+  for (let c = 0; c < 8; c++) {
+    let x = 6 + rand() * (S - 12), y = 6 + rand() * (S - 12);
+    const pts: [number, number][] = [[x, y]];
+    let minX = x, maxX = x, minY = y, maxY = y;
+    for (let i = 0; i < STEPS; i++) {
+      const a = (noise(x * freq, y * freq) - 0.5) * Math.PI * 2 * turb;
+      x += Math.cos(a) * 0.85;
+      y += Math.sin(a) * 0.85;
+      if (x < 1 || x > S - 1 || y < 1 || y > S - 1) break;
+      pts.push([x, y]);
+      minX = Math.min(minX, x); maxX = Math.max(maxX, x);
+      minY = Math.min(minY, y); maxY = Math.max(maxY, y);
+    }
+    const span = (maxX - minX) * (maxY - minY) + pts.length;
+    if (span > best.span) best = { pts, span };
+  }
+  const pts = best.pts;
+  if (pts.length < 4) return 'M6 12 L18 12';
+  // normalize into a 24×24 viewBox with 3px padding
+  let minX = 1e9, maxX = -1e9, minY = 1e9, maxY = -1e9;
+  for (const [px, py] of pts) {
+    minX = Math.min(minX, px); maxX = Math.max(maxX, px);
+    minY = Math.min(minY, py); maxY = Math.max(maxY, py);
+  }
+  const scale = 18 / Math.max(maxX - minX, maxY - minY, 1);
+  const ox = 3 + (18 - (maxX - minX) * scale) / 2, oy = 3 + (18 - (maxY - minY) * scale) / 2;
+  return pts
+    .map(([px, py], i) =>
+      `${i === 0 ? 'M' : 'L'}${((px - minX) * scale + ox).toFixed(1)} ${((py - minY) * scale + oy).toFixed(1)}`)
+    .join('');
+}
+const glyphs = new Map(sorted.map((p) => [p.id, glyphPath(p.id)]));
+
+// ---- commit history → 48 amplitude buckets for the instrument ---------------
+const days = (contributions as { date: string; count: number }[]).slice();
+days.sort((a, b) => a.date.localeCompare(b.date));
+const B = 48;
+const buckets = new Array(B).fill(0);
+days.forEach((d, i) => { buckets[Math.min(B - 1, Math.floor((i / days.length) * B))] += d.count; });
+const maxB = Math.max(...buckets, 1);
+const amplitude = buckets.map((v) => +(0.25 + 0.75 * Math.sqrt(v / maxB)).toFixed(3));
+const totalCommits = days.reduce((s, d) => s + d.count, 0);
+const seedDate = new Date().toISOString().slice(0, 10);
+
+const starts = [
+  'the-agentic-web',
+  'dangerously-good-product-managers',
+  'the-courage-to-remove',
+  'just-do-things',
+];
+const startPicks = starts.map((s) => sorted.find((p) => p.id === s)).filter(Boolean);
+
+const record = [
+  { yr: "'23", call: 'natural language interfaces', mark: 'hit', slug: '2023-the-year-of-natural-language-interfaces' },
+  { yr: "'24", call: 'multimodal AI', mark: 'hit', slug: '2024-the-year-of-multimodal-ai' },
+  { yr: "'25", call: 'voice AI', mark: 'hit', slug: '2025-the-year-of-voice-ai' },
+  { yr: "'26", call: 'autonomous computing', mark: 'open', slug: '2026-the-year-of-autonomous-computing' },
+];
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Design proof — Process</title>
+    <meta name="robots" content="noindex" />
+    <link rel="preload" href="/fonts/source-serif/ss4-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/source-serif/ss4-latin-600-normal.woff2" as="font" type="font/woff2" crossorigin />
+    <script is:inline>
+      (function () {
+        const stored = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        document.documentElement.setAttribute('data-theme', stored || (prefersDark ? 'dark' : 'light'));
+      })();
+    </script>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="wordmark" href="/design-proof">mili</a>
+      <nav aria-label="Main">
+        <a href="/writing">writing</a>
+        <a href="/design-proof#record">record</a>
+        <a href="/talks">talks</a>
+        <a href="/projects">projects</a>
+        <button id="theme-toggle" aria-label="Toggle theme">◐</button>
+      </nav>
+    </header>
+
+    <main class="container">
+      <h1>John Milinovich</h1>
+
+      <figure class="instrument">
+        <canvas id="field" height="136" aria-hidden="true"></canvas>
+        <figcaption>seed {seedDate} · {totalCommits.toLocaleString()} commits · 2022→26</figcaption>
+      </figure>
+
+      <ul class="facts">
+        <li>Leading Generative AI Product at <a href="https://www.canva.com/">Canva</a>, where I helped build <a href="https://www.canva.com/newsroom/news/magic-studio/">Magic Studio</a> (<a href="https://time.com/7094550/canva-magic-studio/">Time's Best Inventions 2024</a>)</li>
+        <li>Previously: founded <a href="https://techcrunch.com/2013/10/16/urx-ads/">URX</a> (acquired by Pinterest), led discovery at <a href="https://www.nytimes.com/2021/02/15/business/clubhouse.html">Clubhouse</a>, co-founded <a href="https://www.axios.com/2020/04/30/aesthetic-seed-funding-ai-brand-design">Aesthetic</a></li>
+        <li>Early career at Google and Yahoo</li>
+        <li>UCLA architecture — got hooked on code after seeing <a href="https://www.youtube.com/watch?v=_8DMEHxOLQE">Casey Reas</a> demo Processing.js</li>
+        <li>Interested in AI-human collaboration, product craft, and building things</li>
+      </ul>
+
+      <section id="record" class="record">
+        <h2 class="eyebrow">The record <span class="eyebrow-note">— one call a year, scored</span></h2>
+        <ul>
+          {record.map((r) => (
+            <li>
+              <a href={`/writing/${r.slug}`}>
+                <span class="record-yr">{r.yr}</span>
+                <span class="record-call">{r.call}</span>
+                <span class={`record-mark ${r.mark}`}>{r.mark === 'hit' ? '✓' : '○'}</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      <section class="writing">
+        <h2 class="eyebrow">Start here</h2>
+        {startPicks.map((p) => (
+          <article class="row">
+            <svg class="glyph" viewBox="0 0 24 24" aria-hidden="true"><path d={glyphs.get(p!.id)} /></svg>
+            <a href={`/writing/${p!.id}`} class="row-title">{p!.data.title}</a>
+            <time class="row-date" datetime={p!.data.date}>{fmtDate(p!.data.date)}</time>
+          </article>
+        ))}
+      </section>
+
+      <section class="writing">
+        <h2 class="eyebrow">All writing</h2>
+        {sorted.map((p) => (
+          <article class="row">
+            <svg class="glyph" viewBox="0 0 24 24" aria-hidden="true"><path d={glyphs.get(p.id)} /></svg>
+            <a href={`/writing/${p.id}`} class="row-title">{p.data.title}</a>
+            <time class="row-date" datetime={p.data.date}>{fmtDate(p.data.date)}</time>
+          </article>
+        ))}
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <a href="https://www.linkedin.com/in/johnmilinovich/">linkedin</a><span>·</span>
+      <a href="https://x.com/jmilinovich">x</a><span>·</span>
+      <a href="https://github.com/jmilinovich">github</a><span>·</span>
+      <a href="/rss.xml">rss</a>
+    </footer>
+
+    <script define:vars={{ amplitude, seedDate }}>
+      // ---- the instrument: a settling field recording of 2022→26 ------------
+      const canvas = document.getElementById('field');
+      const ctx = canvas.getContext('2d');
+      const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const DURATION = 7000;
+      let raf = 0, running = false;
+
+      function xmur3(str) {
+        let h = 1779033703 ^ str.length;
+        for (let i = 0; i < str.length; i++) {
+          h = Math.imul(h ^ str.charCodeAt(i), 3432918353);
+          h = (h << 13) | (h >>> 19);
+        }
+        return () => {
+          h = Math.imul(h ^ (h >>> 16), 2246822507);
+          h = Math.imul(h ^ (h >>> 13), 3266489909);
+          return (h ^= h >>> 16) >>> 0;
+        };
+      }
+      function mulberry32(a) {
+        return () => {
+          a |= 0; a = (a + 0x6d2b79f5) | 0;
+          let t = Math.imul(a ^ (a >>> 15), 1 | a);
+          t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+          return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+        };
+      }
+      function makeNoise(seedInt) {
+        const lattice = (ix, iy) => {
+          let h = Math.imul(ix, 374761393) + Math.imul(iy, 668265263) + Math.imul(seedInt, 2246822519);
+          h = Math.imul(h ^ (h >>> 13), 1274126177);
+          return (((h ^ (h >>> 16)) >>> 0) % 100000) / 100000;
+        };
+        const smooth = (t) => t * t * (3 - 2 * t);
+        return (x, y) => {
+          const ix = Math.floor(x), iy = Math.floor(y);
+          const fx = smooth(x - ix), fy = smooth(y - iy);
+          const a = lattice(ix, iy), b = lattice(ix + 1, iy);
+          const c = lattice(ix, iy + 1), d = lattice(ix + 1, iy + 1);
+          return a + (b - a) * fx + (c + (d - c) * fx - (a + (b - a) * fx)) * fy;
+        };
+      }
+
+      let sim = null;
+      function build() {
+        const w = canvas.clientWidth, h = canvas.clientHeight;
+        const dpr = Math.min(window.devicePixelRatio || 1, 2);
+        canvas.width = w * dpr;
+        canvas.height = h * dpr;
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        ctx.clearRect(0, 0, w, h);
+        const dark = document.documentElement.getAttribute('data-theme') === 'dark';
+        ctx.globalCompositeOperation = dark ? 'lighter' : 'source-over';
+        const seedInt = xmur3(seedDate)();
+        const rand = mulberry32(seedInt);
+        const noise = makeNoise(seedInt);
+        const P = 480;
+        const parts = [];
+        for (let i = 0; i < P; i++) {
+          parts.push({ x: rand() * w, y: h * 0.12 + rand() * h * 0.76, life: 40 + rand() * 160 });
+        }
+        sim = {
+          w, h, rand, noise, parts, dark,
+          color: dark ? '83,211,57' : '26,26,26',
+          baseAlpha: dark ? 0.038 : 0.045,
+          freq: 0.011,
+          elapsed: 0,
+        };
+      }
+
+      function step(frames) {
+        const { w, h, rand, noise, parts } = sim;
+        ctx.lineWidth = 1;
+        for (let f = 0; f < frames; f++) {
+          ctx.beginPath();
+          for (const p of parts) {
+            const bpos = Math.max(0, Math.min(46.999, (p.x / w) * 47));
+            const bi = Math.floor(bpos), bf = bpos - bi;
+            const amp = amplitude[bi] * (1 - bf) + amplitude[bi + 1] * bf;
+            const a = (noise(p.x * sim.freq, p.y * sim.freq * 2.2) - 0.5) * Math.PI * 2.6 * amp;
+            const nx = p.x + Math.cos(a) * 1.05 + 0.4;
+            const ny = p.y + Math.sin(a) * 1.05 * amp;
+            ctx.moveTo(p.x, p.y);
+            ctx.lineTo(nx, ny);
+            p.x = nx; p.y = ny;
+            if (--p.life < 0 || p.x > w + 2 || p.y < -2 || p.y > h + 2) {
+              p.x = rand() * w;
+              p.y = h * 0.12 + rand() * h * 0.76;
+              p.life = 40 + rand() * 160;
+            }
+          }
+          ctx.strokeStyle = `rgba(${sim.color},${sim.baseAlpha})`;
+          ctx.stroke();
+        }
+      }
+
+      function start() {
+        stop();
+        build();
+        if (reduced) { step(420); return; }
+        running = true;
+        let last = performance.now();
+        const loop = (now) => {
+          if (!running) return;
+          const dt = now - last; last = now;
+          sim.elapsed += dt;
+          step(2);
+          if (sim.elapsed >= DURATION) { running = false; return; }  // settled — loop cancelled
+          raf = requestAnimationFrame(loop);
+        };
+        raf = requestAnimationFrame(loop);
+      }
+      function stop() { running = false; cancelAnimationFrame(raf); }
+
+      document.addEventListener('visibilitychange', () => { if (document.hidden) stop(); });
+      new MutationObserver(() => start())
+        .observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+      let rt;
+      window.addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(start, 200); });
+      start();
+
+      document.getElementById('theme-toggle').addEventListener('click', () => {
+        const next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+        document.documentElement.setAttribute('data-theme', next);
+        localStorage.setItem('theme', next);
+      });
+    </script>
+
+    <style is:global>
+      :root {
+        --paper: #fff;
+        --ink: #333;
+        --ink-strong: #111;
+        --muted: #666;
+        --hairline: #e6e6e6;
+        --sig: #1a7f37;           /* moss — the light-mode voice of the system */
+        --glyph: rgba(26, 26, 26, 0.85); /* plotter ink */
+      }
+      [data-theme='dark'] {
+        --paper: #0a0a0a;
+        --ink: #c8c8c8;
+        --ink-strong: #e8e8e8;
+        --muted: #8a8a8a;
+        --hairline: #222;
+        --sig: #53d339;           /* phosphor — off GitHub's swatch, onto the CRT */
+        --glyph: #53d339;
+      }
+
+      @font-face {
+        font-family: 'Source Serif 4';
+        src: url('/fonts/source-serif/ss4-latin-400-normal.woff2') format('woff2');
+        font-weight: 400; font-style: normal; font-display: swap;
+      }
+      @font-face {
+        font-family: 'Source Serif 4';
+        src: url('/fonts/source-serif/ss4-latin-600-normal.woff2') format('woff2');
+        font-weight: 600; font-style: normal; font-display: swap;
+      }
+      @font-face {
+        font-family: 'Source Serif 4';
+        src: url('/fonts/source-serif/ss4-latin-400-italic.woff2') format('woff2');
+        font-weight: 400; font-style: italic; font-display: swap;
+      }
+      @font-face {
+        font-family: 'Berkeley Mono';
+        src: url('/fonts/BerkeleyMono-Regular.otf') format('opentype');
+        font-weight: 400; font-style: normal; font-display: swap;
+      }
+
+      *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+      html { font-size: 62.5%; scrollbar-gutter: stable; }
+      body {
+        font-family: 'Source Serif 4', Georgia, serif;
+        font-size: 1.7rem;
+        line-height: 1.65;
+        color: var(--ink);
+        background: var(--paper);
+        -webkit-font-smoothing: antialiased;
+      }
+      ::selection { background: var(--sig); color: var(--paper); }
+      a { color: inherit; text-decoration: none; }
+      a:hover { text-decoration: underline; text-underline-offset: 0.2em; }
+      :focus-visible { outline: 2px solid var(--sig); outline-offset: 3px; border-radius: 1px; }
+
+      .site-header {
+        max-width: 575px; margin: 0 auto; padding: 3rem 2rem 2.4rem;
+        display: flex; align-items: baseline; justify-content: space-between;
+      }
+      .wordmark, nav a, #theme-toggle {
+        font-family: 'Berkeley Mono', monospace; font-size: 1.3rem; color: var(--muted);
+      }
+      .wordmark { color: var(--ink-strong); }
+      nav { display: flex; gap: 1.8rem; align-items: baseline; }
+      nav a:hover { color: var(--ink-strong); text-decoration: none; }
+      #theme-toggle { background: none; border: none; cursor: pointer; font-size: 1.4rem; }
+
+      .container { max-width: 575px; margin: 0 auto; padding: 0 2rem 6rem; }
+
+      h1 {
+        font-family: 'Source Serif 4', Georgia, serif;
+        font-weight: 600;
+        font-size: clamp(3rem, 2.2rem + 1.6vw, 4.2rem);
+        letter-spacing: -0.015em;
+        line-height: 1.1;
+        color: var(--ink-strong);
+        margin-bottom: 2rem;
+      }
+
+      .instrument { margin-bottom: 3.2rem; }
+      .instrument canvas {
+        display: block; width: 100%; height: 136px;
+        border: 1px solid var(--hairline);
+      }
+      .instrument figcaption {
+        font-family: 'Berkeley Mono', monospace;
+        font-size: 1.15rem; color: var(--muted);
+        text-align: right; margin-top: 0.7rem; letter-spacing: 0.02em;
+      }
+
+      .facts { list-style: disc; padding-left: 2rem; margin-bottom: 4rem; }
+      .facts li { margin-bottom: 0.7rem; }
+      .facts a { text-decoration: underline; text-decoration-color: var(--hairline); text-underline-offset: 0.2em; }
+      .facts a:hover { text-decoration-color: var(--sig); }
+
+      .eyebrow {
+        font-family: 'Berkeley Mono', monospace;
+        font-size: 1.2rem; font-weight: 400;
+        color: var(--muted);
+        text-transform: uppercase; letter-spacing: 0.12em;
+        margin-bottom: 1.6rem;
+      }
+      .eyebrow-note { text-transform: none; letter-spacing: 0.02em; }
+
+      .record { margin-bottom: 4rem; }
+      .record ul { list-style: none; }
+      .record li a {
+        display: flex; align-items: baseline; gap: 1.2rem;
+        font-family: 'Berkeley Mono', monospace; font-size: 1.35rem;
+        padding: 0.45rem 0;
+      }
+      .record li a:hover { text-decoration: none; }
+      .record li a:hover .record-call { color: var(--ink-strong); text-decoration: underline; text-underline-offset: 0.25em; }
+      .record-yr { color: var(--muted); }
+      .record-call { color: var(--ink); }
+      .record-mark { margin-left: auto; }
+      .record-mark.hit { color: var(--sig); }
+      .record-mark.open { color: var(--muted); }
+
+      .writing { margin-bottom: 4rem; }
+      .row { display: flex; align-items: baseline; gap: 1.2rem; padding: 0.55rem 0; }
+      .glyph {
+        width: 20px; height: 20px; flex: none; align-self: center;
+        overflow: visible;
+      }
+      .glyph path {
+        fill: none; stroke: var(--glyph); stroke-width: 1.7;
+        stroke-linecap: round; stroke-linejoin: round;
+      }
+      .row-title {
+        font-family: 'Source Serif 4', Georgia, serif;
+        font-size: 1.7rem; color: var(--ink-strong); line-height: 1.4;
+      }
+      .row-date {
+        font-family: 'Berkeley Mono', monospace;
+        font-size: 1.2rem; color: var(--muted);
+        margin-left: auto; flex: none; padding-left: 1.2rem;
+      }
+
+      .site-footer {
+        max-width: 575px; margin: 0 auto; padding: 0 2rem 5rem;
+        display: flex; justify-content: center; gap: 1rem;
+        font-family: 'Berkeley Mono', monospace; font-size: 1.25rem; color: var(--muted);
+      }
+      .site-footer span { color: var(--hairline); }
+      .site-footer a:hover { color: var(--ink-strong); text-decoration: none; }
+
+      @media (max-width: 767px) {
+        .row { flex-wrap: wrap; padding: 0.8rem 0; }
+        .row-title { width: calc(100% - 20px - 1.2rem); }
+        .row-date { margin-left: calc(20px + 1.2rem); padding-left: 0; }
+      }
+    </style>
+  </body>
+</html>
