@@ -97,8 +97,13 @@ streamlines`.
    runtime. Freshness guard: data older than 30 days → date-seed only.
 2. **Per-essay glyph** — seeded by the slug, generated at build, inline SVG (~20×20 at the
    index). Deterministic forever: same slug, same mark.
-3. **Essay-page header** — the glyph's field drawn large, still, replacing the
-   AI-generated hero images (all of which are deleted).
+3. **Essay pressmark + end-mark** — the slug's glyph appears exactly twice on its essay
+   page: small (20px) beside the date in the byline, and again (28px, centered) as the
+   end-mark after the last line. The AI-generated hero images are deleted and replaced by
+   *nothing large* — essays open with their first sentence. *Reason:* the same mark seen
+   in the index reappearing on the essay is the system revealing its determinism; a big
+   generative header would recreate the hero-image problem (decoration before words, 38
+   large artworks to art-direct). The big rendering lives only on the OG card.
 4. **OG cards** — 1200×630 build-time renders: paper ground, serif title, one trace in
    `sig`.
 
