@@ -11,7 +11,6 @@ import { readFileSync, writeFileSync, readdirSync, mkdirSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 import { Resvg } from '@resvg/resvg-js';
-import { glyphPath } from '../src/lib/process.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, '..');
@@ -25,7 +24,14 @@ const FONTS = [
 ];
 
 const W = 1200, H = 630;
-const PAPER = '#0a0a0a', INK_STRONG = '#e8e8e8', MUTED = '#8a8a8a', HAIRLINE = '#222', PHOSPHOR = '#53d339';
+const PAPER = '#0a0a0a', INK_STRONG = '#e8e8e8', MUTED = '#8a8a8a', HAIRLINE = '#222';
+
+// John's hand-designed mili wordmark, pulled live from the real component so the
+// cards can never drift from the site. viewBox 0 0 3109 2091.
+const logoSource = readFileSync(join(ROOT, 'src', 'components', 'Logo.astro'), 'utf8');
+const logoPaths = [...logoSource.matchAll(/<path[^>]*\bd="([^"]+)"/g)].map((m) => m[1]);
+if (logoPaths.length < 5) throw new Error('could not extract logo paths from Logo.astro');
+const LOGO_W = 3109, LOGO_H = 2091;
 
 const esc = (s) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 
@@ -43,7 +49,7 @@ function wrapTitle(title, fontSize, maxWidth) {
   return lines;
 }
 
-function card({ title, dateLabel, seed }) {
+function card({ title, dateLabel }) {
   const fontSize = title.length > 64 ? 50 : 60;
   const lineH = fontSize * 1.25;
   const lines = wrapTitle(title, fontSize, 540);
@@ -53,20 +59,19 @@ function card({ title, dateLabel, seed }) {
     .map((l, i) => `<text x="80" y="${(startY + i * lineH).toFixed(0)}" font-family="Source Serif 4 SemiBold" font-size="${fontSize}" fill="${INK_STRONG}" letter-spacing="-0.5">${esc(l)}</text>`)
     .join('');
 
-  // The mark, drawn large in phosphor: soft bloom pass under a crisp pass.
-  const d = glyphPath(seed);
-  const scale = 21;
-  const trace = `
-    <g transform="translate(668, 55) scale(${scale})" fill="none" stroke-linecap="round" stroke-linejoin="round">
-      <path d="${d}" stroke="${PHOSPHOR}" stroke-opacity="0.22" stroke-width="${(15 / scale).toFixed(3)}"/>
-      <path d="${d}" stroke="${PHOSPHOR}" stroke-opacity="0.5" stroke-width="${(7 / scale).toFixed(3)}"/>
-      <path d="${d}" stroke="${PHOSPHOR}" stroke-width="${(3.4 / scale).toFixed(3)}"/>
+  // The mili wordmark, right side, vertically centered.
+  const logoW = 360;
+  const scale = logoW / LOGO_W;
+  const logoH = LOGO_H * scale;
+  const logo = `
+    <g transform="translate(${(W - 80 - logoW).toFixed(0)}, ${((H - logoH) / 2).toFixed(0)}) scale(${scale.toFixed(4)})" fill="${INK_STRONG}">
+      ${logoPaths.map((d) => `<path d="${d}"/>`).join('\n      ')}
     </g>`;
 
   return `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}">
   <rect width="${W}" height="${H}" fill="${PAPER}"/>
   <rect x="1.5" y="1.5" width="${W - 3}" height="${H - 3}" fill="none" stroke="${HAIRLINE}" stroke-width="3"/>
-  ${trace}
+  ${logo}
   ${titleText}
   <text x="80" y="${H - 56}" font-family="Berkeley Mono" font-size="23" fill="${MUTED}" letter-spacing="0.5">mili.dev${dateLabel ? ` · ${esc(dateLabel)}` : ''}</text>
 </svg>`;
@@ -92,9 +97,9 @@ for (const file of readdirSync(CONTENT)) {
   const date = fm.match(/^date:\s*"(.*)"/m)?.[1];
   if (!title || !date) continue;
   const slug = file.replace(/\.md$/, '');
-  render(card({ title, dateLabel: fmtDate(date), seed: slug }), join(OUT, `${slug}.png`));
+  render(card({ title, dateLabel: fmtDate(date) }), join(OUT, `${slug}.png`));
   count++;
 }
 
-render(card({ title: 'John Milinovich', dateLabel: '', seed: 'mili.dev' }), join(OUT, 'default.png'));
+render(card({ title: 'John Milinovich', dateLabel: '' }), join(OUT, 'default.png'));
 console.log(`generated ${count} essay OG cards + default.png → public/og/`);
