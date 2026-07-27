@@ -3,11 +3,9 @@ title: "Canva is one percent of the way there"
 date: "2026-07-27"
 ---
 
-*Three years inside the machine built around Melanie Perkins, and why "one percent of the way there" is a mantra, not a verdict.*
+We're one percent of the way there. It's the phrase you hear most inside Canva, said casually and meant completely. Mel Perkins was using it when the company was a few hundred people. She was still using it at a quarter of a billion users and eight profitable years.
 
-Nobody who has worked inside Canva has written down what it's like there and how the magic actually gets made. I was there for three years. This is what I saw.
-
-I joined in March 2023 to run Discovery, and spent most of a year restructuring search and recommendations so they could incubate what became a big part of [Magic Studio](https://www.canva.com/newsroom/news/magic-studio/). In June 2024 I became the founding head of product for a new generative AI group, and we shipped [Canva AI](https://www.canva.com/newsroom/news/canva-create-2025/). In January 2026 I moved into a product lead role to launch [Canva AI 2.0](https://www.canva.com/newsroom/news/canva-create-2026-ai/). I left in May. Three roles and three org shapes in three years, all pointed at the same problem. I'll come back to the problem, because it's the most important thing I have to say.
+I was there for three of those years. I joined in March 2023 to run Discovery, and spent most of a year restructuring search and recommendations so they could incubate what became a big part of [Magic Studio](https://www.canva.com/newsroom/news/magic-studio/). In June 2024 I became the founding head of product for a new generative AI group, and we shipped [Canva AI](https://www.canva.com/newsroom/news/canva-create-2025/). In January 2026 I moved into a product lead role to launch [Canva AI 2.0](https://www.canva.com/newsroom/news/canva-create-2026-ai/). I left in May. Three roles and three org shapes in three years, all pointed at the same problem. I'll come back to the problem, because it's the most important thing I have to say.
 
 ## It should not have worked
 
@@ -29,7 +27,7 @@ In 2011, before there was a company, Mel made a deck for something called [Canva
 
 Canva is the only place I've worked where a document written before the company existed still functions as a spec. When thousands of people can predict what the founder would say about a decision, they stop needing to ask her about every one, and she gets to choose where to be involved rather than being the bottleneck everywhere.
 
-It also never lets you arrive. The phrase used inside the company is that we're one percent of the way there, and Mel has [said a version of it publicly](https://leaders.com/articles/leaders-stories/melanie-perkins/): a company is still a startup while its dreams are much bigger than its size. The number never moves. People from the early days say she was using it at a few hundred employees. She was still using it at a quarter of a billion users.
+It also never lets you arrive. Mel has [said a version of the mantra publicly](https://leaders.com/articles/leaders-stories/melanie-perkins/): a company is still a startup while its dreams are much bigger than its size. The number never moves.
 
 We launched Canva AI, and it went well. Within what felt like no time the conversation had stopped being about an assistant and started being about an agent that does the whole job, which is roughly what we announced a year later as Canva AI 2.0. The target had moved before I'd finished being pleased about hitting the last one. That should be exhausting, and mostly it isn't, because the expansion is genuine. If the objective is to empower the world to design, then the world is large and design is most things, and there is no version of the job where you're finished. Mel holds ambition at that size without ever letting it curdle into fantasy, and I haven't seen anyone else manage it.
 
