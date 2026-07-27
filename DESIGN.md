@@ -117,9 +117,12 @@ streamlines`.
    *nothing large* — essays open with their first sentence. *Reason:* the same mark seen
    in the index reappearing on the essay is the system revealing its determinism; a big
    generative header would recreate the hero-image problem (decoration before words, 38
-   large artworks to art-direct). The big rendering lives only on the OG card.
-4. **OG cards** — 1200×630 build-time renders: paper ground, serif title, one trace in
-   `sig`.
+   large artworks to art-direct).
+4. **OG cards** — 1200×630 build-time renders: dark paper, hairline frame, serif title,
+   mono provenance, and the living-logo wordmark (extracted from `Logo.astro` at build).
+   Owner decision 2026-07-27: the glyph trace was tried here and rejected — out of
+   context it reads as an unexplained squiggle. Glyphs stay where they have context
+   (index, pressmark, end-mark); the logo carries identity off-site.
 
 **Determinism is law.** Same seed → same drawing, on every build, in both themes.
 **Quality gate:** every new glyph set renders to a contact sheet and gets human review
