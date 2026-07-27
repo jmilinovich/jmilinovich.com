@@ -10,7 +10,7 @@ interface Props {
   ogImage?: string;
 }
 
-const { title, description = "John Milinovich - entrepreneur and technology executive", ogImage } = Astro.props;
+const { title, description = "John Milinovich - entrepreneur and technology executive", ogImage = '/og/default.png' } = Astro.props;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
 const forwards: TransitionAnimationPair = {
