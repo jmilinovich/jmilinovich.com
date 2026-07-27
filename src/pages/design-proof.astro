@@ -2,6 +2,7 @@
 // DESIGN PROOF — direction "Process". Standalone page, does not touch the live app.
 // One generative system, two materials: phosphor (dark) / plotter ink (light).
 import { getCollection } from 'astro:content';
+import Logo from '../components/Logo.astro';
 import contributions from '../../public/data/contributions.json';
 
 const posts = await getCollection('writing', ({ data }) => !data.draft);
@@ -136,7 +137,7 @@ const record = [
   </head>
   <body>
     <header class="site-header">
-      <a class="wordmark" href="/design-proof">mili</a>
+      <a class="logo" href="/design-proof" aria-label="Home"><Logo /></a>
       <nav aria-label="Main">
         <a href="/writing">writing</a>
         <a href="/design-proof#record">record</a>
@@ -394,12 +395,17 @@ const record = [
 
       .site-header {
         max-width: 575px; margin: 0 auto; padding: 3rem 2rem 2.4rem;
-        display: flex; align-items: baseline; justify-content: space-between;
+        display: flex; align-items: center; justify-content: space-between;
       }
-      .wordmark, nav a, #theme-toggle {
+      nav a, #theme-toggle {
         font-family: 'Berkeley Mono', monospace; font-size: 1.3rem; color: var(--muted);
       }
-      .wordmark { color: var(--ink-strong); }
+      .logo { display: flex; align-items: center; color: var(--ink-strong); }
+      .logo:hover { text-decoration: none; opacity: 0.7; }
+      .logo .logo-container { width: 42px; height: 28px; }
+      @media (max-width: 767px) {
+        .logo .logo-container { width: 36px; height: 24px; }
+      }
       nav { display: flex; gap: 1.8rem; align-items: baseline; }
       nav a:hover { color: var(--ink-strong); text-decoration: none; }
       #theme-toggle { background: none; border: none; cursor: pointer; font-size: 1.4rem; }
