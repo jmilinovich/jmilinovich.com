@@ -46,7 +46,7 @@
       "glyph": "#53d339"
     },
     "rules": [
-      "chrome is achromatic; sig appears only in drawings, ::selection, :focus-visible, record marks",
+      "chrome is achromatic; sig appears only in drawings, ::selection, :focus-visible",
       "links are underline-distinguished, never coloured",
       "muted must hold >= 4.5:1 on paper in both themes"
     ]

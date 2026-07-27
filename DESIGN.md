@@ -16,8 +16,11 @@ superseded by this document.
 - **The signature is spent in exactly one place:** the Process system — flow-field drawings
   seeded by real things (essay slugs, the date, commit history). Everything around it stays
   still and quiet so the one living thing reads as identity, not decoration.
-- **Credibility is timestamps, not claims.** The `/record` page scores the yearly calls
-  honestly — misses included; that is what makes the hits credible.
+- **Credibility is timestamps, not claims — and never a scoreboard.** The dated archive
+  itself is the proof of foresight; the yearly prediction essays sit in the list like
+  everything else. A self-scored "record" section was built, reviewed, and rejected
+  (2026-07-27): it read as ego-forward and demands annual upkeep that will inevitably
+  lapse. Do not reintroduce it.
 - **Willing to be bad at:** being a résumé (no case studies, no logo rows, bio stays five
   bullets) and trend coverage (no bento, no craft-demo playground — that genre belongs to
   design engineers selling interaction craft; this site's proof is dated writing).
@@ -60,8 +63,8 @@ The two themes are two physical materials for the same algorithm: **dark = phosp
 accents) — the Casey Reas print citation. `muted` values replace the old `#999`/`#777`,
 which failed WCAG AA on every date on the site.
 
-**Rule:** chrome stays achromatic. Colour exists only in the drawings, `::selection`,
-`:focus-visible`, and record ✓ marks. Links are underline-distinguished, never coloured.
+**Rule:** chrome stays achromatic. Colour exists only in the drawings, `::selection`, and
+`:focus-visible`. Links are underline-distinguished, never coloured.
 
 ## Space & density
 
@@ -106,8 +109,8 @@ before ship; `seedOverride` frontmatter exists for duds. Algorithmic slop is sti
 ## Component vocabulary
 
 `row` (glyph + serif title + mono date) · `eyebrow` (mono section label) · `instrument`
-(canvas + caption) · `record entry` (year + call + mark) · `facts` (the bio bullets) ·
-`footer strip`. That's the whole kit; new surfaces compose these before inventing.
+(canvas + caption) · `facts` (the bio bullets) · `footer strip`. That's the whole kit;
+new surfaces compose these before inventing.
 
 ## Anti-patterns (the audit checks these)
 
@@ -118,5 +121,7 @@ before ship; `seedOverride` frontmatter exists for duds. Algorithmic slop is sti
 - No infinite animation loops; nothing animates on essay pages.
 - No terminal-typing effects, no Matrix-rain framing — the instrument is bordered,
   captioned, and data-fed precisely so it reads as an instrument, not a screensaver.
+- No self-scoreboards, badges, or "called it" marks — nothing that grades John's own
+  work on his own site, and nothing that requires annual editorial upkeep to stay true.
 - Muted text never falls below WCAG AA (4.5:1).
 - No `#39d353` outside the `/commits` chart — the site's green is `sig`.

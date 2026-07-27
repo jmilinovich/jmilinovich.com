@@ -110,12 +110,6 @@ const starts = [
 ];
 const startPicks = starts.map((s) => sorted.find((p) => p.id === s)).filter(Boolean);
 
-const record = [
-  { yr: "'23", call: 'natural language interfaces', mark: 'hit', slug: '2023-the-year-of-natural-language-interfaces' },
-  { yr: "'24", call: 'multimodal AI', mark: 'hit', slug: '2024-the-year-of-multimodal-ai' },
-  { yr: "'25", call: 'voice AI', mark: 'hit', slug: '2025-the-year-of-voice-ai' },
-  { yr: "'26", call: 'autonomous computing', mark: 'open', slug: '2026-the-year-of-autonomous-computing' },
-];
 ---
 
 <!DOCTYPE html>
@@ -140,7 +134,6 @@ const record = [
       <a class="logo" href="/design-proof" aria-label="Home"><Logo /></a>
       <nav aria-label="Main">
         <a href="/writing">writing</a>
-        <a href="/design-proof#record">record</a>
         <a href="/talks">talks</a>
         <a href="/projects">projects</a>
         <button id="theme-toggle" aria-label="Toggle theme">◐</button>
@@ -162,21 +155,6 @@ const record = [
         <li>UCLA architecture — got hooked on code after seeing <a href="https://www.youtube.com/watch?v=_8DMEHxOLQE">Casey Reas</a> demo Processing.js</li>
         <li>Interested in AI-human collaboration, product craft, and building things</li>
       </ul>
-
-      <section id="record" class="record">
-        <h2 class="eyebrow">The record <span class="eyebrow-note">— one call a year, scored</span></h2>
-        <ul>
-          {record.map((r) => (
-            <li>
-              <a href={`/writing/${r.slug}`}>
-                <span class="record-yr">{r.yr}</span>
-                <span class="record-call">{r.call}</span>
-                <span class={`record-mark ${r.mark}`}>{r.mark === 'hit' ? '✓' : '○'}</span>
-              </a>
-            </li>
-          ))}
-        </ul>
-      </section>
 
       <section class="writing">
         <h2 class="eyebrow">Start here</h2>
@@ -446,21 +424,6 @@ const record = [
         margin-bottom: 1.6rem;
       }
       .eyebrow-note { text-transform: none; letter-spacing: 0.02em; }
-
-      .record { margin-bottom: 4rem; }
-      .record ul { list-style: none; }
-      .record li a {
-        display: flex; align-items: baseline; gap: 1.2rem;
-        font-family: 'Berkeley Mono', monospace; font-size: 1.35rem;
-        padding: 0.45rem 0;
-      }
-      .record li a:hover { text-decoration: none; }
-      .record li a:hover .record-call { color: var(--ink-strong); text-decoration: underline; text-underline-offset: 0.25em; }
-      .record-yr { color: var(--muted); }
-      .record-call { color: var(--ink); }
-      .record-mark { margin-left: auto; }
-      .record-mark.hit { color: var(--sig); }
-      .record-mark.open { color: var(--muted); }
 
       .writing { margin-bottom: 4rem; }
       .row { display: flex; align-items: baseline; gap: 1.2rem; padding: 0.55rem 0; }
