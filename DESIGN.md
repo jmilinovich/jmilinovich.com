@@ -85,7 +85,7 @@ respected, and the toggle's saved choice always wins over both.
 ## Motion
 
 - **Budget: one settle-to-rest moment.** The homepage instrument draws itself once over
-  ~6s on first arrival (the plotter pen tracing the seismogram), then the animation loop
+  ~6s on first arrival (the rootwork growing across the band), then the animation loop
   is cancelled — not slowed, cancelled. Essay pages are still. Existing view transitions
   may remain.
 - **The drawing is precomputed geometry, paced by time** — the same seed produces the
@@ -93,8 +93,8 @@ respected, and the toggle's saved choice always wins over both.
   Time only paces the reveal; it never changes the image.
 - Theme toggles, resizes, and mid-session reduced-motion changes re-render the settled
   frame *synchronously* — the animation plays once per arrival, never again.
-- `prefers-reduced-motion`: the same 840-step settled frame, rendered synchronously.
-  No-JS: a build-time static frame (inline SVG in `<noscript>`), same seed.
+- `prefers-reduced-motion`: the finished growth, rendered synchronously.
+  No-JS: a low-fi static SVG of the organism in `<noscript>`.
 - Lifecycle: pause when the document hides, resume when it returns; tear down on
   `astro:before-swap`. (The `/commits` page currently leaks listeners on every
   navigation — fix, and don't reintroduce.)
