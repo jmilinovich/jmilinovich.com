@@ -88,7 +88,7 @@
       "links carry a visible underline in muted (>= 3:1), darkening to ink-strong on hover; never coloured",
       "muted must hold >= 4.5:1 on paper in both themes",
       "code renders monochrome: ink on code-bg, no syntax colours",
-      "light is the default theme; dark is an explicit toggle choice, never inherited from the OS"
+      "default is light; an explicit OS dark preference is respected; the toggle choice wins over both"
     ]
   },
   "space": {

@@ -73,10 +73,13 @@ const viewTransition = { forwards, backwards };
     <link rel="preload" href="/fonts/BerkeleyMono-Regular.woff2" as="font" type="font/woff2" crossorigin />
     <ClientRouter />
     <script is:inline>
-      // Apply theme before paint to prevent flash. Light is the default;
-      // dark is an explicit choice via the toggle.
+      // Apply theme before paint to prevent flash. The toggle choice wins;
+      // otherwise an explicit OS dark preference is respected; everyone else
+      // gets light.
       (function() {
-        const theme = localStorage.getItem('theme') || 'light';
+        const stored = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const theme = stored || (prefersDark ? 'dark' : 'light');
         document.documentElement.setAttribute('data-theme', theme);
       })();
       // Preserve theme across view transitions (ClientRouter replaces <html> attributes on swap)
@@ -123,6 +126,20 @@ const viewTransition = { forwards, backwards };
     --sig: #53d339;
     --glyph: #53d339;
   }
+  /* no-JS: honor an explicit OS dark preference (JS sets data-theme before paint when present) */
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme]) {
+      --paper: #0a0a0a;
+      --ink: #c8c8c8;
+      --ink-strong: #e8e8e8;
+      --muted: #8a8a8a;
+      --hairline: #222;
+      --code-bg: #1a1a1a;
+      --sig: #53d339;
+      --glyph: #53d339;
+    }
+  }
+
   @font-face {
     font-family: 'Source Serif 4';
     src: url('/fonts/source-serif/ss4-latin-400-normal.woff2') format('woff2');
