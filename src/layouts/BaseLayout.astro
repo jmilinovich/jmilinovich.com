@@ -107,6 +107,7 @@ const viewTransition = { forwards, backwards };
      dark = phosphor on black. Chrome stays achromatic; sig lives only in the
      drawings, ::selection, and :focus-visible. */
   :root {
+    color-scheme: light; /* declare our schemes so Chrome never force-darkens (which hides canvas ink) */
     --paper: #fff;
     --ink: #333;
     --ink-strong: #111;
@@ -117,6 +118,7 @@ const viewTransition = { forwards, backwards };
     --glyph: rgba(26, 26, 26, 0.85);
   }
   [data-theme="dark"] {
+    color-scheme: dark;
     --paper: #0a0a0a;
     --ink: #c8c8c8;
     --ink-strong: #e8e8e8;
@@ -129,6 +131,7 @@ const viewTransition = { forwards, backwards };
   /* no-JS: honor an explicit OS dark preference (JS sets data-theme before paint when present) */
   @media (prefers-color-scheme: dark) {
     :root:not([data-theme]) {
+      color-scheme: dark;
       --paper: #0a0a0a;
       --ink: #c8c8c8;
       --ink-strong: #e8e8e8;
