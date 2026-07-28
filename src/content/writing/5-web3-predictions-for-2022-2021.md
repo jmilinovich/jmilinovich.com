@@ -1,5 +1,5 @@
 ---
-title: "2022: web3 predictions"
+title: "5 web3 predictions for 2022"
 date: "2022-01-02"
 ---
 
@@ -11,13 +11,11 @@ _Looking back grade: 38%_
 
 **3. FAIL: Olympus DAO 500K+ holders**: complete miss here. Olympus is just a cute way for people to take on massively risky, highly leveraged positions. DeFi should be regulated.
 
-**4. SUCCESS: DAO competes with Wikipedia**: Golden.com launched a DAO for its contributors to earn revenue share on their SaaS revenues. I still think DAOs can unlock novel business models, but need to be tied to clear user problems.
+**4. SUCCESS: DAO competes with Wikipedia**: Golden.com launched a token protocol for its contributors. I still think DAOs can unlock novel business models, but need to be tied to clear user problems.
 
 ---
 
-For the least few years I've written out my own tech industry predictions, but I've never been bold enough to publish them externally. After spending the last 9 months going down the web3 rabbit hole, I thought it'd be worthwhile to call out 5 ways I think web3 will influence the software industry in 2022:
-
-<!-- Image unavailable: original URL was https://images.spr.so/cdn-cgi/imagedelivery/j42No7y-dcokJuNgXeA0ig/f4e565cf-b2cb-46e3-b6a6-ec0a066b4ce3/Untitled/w=3840,quality=90,fit=scale-down -->
+For the last few years I've written out my own tech industry predictions, but I've never been bold enough to publish them externally. After spending the last 9 months going down the web3 rabbit hole, I thought it'd be worthwhile to call out 5 ways I think web3 will influence the software industry in 2022:
 
 ## **At least 2 of the top 10 projects on [OpenSea](https://opensea.io) will be powered by on-chain SVGs.**
 
@@ -33,15 +31,15 @@ In 2021 some forward-thinking startups (ie, [CollabLand](https://collab.land), [
 
 ## **2 large ($1b+ valuation) web 2 companies will launch web3 business models.**
 
-Today we separate the world into "web2" and "web3", but in reality things aren't that simple. Whereas all early web3 startups are new companies that build native to this new technology, we'll going to seem many hybrid "web2.5" companies in 2022.
+Today we separate the world into "web2" and "web3", but in reality things aren't that simple. Whereas all early web3 startups are new companies that build native to this new technology, we're going to see many hybrid "web2.5" companies in 2022.
 
-In particular, I think 1 creator platform (ie, [Substack](https://substack.com/), [Patreon](https://patreon.com/)) and 1 real estate company (ie [Opendoor](https://opendoor.com/), [Compass](https://compass.com/)) will launch crypto native functionality where they either bring a large part of their existing business on-chain or create a new on-chain business line.
+In particular, I think 1 creator platform (ie, [Substack](https://substack.com/), [Patreon](https://patreon.com/)) and 1 real estate company (ie, [Opendoor](https://opendoor.com/), [Compass](https://compass.com/)) will launch crypto native functionality where they either bring a large part of their existing business on-chain or create a new on-chain business line.
 
 ## **Olympus DAO will reach 500,000 holders, signaling that DeFi 2.0 has entered its next phase of adoption.**
 
-[Olympus DAO](https://www.olympusdao.finance/) is a partially collateralized, floating price currency that aims to be the de facto reserve currency for all crypto projects in the future. When it was released in April '21 it introduced many new DeFi primitives to the world and is credited with creating, "DeFi 2.0".
+[Olympus DAO](https://www.olympusdao.finance/) is a partially collateralized, floating price currency that aims to be the de facto reserve currency for all crypto projects in the future. When it was released in March '21 it introduced many new DeFi primitives to the world and is credited with creating, "DeFi 2.0".
 
-There are currently ~100,000 "OHMies" who are currently holding and staking OHM—referred to as (3,3)—and I believe that the number of OHMies will quintuple in 2022.
+There are currently ~100,000 "OHMies" holding and staking OHM—referred to as (3,3)—and I believe that the number of OHMies will quintuple in 2022.
 
 ## **A web3 competitor to Wikipedia will emerge.**
 
