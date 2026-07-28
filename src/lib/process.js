@@ -133,8 +133,13 @@ export function growthFoldSvg(slug, features, year) {
   const seed = xmur3(slug);
   const rand = mulberry32(seed());
   const noise = makeNoise(seed());
-  const { words, paragraphs: paras } = features;
-  const pc = Math.max(1, paras.length);
+  // a post with no parseable prose (images-only, frontmatter-only draft) still
+  // builds: grow from one small synthetic paragraph rather than crashing
+  const paras = features.paragraphs.length
+    ? features.paragraphs
+    : [{ words: 24, sentences: [{ w: 24, end: '.', dash: 0 }] }];
+  const words = Math.max(features.words, 24);
+  const pc = paras.length;
 
   const totalW = paras.reduce((a, p) => a + p.words, 0) || 1;
   let cum = 0;
