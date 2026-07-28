@@ -12,9 +12,6 @@ const seedDate = new Date().toISOString().slice(0, 10); // build-time fallback; 
 const days = (contributions as { date: string; count: number }[])
   .slice()
   .sort((a, b) => a.date.localeCompare(b.date));
-const totalCommits = days.reduce((s, d) => s + d.count, 0);
-const lastDataDate = days[days.length - 1]?.date ?? '1970-01-01';
-const fresh = Math.floor((Date.parse(seedDate) - Date.parse(lastDataDate)) / 86400000) <= 30;
 // daily counts, capped at 35, one base36 char per day — the growth's raw material
 const countsArr = days.map((d) => Math.min(35, d.count));
 const countsB36 = countsArr.map((c) => c.toString(36)).join('');
@@ -40,7 +37,7 @@ const startPicks = starts.map((s) => sortedPosts.find((p) => p.id === s)).filter
       data-counts={countsB36}
     ></canvas>
     <noscript set:html={noscriptFrame} />
-    <figcaption>seed <span id="seed-label">{seedDate}</span>{fresh && ` · ${totalCommits.toLocaleString()} commits`}</figcaption>
+    <figcaption>seed <span id="seed-label">{seedDate}</span></figcaption>
   </figure>
 
   <ul class="facts">

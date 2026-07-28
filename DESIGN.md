@@ -114,13 +114,15 @@ streamlines`.
    wallpaper, the seismogram read as a heart monitor). Branching growth creeps left to
    right across the years over ~5.6s, staggered starts, ramifying where the commit
    history is dense (the axis itself stays unlabeled — owner call 2026-07-28: an organism
-   doesn't need chart furniture; the caption carries the provenance); the only colour is the
+   doesn't need chart furniture, and the caption shows only the seed — the commit count
+   came out too, 2026-07-28); the only colour is the
    `sig` dot at the furthest tip. **A new random seed every load** (owner decision: the
    drawing should feel different each visit); the caption shows the seed and `?seed=<hex>`
    replays any drawing — determinism preserved per seed, surprise preserved per visit.
    Growth is iteration-based, so the finished organism is identical at any refresh rate;
    daily counts inline at build (~1.7KB base36); no-JS gets a low-fi static SVG of the
-   same organism.
+   same organism. The caption makes no data claim, so the old 30-day freshness guard is
+   retired; the data feeds the form silently.
 2. **Per-essay glyph** — seeded by the slug, generated at build, inline SVG (~20×20 at the
    index). Deterministic forever: same slug, same mark.
 3. **Essay pressmark + end-mark** — the slug's glyph appears exactly twice on its essay
