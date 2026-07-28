@@ -1,6 +1,7 @@
 ---
 title: "Glass minds"
 date: "2025-01-31"
+draft: true
 
 ---
 
