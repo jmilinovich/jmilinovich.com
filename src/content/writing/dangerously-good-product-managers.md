@@ -7,11 +7,9 @@ date: "2023-03-01"
 
 Product managers play a crucial role in consumer product companies as they serve as the central point of contact between the company's users, product development teams, cross-functional teams, and leadership team. While a product manager's success is dependent on the impact and quality of their team's work, it's easy to fall into the trap of being a bad PM who contributes little to the team beyond attending meetings and writing a few documents.
 
-<!-- Image unavailable: original URL was https://images.spr.so/cdn-cgi/imagedelivery/j42No7y-dcokJuNgXeA0ig/7b3613b1-bda9-4f39-a1ea-f386aaa6be4c/Untitled/w=3840,quality=90,fit=scale-down -->
-
 However, an exceptional product manager can be a significant force multiplier for the entire organization. During our work at Clubhouse, Harsan coined the term "dangerous product managers" to describe these exceptional individuals.
 
-To become dangerous, product managers must hone their product sense, communication skills, planning/project management processes, and relationship management with their teams, cross-functional partners, and their own well-being.
+To become dangerous, product managers must hone their product sense, communication skills, planning and project management processes, relationships with their teams and cross-functional partners, people management, and their own psychology.
 
 Based on my experience, the most effective product managers exhibit the following traits:
 
@@ -26,7 +24,7 @@ Based on my experience, the most effective product managers exhibit the followin
 
 - **Know that less is more**: Dangerous product managers don't talk to hear their own voice; they speak to guide and focus discussions. They generally speak for less than a third of the time in group meetings.
 - **Write structured and impactful documents**: They know that docs are often the primary tool used to understand, debate and make decisions. They use short sentences, and incorporate bullet points and tables where necessary. Their documents are typically less than two pages.
-- **Maintain flexible schedules**: They design their calendars with the same care as world class architects, maximizing for negative space and flow rather than positive, or fixed, space. Practically, this means they're calendar is booked with maker time instead of meetings.
+- **Maintain flexible schedules**: They design their calendars with the same care as world class architects, maximizing for negative space and flow rather than positive, or fixed, space. Practically, this means their calendar is booked with maker time instead of meetings.
 - **Avoid status meetings**: They share information asynchronously and utilize meeting time for productive discussions, resolving issues, and brainstorming. They encourage others to participate and express their opinions.
 
 ## ON PLANNING
@@ -53,7 +51,7 @@ Based on my experience, the most effective product managers exhibit the followin
 ## ON PEOPLE MANAGEMENT
 
 - **Create psychological safety**: Dangerous product managers make their team feel valued and heard, demonstrating their genuine care every day. They don't just give lip service to this, but actually follow through.
-- **Follow Radical Candor**: They provide direct and actionable feedback to help improve their team's performance, and are not afraid to be candid because they are concerned about how it will be received.
+- **Follow Radical Candor**: They provide direct and actionable feedback to help improve their team's performance, and are candid because they care, even when the feedback is uncomfortable to deliver.
 - **Give feedback continuously**: They don't wait for specific meeting times or reviews to provide feedback. Instead, they offer feedback consistently and in the moment while it's still fresh, often in one-on-one settings.
 - **Uplevel others with growth mindsets**: They scale themselves by making others dangerous by constantly giving opportunities to people that are hungry for them.
 
