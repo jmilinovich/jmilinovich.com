@@ -1,7 +1,6 @@
 ---
 title: "Quantified Me"
 date: "2012-06-01"
-draft: true
 ---
 
 *tl;dr: Open access to human-centric datasets from the Quantified Self movement will change how we live.*
@@ -12,9 +11,9 @@ In most of the current 'Quantified Self' products, the most compelling use cases
 
 **My Measurement Framework**
 
-My "Quantified Me" exists through 5 main interfaces: [Fitocracy](https://www.fitocracy.com), The Eatery, [RunKeeper](https://runkeeper.com), [Withings](https://www.withings.com) and [Fitbit](https://www.fitbit.com). Each attempts to measure a specific part of my activity, either implicitly through sensors or explicitly through an interface. The goal of measurement in each context is to help you move towards certain milestones or achievements. This could be getting to your ideal weight or setting new weightlifting max's.
+My "Quantified Me" exists through 5 main interfaces: [Fitocracy](https://www.fitocracy.com), The Eatery, [RunKeeper](https://runkeeper.com), [Withings](https://www.withings.com) and [Fitbit](https://www.fitbit.com). Each attempts to measure a specific part of my activity, either implicitly through sensors or explicitly through an interface. The goal of measurement in each context is to help you move towards certain milestones or achievements. This could be getting to your ideal weight or setting new weightlifting maxes.
 
-Some of the applications (RunKeeper, Withings, Fitbit) have API's that allow me to connect one product to another. Fitbit integrates with Withings to more accurately measure calories burned, while Fitocracy lets me get Points for Runkeeper runs. There is a certian data economy that is starting to emerge but hasn't quite hit ubiquity (more on this later).
+Some of the applications (RunKeeper, Withings, Fitbit) have API's that allow me to connect one product to another. Fitbit integrates with Withings to more accurately measure calories burned, while Fitocracy lets me get Points for Runkeeper runs. There is a certain data economy that is starting to emerge but hasn't quite hit ubiquity (more on this later).
 
 **User-Input Data // Fitocracy + Eatery** -- *All about experience and interaction design.*
 
@@ -30,7 +29,7 @@ I wear my **Fitbit** on my belt loop and it keeps track of how many steps I take
 
 **Lagging Indicators // Withings** -- *Connected scale that measures bodyweight and lean mass over time.*
 
-The **Withings** Scale is WiFi connected and uploads my weight, body mass and lean mass measurements everytime I use it. Over time, I can see how things are tracking and if concerted efforts to eat healthy actually do anything. This data is great to have but doesn't quite inform action moreso than it justifies things you've already done. If it were combined with The Eatery, though, it could be awesome.
+The **Withings** Scale is WiFi connected and uploads my weight, body mass and lean mass measurements every time I use it. Over time, I can see how things are tracking and if concerted efforts to eat healthy actually do anything. This data is great to have but doesn't quite inform action moreso than it justifies things you've already done. If it were combined with The Eatery, though, it could be awesome.
 
 **Open My Data and Let's Dig Around**
 

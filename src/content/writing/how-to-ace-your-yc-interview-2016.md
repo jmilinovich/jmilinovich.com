@@ -12,7 +12,7 @@ For those among you who are preparing for your interviews over the next few days
 
 Each interview lasts about 10 minutes and the interviewers' goal is to get as much signal about the team as possible. Because of this, the interviews are structured as a series of rapid fire questions that will cover a lot of ground. Having well prepared, concise answers that you can recall quickly is probably the single strongest indicator of success for your interview. We prepared for this by coming up with a list of ~50 expected questions, each with their own with 2–3 bullet point response. Then, we spent hours grilling each other and loaded them into a flashcard webapp for self testing. This took some time, but was well worth it.
 
-## Know your 5 points, and make sure you speak to them
+## Know your key points, and make sure you speak to them
 
 In any interview, it's crucial that your personal narrative shines through. Unfortunately, the rapid fire nature of YC interviews makes this difficult. In your prep, it's crucial that you identify the 3-5 most important points about your business/team that you need the YC interviewers to hear. These can be things about your backgrounds, user growth, revenue, or the like, and together should tell the best version of your story. For our team, these were:
 1. We've known each other for a long time, and have lots of experience in the space.

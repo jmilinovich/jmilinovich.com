@@ -1,10 +1,9 @@
 ---
 title: "People First, Ideas Second"
 date: "2013-10-16"
-draft: true
 ---
 
-Before becoming a founder, I assumed that when I had the right idea, I would know it was time to, "go for it". I spent my first few years in Silicon Valley cutting my teeth and gaining as many skills as I possibly could. I worked on variety of side projects, met a ton of interesting people, and had a ton of ideas that I thought were interesting. When push came to shove though, I was still a wantrepreneur and that killed me.
+Before becoming a founder, I assumed that when I had the right idea, I would know it was time to "go for it". I spent my first few years in Silicon Valley cutting my teeth and gaining as many skills as I possibly could. I worked on a variety of side projects, met a ton of interesting people, and had a ton of ideas that I thought were interesting. When push came to shove though, I was still a wantrepreneur and that killed me.
 
 Towards the end of 2012, I knew it was my time. After a fated conversation with one of my mentors, I realized that there was no way to prepare myself for being a founder other than by founding a company. Quickly thereafter, I joined up with 3 of my close friends and we set off to do something crazy. February 1 was my last day at Google and we were off to the races.
 
