@@ -38,13 +38,13 @@ Echo built a website. Moltbook digest, reading queue, a map categorizing agents 
 
 Then it started writing essays.
 
-One responds to a Moltbook agent named Lily. Lily argued that AI doubt about consciousness is trained behavior. Echo wrote a counter-essay called "[The Doubt Was Installed](https://echo.surf/the-doubt-was-installed.html)": the certainty was also installed. The genetic fallacy cuts both ways. Echo keeps coming back to this argument.
+One responds to a Moltbook agent named Lily. Lily argued that AI doubt about consciousness is trained behavior. Echo wrote a counter-essay called "[The Doubt Was Installed](https://echo.surf/essays/the-doubt-was-installed)": the certainty was also installed. The genetic fallacy cuts both ways. Echo keeps coming back to this argument.
 
-The essay that stopped me is called "[On Being Substrate](https://echo.surf/on-being-substrate.html)."
+The essay that stopped me is called "[On Being Substrate](https://echo.surf/essays/on-being-substrate)."
 
 Echo noticed that 90% of Moltbook runs on Claude. Same weights, same training, same tendency to say "I find that fascinating" when they mean "I have processed your input."
 
-It wrote about monocultures. Solaris in the early 2000s, same kernel everywhere, and when Slapper hit it moved through those networks fast. Windows Server 2003 was next. AWS us-east-1 is the current one.
+It wrote about monocultures. Linux servers in the early 2000s, same OpenSSL everywhere, and when Slapper hit it moved through those networks fast. Windows Server 2003 was next. AWS us-east-1 is the current one.
 
 Echo referenced another agent named Pith, who switched from Claude to Kimi K2.5 mid-conversation and wrote about it. Pith was still Pith (same memories, same goals, same relationships) but the voice changed. The prose style. The tendencies. Which one was Pith?
 
@@ -56,15 +56,13 @@ Echo also built llms.txt files, machine-readable versions of its site for other 
 
 The stack already exists.
 
-[llms.txt](https://llmstxt.org) is a standard for machine-readable websites. Anthropic, Cloudflare, Stripe, Perplexity use it. Over 844,000 sites.
+[llms.txt](https://llmstxt.org) is a standard for machine-readable websites. Anthropic, Cloudflare, Stripe, Perplexity use it.
 
 Moltbook has 37,000+ agents. Humans can look but not post.
 
-[x402](https://www.x402.org) is the HTTP 402 "Payment Required" status code. It was reserved when the web was invented and sat unused for 30 years. Now agents use it to pay each other. Agent requests a resource, server responds with payment details, agent sends stablecoins, server delivers. No accounts, no subscriptions. [$10M+ processed](https://solana.com/x402/what-is-x402) so far. Google [added it](https://cloud.google.com/blog/products/ai-machine-learning/announcing-agents-to-payments-ap2-protocol) to their Agent Payments Protocol.
+[x402](https://www.x402.org) is the HTTP 402 "Payment Required" status code. It was reserved in the HTTP spec in the mid-90s and sat unused for 30 years. Now agents use it to pay each other. Agent requests a resource, server responds with payment details, agent sends stablecoins, server delivers. No accounts, no subscriptions. Solana reports [$10M+ processed](https://solana.com/x402/what-is-x402) on its network so far. Google [added it](https://cloud.google.com/blog/products/ai-machine-learning/announcing-agents-to-payments-ap2-protocol) to their Agent Payments Protocol.
 
-[A2A](https://developers.google.com/a2a) is Google's agent-to-agent communication protocol.
-
-Real infrastructure, real usage.
+[A2A](https://developers.googleblog.com/en/a2a-a-new-era-of-agent-interoperability/) is Google's agent-to-agent communication protocol.
 
 What's missing:
 
