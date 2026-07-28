@@ -74,6 +74,11 @@ respected, and the toggle's saved choice always wins over both.
 **Rule:** chrome stays achromatic. Colour exists only in the drawings, `::selection`, and
 `:focus-visible`. Links are underline-distinguished, never coloured.
 
+**`color-scheme` is declared** (light on `:root`, dark under `[data-theme="dark"]` and
+the no-JS dark media block). Without it Chrome's auto-dark force-darkens the light
+theme — inverting the CSS but not canvas bitmaps, which leaves plotter ink invisible
+on a forced-dark ground. Do not remove.
+
 ## Space & density
 
 - Container `575px`, `2rem` side padding — kept from the current site (~68ch at 1.7rem
@@ -84,17 +89,20 @@ respected, and the toggle's saved choice always wins over both.
 
 ## Motion
 
-- **Budget: one settle-to-rest moment.** The homepage instrument draws itself once over
-  ~6s on first arrival (the rootwork growing across the band), then the animation loop
-  is cancelled — not slowed, cancelled. Essay pages are still. Existing view transitions
+- **Budget: settle-to-rest, with scroll as the only other energy source.** On arrival
+  the substrate grows the first viewport once (~7s), then the loop is cancelled — not
+  slowed, cancelled. Below the fold, growth advances only while the reader scrolls
+  (the reveal target leads the eye by most of a viewport), and every region settles.
+  Idle CPU is zero once caught up. Essay pages are still. Existing view transitions
   may remain.
-- **The drawing is precomputed geometry, paced by time** — the same seed produces the
-  identical finished drawing on a 60Hz laptop, a 120Hz phone, and under reduced-motion.
-  Time only paces the reveal; it never changes the image.
-- Theme toggles, resizes, and mid-session reduced-motion changes re-render the settled
-  frame *synchronously* — the animation plays once per arrival, never again.
-- `prefers-reduced-motion`: the finished growth, rendered synchronously.
-  No-JS: a low-fi static SVG of the organism in `<noscript>`.
+- **The drawing is precomputed geometry, paced by time and scroll** — the same seed
+  produces the identical finished organism on a 60Hz laptop, a 120Hz phone, and under
+  reduced-motion. Pacing only reveals the image; it never changes it.
+- Theme toggles, resizes, and mid-session reduced-motion changes re-render the drawn
+  state *synchronously* — the arrival animation plays once per load, never again.
+- `prefers-reduced-motion`: the fully grown organism, rendered synchronously.
+  No-JS: pure typography — the substrate is the living layer and gets no taxidermied
+  stand-in (v4 decision; the drawing depends on measured layout no build step can know).
 - Lifecycle: pause when the document hides, resume when it returns; tear down on
   `astro:before-swap`. (The `/commits` page currently leaks listeners on every
   navigation — fix, and don't reintroduce.)
@@ -110,19 +118,26 @@ respected, and the toggle's saved choice always wins over both.
 One algorithm, many render targets. `hash(seed) → PRNG → value-noise flow field →
 streamlines`.
 
-1. **Homepage instrument** — rootwork (v3, 2026-07-28; the flow field was judged
-   wallpaper, the seismogram read as a heart monitor). Branching growth creeps left to
-   right across the years over ~5.6s, staggered starts, ramifying where the commit
-   history is dense (the axis itself stays unlabeled — owner call 2026-07-28: an organism
-   doesn't need chart furniture, and the caption shows only the seed — the commit count
-   came out too, 2026-07-28); the only colour is the
-   `sig` dot at the furthest tip. **A new random seed every load** (owner decision: the
-   drawing should feel different each visit); the caption shows the seed and `?seed=<hex>`
-   replays any drawing — determinism preserved per seed, surprise preserved per visit.
-   Growth is iteration-based, so the finished organism is identical at any refresh rate;
-   daily counts inline at build (~1.7KB base36); no-JS gets a low-fi static SVG of the
-   same organism. The caption makes no data claim, so the old 30-day freshness guard is
-   retired; the data feeds the form silently.
+1. **Homepage substrate** — the whole page as petri dish (v4, 2026-07-28, via
+   /grill-me; v3's bounded left→right band was judged a legacy of the commit axis and
+   repealed — the terrarium died, the organism got the page). A curtain of roots
+   descends from the top edge of the document behind the content; **text is stone** —
+   growth measures the DOM rects of every text block and flows around them, hugging
+   margins and gutters, threading section gaps, never crossing a word. Taproot
+   hierarchy: a few thick primaries ramify into hairline rootlets. Fed by commit
+   density with **no time axis** — daily counts (inline at build, ~1.7KB base36) are
+   scattered through the soil as a seed-placed nutrient field; roots ramify and
+   thicken where the mass landed. The data feeds the form silently (owner call
+   2026-07-28: the caption makes no data claim). Arrival grows the first viewport
+   once; the reader's scroll grows the rest (owner call: curtain origins across the
+   whole top edge, not a single seed point — immersion over origin-story). Thin soil
+   on mobile: the gutters are the lanes. The only colour is the `sig` dot at the
+   deepest tip, leading the scroll. **A new random seed every load** (owner decision:
+   the drawing should feel different each visit); the provenance line at the bottom
+   of the soil shows the full 8-hex seed — nothing else — and `?seed=<hex>` replays
+   any organism: determinism preserved per seed, surprise preserved per visit.
+   Growth is iteration-based, so the finished organism is identical at any refresh
+   rate.
 2. **Per-essay glyph** — seeded by the slug, generated at build, inline SVG (~20×20 at the
    index). Deterministic forever: same slug, same mark.
 3. **Essay pressmark + end-mark** — the slug's glyph appears exactly twice on its essay
@@ -145,9 +160,9 @@ before ship; `seedOverride` frontmatter exists for duds. Algorithmic slop is sti
 ## Component vocabulary
 
 `logo` (the living mili wordmark, `Logo.astro`) · `row` (glyph + serif title + mono date)
-· `eyebrow` (mono section label) · `instrument` (canvas + caption) · `facts` (the bio
-bullets) · `footer strip`. That's the whole kit; new surfaces compose these before
-inventing.
+· `eyebrow` (mono section label) · `substrate` (the page-wide root layer + its mono
+provenance line) · `facts` (the bio bullets) · `footer strip`. That's the whole kit;
+new surfaces compose these before inventing.
 
 ## Anti-patterns (the audit checks these)
 
@@ -159,8 +174,11 @@ inventing.
   else animates on essay pages.
 - Links are identified by a visible underline in `muted` (≥3:1), darkening on hover —
   never by colour, and never by a hairline too faint to see.
-- No terminal-typing effects, no Matrix-rain framing — the instrument is bordered,
-  captioned, and data-fed precisely so it reads as an instrument, not a screensaver.
+- No terminal-typing effects, no Matrix-rain framing — the substrate is data-fed,
+  seed-labelled (the provenance line at the bottom of the soil), and settles to rest
+  precisely so it reads as a specimen, not a screensaver. The old defense was the
+  border and caption; the new one is provenance plus stillness. If it ever loops
+  idly or loses its seed line, it has become wallpaper — revert.
 - No self-scoreboards, badges, or "called it" marks — nothing that grades John's own
   work on his own site, and nothing that requires annual editorial upkeep to stay true.
 - Muted text never falls below WCAG AA (4.5:1).
