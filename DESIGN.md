@@ -110,16 +110,16 @@ respected, and the toggle's saved choice always wins over both.
 One algorithm, many render targets. `hash(seed) → PRNG → value-noise flow field →
 streamlines`.
 
-1. **Homepage instrument** — a seismogram of the commit history (rebuilt 2026-07-28,
-   after the flow-field draft was judged wallpaper; craft discipline borrowed from
-   Signal Geometry: one legible spatial event, 70–95% quiet field, colour as a single
-   semantic accent). One continuous trace, 2022 → today, time left to right with faint
-   year ticks: calm weeks run flat, heavy weeks oscillate dense and tall. Drawn once per
-   arrival like a plotter pen (~6s), then still. The trace is `ink`; the only colour on
-   the canvas is the terminal dot — today — in `sig` (dark adds a soft bloom). The daily
-   seed jitters the hand, so the drawing is visibly different each day. Daily counts are
-   inlined at build (~1.7KB base36), never fetched at runtime; the caption drops its
-   commit claim when the data is >30 days stale.
+1. **Homepage instrument** — rootwork (v3, 2026-07-28; the flow field was judged
+   wallpaper, the seismogram read as a heart monitor). Branching growth creeps left to
+   right across the years over ~5.6s, staggered starts, ramifying where the commit
+   history is dense; faint year ticks keep the time axis legible; the only colour is the
+   `sig` dot at the furthest tip. **A new random seed every load** (owner decision: the
+   drawing should feel different each visit); the caption shows the seed and `?seed=<hex>`
+   replays any drawing — determinism preserved per seed, surprise preserved per visit.
+   Growth is iteration-based, so the finished organism is identical at any refresh rate;
+   daily counts inline at build (~1.7KB base36); no-JS gets a low-fi static SVG of the
+   same organism.
 2. **Per-essay glyph** — seeded by the slug, generated at build, inline SVG (~20×20 at the
    index). Deterministic forever: same slug, same mark.
 3. **Essay pressmark + end-mark** — the slug's glyph appears exactly twice on its essay
