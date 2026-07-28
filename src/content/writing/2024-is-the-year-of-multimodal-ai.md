@@ -1,20 +1,40 @@
 ---
-title: "2024: the year of multimodal AI"
+title: "2024 is the year of multimodal AI"
 date: "2023-12-19"
 ---
 
-_Retroactive Grade (February 2025): Correct._
+_**Retroactive Grade (February 2025)**: Correct._
 
-I called 2023 the year of natural language interfaces. I was wrong -- it was bigger. ChatGPT spawned thousands of copycats and specialized tools. The tech world transformed in 13 months.
+## 2023: a year of triumph for natural language interfaces
 
-Today, I saw something bigger coming: AI that works with images, video, and sound as naturally as it does with text.
+Last year, I [predicted](/writing/2023-is-the-year-of-natural-language-interfaces-2022) that 2023 would be the year of natural language interfaces, and in retrospect it looks like a crazy conservative guess. The tech world has been abuzz with Copilots, "ChatGPT for X", and the announcement of ChatGPT's GPT Store. It's been a rollercoaster since ChatGPT came onto the scene about 13 months ago.
 
-<!-- Image unavailable: original URL was https://images.spr.so/cdn-cgi/imagedelivery/j42No7y-dcokJuNgXeA0ig/62bb2a82-4e17-429c-9968-f37295f82eb2/Screenshot_2023-12-20_at_4.46.10_AM/w=3840,quality=90,fit=scale-down -->
+## The dawn of multimodal AI in 2024
 
-I tested the early versions: showed an AI my fridge and a recipe (it told me what to buy), gave it rough wireframes (it drew a data model), photographed a French menu with my allergies (it found safe dishes).
+Imagine designing a building, composing a symphony, or planning a health regimen, all from a few photos or spoken words. That's the imminent reality of multimodal AI. **My prediction for 2024 is that multimodal generative AI will go mainstream.** In a nutshell, multimodal AI means moving beyond text in generative AI to inputs and outputs in other formats: images, video, and audio.
 
-I predict that by mid-2024, every developer would have access to these capabilities. They'd build tools that look at photos for renovation ideas, watch construction sites for safety violations, turn sketches into architectural plans, analyze image libraries for patterns.
+## Recent multimodal explorations
 
-Remember how ChatGPT changed writing and coding? This shift will be broader. Architects, designers, doctors, and builders will all have AI assistants that can see and hear the world as they do.
+In recent months, ChatGPT, Bard, and Bing have all added multimodal features to their chatbots, and I've been playing with them _a lot_ since then. Some of my favorite use cases so far:
 
-We're moving from reading and writing with AI to showing and seeing. The keyboard was just the beginning.
+- **App development**: While helping a friend with their app, I input UX wireframes and a brief description, and out came a UML diagram for the required data model.
+- **Creative assistance**: Working on a holiday card, I fed the AI a color palette and design brief, and it suggested compatible colors and palette alterations.
+- **Real-world perception**: Unsure of what to buy for a new recipe, I uploaded a recipe screenshot and a fridge photo, and the AI listed the ingredients I needed.
+- **Visual understanding**: At a French restaurant, I snapped a photo of the menu along with my dietary preferences, and the AI recommended the perfect dishes.
+
+## The unleashing of multimodal foundation models
+
+The real shift will be the widespread availability of multimodal foundation models via APIs in early 2024, with fine-tuning to follow by mid-year. As a product builder and software developer, I anticipate 4 widespread use cases for these APIs:
+
+- **Image classification**: Input an image corpus with labels, get text classifications for each image.
+- **Design advice**: Submit a photo of a bedroom and remodeling instructions, receive interior design suggestions.
+- **Creative augmentation**: Feed a low-fidelity CAD file with a brief to envision a building, and get multiple floor plan variations.
+- **Real-world intelligence**: Input a work site photo with a request to identify safety hazards, and receive a list of potential risks.
+
+## Beyond the text box: a renaissance in human-computer interaction
+
+Interactions with software are getting more conversational and more domain-specific. We're moving from plain "natural language" to conversations that look a lot more like how professionals actually interact with each other.
+
+## A Cambrian explosion of creativity
+
+Text-to-text generative AI amplified creativity across numerous fields. I expect multimodal generative AI to spark a Cambrian explosion of creative applications across an even broader set of industries and disciplines.
