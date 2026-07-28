@@ -32,6 +32,8 @@ const countsB36 = days.map((d) => Math.min(35, d.count).toString(36)).join('');
     </main>
 
     <script>
+      // Animated lab: each machine draws itself on load. Shared rAF ticker;
+      // every "draw again" is a fresh random seed.
       const counts = [...(document.body.dataset.counts || '')].map((ch) => parseInt(ch, 36));
       const n = counts.length;
       const raw = counts.map((c) => Math.log1p(c));
@@ -48,6 +50,7 @@ const countsB36 = days.map((d) => Math.min(35, d.count).toString(36)).join('');
         return Math.min(1.25, s / wt / p95);
       });
       const envAt = (t: number) => envArr[Math.max(0, Math.min(n - 1, Math.floor(t * n)))];
+      const ease = (t: number) => (t < 0 ? 0 : t > 1 ? 1 : t * t * (3 - 2 * t));
 
       function mulberry32(a: number) {
         return () => {
@@ -83,61 +86,76 @@ const countsB36 = days.map((d) => Math.min(35, d.count).toString(36)).join('');
         ctx.clearRect(0, 0, w, h);
         const st = getComputedStyle(document.documentElement);
         return {
-          cv, ctx, w, h,
+          ctx, w, h,
           ink: st.getPropertyValue('--ink').trim(),
           sig: st.getPropertyValue('--sig').trim(),
           dark: document.documentElement.getAttribute('data-theme') === 'dark',
         };
       }
 
-      // A · WEATHER — sparse streamlines; turbulence and ink cluster where env is high
+      // A · WEATHER — streamlines precomputed, then drawn in with staggered eased reveals;
+      // the signal thread arrives last.
       function weather(seedInt: number) {
         const { ctx, w, h, ink, sig } = setup('a');
         const rand = mulberry32(seedInt);
         const noise = makeNoise(seedInt);
-        ctx.lineWidth = 1;
-        const LINES = 46;
-        for (let s = 0; s < LINES; s++) {
+        const lines: { pts: [number, number][]; alpha: number; delay: number; dur: number; drawn: number; sig?: boolean }[] = [];
+        for (let s = 0; s < 46; s++) {
           let x = rand() * w * 0.25 - 6;
           let y = h * 0.08 + rand() * h * 0.84;
           const personal = rand() * 6;
-          ctx.strokeStyle = ink;
-          ctx.globalAlpha = 0.34 + rand() * 0.22;
-          ctx.beginPath();
-          ctx.moveTo(x, y);
-          for (let i = 0; i < 340; i++) {
+          const pts: [number, number][] = [[x, y]];
+          for (let i = 0; i < 300; i++) {
             const e = envAt(x / w);
             const a = (noise(x * 0.008, y * 0.014 + personal) - 0.5) * Math.PI * (0.5 + e * 1.6);
             x += Math.cos(a) * 1.7 + 0.9;
             y += Math.sin(a) * 1.7 * (0.5 + e * 0.7);
             if (x > w + 4 || y < -4 || y > h + 4) break;
-            ctx.lineTo(x, y);
+            pts.push([x, y]);
           }
-          ctx.stroke();
+          lines.push({ pts, alpha: 0.34 + rand() * 0.22, delay: rand() * 2200, dur: 1700 + rand() * 1400, drawn: 0 });
         }
-        // one signal streamline through the storm's heart
         let mi = 0; envArr.forEach((e, i) => { if (e > envArr[mi]) mi = i; });
-        let x = (mi / n) * w - 60, y = h * 0.5;
-        ctx.strokeStyle = sig; ctx.globalAlpha = 0.9; ctx.lineWidth = 1.4;
-        ctx.beginPath(); ctx.moveTo(x, y);
+        let sx = (mi / n) * w - 60, sy = h * 0.5;
+        const spts: [number, number][] = [[sx, sy]];
         for (let i = 0; i < 130; i++) {
-          const e = envAt(x / w);
-          const a = (noise(x * 0.008, y * 0.014 + 3.3) - 0.5) * Math.PI * (0.5 + e * 1.6);
-          x += Math.cos(a) * 1.7 + 0.9; y += Math.sin(a) * 1.7 * (0.5 + e * 0.7);
-          ctx.lineTo(x, y);
+          const e = envAt(sx / w);
+          const a = (noise(sx * 0.008, sy * 0.014 + 3.3) - 0.5) * Math.PI * (0.5 + e * 1.6);
+          sx += Math.cos(a) * 1.7 + 0.9; sy += Math.sin(a) * 1.7 * (0.5 + e * 0.7);
+          spts.push([sx, sy]);
         }
-        ctx.stroke(); ctx.globalAlpha = 1; ctx.lineWidth = 1;
+        lines.push({ pts: spts, alpha: 0.9, delay: 3600, dur: 1500, drawn: 0, sig: true });
+        const t0 = performance.now();
+        return () => {
+          const now = performance.now() - t0;
+          let alive = false;
+          for (const L of lines) {
+            const target = Math.floor(ease((now - L.delay) / L.dur) * (L.pts.length - 1));
+            if (target > L.drawn) {
+              ctx.strokeStyle = L.sig ? sig : ink;
+              ctx.globalAlpha = L.alpha;
+              ctx.lineWidth = L.sig ? 1.4 : 1;
+              ctx.beginPath();
+              ctx.moveTo(L.pts[L.drawn][0], L.pts[L.drawn][1]);
+              for (let i = L.drawn + 1; i <= target; i++) ctx.lineTo(L.pts[i][0], L.pts[i][1]);
+              ctx.stroke();
+              L.drawn = target;
+            }
+            if (L.drawn < L.pts.length - 1) alive = true;
+          }
+          ctx.globalAlpha = 1;
+          return alive;
+        };
       }
 
-      // B · ORGANISM — physarum-style trails; agents seeded by the data's weight
+      // B · ORGANISM — the sim runs live; you watch the colony organize into veins.
       function organism(seedInt: number) {
-        const { ctx, w, h, ink, sig, dark } = setup('b');
+        const { ctx, w, h, sig, dark } = setup('b');
         const rand = mulberry32(seedInt);
         const N = 4200, STEPS = 260;
         const trail = new Float32Array(w * h);
         const ags: number[] = [];
         for (let i = 0; i < N; i++) {
-          // seed agents along x weighted by env, so the colony lives where the work was
           let t = rand(); let guard = 0;
           while (envAt(t) < rand() * 1.1 && guard++ < 8) t = rand();
           ags.push(t * w, h * 0.15 + rand() * h * 0.7, rand() * Math.PI * 2);
@@ -147,98 +165,125 @@ const countsB36 = days.map((d) => Math.min(35, d.count).toString(36)).join('');
           if (sx < 0 || sx >= w || sy < 0 || sy >= h) return -1;
           return trail[sy * w + sx];
         };
-        for (let s = 0; s < STEPS; s++) {
-          for (let i = 0; i < N; i++) {
-            const ix = i * 3;
-            let [x, y, a] = [ags[ix], ags[ix + 1], ags[ix + 2]];
-            const F = sense(x, y, a), L = sense(x, y, a - 0.5), R = sense(x, y, a + 0.5);
-            if (L > F && L > R) a -= 0.4;
-            else if (R > F && R > L) a += 0.4;
-            else if (rand() < 0.05) a += (rand() - 0.5) * 0.5;
-            x += Math.cos(a) * 1.2; y += Math.sin(a) * 1.2;
-            if (x < 2) { x = 2; a = Math.PI - a; }
-            if (x > w - 2) { x = w - 2; a = Math.PI - a; }
-            if (y < 2) { y = 2; a = -a; }
-            if (y > h - 2) { y = h - 2; a = -a; }
-            const px = (Math.round(y) * w + Math.round(x));
-            trail[px] += 0.5 + envAt(x / w) * 0.55;
-            ags[ix] = x; ags[ix + 1] = y; ags[ix + 2] = a;
-          }
-          if (s % 2 === 0) for (let p = 0; p < trail.length; p++) trail[p] *= 0.955;
-        }
-        // one 3x3 blur pass so trails fuse into veins
-        const blurred = new Float32Array(trail.length);
-        for (let y = 1; y < h - 1; y++)
-          for (let x = 1; x < w - 1; x++) {
-            let acc = 0;
-            for (let dy = -1; dy <= 1; dy++)
-              for (let dx = -1; dx <= 1; dx++) acc += trail[(y + dy) * w + (x + dx)];
-            blurred[y * w + x] = acc / 9;
-          }
-        trail.set(blurred);
-        let mx = 0;
-        for (let p = 0; p < trail.length; p++) if (trail[p] > mx) mx = trail[p];
         const img = ctx.createImageData(w, h);
         const [ir, ig, ib] = dark ? [200, 200, 200] : [26, 26, 26];
-        for (let p = 0; p < trail.length; p++) {
-          const v = Math.pow(trail[p] / mx, 0.65);
-          if (v < 0.1) continue;
-          const o = p * 4;
-          img.data[o] = ir; img.data[o + 1] = ig; img.data[o + 2] = ib;
-          img.data[o + 3] = Math.min(235, v * 255);
-        }
-        ctx.putImageData(img, 0, 0);
-        // the colony's brightest node, marked
-        let pi = 0; for (let p = 0; p < trail.length; p++) if (trail[p] > trail[pi]) pi = p;
-        ctx.fillStyle = sig;
-        ctx.beginPath(); ctx.arc(pi % w, Math.floor(pi / w), 3, 0, Math.PI * 2); ctx.fill();
+        let step = 0;
+        const render = (final: boolean) => {
+          let src = trail;
+          if (final) {
+            const blurred = new Float32Array(trail.length);
+            for (let y = 1; y < h - 1; y++)
+              for (let x = 1; x < w - 1; x++) {
+                let acc = 0;
+                for (let dy = -1; dy <= 1; dy++)
+                  for (let dx = -1; dx <= 1; dx++) acc += trail[(y + dy) * w + (x + dx)];
+                blurred[y * w + x] = acc / 9;
+              }
+            src = blurred;
+          }
+          let mx = 0;
+          for (let p = 0; p < src.length; p++) if (src[p] > mx) mx = src[p];
+          img.data.fill(0);
+          for (let p = 0; p < src.length; p++) {
+            const v = Math.pow(src[p] / mx, 0.65);
+            if (v < 0.1) continue;
+            const o = p * 4;
+            img.data[o] = ir; img.data[o + 1] = ig; img.data[o + 2] = ib;
+            img.data[o + 3] = Math.min(235, v * 255);
+          }
+          ctx.putImageData(img, 0, 0);
+          if (final) {
+            let pi = 0;
+            for (let p = 0; p < src.length; p++) if (src[p] > src[pi]) pi = p;
+            ctx.fillStyle = sig;
+            ctx.beginPath(); ctx.arc(pi % w, Math.floor(pi / w), 3, 0, Math.PI * 2); ctx.fill();
+          }
+        };
+        return () => {
+          for (let k = 0; k < 2 && step < STEPS; k++, step++) {
+            for (let i = 0; i < N; i++) {
+              const ix = i * 3;
+              let x = ags[ix], y = ags[ix + 1], a = ags[ix + 2];
+              const F = sense(x, y, a), L = sense(x, y, a - 0.5), R = sense(x, y, a + 0.5);
+              if (L > F && L > R) a -= 0.4;
+              else if (R > F && R > L) a += 0.4;
+              else if (rand() < 0.05) a += (rand() - 0.5) * 0.5;
+              x += Math.cos(a) * 1.2; y += Math.sin(a) * 1.2;
+              if (x < 2) { x = 2; a = Math.PI - a; }
+              if (x > w - 2) { x = w - 2; a = Math.PI - a; }
+              if (y < 2) { y = 2; a = -a; }
+              if (y > h - 2) { y = h - 2; a = -a; }
+              trail[Math.round(y) * w + Math.round(x)] += 0.5 + envAt(x / w) * 0.55;
+              ags[ix] = x; ags[ix + 1] = y; ags[ix + 2] = a;
+            }
+            if (step % 2 === 0) for (let p = 0; p < trail.length; p++) trail[p] *= 0.955;
+          }
+          render(step >= STEPS);
+          return step < STEPS;
+        };
       }
 
-      // C · ROOTWORK — branching growth left→right; ramifies where env is high
+      // C · ROOTWORK — tips grow live, three iterations per frame.
       function rootwork(seedInt: number) {
         const { ctx, w, h, ink, sig } = setup('c');
         const rand = mulberry32(seedInt);
         const noise = makeNoise(seedInt);
-        ctx.lineWidth = 1;
         type Tip = { x: number; y: number; a: number; wd: number };
         let tips: Tip[] = [];
         for (let i = 0; i < 6; i++) tips.push({ x: -2, y: h * 0.15 + rand() * h * 0.7, a: 0, wd: 1.5 });
         let total = tips.length;
-        let far: Tip = tips[0];
-        ctx.strokeStyle = ink;
-        while (tips.length) {
-          const next: Tip[] = [];
-          for (const t of tips) {
-            const e = envAt(t.x / w);
-            t.a += (noise(t.x * 0.012, t.y * 0.02) - 0.5) * (0.35 + e * 0.55);
-            t.a = Math.max(-0.62, Math.min(0.62, t.a));
-            const nx = t.x + Math.cos(t.a) * 2.0, ny = t.y + Math.sin(t.a) * 2.0;
-            ctx.globalAlpha = 0.3 + Math.min(0.3, t.wd * 0.15);
-            ctx.lineWidth = t.wd;
-            ctx.beginPath(); ctx.moveTo(t.x, t.y); ctx.lineTo(nx, ny); ctx.stroke();
-            t.x = nx; t.y = ny;
-            if (t.x > far.x) far = t;
-            if (t.x > w - 3) continue;
-            if (t.y < 3 || t.y > h - 3) { t.y = Math.max(3, Math.min(h - 3, t.y)); t.a = -t.a * 0.7; }
-            if (total < 220 && rand() < 0.013 + e * 0.06 * rand()) {
-              next.push({ x: t.x, y: t.y, a: t.a + (rand() < 0.5 ? -1 : 1) * (0.3 + rand() * 0.35), wd: Math.max(0.6, t.wd * 0.8) });
-              total++;
+        let far: Tip = { ...tips[0] };
+        let doneDot = false;
+        return () => {
+          if (!tips.length) {
+            if (!doneDot) {
+              doneDot = true;
+              ctx.globalAlpha = 1;
+              ctx.fillStyle = sig;
+              ctx.beginPath(); ctx.arc(Math.min(far.x, w - 4), far.y, 3, 0, Math.PI * 2); ctx.fill();
             }
-            next.push(t);
+            return false;
           }
-          tips = next;
-          if (total > 4000) break;
-        }
-        ctx.globalAlpha = 1; ctx.lineWidth = 1;
-        ctx.fillStyle = sig;
-        ctx.beginPath(); ctx.arc(Math.min(far.x, w - 4), far.y, 3, 0, Math.PI * 2); ctx.fill();
+          for (let it = 0; it < 3 && tips.length; it++) {
+            const next: Tip[] = [];
+            for (const t of tips) {
+              const e = envAt(t.x / w);
+              t.a += (noise(t.x * 0.012, t.y * 0.02) - 0.5) * (0.35 + e * 0.55);
+              t.a = Math.max(-0.62, Math.min(0.62, t.a));
+              const nx = t.x + Math.cos(t.a) * 2.0, ny = t.y + Math.sin(t.a) * 2.0;
+              ctx.strokeStyle = ink;
+              ctx.globalAlpha = 0.3 + Math.min(0.3, t.wd * 0.15);
+              ctx.lineWidth = t.wd;
+              ctx.beginPath(); ctx.moveTo(t.x, t.y); ctx.lineTo(nx, ny); ctx.stroke();
+              t.x = nx; t.y = ny;
+              if (t.x > far.x) far = { ...t };
+              if (t.x > w - 3) continue;
+              if (t.y < 3 || t.y > h - 3) { t.y = Math.max(3, Math.min(h - 3, t.y)); t.a = -t.a * 0.7; }
+              if (total < 220 && rand() < 0.013 + e * 0.06 * rand()) {
+                next.push({ x: t.x, y: t.y, a: t.a + (rand() < 0.5 ? -1 : 1) * (0.3 + rand() * 0.35), wd: Math.max(0.6, t.wd * 0.8) });
+                total++;
+              }
+              next.push(t);
+            }
+            tips = next;
+            if (total > 4000) break;
+          }
+          ctx.globalAlpha = 1; ctx.lineWidth = 1;
+          return true;
+        };
       }
 
+      let raf = 0;
+      let tasks: (() => boolean)[] = [];
+      function loop() {
+        tasks = tasks.filter((t) => t());
+        if (tasks.length) raf = requestAnimationFrame(loop);
+      }
       function drawAll() {
+        cancelAnimationFrame(raf);
         const seed = (Math.random() * 2 ** 31) | 0;
-        weather(seed);
-        organism(seed ^ 0x9e3779b9);
-        rootwork(seed ^ 0x85ebca6b);
+        tasks = [weather(seed), organism(seed ^ 0x9e3779b9), rootwork(seed ^ 0x85ebca6b)];
+        raf = requestAnimationFrame(loop);
       }
       document.getElementById('again')!.addEventListener('click', drawAll);
       drawAll();
