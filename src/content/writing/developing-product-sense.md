@@ -1,19 +1,96 @@
 ---
-title: "Product sense"
+title: "Developing product sense"
 date: "2024-09-25"
 
 ---
 
-That screech of a 14.4k modem in my first-grade bedroom changed everything. Each night I'd wait for that digital handshake, knowing it meant I could explore something new.
+I was building product sense long before I knew what a product manager was. It started with a Hewlett Packard computer in my first-grade bedroom and the unforgettable sound of a 14.4k modem connecting to the internet. From that moment, I was hooked.
 
-I became obsessed with mastering every piece of software I could find. Building websites in FrontPage. Creating logos in Photoshop. Each new program was a playground to explore, though I didn't realize I was laying the foundation for something bigger.
+As a kid I wanted to master every piece of software I could get my hands on. I built websites with FrontPage, created logos and edited images in Photoshop, and spent countless hours tinkering with whatever applications I could find. I didn't know it yet, but that curiosity was laying the foundation for a career.
 
-I filled notebooks with sketches of every interface I encountered. When the mobile revolution hit in the late 2000s, my obsession exploded. I downloaded every app I could find, filling folders with screenshots, trying to understand why certain design decisions worked and others failed.
+When mobile apps took off in the late 2000s, my tinkering took on a new form. I downloaded every app I could find, not just to use them but to understand them. I filled notebooks with sketches of user interfaces and folders with screenshots, trying to deconstruct how they worked and why certain design decisions were made.
 
-Architecture school taught me something unexpected: pixels and buildings solve the same problems. Reading ["The Design of Everyday Things"](https://www.amazon.com/Design-Everyday-Things-Revised-Expanded/dp/0465050654) unlocked something in my brain. A doorway and a submit button both need to tell you exactly what to do next. The best designs never make you think - they guide you naturally.
+My formal education in architecture mattered in a way I didn't expect. It taught me to think about user experience in physical spaces, which translated surprisingly well to digital products. Reading ["The Design of Everyday Things"](https://www.amazon.com/Design-Everyday-Things-Revised-Expanded/dp/0465050654) helped me see the same principles underneath all good design.
 
-The real education came from working alongside brilliant designers at URX, Pinterest, Aesthetic, and Clubhouse. Each team taught me new ways of seeing. Each product revealed new patterns. Each failure pushed me to look closer, think deeper.
+My product sense grew fastest once I entered the professional world. Working alongside brilliant designers and product visionaries at companies like URX, Pinterest, Aesthetic and Clubhouse exposed me to new ways of thinking about products, and each experience changed my approach.
 
-Now I lead product teams at Canva. The tools changed, but I'm still that curious kid at heart. Just instead of sketching other people's interfaces, I'm building things that impact millions of users worldwide.
+Today I lead product teams at Canva, and I'm still that curious kid at heart, exploring new technologies, analyzing products, trying to understand what users need. The difference is that the products I work on now reach millions of people.
 
-Want to build product sense? Start filling your own notebooks. Break things apart until you understand every piece. Question every button. The answers are in the details. They always have been.
+Product sense is the ability to understand what users need, spot opportunities, and create solutions that feel intuitive. It's a mix of analytical thinking, creativity, and an understanding of technology and human behavior.
+
+## Embrace technology
+
+Many product managers start building product sense early, often without realizing it. Some ways to lay the foundation:
+
+1. **Explore widely**: Use a variety of apps, websites, and software tools, and pay attention to how they work and why features are designed the way they are.
+
+2. **Create and experiment**: Use technology to make things: websites, edited images, presentations. Hands-on work develops an intuitive feel for interfaces.
+
+3. **Stay curious**: Keep up with new technologies and product launches. Product design keeps evolving, and it helps to watch it happen.
+
+## The tinkerer's mindset
+
+Developing a tinkerer's mindset sharpens your product sense:
+
+1. **Break down apps and websites**: Look at how different products approach common elements like search bars, menus, or notifications.
+
+2. **Document your observations**: Keep screenshots, sketches, or notes about interesting design elements and user flows you come across.
+
+3. **Question design decisions**: Ask yourself why certain features are built the way they are. What problems are they solving? How well do they work?
+
+## Look beyond software
+
+Product sense isn't limited to software:
+
+1. **Study other disciplines**: Fields like architecture, psychology, or even biology can offer fresh perspectives on design and user behavior.
+
+2. **Analyze physical products**: The principles of good design apply to physical objects too. I read design books from a wide variety of disciplines and learned to think critically about user experience problems.
+
+3. **Travel and observe**: Different cultures solve problems in different ways, and noticing those differences can inspire new approaches.
+
+## Learn from the best
+
+Great teams and experienced people accelerate the process:
+
+1. **Seek out mentors**: Look for experienced product managers or designers who can guide you and share how they work.
+
+2. **Collaborate across disciplines**: Work closely with designers, engineers, and other stakeholders. Understanding their perspectives sharpens your own product thinking.
+
+3. **Study successful products**: Analyze market-leading products in detail. What makes them successful? How do they solve user problems?
+
+## Single and multiplayer modes
+
+Some of the practice is solo, and some of it only works with other people.
+
+**Single-player mode:**
+
+- Regularly analyze new products and features
+- Practice sketching ideas and user flows
+- Build mental models of how interfaces work
+- Develop and refine your taste in product design
+
+**Multiplayer mode:**
+
+- Talk through products with colleagues
+- Participate in design critiques and brainstorming sessions
+- Ask for feedback on your ideas and analyses
+
+**Stay informed:**
+
+- Listen to product-focused podcasts
+- Read books on design, business, and technology
+- Follow industry blogs and thought leaders
+
+## Practical exercises
+
+1. **Feature breakdown**: Choose a popular app and list all its features, then try to rank them by how much they matter to users.
+
+2. **Redesign challenge**: Take a familiar product and reimagine one of its key features. How would you improve it?
+
+3. **User journey mapping**: Pick a common task, like ordering food online, and map out the ideal user journey. Compare your map with existing solutions.
+
+4. **Trend analysis**: Identify emerging trends in technology or user behavior. How might they change product design in your industry?
+
+Product sense is a craft you never stop refining. New technologies arrive, user needs shift, and the work of understanding both starts over.
+
+Everyone starts somewhere. Begin actively thinking about the products you use, question their design decisions, and keep working to understand what users need. Wherever you are in your career, there's room to grow. I'm decades in and still exploring.
