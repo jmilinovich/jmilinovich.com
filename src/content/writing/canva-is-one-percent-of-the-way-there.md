@@ -39,9 +39,7 @@ What she prototyped in the room was a library. Not a list of remembered facts, b
 
 The design we brought into that room was weeks of work, and it was good work. Ten minutes later it wasn't the plan anymore.
 
-At most companies that pattern would be corrosive. The thing that keeps a team fast is believing that the work they're doing now is the work that ships, and every founder redraw takes a small bite out of that belief. At Canva the redraw gets celebrated instead, and the difference isn't luck. It's the expectation, set early and reinforced constantly, that the best idea can arrive at any moment and that a redraw is in service of the outcome, never anyone's ego.
-
-The redraw still lands hardest on the layers between her and the team, and Canva's answer is that the reasoning travels with the decision. Feedback that spans a lot of scope reaches the leads first, and they carry it; a single design in a sprint gets presented by whoever built it, in the room, talking, not summarized from three levels removed. When it goes badly, you've spent some of the team's belief, and the next week goes to earning it back. When it goes well, people walk out with an obviously better idea and the reasons for it.
+At most companies that pattern would be corrosive. The thing that keeps a team fast is believing that the work they're doing now is the work that ships, and every founder redraw takes a small bite out of that belief. At Canva the redraw gets celebrated instead, and the difference isn't luck. It's the expectation, set early and reinforced constantly, that the best idea can arrive at any moment and that a redraw is in service of the outcome, never anyone's ego. It still lands hardest on the layers between her and the team, and carrying the reasoning intact to the people who need it is their whole job.
 
 ## The harness
 
@@ -49,9 +47,9 @@ The redraw still lands hardest on the layers between her and the team, and Canva
 
 Reviews are structured so Mel is looking at the real artifact rather than a description of it, and teams are shaped so the surface she touches is where her judgment adds the most. None of it runs itself: people decide every week what reaches her and own everything that doesn't, and for three years that was a large part of my job. When the latency between her judgment and the work gets too high, Canva reorganizes: the org changes shape and the person doesn't. I never once thought the reorgs were arbitrary.
 
-The bar the harness protects is hers. Before AI 2.0 shipped, Mel came to a review with a twenty-slide deck she had built herself by being the product's biggest power user: one issue per slide, down to the hover animation on the logo in the sidebar. Twenty slides became a team, running the final months on nothing but end-to-end quality. There's no fear in it, because nobody believes the standard is about them. She's hardest on her own work.
+The bar the harness protects is hers: before AI 2.0 shipped, Mel reviewed the product as its biggest power user and arrived with twenty slides of issues, down to the hover animation on a sidebar logo, and those twenty slides became a polish team for the final months. There's no fear in it, because nobody believes the standard is about them. She's hardest on her own work.
 
-None of it holds without a second voice, and Cliff is that voice. He and Mel are married, they built a [$42 billion company](https://sacra.com/c/canva/) together, and he is one of the best operators I've ever seen. He'll say the thing he actually thinks in front of anyone, and on the occasions he and Mel read a decision differently, it gets worked through in the open rather than sanded down before the room. A strategic disagreement with Cliff arrives as a considered document with the screenshots that got him there; a quality problem arrives as the screenshot and one honest line. The document tells you he did the work himself. The one-liner tells you it isn't about you. You know within about four seconds exactly where you stand.
+None of it holds without a second voice, and Cliff is that voice. He and Mel are married, they built a [$42 billion company](https://sacra.com/c/canva/) together, and he is one of the best operators I've ever seen. He'll say the thing he actually thinks in front of anyone, and on the occasions he and Mel read a decision differently, it gets worked through in the open rather than sanded down before the room. That's how a team learns how decisions really get made.
 
 ## The two-step plan
 
