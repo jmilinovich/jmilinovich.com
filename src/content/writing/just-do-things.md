@@ -4,36 +4,20 @@ date: "2025-04-25"
 
 ---
 
-You can literally just do things. This tech-world mantra captures a profound truth about our modern capability landscape. What began in tech circles now represents a fundamental shift in how we conceptualize personal agency.
+You can literally just do things. The line has been going around tech circles for a while, and it stuck with me because it's true.
 
-We instinctively defer to external authorities when facing uncertainty, looking outward for direction rather than inward for agency. This reflexive surrender of autonomy happens despite an unprecedented liberation from traditional constraints.
+Our instinct runs the other way. When we're uncertain, we defer: we look outward for direction, for someone with more authority to say it's allowed.
 
-Ask yourself: "If I had 10 times more agency than I do right now, what would I do?"
+Ask yourself: "If I had 10 times more agency than I do right now, what would I do?" Whatever comes to mind, notice how little of it needs anyone's permission. The gap between thinking about those things and doing them is where most of them die.
 
-The gap between thought and action is where most dreams die. We've forgotten that our agency is effectively unbounded. The challenge isn't permission -- it's recognizing and exercising our inherent freedom to act.
+The external barriers mostly aren't there anymore. The technical ones have been dissolving for years, and generative AI knocked down most of what was left. If you're clear on what you want to make, you can probably make it. What's still standing is internal: impostor syndrome, fear of failure, perfectionism, and an imagined wall of red tape that usually isn't there when you walk up to it.
 
-Personal agency -- our capacity to make choices and exert control -- forms the cornerstone of psychological wellbeing. Without autonomy, we experience the psychological equivalent of being puppets controlled by unseen forces.
+We spend a lot of time debating how much agency to give AI agents, and much less on how much we claim for ourselves. That question feels more urgent to me, because if all you're doing is waiting for instructions, the instructions will eventually get routed to an automated system that runs them more efficiently than you do.
 
-We remain trapped in illusory constraints while the technical barriers that once limited individual impact have largely dissolved. Generative AI has further commoditized creation, eliminating countless barriers to execution. Today's tools transform anyone with clarity of purpose into a creator, builder, or decision-maker.
+High agency doesn't mean grand gestures. Mostly it means turning something you want into a concrete step you take today.
 
-This technological revolution demands a corresponding revolution in human agency. The psychological barriers -- impostor syndrome, fear of failure, perfectionism -- now pose greater obstacles than any external limitation. High-achieving individuals often struggle most with these internal constraints, attributing their success to luck rather than their abilities.
-
-Our competitive advantage against increasingly autonomous machines lies precisely in the realm of agency they don't possess: making novel connections, challenging assumptions, and charting entirely new paths. While we extensively discuss AI agents, we neglect how humans must now claim greater agency over our lives and work.
-
-Self-efficacy -- the belief in your ability to execute actions necessary to achieve specific outcomes -- forms the foundation of agency. Without this belief, even technically feasible actions remain practically impossible. This explains why paths forward typically exist but require assuming greater responsibility for outcomes than our self-imposed limits allow.
-
-The combination of this mental framework with the realization that bureaucratic barriers are frequently imagined rather than real can fundamentally alter your trajectory. The red tape stopping you is more often an illusion projected by your internal bureaucracy than an external reality.
-
-High agency isn't about grand gestures -- it's about converting abstract desires into immediate, concrete actions:
-
-- Want to write a book? Start by writing 500 words right now.
-- Want to build a software product? Create a prototype using AI tools.
-- Want to remodel your house? Begin with a vision board on Pinterest.
-- Want to change careers? Spend an hour learning a relevant skill today.
-- Want to improve your health? Take a 10-minute walk immediately after reading this.
-
-If we merely wait to be told what to do, eventually what we're told will be delegated to more efficient automated systems. The world belongs to those who recognize that authority has been within them all along.
-
-This mantra has transcended its indie-hacker origins to become shorthand for an entire era's relationship with technology and agency. It's not just about what's technically possible -- it's about internalizing a new mindset where the only real constraint is your willingness to act.
-
-You can literally just do things.
+- Want to write a book? Write 500 words right now.
+- Want to build a software product? Put together a prototype with AI tools.
+- Want to remodel your house? Start a vision board on Pinterest.
+- Want to change careers? Spend an hour today learning a skill you'd need.
+- Want to improve your health? Take a 10-minute walk as soon as you finish reading this.
