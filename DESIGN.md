@@ -140,18 +140,27 @@ streamlines`.
    rate.
 2. **Per-essay glyph** — seeded by the slug, generated at build, inline SVG (~20×20 at the
    index). Deterministic forever: same slug, same mark.
-3. **Essay pressmark + end-mark** — the slug's glyph appears exactly twice on its essay
-   page: small (20px) beside the date in the byline, and again (28px, centered) as the
-   end-mark after the last line. The AI-generated hero images are deleted and replaced by
-   *nothing large* — essays open with their first sentence. *Reason:* the same mark seen
-   in the index reappearing on the essay is the system revealing its determinism; a big
-   generative header would recreate the hero-image problem (decoration before words, 38
-   large artworks to art-direct).
+3. **Essay pressmark + fingerprint** — the pressmark opens, the fingerprint closes
+   (2026-07-28, via /grill-me; the 28px end-mark glyph retired in its favor). The slug's
+   glyph appears small (20px) beside the date in the byline; after the last line sits the
+   **fingerprint**: a differential-growth line grown at build time from the essay's own
+   text (`growthFoldSvg` in `src/lib/process.js`) — one growth epoch per paragraph,
+   insertion budget ∝ paragraph words, question sentences buckling the line, em-dashes
+   striking kicks it absorbs; faint ghosts show three earlier growth states; the sig dot
+   rests where growth ended. It lives in the instrument container (hairline frame, mono
+   caption) — the v3 frame reborn at essay scale — and the caption says one quiet number
+   (`N words`), the gentlest decoder ring (owner call: craft over decodability; the
+   mapping is feelable — more words, more folding — not labeled). Static, no JS, chosen
+   from a five-system rendered contact sheet (streamline-family, core-sample,
+   cadence-thread, silhouette-ghost were built and rejected). Essays still open with
+   their first sentence — *nothing large before words*; the fingerprint is decoration
+   AFTER words, the specimen of what was just read. Deterministic: same text, same
+   drawing; editing the essay regrows it.
 4. **OG cards** — 1200×630 build-time renders: dark paper, hairline frame, serif title,
    mono provenance, and the living-logo wordmark (extracted from `Logo.astro` at build).
    Owner decision 2026-07-27: the glyph trace was tried here and rejected — out of
    context it reads as an unexplained squiggle. Glyphs stay where they have context
-   (index, pressmark, end-mark); the logo carries identity off-site.
+   (index, pressmark); the logo carries identity off-site.
 
 **Determinism is law.** Same seed → same drawing, on every build, in both themes.
 **Quality gate:** every new glyph set renders to a contact sheet and gets human review
@@ -161,8 +170,9 @@ before ship; `seedOverride` frontmatter exists for duds. Algorithmic slop is sti
 
 `logo` (the living mili wordmark, `Logo.astro`) · `row` (glyph + serif title + mono date)
 · `eyebrow` (mono section label) · `substrate` (the page-wide root layer + its mono
-provenance line) · `facts` (the bio bullets) · `footer strip`. That's the whole kit;
-new surfaces compose these before inventing.
+provenance line) · `fingerprint` (the essay's growth-fold in a hairline frame + mono
+caption — the contained instrument) · `facts` (the bio bullets) · `footer strip`.
+That's the whole kit; new surfaces compose these before inventing.
 
 ## Anti-patterns (the audit checks these)
 
