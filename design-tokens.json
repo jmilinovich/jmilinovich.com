@@ -102,13 +102,13 @@
   "motion": {
     "budget": "one settle-to-rest instrument on the homepage, animated once per arrival; essay pages are still; sole standing exception: the living logo",
     "instrument": {
-      "durationMs": 7000,
-      "stepsTotal": 840,
-      "onSettle": "cancelAnimationFrame",
-      "maxParticles": 480,
+      "style": "seismogram, pen-draws-once",
+      "drawMs": 6000,
+      "onComplete": "cancelAnimationFrame",
+      "accent": "terminal dot only, in sig",
       "dprCap": 2
     },
-    "determinism": "settle is the fixed 840-step budget, never a wall-clock cutoff \u2014 identical drawing at any refresh rate",
+    "determinism": "geometry precomputed from the daily seed; time paces the reveal, never the image",
     "reducedMotion": "the same 840-step settled frame, rendered synchronously; honors mid-session changes",
     "noJs": "build-time static frame as inline SVG in <noscript>, same seed",
     "themeOrResize": "re-render the settled frame synchronously; never replay the animation",

@@ -84,12 +84,13 @@ respected, and the toggle's saved choice always wins over both.
 
 ## Motion
 
-- **Budget: one settle-to-rest moment.** The homepage instrument draws itself over ~7s on
-  first arrival, then the animation loop is cancelled — not slowed, cancelled. Essay pages
-  are still. Existing view transitions may remain.
-- **The settle is a fixed step count (840), not a wall-clock cutoff** — the same seed must
-  produce the identical settled drawing on a 60Hz laptop, a 120Hz phone, and under
-  reduced-motion. Time only paces the steps; it never changes their total.
+- **Budget: one settle-to-rest moment.** The homepage instrument draws itself once over
+  ~6s on first arrival (the plotter pen tracing the seismogram), then the animation loop
+  is cancelled — not slowed, cancelled. Essay pages are still. Existing view transitions
+  may remain.
+- **The drawing is precomputed geometry, paced by time** — the same seed produces the
+  identical finished drawing on a 60Hz laptop, a 120Hz phone, and under reduced-motion.
+  Time only paces the reveal; it never changes the image.
 - Theme toggles, resizes, and mid-session reduced-motion changes re-render the settled
   frame *synchronously* — the animation plays once per arrival, never again.
 - `prefers-reduced-motion`: the same 840-step settled frame, rendered synchronously.
@@ -109,10 +110,16 @@ respected, and the toggle's saved choice always wins over both.
 One algorithm, many render targets. `hash(seed) → PRNG → value-noise flow field →
 streamlines`.
 
-1. **Homepage instrument** — 136px band, hairline border, mono caption
-   (`seed 2026-07-27 · 1,290 commits · 2022→26`). Seeded by the date; turbulence
-   amplitude-modulated by real commit history, inlined at build (≤1KB), never fetched at
-   runtime. Freshness guard: data older than 30 days → date-seed only.
+1. **Homepage instrument** — a seismogram of the commit history (rebuilt 2026-07-28,
+   after the flow-field draft was judged wallpaper; craft discipline borrowed from
+   Signal Geometry: one legible spatial event, 70–95% quiet field, colour as a single
+   semantic accent). One continuous trace, 2022 → today, time left to right with faint
+   year ticks: calm weeks run flat, heavy weeks oscillate dense and tall. Drawn once per
+   arrival like a plotter pen (~6s), then still. The trace is `ink`; the only colour on
+   the canvas is the terminal dot — today — in `sig` (dark adds a soft bloom). The daily
+   seed jitters the hand, so the drawing is visibly different each day. Daily counts are
+   inlined at build (~1.7KB base36), never fetched at runtime; the caption drops its
+   commit claim when the data is >30 days stale.
 2. **Per-essay glyph** — seeded by the slug, generated at build, inline SVG (~20×20 at the
    index). Deterministic forever: same slug, same mark.
 3. **Essay pressmark + end-mark** — the slug's glyph appears exactly twice on its essay

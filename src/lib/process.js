@@ -82,49 +82,65 @@ export function glyphPath(slug) {
     .join('');
 }
 
-// The instrument's no-JS fallback: a simplified settled frame as inline SVG.
-export function settledFrameSvg(seed, amplitude) {
-  const W = 575, H = 136;
-  const rand = mulberry32(xmur3(seed)());
-  const noise = makeNoise(xmur3(seed)());
-  const lines = [];
-  for (let i = 0; i < 80; i++) {
-    let x = rand() * W, y = H * 0.12 + rand() * H * 0.76;
-    const pts = [`${x.toFixed(0)},${y.toFixed(0)}`];
-    for (let s = 0; s < 55; s++) {
-      const bpos = Math.max(0, Math.min(46.999, (x / W) * 47));
-      const bi = Math.floor(bpos), bf = bpos - bi;
-      const amp = amplitude[bi] * (1 - bf) + amplitude[bi + 1] * bf;
-      const a = (noise(x * 0.011, y * 0.011 * 2.2) - 0.5) * Math.PI * 2.6 * amp;
-      x += Math.cos(a) * 2.1 + 0.8;
-      y += Math.sin(a) * 2.1 * amp;
-      if (x > W + 2 || y < -2 || y > H + 2) break;
-      pts.push(`${x.toFixed(0)},${y.toFixed(0)}`);
-    }
-    if (pts.length > 6) lines.push(`<polyline points="${pts.join(' ')}"/>`);
-  }
-  return `<svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="none" style="display:block;width:100%;height:136px" fill="none" stroke="var(--glyph)" stroke-opacity="0.28" stroke-width="1">${lines.join('')}</svg>`;
-}
-
-// Commit history → 48 amplitude buckets, behind DESIGN.md's 30-day freshness guard.
-export function commitAmplitude(days, todayIso) {
-  const sorted = days.slice().sort((a, b) => a.date.localeCompare(b.date));
-  const lastDataDate = sorted[sorted.length - 1]?.date ?? '1970-01-01';
-  const dataAgeDays = Math.floor((Date.parse(todayIso) - Date.parse(lastDataDate)) / 86400000);
-  const fresh = dataAgeDays <= 30;
-  const B = 48;
-  let amplitude;
-  if (fresh) {
-    const buckets = new Array(B).fill(0);
-    sorted.forEach((d, i) => { buckets[Math.min(B - 1, Math.floor((i / sorted.length) * B))] += d.count; });
-    const maxB = Math.max(...buckets, 1);
-    amplitude = buckets.map((v) => +(0.25 + 0.75 * Math.sqrt(v / maxB)).toFixed(3));
-  } else {
-    amplitude = new Array(B).fill(1); // stale → pure date-seed field, no data claim
-  }
-  const totalCommits = sorted.reduce((s, d) => s + d.count, 0);
-  return { amplitude, fresh, totalCommits };
-}
-
 export const fmtDate = (d) =>
   new Date(d).toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric', timeZone: 'UTC' });
+
+// ---- the instrument: a seismogram of the commit history ---------------------
+// One continuous trace, 2022 → today. Calm weeks run flat; heavy weeks
+// oscillate dense and tall. The only colour is the terminal dot: today.
+// KEEP IN SYNC with the inline copy in src/pages/index.astro.
+export function buildWave(days, seedStr, W = 575, H = 136) {
+  const sorted = days.slice().sort((a, b) => a.date.localeCompare(b.date));
+  const n = sorted.length;
+  const raw = sorted.map((d) => Math.log1p(d.count));
+  const sortedRaw = raw.slice().sort((a, b) => a - b);
+  const p95 = Math.max(sortedRaw[Math.floor(sortedRaw.length * 0.95)] || 0, 0.001);
+  const env = raw.map((_, i) => {
+    let s = 0, w = 0;
+    for (let k = -4; k <= 4; k++) {
+      const j = i + k;
+      if (j < 0 || j >= n) continue;
+      const wt = 1 - Math.abs(k) / 5;
+      s += raw[j] * wt; w += wt;
+    }
+    return Math.min(1.25, s / w / p95);
+  });
+  const seedInt = xmur3(seedStr)();
+  const rand = mulberry32(seedInt);
+  const noise = makeNoise(seedInt);
+  let phase = rand() * Math.PI * 2;
+  const padX = 6, baseY = H * 0.52, span = W - padX * 2;
+  const pts = [];
+  for (let x = 0; x <= span; x += 1) {
+    const t = x / span;
+    const di = Math.min(n - 1, Math.floor(t * n));
+    const e = env[di];
+    const amp = Math.pow(e, 1.12) * H * 0.36;
+    phase += 0.18 + e * 1.1;
+    const jitter = (noise(x * 0.035, 7.3) - 0.5) * 3.0 * (0.25 + e);
+    pts.push([x + padX, baseY + Math.sin(phase) * amp + jitter]);
+  }
+  const startYear = parseInt(sorted[0].date.slice(0, 4), 10);
+  const endYear = parseInt(sorted[n - 1].date.slice(0, 4), 10);
+  const ticks = [];
+  for (let y = startYear; y <= endYear; y++) {
+    const idx = sorted.findIndex((d) => d.date >= `${y}-01-01`);
+    if (idx >= 0) ticks.push({ x: padX + (idx / n) * span, label: `'${String(y).slice(2)}` });
+  }
+  return { pts, ticks, end: pts[pts.length - 1], baseY, W, H };
+}
+
+// Static SVG of the settled seismogram — the no-JS frame.
+export function waveSvg(days, seedStr, W = 575, H = 136) {
+  const { pts, ticks, end, baseY } = buildWave(days, seedStr, W, H);
+  const d = pts.map(([x, y], i) => `${i === 0 ? 'M' : 'L'}${x.toFixed(1)} ${y.toFixed(1)}`).join('');
+  const tickMarks = ticks
+    .map((t) => `<line x1="${t.x.toFixed(1)}" y1="${(baseY + 8).toFixed(1)}" x2="${t.x.toFixed(1)}" y2="${(baseY + 14).toFixed(1)}" stroke="var(--muted)" stroke-opacity="0.55" stroke-width="1"/>`)
+    .join('');
+  return `<svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="none" style="display:block;width:100%;height:${H}px">
+<line x1="6" y1="${baseY}" x2="${W - 6}" y2="${baseY}" stroke="var(--hairline)" stroke-width="1"/>
+${tickMarks}
+<path d="${d}" fill="none" stroke="var(--ink)" stroke-opacity="0.72" stroke-width="1.25" stroke-linejoin="round"/>
+<circle cx="${end[0].toFixed(1)}" cy="${end[1].toFixed(1)}" r="3" fill="var(--sig)"/>
+</svg>`;
+}

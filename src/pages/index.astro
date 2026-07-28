@@ -2,18 +2,24 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PostCard from '../components/PostCard.astro';
 import { getCollection } from 'astro:content';
-import { commitAmplitude, settledFrameSvg } from '../lib/process';
+import { buildWave, waveSvg } from '../lib/process';
 import contributions from '../../public/data/contributions.json';
 
 const posts = await getCollection('writing', ({ data }) => !data.draft);
 const sortedPosts = posts.sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
 
 const seedDate = new Date().toISOString().slice(0, 10); // build-time fallback; the client re-seeds daily
-const { amplitude, fresh, totalCommits } = commitAmplitude(
-  contributions as { date: string; count: number }[],
-  seedDate,
-);
-const noscriptFrame = settledFrameSvg(seedDate, amplitude);
+const days = (contributions as { date: string; count: number }[])
+  .slice()
+  .sort((a, b) => a.date.localeCompare(b.date));
+const totalCommits = days.reduce((s, d) => s + d.count, 0);
+const lastDataDate = days[days.length - 1]?.date ?? '1970-01-01';
+const fresh = Math.floor((Date.parse(seedDate) - Date.parse(lastDataDate)) / 86400000) <= 30;
+// daily counts, capped at 35, one base36 char per day — the trace's raw material
+const countsB36 = days.map((d) => Math.min(35, d.count).toString(36)).join('');
+const noscriptFrame = waveSvg(days, seedDate);
+const { ticks } = buildWave(days, seedDate);
+const tickFracs = ticks.map((t) => +(((t.x - 6) / (575 - 12)).toFixed(4)));
 
 const starts = [
   'the-agentic-web',
@@ -32,10 +38,16 @@ const startPicks = starts.map((s) => sortedPosts.find((p) => p.id === s)).filter
       id="field"
       height="136"
       aria-hidden="true"
-      data-amplitude={JSON.stringify(amplitude)}
+      data-counts={countsB36}
+      data-ticks={JSON.stringify(tickFracs)}
     ></canvas>
     <noscript set:html={noscriptFrame} />
-    <figcaption>seed <span id="seed-date">{seedDate}</span>{fresh && ` · ${totalCommits.toLocaleString()} commits · 2022→26`}</figcaption>
+    <div class="year-axis" aria-hidden="true">
+      {ticks.map((t) => (
+        <span style={`left: ${((t.x / 575) * 100).toFixed(2)}%`}>{t.label}</span>
+      ))}
+    </div>
+    <figcaption>seed <span id="seed-date">{seedDate}</span>{fresh && ` · ${totalCommits.toLocaleString()} commits`}</figcaption>
   </figure>
 
   <ul class="facts">
@@ -66,20 +78,20 @@ const startPicks = starts.map((s) => sortedPosts.find((p) => p.id === s)).filter
 </BaseLayout>
 
 <script>
-  // The instrument — settling field recording. Contract in DESIGN.md §Motion:
-  // animates once per arrival at a fixed 840-step budget (refresh-rate-proof),
-  // then the loop is cancelled. Theme/resize/reduced-motion re-render the
-  // settled frame synchronously. Pauses on hidden, resumes on visible.
-  // Lifecycle-safe under the ClientRouter: init on astro:page-load (guarded),
-  // teardown on astro:before-swap.
-  const DURATION = 7000;
-  const STEPS_TOTAL = 840;
+  // The instrument: a seismogram of the commit history, 2022 → today.
+  // One continuous trace drawn once per arrival like a plotter pen (~6s),
+  // then still. Calm weeks run flat; heavy weeks oscillate. The only colour
+  // is the terminal dot: today. Geometry is precomputed, so the finished
+  // drawing is identical at any refresh rate. Lifecycle-safe under the
+  // ClientRouter: init on astro:page-load (guarded), teardown on before-swap.
+  // KEEP THE WAVE MATH IN SYNC with buildWave in src/lib/process.js.
+  const DRAW_MS = 6000;
   const reducedMq = window.matchMedia('(prefers-reduced-motion: reduce)');
   let reduced = reducedMq.matches;
   let canvas: HTMLCanvasElement | null = null;
   let ctx: CanvasRenderingContext2D | null = null;
-  let amplitude: number[] = [];
-  let raf = 0, running = false, sim: any = null;
+  let raf = 0, running = false;
+  let wave: any = null; // { pts, ticks, end, baseY, w, h, drawn, elapsed }
 
   function xmur3(str: string) {
     let h = 1779033703 ^ str.length;
@@ -117,9 +129,21 @@ const startPicks = starts.map((s) => sortedPosts.find((p) => p.id === s)).filter
     };
   }
 
+  function colors() {
+    const s = getComputedStyle(document.documentElement);
+    return {
+      ink: s.getPropertyValue('--ink').trim() || '#333',
+      hairline: s.getPropertyValue('--hairline').trim() || '#e6e6e6',
+      muted: s.getPropertyValue('--muted').trim() || '#666',
+      sig: s.getPropertyValue('--sig').trim() || '#1a7f37',
+      dark: document.documentElement.getAttribute('data-theme') === 'dark',
+    };
+  }
+
   function build() {
     if (!canvas || !ctx) return;
-    const seed = new Date().toISOString().slice(0, 10);
+    const params = new URLSearchParams(location.search);
+    const seed = params.get('seed') || new Date().toISOString().slice(0, 10);
     const seedEl = document.getElementById('seed-date');
     if (seedEl) seedEl.textContent = seed;
     const w = canvas.clientWidth || 575, h = canvas.clientHeight || 136;
@@ -127,86 +151,134 @@ const startPicks = starts.map((s) => sortedPosts.find((p) => p.id === s)).filter
     canvas.width = w * dpr;
     canvas.height = h * dpr;
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    ctx.clearRect(0, 0, w, h);
-    const dark = document.documentElement.getAttribute('data-theme') === 'dark';
-    ctx.globalCompositeOperation = dark ? 'lighter' : 'source-over';
+
+    const counts = [...(canvas.dataset.counts || '')].map((c) => parseInt(c, 36));
+    const n = counts.length || 1;
+    const raw = counts.map((c) => Math.log1p(c));
+    const sortedRaw = raw.slice().sort((a, b) => a - b);
+  const p95 = Math.max(sortedRaw[Math.floor(sortedRaw.length * 0.95)] || 0, 0.001);
+    const env = raw.map((_, i) => {
+      let s = 0, wt = 0;
+      for (let k = -4; k <= 4; k++) {
+        const j = i + k;
+        if (j < 0 || j >= n) continue;
+        const g = 1 - Math.abs(k) / 5;
+        s += raw[j] * g; wt += g;
+      }
+      return Math.min(1.25, s / wt / p95);
+    });
     const seedInt = xmur3(seed)();
     const rand = mulberry32(seedInt);
     const noise = makeNoise(seedInt);
-    const parts = [];
-    for (let i = 0; i < 480; i++) {
-      parts.push({ x: rand() * w, y: h * 0.12 + rand() * h * 0.76, life: 40 + rand() * 160 });
+    let phase = rand() * Math.PI * 2;
+    const padX = 6, baseY = h * 0.52, span = w - padX * 2;
+    const pts: [number, number][] = [];
+    for (let x = 0; x <= span; x += 1) {
+      const t = x / span;
+      const di = Math.min(n - 1, Math.floor(t * n));
+      const e = env[di];
+      const amp = Math.pow(e, 1.12) * h * 0.36;
+      phase += 0.18 + e * 1.1;
+      const jitter = (noise(x * 0.035, 7.3) - 0.5) * 3.0 * (0.25 + e);
+      pts.push([x + padX, baseY + Math.sin(phase) * amp + jitter]);
     }
-    sim = {
-      w, h, rand, noise, parts,
-      color: dark ? '83,211,57' : '26,26,26',
-      baseAlpha: dark ? 0.038 : 0.045,
-      freq: 0.011,
-      elapsed: 0,
-      drawn: 0,
-    };
+    const ticks = JSON.parse(canvas.dataset.ticks || '[]').map((f: number) => padX + f * span);
+    wave = { pts, ticks, end: pts[pts.length - 1], baseY, w, h, drawn: 0, elapsed: 0 };
   }
 
-  function step(frames: number) {
-    if (!ctx) return;
-    const { w, h, rand, noise, parts } = sim;
+  function scaffold() {
+    if (!ctx || !wave) return;
+    const c = colors();
+    ctx.clearRect(0, 0, wave.w, wave.h);
+    ctx.strokeStyle = c.hairline;
     ctx.lineWidth = 1;
-    for (let f = 0; f < frames; f++) {
-      ctx.beginPath();
-      for (const p of parts) {
-        const bpos = Math.max(0, Math.min(46.999, (p.x / w) * 47));
-        const bi = Math.floor(bpos), bf = bpos - bi;
-        const amp = amplitude[bi] * (1 - bf) + amplitude[bi + 1] * bf;
-        const a = (noise(p.x * sim.freq, p.y * sim.freq * 2.2) - 0.5) * Math.PI * 2.6 * amp;
-        const nx = p.x + Math.cos(a) * 1.05 + 0.4;
-        const ny = p.y + Math.sin(a) * 1.05 * amp;
-        ctx.moveTo(p.x, p.y);
-        ctx.lineTo(nx, ny);
-        p.x = nx; p.y = ny;
-        if (--p.life < 0 || p.x > w + 2 || p.y < -2 || p.y > h + 2) {
-          p.x = rand() * w;
-          p.y = h * 0.12 + rand() * h * 0.76;
-          p.life = 40 + rand() * 160;
-        }
-      }
-      ctx.strokeStyle = `rgba(${sim.color},${sim.baseAlpha})`;
-      ctx.stroke();
+    ctx.beginPath();
+    ctx.moveTo(6, wave.baseY);
+    ctx.lineTo(wave.w - 6, wave.baseY);
+    ctx.stroke();
+    ctx.strokeStyle = c.muted;
+    ctx.globalAlpha = 0.55;
+    ctx.beginPath();
+    for (const x of wave.ticks) {
+      ctx.moveTo(x, wave.baseY + 8);
+      ctx.lineTo(x, wave.baseY + 14);
     }
+    ctx.stroke();
+    ctx.globalAlpha = 1;
+  }
+
+  function trace(from: number, to: number) {
+    if (!ctx || !wave) return;
+    const c = colors();
+    ctx.strokeStyle = c.ink;
+    ctx.globalAlpha = 0.72;
+    ctx.lineWidth = 1.25;
+    ctx.lineJoin = 'round';
+    ctx.beginPath();
+    const start = Math.max(0, from - 1);
+    ctx.moveTo(wave.pts[start][0], wave.pts[start][1]);
+    for (let i = start + 1; i <= to; i++) ctx.lineTo(wave.pts[i][0], wave.pts[i][1]);
+    ctx.stroke();
+    ctx.globalAlpha = 1;
+  }
+
+  function dot() {
+    if (!ctx || !wave) return;
+    const c = colors();
+    const [x, y] = wave.end;
+    if (c.dark) {
+      ctx.fillStyle = c.sig;
+      ctx.globalAlpha = 0.22;
+      ctx.beginPath();
+      ctx.arc(x, y, 7, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.globalAlpha = 1;
+    }
+    ctx.fillStyle = c.sig;
+    ctx.beginPath();
+    ctx.arc(x, y, 3, 0, Math.PI * 2);
+    ctx.fill();
   }
 
   function pause() { running = false; cancelAnimationFrame(raf); }
 
+  function renderSettled() {
+    if (!canvas) return;
+    pause(); build(); scaffold();
+    trace(0, wave.pts.length - 1);
+    wave.drawn = wave.pts.length - 1;
+    wave.elapsed = DRAW_MS;
+    dot();
+  }
+
   function runLoop() {
-    if (running) return;
+    if (running || !wave) return;
     running = true;
     let last = performance.now();
     const loop = (now: number) => {
-      if (!running || !sim) return;
-      const dt = Math.min(now - last, 100); // clamp: background-tab gaps must not expire the budget
+      if (!running || !wave) return;
+      const dt = Math.min(now - last, 100);
       last = now;
-      sim.elapsed += dt;
-      const target = Math.min(STEPS_TOTAL, Math.round((sim.elapsed / DURATION) * STEPS_TOTAL));
-      if (target > sim.drawn) { step(target - sim.drawn); sim.drawn = target; }
-      if (sim.drawn >= STEPS_TOTAL) { running = false; return; } // settled — loop cancelled
+      wave.elapsed += dt;
+      const target = Math.min(wave.pts.length - 1, Math.round((wave.elapsed / DRAW_MS) * (wave.pts.length - 1)));
+      if (target > wave.drawn) { trace(wave.drawn, target); wave.drawn = target; }
+      if (wave.drawn >= wave.pts.length - 1) { dot(); running = false; return; }
       raf = requestAnimationFrame(loop);
     };
     raf = requestAnimationFrame(loop);
   }
 
-  function settleNow() {
-    step(STEPS_TOTAL - sim.drawn);
-    sim.drawn = STEPS_TOTAL;
-    sim.elapsed = DURATION;
-  }
-  function renderSettled() { if (!canvas) return; pause(); build(); settleNow(); }
   function start() {
     pause(); build();
-    if (reduced) { settleNow(); return; }
+    if (!wave) return;
+    scaffold();
+    if (reduced) { renderSettled(); return; }
     runLoop();
   }
+
   function teardown() {
     pause();
-    sim = null;
+    wave = null;
     canvas = null;
     ctx = null;
   }
@@ -214,31 +286,29 @@ const startPicks = starts.map((s) => sortedPosts.find((p) => p.id === s)).filter
   function init() {
     const el = document.getElementById('field') as HTMLCanvasElement | null;
     if (!el) { teardown(); return; }
-    if (el === canvas && sim) return; // same page, already live
+    if (el === canvas && wave) return;
     canvas = el;
     ctx = el.getContext('2d');
-    amplitude = JSON.parse(el.dataset.amplitude || '[]');
     start();
   }
 
-  // Registered once at module scope; all handlers no-op when no canvas is live.
   document.addEventListener('astro:page-load', init);
   document.addEventListener('astro:before-swap', teardown);
   document.addEventListener('visibilitychange', () => {
-    if (!sim) return;
+    if (!wave) return;
     if (document.hidden) pause();
-    else if (sim.drawn < STEPS_TOTAL && !reduced) runLoop();
+    else if (wave.drawn < wave.pts.length - 1 && !reduced) runLoop();
   });
-  new MutationObserver(() => { if (sim) renderSettled(); })
+  new MutationObserver(() => { if (wave) renderSettled(); })
     .observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
   let rt: ReturnType<typeof setTimeout>;
   window.addEventListener('resize', () => {
     clearTimeout(rt);
-    rt = setTimeout(() => { if (canvas && sim && canvas.clientWidth !== sim.w) renderSettled(); }, 200);
+    rt = setTimeout(() => { if (canvas && wave && canvas.clientWidth !== wave.w) renderSettled(); }, 200);
   });
   reducedMq.addEventListener('change', (e) => {
     reduced = e.matches;
-    if (reduced && sim) renderSettled();
+    if (reduced && wave) renderSettled();
   });
   init();
 </script>
@@ -260,12 +330,26 @@ const startPicks = starts.map((s) => sortedPosts.find((p) => p.id === s)).filter
   .instrument :global(noscript svg) {
     border: 1px solid var(--hairline);
   }
+  .year-axis {
+    position: relative;
+    height: 1.5rem;
+    margin-top: 0.4rem;
+    font-family: 'Berkeley Mono', monospace;
+    font-size: 1.05rem;
+    color: var(--muted);
+  }
+
+  .year-axis span {
+    position: absolute;
+    transform: translateX(-50%);
+  }
+
   .instrument figcaption {
     font-family: 'Berkeley Mono', monospace;
     font-size: 1.15rem;
     color: var(--muted);
     text-align: right;
-    margin-top: 0.7rem;
+    margin-top: 0.2rem;
     letter-spacing: 0.02em;
   }
 
