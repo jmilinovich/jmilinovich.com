@@ -4,39 +4,39 @@ date: "2024-07-03"
 
 ---
 
-I saw my first [processing.js](https://processing.org/) demo at UCLA in 2012. [Casey Reas](https://reas.com/) made me question everything I thought I knew about making art. Who's the real artist -- the person who writes the code, or the code itself?
+My fascination with generative interfaces began in college, studying architecture at UCLA. A [Processing](https://processing.org/) demo by [Casey Reas](https://reas.com/) in 2012 challenged my understanding of how art gets made: is the artist the algorithm, or its creator? Twelve years later I'm asking a bigger version of the same question: could the artist be a collaboration between human and AI, with the interface itself as a co-creator?
 
-Now I ask a different question: What if the interface itself could create with us?
+Design generation has had two paradigms so far. Parametric design is algorithm-driven, with the user setting the parameters. AI generation learns from data to create new designs. Now we're entering a third: AI-generated interfaces.
 
-Most AI tools today work like a waiter -- you order something, wait, and get what you asked for. But imagine if your 3D modeling software watched you work and spawned new tools on the fly. Request more rooms in your design, and suddenly there's a slider to control them. The software isn't just following orders -- it's building you a custom cockpit.
+![Neural Photo Editing with Introspective Adversarial Networks: a portrait being edited through a latent-space brush and sliders](/images/posts/neural-photo-editing-2016.gif)
 
-This isn't science fiction. Figma already previewed something like this at Config. Design a layout, and the interface grows new controls specifically for that design. Not preset options -- tools born from your work.
+*Neural Photo Editing with Introspective Adversarial Networks (2016)*
 
-![Figma's Writing Tone Dial](/images/posts/w-640-quality-90-fit-scale-down.png)
+![Logo Synthesis and Manipulation with Clustered Generative Adversarial Networks: a GAN logo tool with sliders for color and shape](/images/posts/logo-synthesis-gan-2017.png)
 
-*Figma's Writing Tone Dial (Figma Connect 2024)*
+*Logo Synthesis and Manipulation with Clustered Generative Adversarial Networks (2017)*
 
-The real magic is speed. Today's AI often feels like talking to someone on a laggy video call. But these new interfaces could feel like a video game controller -- instant, natural, alive. Picture adjusting complex 3D models as smoothly as moving Mario through a level.
+Imagine working on a 3D architectural model. You ask for more rooms, the rooms appear, and so does a slider for adjusting the room count yourself, generated from the context of your work. The AI is making changes, and it's also crafting the tools you use to make your own. The interface itself becomes part of the creative process.
 
-Projects like [ComfyUI](https://github.com/comfyanonymous/ComfyUI) and [GLIGEN](https://gligen.github.io/) are already pushing this direction. [Krea](https://www.krea.ai/home) lets you use anything on your screen as input, updating in real-time. We're building tools that don't just understand what you want -- they evolve to help you create it.
+The power of AI-generated interfaces comes from real-time interaction. Generative AI today suffers from latency: you prompt, you wait, you look at what came back. These new interfaces could have the responsiveness of a video game controller. Combine the speed of parametric design with the adaptability of AI and you could adjust a complex 3D model with the same immediacy as moving a game character. That quick feedback loop is also what keeps the user in control of the process.
 
-<!-- Image unavailable: original URL was https://assets.super.so/a552cc9d-75a0-4c81-bdd0-edbe3eec9f99/images/912fd865-75b9-4cb0-a05d-b049bafc7ebf/download.gif?w=708 -->
+Early versions already exist. [ComfyUI](https://github.com/comfyanonymous/ComfyUI) is bringing [Grasshopper](https://www.grasshopper3d.com/)-like capabilities to diffusion models, and [GLIGEN](https://gligen.github.io/) is stretching what a non-realtime diffusion interface can do. The approach I'm most excited about is [Krea's](https://www.krea.ai/home): use anything on your screen as context for the model, and watch the output update in real time.
 
-*Krea's Realtime Generation Feature*
+Mainstream design tools are showing glimpses of this too. At their Config conference this year, Figma previewed Adjust tone for AI-generated text: a 2D pad where you drag between casual and professional, concise and expanded, and the text follows.
 
-But this brings hard questions:
+![Figma's Adjust tone control: a 2D pad with axes running from casual to professional and concise to expanded](/images/posts/figma-adjust-tone-config-2024.gif)
 
-- How do we keep interfaces learnable when everyone's are different?
-- How do we protect privacy when interfaces learn from behavior?
-- How do we make tools that empower rather than replace?
+*Figma's Adjust tone (Config 2024)*
 
-The next revolution isn't just about smarter AI. It's about interfaces that grow with us, that feel less like ordering from a menu and more like jamming with a band.
+You can point the same pattern at almost any creative tool: a color palette adjuster generated for the specific logo you're designing, trimming tools that understand the content of your footage, visualization controls built from the patterns in your dataset.
 
-Want to build this future? Start here:
+There are hard problems here. Generating interfaces from user behavior takes data about that behavior, so privacy matters. Adaptability can add complexity as easily as it removes it. And if every user's interface is different, keeping tools consistent and learnable across applications gets harder.
 
-- Push computation to the edge for speed
-- Think beyond text prompts
-- Mix AI with old-school parametric design
-- Make it feel alive
+For those of us building generative AI products, a few places to focus:
 
-The interface of tomorrow moves and breathes. What are you going to build?
+- Cut latency however you can: model optimization, caching, hybrid parametric-AI approaches.
+- Move past text prompts to multimodal input, and make sure generated interfaces add to the user's agency rather than replacing it.
+- Push more computation to the client, for responsiveness and for privacy.
+- Bridge the paradigms: the control of parametric design, the power of generative AI, the adaptability of AI-generated interfaces.
+
+The next breakthroughs won't come from better models alone. They'll come from interfaces generated as dynamically as the work itself. What's the next one you're going to prototype?
