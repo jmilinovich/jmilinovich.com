@@ -67,6 +67,10 @@ The two themes are two physical materials for the same algorithm: **dark = phosp
 accents) — the Casey Reas print citation. `muted` values replace the old `#999`/`#777`,
 which failed WCAG AA on every date on the site.
 
+**Light is the default theme** (owner decision 2026-07-27): every visitor gets plotter
+ink on white unless they explicitly toggle dark. The OS color-scheme preference does not
+override the default — dark is a choice, not an inheritance.
+
 **Rule:** chrome stays achromatic. Colour exists only in the drawings, `::selection`, and
 `:focus-visible`. Links are underline-distinguished, never coloured.
 

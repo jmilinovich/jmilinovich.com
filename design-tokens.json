@@ -1,5 +1,5 @@
 {
-  "$description": "Design tokens for mili.dev — direction 'Process'. See DESIGN.md for reasons. Themes: light = plotter ink on paper, dark = phosphor on black.",
+  "$description": "Design tokens for mili.dev \u2014 direction 'Process'. See DESIGN.md for reasons. Themes: light = plotter ink on paper, dark = phosphor on black.",
   "type": {
     "families": {
       "serif": {
@@ -17,14 +17,49 @@
     },
     "scale": {
       "root": "62.5%",
-      "body": { "size": "1.7rem", "lineHeight": 1.65, "family": "serif" },
-      "h1": { "size": "clamp(3rem, 2.2rem + 1.6vw, 4.2rem)", "weight": 600, "lineHeight": 1.1, "letterSpacing": "-0.015em", "family": "serif" },
-      "essayTitle": { "size": "clamp(2.8rem, 2.1rem + 1.4vw, 3.8rem)", "weight": 600, "lineHeight": 1.15, "letterSpacing": "-0.015em", "family": "serif" },
-      "rowTitle": { "size": "1.7rem", "lineHeight": 1.4, "family": "serif" },
-      "eyebrow": { "size": "1.2rem", "transform": "uppercase", "letterSpacing": "0.12em", "family": "mono" },
-      "date": { "size": "1.2rem", "family": "mono" },
-      "caption": { "size": "1.15rem", "letterSpacing": "0.02em", "family": "mono" },
-      "nav": { "size": "1.3rem", "family": "mono" }
+      "body": {
+        "size": "1.7rem",
+        "lineHeight": 1.65,
+        "family": "serif"
+      },
+      "h1": {
+        "size": "clamp(3rem, 2.2rem + 1.6vw, 4.2rem)",
+        "weight": 600,
+        "lineHeight": 1.1,
+        "letterSpacing": "-0.015em",
+        "family": "serif"
+      },
+      "essayTitle": {
+        "size": "clamp(2.8rem, 2.1rem + 1.4vw, 3.8rem)",
+        "weight": 600,
+        "lineHeight": 1.15,
+        "letterSpacing": "-0.015em",
+        "family": "serif"
+      },
+      "rowTitle": {
+        "size": "1.7rem",
+        "lineHeight": 1.4,
+        "family": "serif"
+      },
+      "eyebrow": {
+        "size": "1.2rem",
+        "transform": "uppercase",
+        "letterSpacing": "0.12em",
+        "family": "mono"
+      },
+      "date": {
+        "size": "1.2rem",
+        "family": "mono"
+      },
+      "caption": {
+        "size": "1.15rem",
+        "letterSpacing": "0.02em",
+        "family": "mono"
+      },
+      "nav": {
+        "size": "1.3rem",
+        "family": "mono"
+      }
     }
   },
   "palette": {
@@ -52,7 +87,8 @@
       "chrome is achromatic; sig appears only in drawings, ::selection, :focus-visible",
       "links carry a visible underline in muted (>= 3:1), darkening to ink-strong on hover; never coloured",
       "muted must hold >= 4.5:1 on paper in both themes",
-      "code renders monochrome: ink on code-bg, no syntax colours"
+      "code renders monochrome: ink on code-bg, no syntax colours",
+      "light is the default theme; dark is an explicit toggle choice, never inherited from the OS"
     ]
   },
   "space": {
@@ -65,20 +101,33 @@
   },
   "motion": {
     "budget": "one settle-to-rest instrument on the homepage, animated once per arrival; essay pages are still; sole standing exception: the living logo",
-    "instrument": { "durationMs": 7000, "stepsTotal": 840, "onSettle": "cancelAnimationFrame", "maxParticles": 480, "dprCap": 2 },
-    "determinism": "settle is the fixed 840-step budget, never a wall-clock cutoff — identical drawing at any refresh rate",
+    "instrument": {
+      "durationMs": 7000,
+      "stepsTotal": 840,
+      "onSettle": "cancelAnimationFrame",
+      "maxParticles": 480,
+      "dprCap": 2
+    },
+    "determinism": "settle is the fixed 840-step budget, never a wall-clock cutoff \u2014 identical drawing at any refresh rate",
     "reducedMotion": "the same 840-step settled frame, rendered synchronously; honors mid-session changes",
     "noJs": "build-time static frame as inline SVG in <noscript>, same seed",
     "themeOrResize": "re-render the settled frame synchronously; never replay the animation",
     "lifecycle": "pause on hidden, resume on visible; teardown on astro:before-swap",
-    "viewTransitions": { "out": "0.2s ease-in", "in": "0.3s ease-out 0.2s delay" }
+    "viewTransitions": {
+      "out": "0.2s ease-in",
+      "in": "0.3s ease-out 0.2s delay"
+    }
   },
   "surface": {
     "borderRadius": "0 (max 2px on focus ring)",
     "borders": "1px hairline only",
     "shadows": "none",
     "gradients": "none",
-    "imagery": "generative only — no AI-generated images, no stock; photos only when the essay is about the photo",
-    "instrumentFrame": { "height": "136px", "border": "1px solid hairline", "caption": "mono, right-aligned, seed + data provenance" }
+    "imagery": "generative only \u2014 no AI-generated images, no stock; photos only when the essay is about the photo",
+    "instrumentFrame": {
+      "height": "136px",
+      "border": "1px solid hairline",
+      "caption": "mono, right-aligned, seed + data provenance"
+    }
   }
 }
