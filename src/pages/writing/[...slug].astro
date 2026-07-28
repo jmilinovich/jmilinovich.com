@@ -1,7 +1,7 @@
 ---
 import { getCollection, render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { glyphPath, fmtDate } from '../../lib/process';
+import { glyphPath, fmtDate, essayFeatures, growthFoldSvg } from '../../lib/process';
 
 export async function getStaticPaths() {
   const posts = await getCollection('writing', ({ data }) => !data.draft);
@@ -14,6 +14,11 @@ export async function getStaticPaths() {
 const { post } = Astro.props;
 const { Content } = await render(post);
 const glyph = glyphPath(post.id);
+
+// The fingerprint: a growth-fold line grown from this essay's own text at
+// build time (see growthFoldSvg). The byline pressmark opens; this closes.
+const feats = essayFeatures(post.body || '');
+const fingerprint = growthFoldSvg(post.id, feats, +(post.data.date || '2026').slice(0, 4));
 
 // Auto-extract description from first paragraph of markdown
 function extractDescription(body: string): string {
@@ -49,9 +54,10 @@ const postDescription = extractDescription(post.body || '');
     <div class="post-content">
       <Content />
     </div>
-    <footer class="end-mark" aria-hidden="true">
-      <svg class="glyph glyph-end" viewBox="0 0 24 24"><path d={glyph} /></svg>
-    </footer>
+    <figure class="fingerprint" aria-hidden="true">
+      <div class="frame" set:html={fingerprint} />
+      <figcaption>{feats.words.toLocaleString()} words</figcaption>
+    </figure>
   </article>
 </BaseLayout>
 
@@ -75,22 +81,27 @@ const postDescription = extractDescription(post.body || '');
     color: var(--muted);
   }
 
-  .byline .glyph,
-  .end-mark .glyph {
+  .byline .glyph {
     width: 20px;
     height: 20px;
     flex: none;
   }
 
-  .end-mark {
-    display: flex;
-    justify-content: center;
+  .fingerprint {
     margin-top: 5rem;
   }
 
-  .end-mark .glyph-end {
-    width: 28px;
-    height: 28px;
+  .fingerprint .frame {
+    border: 1px solid var(--hairline);
+  }
+
+  .fingerprint figcaption {
+    font-family: 'Berkeley Mono', monospace;
+    font-size: 1.15rem;
+    color: var(--muted);
+    text-align: right;
+    margin-top: 0.7rem;
+    letter-spacing: 0.02em;
   }
 
   .post-content {

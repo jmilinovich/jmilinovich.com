@@ -130,6 +130,11 @@
     "substrate": {
       "frame": "none — no border, no box; the page is the canvas",
       "provenance": "mono caption, right-aligned, at the bottom of the soil; seed only, no data claim"
+    },
+    "fingerprint": {
+      "frame": "1px hairline border, 575x136 viewBox, end of every essay",
+      "caption": "mono, right-aligned, one quiet number (word count) — the gentlest decoder ring",
+      "motion": "none — static build-time SVG; essay pages stay still"
     }
   }
 }
