@@ -100,18 +100,20 @@
     "breakpoint": "767px"
   },
   "motion": {
-    "budget": "one settle-to-rest instrument on the homepage, animated once per arrival; essay pages are still; sole standing exception: the living logo",
-    "instrument": {
-      "style": "rootwork, grows-once",
-      "drawMs": 5600,
-      "onComplete": "cancelAnimationFrame",
-      "seed": "random per load, replayable via ?seed=",
-      "accent": "terminal dot only, in sig",
-      "dprCap": 2
+    "budget": "settle-to-rest: arrival grows the first viewport once, scroll is the only other energy source, idle CPU zero; essay pages are still; sole standing exception: the living logo",
+    "substrate": {
+      "style": "root curtain descending the whole page; text is stone (measured DOM rects); taproot hierarchy; commit counts as an axis-free nutrient field",
+      "arriveMs": 7000,
+      "scrollFed": "reveal target = scrollY + 1.7 viewports; chase rate 3.5x arrival; never regresses",
+      "onSettle": "cancelAnimationFrame",
+      "seed": "random per load, replayable via ?seed= (full 8-hex)",
+      "accent": "sig dot at the deepest tip only",
+      "dprCap": 2,
+      "canvasSlices": "2048px css per slice, 42M device-px area budget"
     },
-    "determinism": "geometry is iteration-based per seed; time paces the growth, never the image; seed shown in caption",
-    "reducedMotion": "the same 840-step settled frame, rendered synchronously; honors mid-session changes",
-    "noJs": "build-time static frame as inline SVG in <noscript>, same seed",
+    "determinism": "geometry is precomputed per seed; time and scroll pace the reveal, never the image; seed shown in the provenance line",
+    "reducedMotion": "the fully grown organism, rendered synchronously; honors mid-session changes",
+    "noJs": "pure typography — the substrate depends on measured layout and gets no static stand-in",
     "themeOrResize": "re-render the settled frame synchronously; never replay the animation",
     "lifecycle": "pause on hidden, resume on visible; teardown on astro:before-swap",
     "viewTransitions": {
@@ -125,10 +127,9 @@
     "shadows": "none",
     "gradients": "none",
     "imagery": "generative only \u2014 no AI-generated images, no stock; photos only when the essay is about the photo",
-    "instrumentFrame": {
-      "height": "136px",
-      "border": "1px solid hairline",
-      "caption": "mono, right-aligned, seed + data provenance"
+    "substrate": {
+      "frame": "none — no border, no box; the page is the canvas",
+      "provenance": "mono caption, right-aligned, at the bottom of the soil; seed only, no data claim"
     }
   }
 }
