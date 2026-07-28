@@ -1,14 +1,12 @@
 ---
-title: "Small is fast"
+title: "7 lessons learned growing from 4 to 20 people"
 date: "2015-05-24"
 
 ---
 
 In URX's first 2 years, we grew from 4 co-founders to a 20-person engineering, product and business team. With this growth, many of our internal processes and communication channels broke. It didn't feel like we were moving as fast as we were before, and it took longer to get everyone on the same page.
 
-## How can we grow startups as efficiently as living organisms?
-
-After analyzing our current processes, I came up with a new set of tenets that guide how I operate as a CEO. Thanks to the way communication overhead scales exponentially as a team grows, I expect to have to revisit these continuously along our growth curve.
+After analyzing our current processes, I came up with a new set of tenets that guide how I operate as a CEO. Thanks to the way communication overhead scales combinatorially as a team grows, I expect to have to revisit these continuously along our growth curve.
 
 Here are the 7 lessons I learned growing URX from 4 to 20 people.
 
@@ -42,7 +40,7 @@ As a founding CEO, your emotions are amplified throughout the organization. Ever
 
 The hardest part of building a startup is how quickly things change. It's an emotional rollercoaster, and if not managed well will get the best of you. For me, this involves trying to live an integrated life that also leaves time for loved ones, working out, writing, sleeping and friends.
 
-Ben Horowitz talks more about this in [Managing Your Own Psychology](https://a16z.com/managing-your-own-psychology/).
+Ben Horowitz talks more about this in [Managing Your Own Psychology](https://a16z.com/whats-the-most-difficult-ceo-skill-managing-your-own-psychology/).
 
 ## Lesson 5: Repeat yourself.
 
@@ -64,7 +62,7 @@ Jim Collins talks more about this in [The Hedgehog Concept](https://www.jimcolli
 
 The beauty of the software industry is that it is built on the shoulders of giants. Whether we like it or not, our world is framed within the work of those that came before us.
 
-It's important to take a step back from the day-to-day to put your company and your problems into the broader context of the world around us. Practically speaking, this means that you're likely not the first person to face some seemingly obscure problem. Chances are, some abstraction of the same type of challenge have been dealt with before.
+It's important to take a step back from the day-to-day to put your company and your problems into the broader context of the world around us. Practically speaking, this means that you're likely not the first person to face some seemingly obscure problem. Chances are, some abstraction of the same type of challenge has been dealt with before.
 
 URX is creating a new kind of marketplace for mobile commerce built with a technology that has never existed before. That said, I consider myself a student of the precedents for all facets of our business. From the history of how the internet was born, to the early days of search engines, to emerging mobile business models and their desktop equivalent- I strive to maximize the potential of URX by deeply understanding the world around us.
 
