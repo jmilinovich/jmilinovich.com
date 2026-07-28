@@ -4,7 +4,7 @@ import PostCard from '../components/PostCard.astro';
 import { getCollection } from 'astro:content';
 import contributions from '../../public/data/contributions.json';
 
-const posts = await getCollection('writing', ({ data }) => !data.draft);
+const posts = await getCollection('writing', ({ data }) => !data.draft && !data.unlisted);
 const sortedPosts = posts.sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
 
 const days = (contributions as { date: string; count: number }[])

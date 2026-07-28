@@ -9,6 +9,8 @@ const writing = defineCollection({
     image: z.string().optional(),
     tags: z.array(z.string()).optional(),
     draft: z.boolean().optional(),
+    // page still builds and is reachable by URL, just kept off every listing
+    unlisted: z.boolean().optional(),
   }),
 });
 
