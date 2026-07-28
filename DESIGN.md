@@ -113,7 +113,8 @@ streamlines`.
 1. **Homepage instrument** — rootwork (v3, 2026-07-28; the flow field was judged
    wallpaper, the seismogram read as a heart monitor). Branching growth creeps left to
    right across the years over ~5.6s, staggered starts, ramifying where the commit
-   history is dense; faint year ticks keep the time axis legible; the only colour is the
+   history is dense (the axis itself stays unlabeled — owner call 2026-07-28: an organism
+   doesn't need chart furniture; the caption carries the provenance); the only colour is the
    `sig` dot at the furthest tip. **A new random seed every load** (owner decision: the
    drawing should feel different each visit); the caption shows the seed and `?seed=<hex>`
    replays any drawing — determinism preserved per seed, surprise preserved per visit.

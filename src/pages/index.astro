@@ -19,15 +19,6 @@ const fresh = Math.floor((Date.parse(seedDate) - Date.parse(lastDataDate)) / 864
 const countsArr = days.map((d) => Math.min(35, d.count));
 const countsB36 = countsArr.map((c) => c.toString(36)).join('');
 const noscriptFrame = rootsSvg(countsArr, xmur3(seedDate)());
-const ticks: { f: number; label: string }[] = [];
-{
-  const startYear = +days[0].date.slice(0, 4);
-  const endYear = +days[days.length - 1].date.slice(0, 4);
-  for (let y = startYear; y <= endYear; y++) {
-    const idx = days.findIndex((d) => d.date >= `${y}-01-01`);
-    if (idx >= 0) ticks.push({ f: idx / days.length, label: `'${String(y).slice(2)}` });
-  }
-}
 
 const starts = [
   'the-agentic-web',
@@ -47,14 +38,8 @@ const startPicks = starts.map((s) => sortedPosts.find((p) => p.id === s)).filter
       height="136"
       aria-hidden="true"
       data-counts={countsB36}
-      data-ticks={JSON.stringify(ticks.map((k) => +k.f.toFixed(4)))}
     ></canvas>
     <noscript set:html={noscriptFrame} />
-    <div class="year-axis" aria-hidden="true">
-      {ticks.map((k) => (
-        <span style={`left: ${(((6 + k.f * (575 - 12)) / 575) * 100).toFixed(2)}%`}>{k.label}</span>
-      ))}
-    </div>
     <figcaption>seed <span id="seed-label">{seedDate}</span>{fresh && ` · ${totalCommits.toLocaleString()} commits`}</figcaption>
   </figure>
 
@@ -217,24 +202,12 @@ const startPicks = starts.map((s) => sortedPosts.find((p) => p.id === s)).filter
       iters.push(segs);
       if (!anyAlive) break;
     }
-    const ticks = JSON.parse(canvas.dataset.ticks || '[]').map((f: number) => 6 + f * (w - 12));
-    art = { seedInt, iters, far: { x: Math.min(far.x, w - 4), y: far.y }, ticks, w, h, drawn: 0, elapsed: 0 };
+    art = { seedInt, iters, far: { x: Math.min(far.x, w - 4), y: far.y }, w, h, drawn: 0, elapsed: 0 };
   }
 
   function scaffold() {
     if (!ctx || !art) return;
-    const c = colors();
     ctx.clearRect(0, 0, art.w, art.h);
-    ctx.strokeStyle = c.muted;
-    ctx.globalAlpha = 0.5;
-    ctx.lineWidth = 1;
-    ctx.beginPath();
-    for (const x of art.ticks) {
-      ctx.moveTo(x, art.h - 10);
-      ctx.lineTo(x, art.h - 4);
-    }
-    ctx.stroke();
-    ctx.globalAlpha = 1;
   }
 
   function growth(from: number, to: number) {
@@ -365,26 +338,12 @@ const startPicks = starts.map((s) => sortedPosts.find((p) => p.id === s)).filter
   .instrument :global(noscript svg) {
     border: 1px solid var(--hairline);
   }
-  .year-axis {
-    position: relative;
-    height: 1.5rem;
-    margin-top: 0.4rem;
-    font-family: 'Berkeley Mono', monospace;
-    font-size: 1.05rem;
-    color: var(--muted);
-  }
-
-  .year-axis span {
-    position: absolute;
-    transform: translateX(-50%);
-  }
-
   .instrument figcaption {
     font-family: 'Berkeley Mono', monospace;
     font-size: 1.15rem;
     color: var(--muted);
     text-align: right;
-    margin-top: 0.2rem;
+    margin-top: 0.7rem;
     letter-spacing: 0.02em;
   }
 
