@@ -1,9 +1,13 @@
 ---
-title: "On Chain Conglomerates"
+title: "On chain conglomerates"
 date: "2022-07-10"
 ---
 
 [Crypto Mullets](https://mirror.xyz/jrm.eth/sc2O_cxkJ_npiC17HwUQMvhaoSMe227pIVcgoIC5yUY) are the next wave of multibillion dollar web3 companies, and one way they'll come to market is through on chain conglomerates powered by annuity-bearing NFTs.
+
+![Blue illustration of interconnected hub-and-spoke node diagrams under the words "On Chain Conglomerates"](/images/posts/on-chain-conglomerates-mirror-2022.png)
+
+*The original art from this post's first publication on mirror.xyz.*
 
 Traditional conglomerates are, "a combination of multiple business entities operating in entirely different industries under one corporate group, usually involving a parent company and many subsidiaries" ([source](https://en.wikipedia.org/wiki/Conglomerate_(company))).
 

@@ -1,9 +1,13 @@
 ---
-title: "The crypto mullet: web2 in front, web3 in back"
+title: "The crypto mullet: web2 in the front, web3 in the back"
 date: "2022-06-11"
 ---
 
 The next wave of $1B+ crypto companies will disrupt incumbents by keeping an existing consumer experience in web2 while rebuilding its back office in web3.
+
+![Yellow and black illustration of an Elvis-style silhouette, mullet in the back, with the words "The Crypto Mullet" across the face](/images/posts/crypto-mullet-mirror-2022.png)
+
+*The original art from this post's first publication on [mirror.xyz](https://mirror.xyz/jrm.eth/sc2O_cxkJ_npiC17HwUQMvhaoSMe227pIVcgoIC5yUY).*
 
 Disruptive technologies create transformative business models when they enable a 10x better consumer experience (ie, Netflix with streaming tech vs. going to Blockbuster) or a 10x cheaper back office (ie, Instacart with mobile tech vs operating a grocery store).
 

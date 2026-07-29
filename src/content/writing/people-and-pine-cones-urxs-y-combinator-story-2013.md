@@ -44,6 +44,10 @@ During YC, every startup is paired with one of the partners to meet with frequen
 
 We received an email from PG about a month into YC telling us he'd like to meet because it had been a while since we'd talked last. Excited by the chance to show PG what we've built, we booked office hours and prepped what we wanted to talk about. On the familiar walk around Pioneer Way, PG stopped mid-sentence to bend down and pick something up off the ground. It was a mini pine cone from the redwood tree that towered above us. "Startups are like this pine cone," he told us. "All of them start small and look the same, but only a few will ever realize their full potential." He handed me the pine cone, and we kept walking. (In case you're wondering, yes, I still have that pine cone). We continued sharing our plans and he simply shrugged and told us, "Do what will make you the most money first. Use that as your guiding light." So simple, but more true than we knew at the time.
 
+![A mini pine cone resting on business cards from Yahoo, Google, AdLast and URX](/images/posts/spr-pine-cones-yc.png)
+
+*The pine cone, on top of my old Yahoo, Google, AdLast and URX business cards.*
+
 Towards the end of the meeting, PG gave us a hard time for not yet changing our name from AdLast. We'd looked into it, we told him, but the name wasn't available. I could see (and hear) his disappointment, and "quickly realized that my number one priority had just become our rebrand." 20 minutes later, I was on the phone with the current owner of the name URX and by the time we showed up at the next Tuesday dinner, we were URX.
 
 ## Demo Day and Beyond

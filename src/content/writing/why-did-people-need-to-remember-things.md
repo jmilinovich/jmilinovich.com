@@ -10,6 +10,10 @@ _This is part of a [series](/writing) about living with AGI in society_
 
 My daughter's question catches me off guard, her small face genuinely puzzled as we look through old family photos from back when she was barely walking. In them, my father stands proudly in front of his library: walls of books that held a lifetime of accumulated knowledge, his generation's tools for understanding the world, preserved in amber.
 
+![Black and white illustration of an open book whose pages take flight as a flock of birds](/images/posts/book-into-birds.jpg)
+
+*The essay's original illustration.*
+
 How do I explain what it meant to carry information in our heads? To feel the weight of forgetting, to know that every fact, skill, or memory not actively maintained might slip away forever? These were our challenges, just as my father's generation struggled with access to information itself, and his father's with basic literacy.
 
 The world my daughter's growing up in has made such concerns as foreign to her as memorizing phone numbers now feels to me, though it was routine for my mother's own mother. And it's not because she has perfect recall or cybernetic implants or constant access to a vast database.

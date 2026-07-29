@@ -22,6 +22,10 @@ The power of AI-generated interfaces comes from real-time interaction. Generativ
 
 Early versions already exist. [ComfyUI](https://github.com/comfyanonymous/ComfyUI) is bringing [Grasshopper](https://www.grasshopper3d.com/)-like capabilities to diffusion models, and [GLIGEN](https://gligen.github.io/) is stretching what a non-realtime diffusion interface can do. The approach I'm most excited about is [Krea's](https://www.krea.ai/home): use anything on your screen as context for the model, and watch the output update in real time.
 
+![Krea's real-time canvas: a webcam feed and a yellow circle on the left, generating a live image of a green alien on the right as the prompt and canvas change](/images/posts/krea-realtime-canvas-2024.gif)
+
+*Krea's real-time canvas (2024)*
+
 Mainstream design tools are showing glimpses of this too. At their Config conference this year, Figma previewed Adjust tone for AI-generated text: a 2D pad where you drag between casual and professional, concise and expanded, and the text follows.
 
 ![Figma's Adjust tone control: a 2D pad with axes running from casual to professional and concise to expanded](/images/posts/figma-adjust-tone-config-2024.gif)

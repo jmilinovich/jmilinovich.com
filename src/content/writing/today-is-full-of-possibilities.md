@@ -1,5 +1,5 @@
 ---
-title: "Today is Full of Possibilities"
+title: "Today is full of possibilities"
 date: "2025-12-01"
 
 ---
@@ -89,6 +89,10 @@ But I'm learning something. When I let myself stay, not by defeating the seeking
 That's what my mother's words actually meant. Not that she'd found peace. Not that the darkness was gone. But that today, right now, whatever morning it was when she wrote that entry, was full of possibilities.
 
 She chose the day. Knowing everything. Holding everything. She chose it anyway.
+
+![Wooden alphabet blocks spelling POSSIBILITIES on a living room carpet, a family motion-blurred behind them](/images/posts/possibilities-blocks.jpeg)
+
+*Wooden blocks on the living room floor, the family blurred behind them.*
 
 ---
 
