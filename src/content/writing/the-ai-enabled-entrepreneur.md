@@ -23,7 +23,7 @@ A few months ago, I decided to help a friend with a side project and was able to
 
 ![Today, 2024: nearly every founder job is one I can do primarily myself](/images/posts/ai-entrepreneur-today-2024.png)
 
-Today, I am 200x more capable as a coder than I was three years ago at Aesthetic. At least that's how it feels. The sober version is that I may have become a 2-3x better programmer in the last few years, and LLMs and modern web technologies multiplied that by another 10-20x.
+Today, I am 200x more capable as a coder than I was three years ago at Aesthetic. At least that's how it feels. The sober version is that there are two axes at work: I may have become a 2-3x better programmer in the last few years, and LLMs and modern web technologies amplify whatever skill I have by another 10-20x. Those two axes multiply, and 200x is where it lands for me.
 
 Beyond coding, I'm also 3-5x more efficient in many other key founder activities (i.e. creating marketing collateral, system architecture, go to market execution) because of more experience and how I've integrated generative AI tools into my workflow (how I did this is probably something I'll write about in the future).
 

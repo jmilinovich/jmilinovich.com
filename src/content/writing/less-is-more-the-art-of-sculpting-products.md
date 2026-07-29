@@ -7,9 +7,7 @@ Instagram launched deliberately narrow: you took a photo, you added a filter tha
 
 Most products die from having too many features. We keep adding, thinking more equals better. But users don't want more. They want that one moment where the product feels like magic.
 
-I learned this the expensive way. My team spent six months building what we called a "complete solution." Users called it confusing. When we finally cut it down to one core action, people got it instantly.
-
-This is why product design is more sculpture than painting. The masterpiece is already in there. Your job is to chip away everything that's hiding it.
+That's why product design is more sculpture than painting. The masterpiece is already in there. Your job is to chip away everything that's hiding it.
 
 Look at the giants:
 
