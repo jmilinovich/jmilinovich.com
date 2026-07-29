@@ -174,7 +174,41 @@ differential growth on 2026-07-28.
    their first sentence — *nothing large before words*; the fingerprint is decoration
    AFTER words, the specimen of what was just read. Deterministic: same text, same
    drawing; editing the essay regrows it.
-4. **OG cards** — 1200×630 build-time renders: dark paper, hairline frame, serif title,
+4. **The essay foot** — three onward essays after the fingerprint (2026-07-29, via
+   /grill-me). Reaching the last line used to be a cul-de-sac: the fingerprint, then a
+   footer strip of four links that all left the site. The homepage's stated job — get a
+   second essay opened — actually falls here, so this is where it happens. Three `row`s
+   (glyph + serif title + mono date, the same object every list on the site uses) under a
+   `KEEP READING` eyebrow, closing with a left-aligned mono `All writing →` — the rows'
+   own terminal option. It sits **after** the fingerprint so the essay still closes on its
+   own specimen; the marks are kept because the fingerprint has just taught the reader what
+   they are, and three siblings at 20px are the payoff of that lesson.
+   **Picks are computed from the text** (`src/lib/kinship.js`) — TF-IDF over the corpus,
+   cosine similarity, local scaling, top three. The same principle as the fingerprint: the
+   essay's own words decide, so post 47 wires itself up and there is no `tags:` field to
+   backfill (there never was one — 0 of 46 essays carried tags) and no relevance metadata
+   to rot. *Local scaling is load-bearing:* raw cosine has a hubness problem, and the first
+   contact sheet proved it — URX's YC story was recommended by 12 of 44 essays and four
+   long, vocabulary-broad posts took a third of every slot on the site. Dividing each pair
+   by both essays' own local density (their K-th best match) spread that back out and
+   produced the mutual pairings raw cosine missed.
+   **`related:` in frontmatter overrides the computation**, and is set on exactly two
+   essays — the two the contact sheet showed computation losing: *The courage to remove*
+   (181 words is too little vocabulary to compute from) and *Quantified me* (a 2012
+   vocabulary that shares almost nothing with the archive). This is the escape hatch this
+   file said to build only once a sheet turned up a dud worth overriding. An unknown slug
+   in `related:` fails the build rather than silently dropping a link.
+   Static, no JS, no cards. Unlisted essays get a foot of their own but are never anyone's
+   neighbour. Gates: `node scripts/kinship-sheet.mjs` (contact sheet, `weakest` for the
+   loosest twelve) and `node scripts/check-essay-foot.mjs` after a build.
+   **A sticky or scroll-up-revealing desktop header remains rejected** (owner decision,
+   restated 2026-07-29) — the fixed auto-hiding header is mobile-only by construction. The
+   dead end was real; a bar over a page designed to be still was not the fix. The footer
+   strip gained a single `Home` link instead, which is the global escape at any scroll
+   depth on every page; `Writing` was tried there and cut, because a reader scrolling down
+   from mid-essay meets `All writing →` before the footer and the homepage carries the
+   whole archive anyway.
+5. **OG cards** — 1200×630 build-time renders: dark paper, hairline frame, serif title,
    mono provenance, and the living-logo wordmark (extracted from `Logo.astro` at build).
    Owner decision 2026-07-27: the glyph trace was tried here and rejected — out of
    context it reads as an unexplained squiggle. Glyphs stay where they have context
@@ -193,7 +227,9 @@ actually turns up a dud worth overriding.
 `logo` (the living mili wordmark, `Logo.astro`) · `row` (glyph + serif title + mono date)
 · `eyebrow` (mono section label) · `substrate` (the page-wide root layer + its mono
 provenance line) · `fingerprint` (the essay's growth-fold in a hairline frame + mono
-caption — the contained instrument) · `facts` (the bio bullets) · `footer strip`.
+caption — the contained instrument) · `facts` (the bio bullets) · `keep reading` (the
+essay foot: eyebrow + three `row`s + the mono `All writing →` line, `KeepReading.astro`)
+· `footer strip`.
 That's the whole kit; new surfaces compose these before inventing.
 
 ## Anti-patterns (the audit checks these)

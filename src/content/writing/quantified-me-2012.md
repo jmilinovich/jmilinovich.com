@@ -1,6 +1,14 @@
 ---
 title: "Quantified me"
 date: "2012-06-01"
+# A 2012 vocabulary (Fitocracy, Fitbit, "data mashups") shares almost no words
+# with the archive, so the sheet returned noise. Its real descendants: the essay
+# on outsourcing memory to machines, the open-API plea answered by the open-web
+# post-mortem, and instrumenting yourself today.
+related:
+  - why-did-people-need-to-remember-things
+  - did-social-media-kill-the-open-web-2020
+  - my-ai-native-creative-workflow
 ---
 
 *tl;dr: Open access to human-centric datasets from the Quantified Self movement will change how we live.*

@@ -1,0 +1,61 @@
+---
+// The essay foot (2026-07-29, via /grill-me). Reaching the last line of an
+// essay used to be a cul-de-sac: the fingerprint, then four links off-site. The
+// homepage's stated job — get a second essay opened — actually falls here, so
+// this is where it now happens. Three rows, the same `row` object every list on
+// the site is built from, picked by the essay's own text (src/lib/kinship.js).
+// Sits AFTER the fingerprint: the essay still closes on its own specimen.
+import PostCard from './PostCard.astro';
+
+interface Item {
+  title: string;
+  date: string;
+  slug: string;
+  glyph: string;
+}
+
+const { items } = Astro.props as { items: Item[] };
+---
+
+{items.length > 0 && (
+  <nav class="keep-reading" aria-labelledby="keep-reading-label">
+    <h2 class="eyebrow" id="keep-reading-label">Keep reading</h2>
+    <ul class="rows">
+      {items.map((item) => (
+        <PostCard title={item.title} date={item.date} slug={item.slug} glyph={item.glyph} />
+      ))}
+    </ul>
+    <p class="onward"><a href="/writing">All writing &rarr;</a></p>
+  </nav>
+)}
+
+<style>
+  /* The eyebrow carries the separation, as it does for every other section on
+     the site — no rule, no frame. The fingerprint above already has a box. */
+  .keep-reading {
+    margin-top: 5rem;
+  }
+
+  .rows {
+    list-style: none;
+    padding: 0;
+  }
+
+  /* Continues the rows' own left axis as their terminal option: "or, everything." */
+  .onward {
+    font-family: 'Berkeley Mono', monospace;
+    font-size: 1.2rem;
+    margin-top: 1.6rem;
+  }
+
+  .onward a {
+    color: var(--muted);
+    text-decoration: none;
+  }
+
+  .onward a:hover {
+    color: var(--ink);
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+  }
+</style>

@@ -3,6 +3,14 @@
 
 <footer class="site-footer">
   <div class="footer-inner container">
+    <!-- The way back in. The header scrolls away on desktop by design, so at the
+         bottom of a long page this strip is the only navigation within reach — it
+         can't be four links off-site. Home, not Writing: the homepage carries the
+         whole archive, and the essay foot's own "All writing" line is the reading
+         exit, so a second Writing link 60px above this one was just duplication.
+         (2026-07-29, via /grill-me) -->
+    <a href="/">Home</a>
+    <span class="dot" aria-hidden="true">&middot;</span>
     <a href="https://linkedin.com/in/jmilinovich" target="_blank" rel="noopener noreferrer">LinkedIn</a>
     <span class="dot" aria-hidden="true">&middot;</span>
     <a href="https://x.com/J_mili" target="_blank" rel="noopener noreferrer">X</a>
@@ -25,6 +33,9 @@
     align-items: center;
     justify-content: center;
     gap: 0.8rem;
+    /* five items now — wrap rather than overflow the 375px column */
+    flex-wrap: wrap;
+    row-gap: 0.6rem;
   }
 
   .site-footer a {

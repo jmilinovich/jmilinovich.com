@@ -11,6 +11,10 @@ const writing = defineCollection({
     draft: z.boolean().optional(),
     // page still builds and is reachable by URL, just kept off every listing
     unlisted: z.boolean().optional(),
+    // Override the computed onward picks (src/lib/kinship.js) for this essay.
+    // Absent on almost every post by design — only set where the contact sheet
+    // showed computation genuinely losing. Unknown slugs fail the build.
+    related: z.array(z.string()).optional(),
   }),
 });
 

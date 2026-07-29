@@ -1,6 +1,12 @@
 ---
 title: "The courage to remove"
 date: "2024-07-12"
+# 181 words is too little vocabulary for kinship to compute from — the sheet
+# paired a post about cutting features with two about social platforms.
+related:
+  - product-strategy-for-gen-ai-native-apps
+  - developing-product-sense
+  - a-founders-guide-to-design-2020
 ---
 
 Instagram launched deliberately narrow: you took a photo, you added a filter that made your coffee look better than it was, and it went into a feed. No galleries, no direct messages, no stories.

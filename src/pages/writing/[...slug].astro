@@ -1,17 +1,43 @@
 ---
 import { getCollection, render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { detailPath, fmtDate, essayFeatures, growthFoldSvg } from '../../lib/process';
+import KeepReading from '../../components/KeepReading.astro';
+import { detailPath, fmtDate, essayFeatures, growthFoldSvg, detailFromBody } from '../../lib/process';
+import { kinship } from '../../lib/kinship';
 
 export async function getStaticPaths() {
+  // Astro isolates getStaticPaths, so this lives here rather than at module scope.
+  const ONWARD = 3;
   const posts = await getCollection('writing', ({ data }) => !data.draft);
-  return posts.map((post) => ({
-    params: { slug: post.id },
-    props: { post },
-  }));
+
+  // Unlisted essays are vectorised (they get a foot like everyone else) but are
+  // never anyone's neighbour — they're deliberately off every listing.
+  const linkable = new Set(posts.filter((p) => !p.data.unlisted).map((p) => p.id));
+  const byId = new Map(posts.map((p) => [p.id, p]));
+  const neighbours = kinship(
+    posts.map((p) => ({ id: p.id, title: p.data.title, body: p.body || '' })),
+    { linkable, count: ONWARD }
+  );
+
+  return posts.map((post) => {
+    // Computed by default; `related:` in frontmatter wins where the contact
+    // sheet showed computation losing (see DESIGN.md §the essay foot).
+    const picks = (post.data.related ?? neighbours.get(post.id).map((n) => n.id))
+      .filter((id) => id !== post.id)
+      .slice(0, ONWARD);
+
+    const onward = picks.map((id) => {
+      const p = byId.get(id);
+      // Fail loudly: a renamed slug must not silently drop an onward link.
+      if (!p) throw new Error(`${post.id}: related slug "${id}" is not a published essay`);
+      return { slug: p.id, title: p.data.title, date: p.data.date, glyph: detailFromBody(p.id, p.body || '') };
+    });
+
+    return { params: { slug: post.id }, props: { post, onward } };
+  });
 }
 
-const { post } = Astro.props;
+const { post, onward } = Astro.props;
 const { Content } = await render(post);
 
 // One organism per essay, shown twice. The byline pressmark opens with the
@@ -59,6 +85,7 @@ const postDescription = extractDescription(post.body || '');
       <div class="frame" set:html={fingerprint} />
       <figcaption>{feats.words.toLocaleString()} words</figcaption>
     </figure>
+    <KeepReading items={onward} />
   </article>
 </BaseLayout>
 
