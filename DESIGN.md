@@ -115,8 +115,12 @@ on a forced-dark ground. Do not remove.
 
 ## The Process system (the signature)
 
-One algorithm, many render targets. `hash(seed) → PRNG → value-noise flow field →
-streamlines`.
+Two primitives off one seeded PRNG, many render targets. `hash(seed) → PRNG` then either
+**value-noise flow field → streamlines** (the page-scale substrate) or **differential
+growth → a folding line** (everything per-essay). The split is deliberate: the substrate
+is weather, the essay marks are a specimen. Corrected 2026-07-29 — this heading claimed a
+single flow-field algorithm, which stopped being true when the fingerprint shipped as
+differential growth on 2026-07-28.
 
 1. **Homepage substrate** — the whole page as petri dish (v4, 2026-07-28, via
    /grill-me; v3's bounded left→right band was judged a legacy of the commit axis and
@@ -138,11 +142,25 @@ streamlines`.
    any organism: determinism preserved per seed, surprise preserved per visit.
    Growth is iteration-based, so the finished organism is identical at any refresh
    rate.
-2. **Per-essay glyph** — seeded by the slug, generated at build, inline SVG (~20×20 at the
-   index). Deterministic forever: same slug, same mark.
+2. **Per-essay index mark** — a *detail* of that essay's own fingerprint: the most folded
+   28-node stretch of the same mature growth line, cropped square and magnified into a
+   ~20×20 inline SVG (`detailPath`). One organism per essay, shown at two magnifications —
+   the mark in the list, the whole line after the last paragraph (2026-07-29, via
+   /grill-me). A fixed-length run keeps density constant down the index however long the
+   essay runs; the run is chosen by total turning angle so the mark has character. One
+   uniform stroke — no ghosts, no sig dot, no weight ramp: at 20px the ghosts are invisible
+   and a green dot per row would turn the index into a column of dots. Kinship is carried
+   by geometry, not ornament. **Capturing the line young was tried first and rejected on
+   the contact sheet**: the simulation's frame is ~4:1 wide, so every early state
+   normalises to a flat dash — dead at 24, 40, 60, 85 and 120 nodes alike. Maturity is
+   where the folding lives, so magnify rather than rewind. Seeded by the slug and shaped by
+   the text: same text, same mark; editing the essay regrows it, exactly as the fingerprint
+   already behaved. The retired `glyphPath` flow-field streamline predates this.
 3. **Essay pressmark + fingerprint** — the pressmark opens, the fingerprint closes
-   (2026-07-28, via /grill-me; the 28px end-mark glyph retired in its favor). The slug's
-   glyph appears small (20px) beside the date in the byline; after the last line sits the
+   (2026-07-28, via /grill-me; the 28px end-mark glyph retired in its favor). The essay's
+   index mark appears small (20px) beside the date in the byline — the same detail the
+   list shows, so the page opens on the fragment and closes on the whole; after the last
+   line sits the
    **fingerprint**: a differential-growth line grown at build time from the essay's own
    text (`growthFoldSvg` in `src/lib/process.js`) — one growth epoch per paragraph,
    insertion budget ∝ paragraph words, question sentences buckling the line, em-dashes
@@ -164,7 +182,11 @@ streamlines`.
 
 **Determinism is law.** Same seed → same drawing, on every build, in both themes.
 **Quality gate:** every new glyph set renders to a contact sheet and gets human review
-before ship; `seedOverride` frontmatter exists for duds. Algorithmic slop is still slop.
+before ship. Algorithmic slop is still slop — the gate earns its keep: it is what caught
+the flat-dash seedling on 2026-07-29, after the idea had already been agreed. There is
+**no** `seedOverride` escape hatch; this file claimed one for months and no such
+frontmatter was ever implemented. Owner call 2026-07-29: build it only if a contact sheet
+actually turns up a dud worth overriding.
 
 ## Component vocabulary
 
