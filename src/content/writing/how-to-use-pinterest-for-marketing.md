@@ -5,7 +5,7 @@ date: "2020-12-10"
 
 Pinterest is an extraordinarily powerful tool for consumers, but is still misunderstood by marketers. I worked at Pinterest for 2 years helping build their core content understanding technology, and learned a lot about what makes for a successful Pinterest marketing strategy. I hope this guide helps demystify how marketers can get the most from Pinterest as a marketing channel.
 
-If you have any questions, please [Tweet @jmilinovich](https://twitter.com/intent/tweet?text=Hey%20@jmilinovich)!
+If you have any questions, please [Tweet @J_mili](https://twitter.com/intent/tweet?text=Hey%20@J_mili)!
 
 ## Why is Pinterest marketing important?
 

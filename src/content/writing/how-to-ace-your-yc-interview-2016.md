@@ -38,4 +38,4 @@ Y Combinator emphasizes the strength of the founding team above most other thing
 
 I've heard many people debate whether the interviews should include a demo or not. The general convention is that the partners are more interested in hearing people talk about the thing, as opposed to seeing the thing itself. That said, there seems to be no consistency as to whether a team actually gets to show a demo. In our case, we were introducing a new concept that was too abstract for most people to understand so we had a <30 second demo in place to make it clear exactly what we were talking about. We were able to show it, but only after trying about 3–4 times :). So, don't rely on your demo as a crutch to tell your story.
 
-The YC interview process is as challenging as it is invigorating, and I hope these 6 tips help you in your journey. Questions/feedback? Find me on Twitter [@jmilinovich](http://twitter.com/jmilinovich)
+The YC interview process is as challenging as it is invigorating, and I hope these 6 tips help you in your journey. Questions/feedback? Find me on Twitter [@J_mili](https://x.com/J_mili)

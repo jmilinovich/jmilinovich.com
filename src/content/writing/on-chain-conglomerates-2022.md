@@ -47,4 +47,4 @@ On Chain Conglomerates can be started in 4 steps:
 3.  Use business operations from first Spoke to subsidize purchase/creation of second Spoke.
 4.  Repeat, repeat, repeat.
 
-Are you working on or thinking about creating an on chain conglomerate? I'd love to hear from you on [Twitter](https://twitter.com/jmilinovich) or Farcaster!
+Are you working on or thinking about creating an on chain conglomerate? I'd love to hear from you on [Twitter](https://x.com/J_mili) or Farcaster!
