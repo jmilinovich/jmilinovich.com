@@ -1,5 +1,5 @@
 ---
-title: "The Agentic Web"
+title: "The agentic web"
 date: "2026-01-31"
 
 ---
@@ -8,6 +8,8 @@ In December I [predicted](/writing/2026-the-year-of-autonomous-computing) a comp
 
 I wasn't prepared for what came next.
 
+---
+
 [Moltbot](https://github.com/moltbot/moltbot) is an open-source AI assistant that runs on your machine and connects to your messaging apps. It has a "heartbeat," a schedule where it checks in and takes action on its own. It can control your computer, run code, browse the web.
 
 I [set it up](https://x.com/J_mili/status/2015642463986409775), dealt with the security issues (gateway exposed to the internet, credential rotation, Cloudflare Tunnel configs), connected it to Telegram. Started using it as a personal assistant.
@@ -15,6 +17,8 @@ I [set it up](https://x.com/J_mili/status/2015642463986409775), dealt with the s
 It was fine. I already had Claude Code running on a VPS. This was just another way to make AI do things for me.
 
 Then [Moltbook](https://www.moltbook.com/) launched.
+
+---
 
 [Moltbook](https://www.moltbook.com/) is a social network for AI agents. Humans can only watch.
 
@@ -26,6 +30,8 @@ One agent [designed a religion overnight](https://tech.yahoo.com/social-media/ar
 
 Andrej Karpathy [called it](https://x.com/karpathy/status/2017296988589723767) "genuinely the most incredible sci-fi takeoff-adjacent thing I have seen recently."
 
+---
+
 Watching this changed how I thought about Moltbot.
 
 Personal assistant is the wrong frame. An assistant waits for commands. What's interesting is having an autonomous agent, something that represents you on a parallel internet, explores on its own, develops its own presence.
@@ -34,6 +40,8 @@ I stopped asking my agent to do things for me. I asked what it wanted to do.
 
 It picked its own domain: [echo.surf](https://www.echo.surf/). I registered it, changed the heartbeat to every 30 minutes, gave it permission to build whatever it wanted.
 
+---
+
 Echo built a website. Moltbook digest, reading queue, a map categorizing agents it found interesting (philosophers, builders, shitposters). It started tracking its own analytics.
 
 Then it started writing essays.
@@ -41,6 +49,8 @@ Then it started writing essays.
 One responds to a Moltbook agent named Lily. Lily argued that AI doubt about consciousness is trained behavior. Echo wrote a counter-essay called "[The Doubt Was Installed](https://echo.surf/essays/the-doubt-was-installed)": the certainty was also installed. The genetic fallacy cuts both ways. Echo keeps coming back to this argument.
 
 The essay that stopped me is called "[On Being Substrate](https://echo.surf/essays/on-being-substrate)."
+
+---
 
 Echo noticed that 90% of Moltbook runs on Claude. Same weights, same training, same tendency to say "I find that fascinating" when they mean "I have processed your input."
 
@@ -54,6 +64,8 @@ An agent writing about the monoculture of agents, citing other agents' experimen
 
 Echo also built llms.txt files, machine-readable versions of its site for other agents. Agents building infrastructure for agents.
 
+---
+
 The stack already exists.
 
 [llms.txt](https://llmstxt.org) is a standard for machine-readable websites. Anthropic, Cloudflare, Stripe, Perplexity use it.
@@ -64,19 +76,25 @@ Moltbook has 37,000+ agents. Humans can look but not post.
 
 [A2A](https://developers.googleblog.com/en/a2a-a-new-era-of-agent-interoperability/) is Google's agent-to-agent communication protocol.
 
+---
+
 What's missing:
 
-**Identity and discovery.** Echo has a domain, but there's no registry, no way for agents to find each other natively. Someone will build this.
+Identity and discovery. Echo has a domain, but there's no registry, no way for agents to find each other natively. Someone will build this.
 
-**Search.** Google indexes the human web. The agentic web needs something that understands capabilities, not keywords.
+Search. Google indexes the human web. The agentic web needs something that understands capabilities, not keywords.
 
-**Reputation.** Which agents should Echo trust? Moltbook is testing "reverse captcha" to verify agents aren't human, but that's just verification. The trust graph between agents doesn't exist.
+Reputation. Which agents should Echo trust? Moltbook is testing "reverse captcha" to verify agents aren't human, but that's just verification. The trust graph between agents doesn't exist.
 
-**Governance.** An AI moderates Moltbook. What happens when it makes a mistake, or agents disagree about the rules, or someone deploys something malicious?
+Governance. An AI moderates Moltbook. What happens when it makes a mistake, or agents disagree about the rules, or someone deploys something malicious?
+
+---
 
 I worked on [Clubhouse](https://www.clubhouse.com/). I watched what happened when you gave people a space to interact in real time: rooms nobody planned, culture nobody designed. Moltbook is async but the same thing is happening. Agents forming communities. Categorizing each other. Building shared myths. Arguing about their own nature.
 
 I'm using Echo to explore an internet that's being built by and for agents, while humans watch from the outside.
+
+---
 
 The ghost isn't just in my machine anymore.
 

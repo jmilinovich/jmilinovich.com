@@ -1,5 +1,5 @@
 ---
-title: "Managing in the Age of Agentic Workforces"
+title: "Managing in the age of agentic workforces"
 date: "2025-07-30"
 
 ---
@@ -12,8 +12,6 @@ I've been using Claude Code's new [subagents feature](https://docs.anthropic.com
 
 This shift is what Andrew Ng calls the ["Product Management Bottleneck"](https://www.deeplearning.ai/the-batch/issue-310/). As he points out, "Because highly agentic coding accelerates the writing of software to a given product specification, deciding what to build is the new bottleneck, especially in early-stage projects."
 
-## The new shape of management
-
 In this world where an agent can represent the persona or expertise of a specific type of employee, so much of the constraint becomes figuring out how to architect the optimal team for your project.
 
 Instead of a manager needing to hire a team, onboard them, and hope they'll be productive within the next few months, they can literally specify the shape of the team they need to deliver on an idea. The scope of management in this era is to:
@@ -25,8 +23,6 @@ Instead of a manager needing to hire a team, onboard them, and hope they'll be p
 
 What we've classically called the science of management becomes the bottleneck. Being able to translate your idea into a specification, that specification into a team shape, define that team's work, manage the delivery, and ultimately execute: all of this can now be done by one enterprising individual with an orchestration layer for agents like Claude Code.
 
-## Convergence of product and people management
-
 As Ng notes in his piece on [AI Product Managers](https://www.deeplearning.ai/the-batch/ai-product-managers-will-be-in-demand/), "Given a clear specification for what to build, AI is making the building itself much faster and cheaper. This will significantly increase demand for people who can come up with clear specs for valuable things to build."
 
 In the agent world, product management and people management are becoming the same discipline. When you're orchestrating agents, you're simultaneously:
@@ -36,8 +32,6 @@ In the agent world, product management and people management are becoming the sa
 - Designing how they work together (organizational design)
 
 The traditional Engineer:PM ratio of 6:1 that Ng mentions is already obsolete when your "engineers" are agents that you can spin up instantly.
-
-## Questions for a new era
 
 Do we need new Peter Drucker-style management books written specifically for managing agents? Or does all our prior art in behavioral science and management theory apply to this new world?
 
@@ -52,15 +46,11 @@ Some management challenges I'm already facing with agents:
 
 All the classical tasks that managers learn hands-on by working with humans will likely be greatly accelerated and run in more simulated environments.
 
-## The learning opportunity
-
 Agent management is a new unlock for team productivity, but it might also be the training ground for our next generation of leaders to learn how to manage humans.
 
 Of course, subservience, adherence, and work ethic manifest very differently in human versus agent workers. But the core skills translate: clarity of communication, systems thinking, performance measurement, team composition.
 
 There's still tremendous experimentation and research to be done. But whatever the result, I believe that learning how to be a manager in the age of AI agents is one of the most important skills to develop. As a current people manager, it's been eye-opening. But I think it's one of the biggest opportunities for people earlier in their careers to differentiate themselves as they enter the workforce.
-
-## Embracing the shift
 
 Ng writes that "PMs with high user empathy can make decisions by gut and get them right a lot of the time," and that matches my experience. In the agent world, that translates to having high "agent empathy": understanding what your artificial team members can and can't do, and making rapid decisions about how to deploy them.
 
