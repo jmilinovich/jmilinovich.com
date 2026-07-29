@@ -5,6 +5,10 @@ date: "2023-01-09"
 
 _**Retroactive Grade (December 2023)**: Correct. 2023 will be remembered as the year when NLIs became mainstream, with ChatGPT and many of its competitors now getting 2B+ monthly page views ([source via similarweb](https://github.com/jmilinovich/public/blob/main/2023-12-20-chatbot-pageviews.png))._
 
+![Year of the Chatbot: monthly web visits to ChatGPT, Bard, Character.AI, Perplexity and Claude from October 2022 through October 2023, climbing past 2 billion combined](/images/posts/year-of-the-chatbot-similarweb.png)
+
+*Monthly web visits to ChatGPT and its competitors through October 2023. SimilarWeb data, chart by Shane Burke.*
+
 **Natural language is the new interface for the web, and in 2023 I predict we will see it become increasingly prevalent across many of the tools and software that we use every day.** From virtual assistants and chatbots to general purpose search products and creative tools with sophisticated editors, we will see a wide swath of existing and new use cases for natural language interfaces ("NLIs") not dissimilar to the wave of new mobile interfaces we saw in 2008 after the App Store was introduced.
 
 One of the key advantages of NLIs is their accessibility. By allowing users to communicate with a tool or software program using everyday language rather than a specialized syntax or set of commands, NLIs can make these tools more accessible to a wider range of users. This massively lowers the barrier to becoming a power user of otherwise complicated tools, which in turn will unleash tremendous creativity for people around the world.

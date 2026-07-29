@@ -9,6 +9,10 @@ _**Retroactive Grade (February 2025)**: Correct._
 
 Last year, I [predicted](/writing/2023-is-the-year-of-natural-language-interfaces-2022) that 2023 would be the year of natural language interfaces, and in retrospect it looks like a crazy conservative guess. The tech world has been abuzz with Copilots, "ChatGPT for X", and the announcement of ChatGPT's GPT Store. It's been a rollercoaster since ChatGPT came onto the scene about 13 months ago.
 
+![Year of the Chatbot: monthly web visits to ChatGPT, Bard, Character.AI, Perplexity and Claude from October 2022 through October 2023, climbing past 2 billion combined](/images/posts/year-of-the-chatbot-similarweb.png)
+
+*Monthly web visits to ChatGPT and its competitors through October 2023. SimilarWeb data, chart by Shane Burke.*
+
 ## The dawn of multimodal AI in 2024
 
 Imagine designing a building, composing a symphony, or planning a health regimen, all from a few photos or spoken words. That's the imminent reality of multimodal AI. **My prediction for 2024 is that multimodal generative AI will go mainstream.** In a nutshell, multimodal AI means moving beyond text in generative AI to inputs and outputs in other formats: images, video, and audio.
