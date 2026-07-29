@@ -3,6 +3,8 @@ title: "2025 will be the year of voice AI"
 date: "2024-12-18"
 ---
 
+_**Retroactive Grade (July 2026)**: Mostly correct. By New Year's the count was six or seven voice-AI unicorns, not ten: ElevenLabs, [Sesame](https://techcrunch.com/2025/10/21/sesame-the-conversational-ai-startup-from-oculus-founders-raises-250m-and-launches-beta/), Parloa, Speak, maybe Suno, plus incumbents Uniphore and Cresta. You only reach ten if you count agent companies that happen to talk, like Sierra and Abridge. But ElevenLabs went from $3.3B in January 2025 to [$11B in February 2026](https://techcrunch.com/2026/02/04/elevenlabs-raises-500m-from-sequioia-at-a-11-billion-valuation/), which is more than the ten unicorns I predicted combined._
+
 "Voice is the oldest medium," my friend and former boss Paul Davison would say all the time at Clubhouse. Humans have been using voice to share knowledge and build communities for thousands of years. We hear voices before we're born, and they're often the last thing we experience. In 2025, I believe we'll see voice return as our primary interface with technology, powered by AI.
 
 ## Why voice matters now

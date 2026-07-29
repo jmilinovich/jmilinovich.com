@@ -3,15 +3,17 @@ title: "5 web3 predictions for 2022"
 date: "2022-01-02"
 ---
 
-_Looking back grade: 38%_
+_Looking back grade: 50%_
 
 **1. FAIL: 2+ on-chain SVG in top 10**: completely missed on this one. Still think on-chain SVGs are cool and still hold my Lil Noun and Loot.
 
 **2. 50%: 2 50M+ social networks launch token-gated**: Instagram and Reddit launched wallet integration and basic NFT functionality, but didn't do full-scale roll outs of token gated UX.
 
-**3. FAIL: Olympus DAO 500K+ holders**: complete miss here. Olympus is just a cute way for people to take on massively risky, highly leveraged positions. DeFi should be regulated.
+**3. SUCCESS: 2 $1b+ web2 companies launch web3 business models**: Reddit launched [Collectible Avatars](https://www.coindesk.com/tech/2022/07/07/reddit-launches-polygon-based-collectible-avatar-marketplace) in July, selling avatars for $9.99 to $99.99 by credit card, and Nike was the top brand in NFT revenue at $185M through RTFKT, per [Dune data](https://www.inverse.com/input/style/nike-most-revenue-nft-sales-list). The sectors I actually named (creator platforms, real estate) both missed.
 
-**4. SUCCESS: DAO competes with Wikipedia**: Golden.com launched a token protocol for its contributors. I still think DAOs can unlock novel business models, but need to be tied to clear user problems.
+**4. FAIL: Olympus DAO 500K+ holders**: complete miss here. Olympus is just a cute way for people to take on massively risky, highly leveraged positions. DeFi should be regulated.
+
+**5. SUCCESS: DAO competes with Wikipedia**: Golden.com launched a token protocol for its contributors. I still think DAOs can unlock novel business models, but need to be tied to clear user problems.
 
 ---
 
