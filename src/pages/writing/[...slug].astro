@@ -1,7 +1,7 @@
 ---
 import { getCollection, render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { glyphPath, fmtDate, essayFeatures, growthFoldSvg } from '../../lib/process';
+import { detailPath, fmtDate, essayFeatures, growthFoldSvg } from '../../lib/process';
 
 export async function getStaticPaths() {
   const posts = await getCollection('writing', ({ data }) => !data.draft);
@@ -13,11 +13,12 @@ export async function getStaticPaths() {
 
 const { post } = Astro.props;
 const { Content } = await render(post);
-const glyph = glyphPath(post.id);
 
-// The fingerprint: a growth-fold line grown from this essay's own text at
-// build time (see growthFoldSvg). The byline pressmark opens; this closes.
+// One organism per essay, shown twice. The byline pressmark opens with the
+// detail — the most folded stretch of this essay's mature line; the fingerprint
+// closes with the same line fully grown (see growEssayLine in lib/process).
 const feats = essayFeatures(post.body || '');
+const glyph = detailPath(post.id, feats);
 const fingerprint = growthFoldSvg(post.id, feats, +(post.data.date || '2026').slice(0, 4));
 
 // Auto-extract description from first paragraph of markdown

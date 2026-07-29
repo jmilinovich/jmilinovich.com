@@ -42,46 +42,6 @@ export function makeNoise(seedInt) {
   };
 }
 
-// One streamline per essay, seeded by its slug. Same slug → same mark, forever.
-export function glyphPath(slug) {
-  const seedInt = xmur3(slug)();
-  const rand = mulberry32(seedInt);
-  const noise = makeNoise(seedInt);
-  const freq = 0.055 + rand() * 0.05;
-  const turb = 1.7 + rand() * 1.1;
-  const S = 40, STEPS = 84;
-  let best = { pts: [], span: 0 };
-  for (let c = 0; c < 8; c++) {
-    let x = 6 + rand() * (S - 12), y = 6 + rand() * (S - 12);
-    const pts = [[x, y]];
-    let minX = x, maxX = x, minY = y, maxY = y;
-    for (let i = 0; i < STEPS; i++) {
-      const a = (noise(x * freq, y * freq) - 0.5) * Math.PI * 2 * turb;
-      x += Math.cos(a) * 0.85;
-      y += Math.sin(a) * 0.85;
-      if (x < 1 || x > S - 1 || y < 1 || y > S - 1) break;
-      pts.push([x, y]);
-      minX = Math.min(minX, x); maxX = Math.max(maxX, x);
-      minY = Math.min(minY, y); maxY = Math.max(maxY, y);
-    }
-    const span = (maxX - minX) * (maxY - minY) + pts.length;
-    if (span > best.span) best = { pts, span };
-  }
-  const pts = best.pts;
-  if (pts.length < 4) return 'M6 12 L18 12';
-  let minX = 1e9, maxX = -1e9, minY = 1e9, maxY = -1e9;
-  for (const [px, py] of pts) {
-    minX = Math.min(minX, px); maxX = Math.max(maxX, px);
-    minY = Math.min(minY, py); maxY = Math.max(maxY, py);
-  }
-  const scale = 18 / Math.max(maxX - minX, maxY - minY, 1);
-  const ox = 3 + (18 - (maxX - minX) * scale) / 2, oy = 3 + (18 - (maxY - minY) * scale) / 2;
-  return pts
-    .map(([px, py], i) =>
-      `${i === 0 ? 'M' : 'L'}${((px - minX) * scale + ox).toFixed(1)} ${((py - minY) * scale + oy).toFixed(1)}`)
-    .join('');
-}
-
 export const fmtDate = (d) =>
   new Date(d).toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric', timeZone: 'UTC' });
 
@@ -126,10 +86,27 @@ export function essayFeatures(body) {
   return { words, paragraphs };
 }
 
-export function growthFoldSvg(slug, features, year) {
+const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+const r1 = (n) => Math.round(n * 10) / 10;
+
+// Midpoint-quadratic smoothing — the drawing grammar shared by the fingerprint's
+// line, its ghosts, and the index detail, so all three read as one hand.
+function smoothCommands(pts) {
+  const cmds = [];
+  for (let i = 1; i < pts.length - 1; i++) {
+    cmds.push({ cx: pts[i].x, cy: pts[i].y, x: (pts[i].x + pts[i + 1].x) / 2, y: (pts[i].y + pts[i + 1].y) / 2 });
+  }
+  return { start: pts[0], cmds, last: pts[pts.length - 1] };
+}
+
+// The one simulation behind BOTH per-essay marks (2026-07-29, via /grill-me).
+// One organism per essay: the end-of-essay fingerprint draws the whole mature
+// line, and the index/byline mark magnifies one stretch of that same line, so
+// the two marks are the same object and cannot drift apart. `stopAtNodes` halts
+// growth early; it is retained for experiments (capturing the line young was
+// tried for the index mark and rejected — see detailPath).
+function growEssayLine(slug, features, stopAtNodes = 0) {
   const W = 575, H = 136;
-  const r1 = (n) => Math.round(n * 10) / 10;
-  const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
   const seed = xmur3(slug);
   const rand = mulberry32(seed());
   const noise = makeNoise(seed());
@@ -251,19 +228,88 @@ export function growthFoldSvg(slug, features, year) {
       const due = Math.round(((it + 1) / itersPerEpoch) * budget) - Math.round((it / itersPerEpoch) * budget);
       for (let k = 0; k < due; k++) insertNode(p);
       relax(buckleWins, 1);
+      // The seedling: the same line the moment it first reaches the target node
+      // count, settled by that iteration's relax like every other state. Keyed to
+      // node count, not paragraph fraction, so density is constant across the
+      // index however long the essay runs.
+      if (stopAtNodes && nodes.length >= stopAtNodes) {
+        return { W, H, nodes, snapshots, paraFacts, maxPW, maxAS, lastInserted };
+      }
     }
     if (snapAt.has(p)) snapshots.push(nodes.map((nd) => ({ x: nd.x, y: nd.y })));
   }
   relax([], 22);
+  return { W, H, nodes, snapshots, paraFacts, maxPW, maxAS, lastInserted };
+}
 
-  function smoothCommands(pts) {
-    const cmds = [];
-    for (let i = 1; i < pts.length - 1; i++) {
-      cmds.push({ cx: pts[i].x, cy: pts[i].y, x: (pts[i].x + pts[i + 1].x) / 2, y: (pts[i].y + pts[i + 1].y) / 2 });
-    }
-    return { start: pts[0], cmds, last: pts[pts.length - 1] };
+// One full growth per slug per build — the index, the byline and the fingerprint
+// all read the same organism, so it is simulated once and shared.
+const grown = new Map();
+function grownLine(slug, features) {
+  let g = grown.get(slug);
+  if (!g) { g = growEssayLine(slug, features); grown.set(slug, g); }
+  return g;
+}
+
+// The index/byline mark: a DETAIL of this essay's fingerprint — the most folded
+// stretch of the same mature line, cropped square and blown up. Capturing the
+// line young was tried first and rejected on the contact sheet (2026-07-29): the
+// simulation's frame is ~4:1 wide, so every early state normalises to a flat
+// dash and the index went visually dead at every node count from 24 to 120.
+// Maturity is where the folding lives, so we magnify rather than rewind.
+//
+// A fixed-length run keeps density constant down the index however long the
+// essay runs; picking the run by total turning angle keeps the mark characterful.
+// One uniform stroke — no ghosts, no sig dot, no weight ramp (owner call
+// 2026-07-29). Kinship is carried by geometry, not ornament.
+const DETAIL_NODES = 28;
+export function detailPath(slug, features) {
+  const { nodes: line } = grownLine(slug, features);
+  if (!line || line.length < 4) return 'M6 12 L18 12';
+  const K = Math.min(DETAIL_NODES, line.length);
+  // turning angle at each interior node
+  const turn = new Float64Array(line.length);
+  for (let i = 1; i < line.length - 1; i++) {
+    const ax = line[i].x - line[i - 1].x, ay = line[i].y - line[i - 1].y;
+    const bx = line[i + 1].x - line[i].x, by = line[i + 1].y - line[i].y;
+    const na = Math.hypot(ax, ay), nb = Math.hypot(bx, by);
+    if (na < 1e-6 || nb < 1e-6) continue;
+    turn[i] = Math.acos(clamp((ax * bx + ay * by) / (na * nb), -1, 1));
   }
+  let best = 0, bestScore = -1, run = 0;
+  for (let i = 0; i < K; i++) run += turn[i];
+  bestScore = run; best = 0;
+  for (let i = K; i < line.length; i++) {
+    run += turn[i] - turn[i - K];
+    if (run > bestScore) { bestScore = run; best = i - K + 1; }
+  }
+  const nodes = line.slice(best, best + K);
+  let minX = 1e9, maxX = -1e9, minY = 1e9, maxY = -1e9;
+  for (const n of nodes) {
+    minX = Math.min(minX, n.x); maxX = Math.max(maxX, n.x);
+    minY = Math.min(minY, n.y); maxY = Math.max(maxY, n.y);
+  }
+  // Same normalisation the retired glyphPath used: uniform scale into an 18×18
+  // area centred in the 24×24 viewBox, so the mark sits exactly where the old
+  // one did and the rows do not reflow.
+  const scale = 18 / Math.max(maxX - minX, maxY - minY, 1);
+  const ox = 3 + (18 - (maxX - minX) * scale) / 2;
+  const oy = 3 + (18 - (maxY - minY) * scale) / 2;
+  const pts = nodes.map((n) => ({ x: (n.x - minX) * scale + ox, y: (n.y - minY) * scale + oy }));
+  const { start, cmds, last } = smoothCommands(pts);
+  let d = `M${r1(start.x)} ${r1(start.y)}`;
+  for (const c of cmds) d += `Q${r1(c.cx)} ${r1(c.cy)} ${r1(c.x)} ${r1(c.y)}`;
+  d += `L${r1(last.x)} ${r1(last.y)}`;
+  return d;
+}
 
+// Convenience for call sites that hold raw markdown rather than parsed features.
+export function detailFromBody(slug, body) {
+  return detailPath(slug, essayFeatures(body || ''));
+}
+
+export function growthFoldSvg(slug, features, year) {
+  const { W, H, nodes, snapshots, paraFacts, maxPW, maxAS, lastInserted } = grownLine(slug, features);
   const ageFactor = clamp(0.78 + ((year || 2026) - 2012) * (0.22 / 14), 0.7, 1.0);
   const parts = [];
   snapshots.forEach((snap, gi) => {

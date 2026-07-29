@@ -1,14 +1,16 @@
 ---
-import { glyphPath, fmtDate } from '../lib/process';
+import { fmtDate } from '../lib/process';
 
 interface Props {
   title: string;
   date: string;
   slug: string;
+  // A detail of the essay's own fingerprint. Computed by the caller, which holds
+  // the post body; see detailFromBody in lib/process.
+  glyph: string;
 }
 
-const { title, date, slug } = Astro.props;
-const glyph = glyphPath(slug);
+const { title, date, slug, glyph } = Astro.props;
 ---
 
 <li class="row">
