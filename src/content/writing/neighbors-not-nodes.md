@@ -1,12 +1,14 @@
 ---
-title: "Neighbors, Not Nodes"
+title: "Neighbors, not nodes"
 date: "2025-11-21"
 
 ---
 
-## The Acceleration
+I was walking through downtown Campbell, California, where I live, and the sidewalks were full of people. I could probably have a lot in common with most of them. I was connected to none of them, and being around them made me uncomfortable, which is a strange thing to feel about your own neighbors.
 
-Every neighborhood runs on invisible infrastructure: the morning dog walker who doubles as informal security, the retired teacher who knows three generations of every family, the front stoop where teenagers gather after school, the kitchen table where problems get solved over coffee.
+## The acceleration
+
+Every neighborhood runs on invisible infrastructure: the morning dog walker who doubles as informal security, the retired teacher who knows three generations of every family.
 
 We're dismantling this infrastructure, piece by piece, and replacing it with something that looks like connection but works like isolation.
 
@@ -18,7 +20,7 @@ Children increasingly turn to [AI tutors](https://www.axios.com/2024/10/28/schoo
 
 We're raising kids for whom the mediated relationship is the default. They may never know the anxiety and joy of approaching someone without an algorithm pre-computing compatibility, the muscle memory of working through conflict without AI moderation, or the full presence of another person's undivided attention.
 
-## The False Solutions
+## The false solutions
 
 The responses so far miss the structural problem entirely.
 
@@ -32,7 +34,7 @@ The nostalgia trap catches well-meaning people trying to recreate 1950s neighbor
 
 The tech industry has the biggest blindspot: they genuinely believe they're solving problems. The AI companions, the optimization algorithms, the convenience apps all treat loneliness as an engineering problem. They're demolishing the house they're standing in.
 
-## The Vision
+## The vision
 
 AI doesn't have to be a wrecking ball. It could be scaffolding.
 
@@ -48,7 +50,7 @@ None of it is rigid: no communes, no forced structures. Each neighborhood develo
 
 Physical proximity becomes valuable again. The closer you are, the more you can share: tools, time, space, care. The economics shift from extracting value to retaining it. Money circulates locally, skills get traded, and resources multiply through sharing instead of hoarding.
 
-## The Emergent Future
+## The emergent future
 
 Trust builds through repetition in any neighborhood with these tools. The first time AI suggests sharing a grocery delivery with the family two doors down, it feels weird. The tenth time, it's normal. By the hundredth interaction, you're borrowing their ladder without thinking about the algorithm that introduced you. The infrastructure rebuilds itself, stronger than before.
 
@@ -58,7 +60,7 @@ Democracy gets real when it's 200 people deciding about their actual street rath
 
 The change spreads neighborhood by neighborhood, each one different, all connected by the same principle: AI serves human connection rather than replacing it. Some neighborhoods optimize for families with children, others for artists, others for entrepreneurs. It's the diversity that makes cities feel alive, at a scale where everyone knows your name.
 
-## The Choice
+## The choice
 
 We're at the intersection and the light is changing.
 

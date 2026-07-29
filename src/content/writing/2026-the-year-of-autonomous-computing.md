@@ -1,5 +1,5 @@
 ---
-title: "2026: The Year of Autonomous Computing"
+title: "2026: the year of autonomous computing"
 date: "2025-12-22"
 
 ---
@@ -8,7 +8,7 @@ Last week I pointed [Claude Code](https://docs.anthropic.com/en/docs/claude-code
 
 I'm a programmer, but I didn't write any code. I just told the AI what I wanted, and it operated my computer to make it happen.
 
-A few months ago, I built a game for my daughter. Then one afternoon, while she was playing it on my computer, I modified the game from my phone using my voice and watched her react to the changes in real time. I wasn't coding, just asking.
+A few months ago, I built a game for my daughter, modeled on Toodles from Mickey Mouse Clubhouse, the character who pops up with four tools for whatever situation Mickey is in. Then one afternoon, while she was playing it on my computer, I modified the game from my phone using my voice and watched her react to the changes in real time. I wasn't coding, just asking.
 
 The real breakthrough is AI that uses computers.
 
@@ -40,9 +40,13 @@ Others are building for everyone.
 
 The founder of [Zo Computer](https://www.zo.computer/) pitches it as "AWS for my mom": his mother, a biologist running a research lab, uses it to manage her schedule and run code from her grad students, texting it like a personal assistant.
 
-Both are early, but computer-using AI is becoming a product category.
+I've played around with both but haven't become a big user of either. They're early, but computer-using AI is becoming a product category.
 
 I'm calling this **autonomous computing**: AI that lives on your machine, operates independently, and does real work in the background. It's a persistent process, not a chatbot you visit.
+
+![Streams of light flowing between a phone, tablet, laptop, and TV in a living room at dusk while a person waters a plant](/images/posts/autonomous-computing-living-room.png)
+
+*The original artwork for this post: the work moving between your devices while you do something else.*
 
 Two predictions:
 

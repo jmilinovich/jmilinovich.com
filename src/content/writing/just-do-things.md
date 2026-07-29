@@ -6,7 +6,9 @@ date: "2025-04-25"
 
 You can literally just do things. The line has been going around tech circles for a while, and it stuck with me because it's true.
 
-Our instinct runs the other way. When we're uncertain, we defer: we look outward for direction, for someone with more authority to say it's allowed.
+Part of it is timing. My team just shipped Canva AI, and in the run-up to that launch you could feel the acceleration: things are starting to move much more quickly, and coding agents haven't even arrived yet.
+
+Our instinct still runs the other way. When we're uncertain, we defer: we look outward for direction, for someone with more authority to say it's allowed.
 
 Ask yourself: "If I had 10 times more agency than I do right now, what would I do?" Whatever comes to mind, notice how little of it needs anyone's permission. The gap between thinking about those things and doing them is where most of them die.
 

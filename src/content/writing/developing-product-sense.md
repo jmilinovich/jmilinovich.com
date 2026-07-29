@@ -10,7 +10,7 @@ As a kid I wanted to master every piece of software I could get my hands on. I b
 
 When mobile apps took off in the late 2000s, my tinkering took on a new form. I downloaded every app I could find, not just to use them but to understand them. I filled notebooks with sketches of user interfaces and folders with screenshots, trying to deconstruct how they worked and why certain design decisions were made.
 
-My formal education in architecture mattered in a way I didn't expect. It taught me to think about user experience in physical spaces, which translated surprisingly well to digital products. Reading ["The Design of Everyday Things"](https://www.amazon.com/Design-Everyday-Things-Revised-Expanded/dp/0465050654) helped me see the same principles underneath all good design.
+My formal education in architecture mattered in a way I didn't expect. I went through UCLA's Architectural Studies program, graduating in 2010, and one of the biggest things I remember is the difference between designing the building and designing the experience of the person inhabiting it. That distinction translated surprisingly well to digital products. Reading ["The Design of Everyday Things"](https://www.amazon.com/Design-Everyday-Things-Revised-Expanded/dp/0465050654) helped me see the same principles underneath all good design.
 
 My product sense grew fastest once I entered the professional world. Working alongside brilliant designers and product visionaries at companies like URX, Pinterest, Aesthetic and Clubhouse exposed me to new ways of thinking about products, and each experience changed my approach.
 
