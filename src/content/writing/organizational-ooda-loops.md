@@ -1,5 +1,5 @@
 ---
-title: "Organizational OODA Loops"
+title: "Organizational OODA loops"
 date: "2024-02-23"
 ---
 
