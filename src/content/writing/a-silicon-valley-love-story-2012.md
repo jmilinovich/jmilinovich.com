@@ -1,5 +1,5 @@
 ---
-title: "A Silicon Valley Love Story"
+title: "A Silicon Valley love story"
 date: "2012-02-06"
 ---
 

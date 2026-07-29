@@ -1,5 +1,5 @@
 ---
-title: "Convertible Notes Explained in 192 Words"
+title: "Convertible notes explained in 192 words"
 date: "2013-03-01"
 ---
 

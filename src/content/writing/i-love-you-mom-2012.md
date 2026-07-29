@@ -1,5 +1,5 @@
 ---
-title: "I Love You, Mom"
+title: "I love you, Mom"
 date: "2012-12-17"
 draft: true
 ---

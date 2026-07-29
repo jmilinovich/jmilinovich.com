@@ -1,5 +1,5 @@
 ---
-title: "People First, Ideas Second"
+title: "People first, ideas second"
 date: "2013-10-16"
 ---
 

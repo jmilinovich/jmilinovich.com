@@ -1,5 +1,5 @@
 ---
-title: "The Power of Passion"
+title: "The power of passion"
 date: "2012-05-09"
 ---
 

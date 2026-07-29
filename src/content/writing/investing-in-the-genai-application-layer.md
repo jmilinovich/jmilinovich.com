@@ -14,7 +14,13 @@ The AI ecosystem breaks down into four layers:
 3. **Models**: the foundation models that power AI applications, from OpenAI and Anthropic to Google's Gemini and AWS's Bedrock. Also sold on usage, usually with the compute bundled in.
 4. **Applications**: where AI gets woven into specific products. This is where Canva operates, building AI into our design platform. Priced on the value provided to end users.
 
-So far the lion's share of revenue and profit has accrued at the semiconductor and infrastructure layers. Apoorv Agrawal's [The Economics of Generative AI](https://apoorv03.com/p/the-economics-of-generative-ai) does a great job outlining the value chain today and how he expects it to shift. If history is any indication, the vast majority of the opportunity over the next decade sits at the application layer.
+So far the lion's share of revenue and profit has accrued at the semiconductor and infrastructure layers. Apoorv Agrawal's [The Economics of Generative AI](https://apoorv03.com/p/the-economics-of-generative-ai) does a great job outlining the value chain today and how he expects it to shift.
+
+![Altimeter chart asking where value accrues in the Gen AI stack: in cloud, applications earn an estimated $400B in annual revenue against $200B for infrastructure and $50B for semiconductors, while in generative AI the pyramid is inverted, with $75B at the semiconductor layer and just $5B at the application layer](/images/posts/genai-value-accrual-apoorv.png)
+
+*Estimated annual revenue by layer, cloud versus generative AI. Via [@apoorv03](https://x.com/apoorv03) at Altimeter.*
+
+If history is any indication, the vast majority of the opportunity over the next decade sits at the application layer.
 
 ![Altimeter chart asking how the Gen AI stack will evolve over the next ten years: in cloud, value shifted from semiconductors and infrastructure to applications, and the chart projects the same flip for generative AI](/images/posts/image-4.png)
 

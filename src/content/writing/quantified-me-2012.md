@@ -1,5 +1,5 @@
 ---
-title: "Quantified Me"
+title: "Quantified me"
 date: "2012-06-01"
 ---
 
