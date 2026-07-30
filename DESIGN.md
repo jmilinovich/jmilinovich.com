@@ -231,8 +231,16 @@ differential growth on 2026-07-28.
    file said to build only once a sheet turned up a dud worth overriding. An unknown slug
    in `related:` fails the build rather than silently dropping a link.
    Static, no JS, no cards. Unlisted essays get a foot of their own but are never anyone's
-   neighbour. Gates: `node scripts/kinship-sheet.mjs` (contact sheet, `weakest` for the
-   loosest twelve) and `node scripts/check-essay-foot.mjs` after a build.
+   neighbour. **A new essay wires itself up in both directions and needs no frontmatter** —
+   it gets a foot, and it becomes a candidate for every other essay's foot, so adding a post
+   re-picks the whole site. Verified by probe 2026-07-29.
+   Gates: `scripts/check-essay-foot.mjs` runs as `postbuild`, so a missing, self-referential,
+   dead, or draft onward link fails the build and cannot reach production — it is enforced,
+   not advisory. `node scripts/kinship-sheet.mjs` (add `weakest` for the loosest twelve) is
+   the contact sheet and stays manual by nature: it is human review, and it is what should be
+   run after publishing a new essay, and especially after publishing a short one — under
+   roughly 200 words there is too little vocabulary to compute from and the picks go noisy
+   (the failure mode that earned both `related:` overrides).
    **A sticky or scroll-up-revealing desktop header remains rejected** (owner decision,
    restated 2026-07-29) — the fixed auto-hiding header is mobile-only by construction. The
    dead end was real; a bar over a page designed to be still was not the fix. The footer

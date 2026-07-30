@@ -45,10 +45,20 @@ for (const slug of slugs) {
   if (fp === -1 || fp > html.indexOf('class="keep-reading"')) fail(`${slug}: foot is not after the fingerprint`);
 }
 
-// The global escape, every page.
+// The global escape, every page. This gate runs on every build (postbuild), so a
+// page that simply doesn't exist any more is skipped rather than failing a deploy
+// for a reason unrelated to the foot — the homepage is the only one required.
 const pages = ['index.html', 'writing/index.html', 'talks/index.html', 'projects/index.html', 'commits/index.html'];
+let checkedPages = 0;
 for (const p of pages) {
-  const html = await readFile(new URL(`../dist/${p}`, import.meta.url).pathname, 'utf8');
+  let html;
+  try {
+    html = await readFile(new URL(`../dist/${p}`, import.meta.url).pathname, 'utf8');
+  } catch {
+    if (p === 'index.html') fail('dist/index.html is missing');
+    continue;
+  }
+  checkedPages++;
   const footer = html.match(/<footer[\s\S]*?<\/footer>/);
   if (!footer) { fail(`${p}: no footer`); continue; }
   if (!/href="\/"[^>]*>Home</.test(footer[0])) fail(`${p}: footer has no Home link`);
@@ -57,6 +67,6 @@ for (const p of pages) {
 console.log(
   failures
     ? `\n${failures} failure(s) across ${slugs.length} essays.`
-    : `✓ ${slugs.length} essays: 3 live onward links each, all after the fingerprint; Home in the footer on ${pages.length} page types.`
+    : `✓ ${slugs.length} essays: 3 live onward links each, all after the fingerprint; Home in the footer on ${checkedPages} page types.`
 );
 process.exit(failures ? 1 : 0);
