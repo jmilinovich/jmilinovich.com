@@ -1,0 +1,103 @@
+---
+// Review surface for the mobile substrate candidates (branch substrate-mobile).
+// Deleted along with the ?mv= scaffold once a winner is chosen. noindex so a
+// stray crawl of a branch deploy never surfaces it.
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const CANDIDATES = [
+  {
+    mv: '13',
+    name: 'Minimal',
+    floor: '31,478',
+    spread: '1.4–1.8×',
+    what: 'Fixes only the two things that were broken: origins are placed into the real free lanes instead of guessed at, and thin-soil contact stops being lethal.',
+    costs: 'Edges only. The middle of the page stays empty, which is honest to the existing doctrine but does not make the phone more interesting than it is today.',
+    stones: '11 stones (unchanged)',
+  },
+  {
+    mv: '15',
+    name: 'Bold and sparse',
+    floor: '28,914',
+    spread: '2.8–4.2×',
+    what: 'A few thick roots that reliably reach the bottom, striding further per step. Roughly a third of the segments of the others.',
+    costs: 'Least busy and most graphic, but least like the desktop organism — on a phone it reads as a diagram more than as growth.',
+    stones: '11 stones (unchanged)',
+  },
+  {
+    mv: '17',
+    name: 'Woven fine',
+    floor: '38,802',
+    spread: '1.4–1.6×',
+    what: 'Each list row becomes its own stone, so the gaps between rows open as channels. Finer, more numerous roots weave the margins and thread between rows.',
+    costs: 'Highest floor and tightest spread of the four. More segments than the rest, so the most work per load.',
+    stones: '62 stones',
+  },
+  {
+    mv: '16',
+    name: 'Masonry',
+    floor: '17,250',
+    spread: '3.8–6.4×',
+    what: 'Stones become individual lines of text. Roots thread the ragged right edge of every title and the gaps between lines — "text is stone" taken literally.',
+    costs: 'The boldest and the riskiest. Never touches a glyph, but the roots run close to the lines and may read as noise rather than as something behind the text. Most variable across widths.',
+    stones: '~196 stones',
+  },
+];
+---
+
+<BaseLayout title="Mobile substrate — candidates" noindex={true}>
+  <h1>Mobile substrate</h1>
+
+  <div class="note">
+    <p>
+      At 390px the section-level stones left two 11px lanes down a 4432px document — 5.6% of
+      the width navigable. Three seeds in eight rendered an <em>empty</em> substrate; one
+      rendered zero segments. The cause was origin placement, not root mortality: five origins
+      retried a random x twelve times against 22px of viable lane, then gave up on a blocked one.
+    </p>
+    <p>
+      All four below place origins into measured free lanes. None of them touches a single
+      glyph (verified per-pixel against text-node rects), and all four leave desktop
+      byte-identical. Open each on a phone.
+    </p>
+  </div>
+
+  {CANDIDATES.map((c) => (
+    <section class="cand">
+      <h2 class="eyebrow">{c.name}</h2>
+      <p class="what">{c.what}</p>
+      <p class="costs"><strong>Costs:</strong> {c.costs}</p>
+      <p class="nums">worst seed {c.floor} px · spread {c.spread} · {c.stones}</p>
+      <p class="go"><a href={`/?mv=${c.mv}`}>Open {c.name} &rarr;</a></p>
+    </section>
+  ))}
+
+  <section class="cand">
+    <h2 class="eyebrow">Baseline</h2>
+    <p class="what">What is on production now. Try seed <code>3fa2b8d4</code> — it draws nothing at all.</p>
+    <p class="go"><a href="/?seed=3fa2b8d4">Open baseline, blank seed &rarr;</a></p>
+    <p class="go"><a href="/?mv=17&seed=3fa2b8d4">Same seed, woven fine &rarr;</a></p>
+  </section>
+
+  <style>
+    h1 { margin-bottom: 1.6rem; }
+    .note { margin-bottom: 3.2rem; }
+    .note p { margin-bottom: 1.2rem; }
+    .cand {
+      padding: 2rem 0;
+      border-top: 1px solid var(--hairline);
+    }
+    .cand h2 { margin-bottom: 0.8rem; }
+    .what { margin-bottom: 0.8rem; }
+    .costs { margin-bottom: 0.8rem; color: var(--muted); }
+    .nums {
+      font-family: 'Berkeley Mono', monospace;
+      font-size: 1.15rem;
+      letter-spacing: 0.02em;
+      color: var(--muted);
+      margin-bottom: 1.2rem;
+    }
+    .go { margin: 0; }
+    .go a { font-family: 'Berkeley Mono', monospace; font-size: 1.3rem; }
+    code { font-family: 'Berkeley Mono', monospace; font-size: 1.4rem; }
+  </style>
+</BaseLayout>

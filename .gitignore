@@ -30,3 +30,6 @@ test-results/
 # Local Netlify folder
 .netlify
 public/og/
+
+# mobile substrate exploration output (branch substrate-mobile)
+.mobile-eval/
