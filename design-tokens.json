@@ -1,5 +1,5 @@
 {
-  "$description": "Design tokens for mili.dev \u2014 direction 'Process'. See DESIGN.md for reasons. Themes: light = plotter ink on paper, dark = phosphor on black.",
+  "$description": "Design tokens for mili.dev — direction 'Process'. See DESIGN.md for reasons. Themes: light = plotter ink on paper, dark = phosphor on black.",
   "type": {
     "families": {
       "serif": {
@@ -118,13 +118,30 @@
         "driver": "the commit nutrient field, sampled per segment",
         "lag": 0.05,
         "gamma": 1.8,
-        "tierGain": { "0": 0.35, "1": 0.75, "2+": 1 },
+        "tierGain": {
+          "0": 0.35,
+          "1": 0.75,
+          "2+": 1
+        },
         "bar": "visible in the mass, invisible per stroke"
       },
-      "alphaFloor": { "light": 0.22, "dark": 0.14 },
+      "alphaFloor": {
+        "light": 0.22,
+        "dark": 0.14
+      },
       "accent": "sig dot at the deepest tip only",
       "dprCap": 2,
-      "canvasSlices": "2048px css per slice, 42M device-px area budget"
+      "canvasSlices": "2048px css per slice, 42M device-px area budget",
+      "phone": {
+        "breakpoint": "<=767px",
+        "stones": "individual lines of text (text-node rects), ~200 vs 11 section rects; the channels contain no words",
+        "origins": "placed into measured free lanes (freeLanes), floor of 6 primaries — the blank page was placement failing, not mortality",
+        "mortality": "thin-soil relief: face 0.0015, wall 0.0018, stall 160, header 0.10 (desktop keeps 0.022/0.0015/50/0.3)",
+        "spawnMul": 0.45,
+        "reason": "the gutters-are-the-lanes doctrine left 5.6% of a 390px width navigable; 3 seeds in 8 drew nothing and one drew zero segments",
+        "desktop": "byte-identical above the breakpoint — verified per seed",
+        "gate": "node scripts/check-phone-soil.mjs"
+      }
     },
     "determinism": "geometry is precomputed per seed; time and scroll pace the reveal, never the image; seed shown in the provenance line",
     "reducedMotion": "the fully grown organism, rendered synchronously; honors mid-session changes",
@@ -141,7 +158,7 @@
     "borders": "1px hairline only",
     "shadows": "none",
     "gradients": "none",
-    "imagery": "generative only \u2014 no AI-generated images, no stock; photos only when the essay is about the photo",
+    "imagery": "generative only — no AI-generated images, no stock; photos only when the essay is about the photo",
     "substrate": {
       "frame": "none — no border, no box; the page is the canvas",
       "provenance": "mono caption, right-aligned, at the bottom of the soil; seed only, no data claim"

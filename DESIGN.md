@@ -154,7 +154,27 @@ differential growth on 2026-07-28.
    2026-07-28: the caption makes no data claim). Arrival grows the first viewport
    once; the reader's scroll grows the rest (owner call: curtain origins across the
    whole top edge, not a single seed point — immersion over origin-story). Thin soil
-   on mobile: the gutters are the lanes. **The nutrient field also drives tone**
+   on mobile — but **"the gutters are the lanes" is repealed** (2026-07-30). Measured, that
+   doctrine meant two 11px lanes down a 4432px document, 5.6% of the width navigable,
+   because `main .writing-section` is a single 3346px stone that swallows every channel
+   between rows. Three seeds in eight rendered essentially nothing on a phone and one
+   rendered **zero segments** — a blank page — at 360, 390 and 430px alike. Below 767px
+   the stones are therefore **individual lines of text**: the channels that opens contain
+   no words, so it reads "text is stone" more literally than the section rects ever did,
+   and the roots thread the ragged right edge of every title. Chosen from a measured
+   five-way bake-off (per-row, minimal, bold-and-sparse and a canvas-bleed family were
+   built and rejected; bleed lost outright once the metric stopped counting off-screen
+   ink). Two supporting mechanisms: **origins are placed into measured free lanes**
+   (`freeLanes`) rather than guessed at — the blank page was origin *placement* failing,
+   not roots dying, since five origins retried a random x twelve times against 22px of
+   lane and then gave up on a blocked one — and thin-soil contact stops being lethal,
+   because on a phone the lanes are the only ground there is. Ramification is damped to
+   0.45 so the masonry reads as line rather than thicket. Worst-seed coverage went 0 →
+   6,088px and the blank seed 114 → 13,910. **Everything is scoped to ≤767px and desktop
+   renders byte-identically** (117,519px worst seed, unchanged), because desktop's gutters
+   are ~350px and it never had the problem. Per-line granularity takes the stone count
+   from 11 to ~200, so `blocked()` reads a depth-bucketed index rather than the whole list.
+   **The nutrient field also drives tone**
    (2026-07-29): each root's tone lags the field beneath it (`TONE_LAG`), so hue drifts
    across ~100px into coherent regions rather than mottling per segment, and `TONE_GAMMA`
    (>1) holds ordinary soil at the ink floor so only genuinely rich patches reach
@@ -255,7 +275,13 @@ differential growth on 2026-07-28.
    (index, pressmark); the logo carries identity off-site.
 
 **Determinism is law.** Same seed → same drawing, on every build, in both themes.
-**Quality gate:** every new glyph set renders to a contact sheet and gets human review
+**Quality gate:** `node scripts/check-phone-soil.mjs` after a build asserts the two
+invariants the phone surface can silently break — every seed × width draws (16 × 6, worst
+case not average, because the mean looked survivable throughout the blank-page bug) and no
+ink lands inside a text-node rect (checked per pixel; element rects are exactly what the
+roots are now allowed inside, and the check caught a real violation during the bake-off).
+It is a manual gate, not `postbuild`: it needs a browser, and a Netlify deploy should not
+depend on one. Every new glyph set renders to a contact sheet and gets human review
 before ship. Algorithmic slop is still slop — the gate earns its keep: it is what caught
 the flat-dash seedling on 2026-07-29, after the idea had already been agreed. There is
 **no** `seedOverride` escape hatch; this file claimed one for months and no such

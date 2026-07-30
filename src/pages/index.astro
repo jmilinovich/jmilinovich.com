@@ -175,52 +175,20 @@ const startPicks = starts.map((s) => sortedPosts.find((p) => p.id === s)).filter
   // Text is stone: padded rects growth must flow around. Header links, the
   // h1, the facts, whole writing sections, the provenance line, the footer.
   // ---------------------------------------------------------------------------
-  // MOBILE EXPLORATION SCAFFOLD (branch substrate-mobile, 2026-07-29).
-  // At 390px the section-level stones leave two 11px lanes down a 4432px
-  // document — 5.6% of the width navigable — which is why some seeds render
-  // almost nothing on a phone. `?mv=N` selects a candidate treatment so all of
-  // them can be measured and reviewed from one build. mv=0 is production
-  // behaviour exactly; this whole block collapses to the winner before merge.
-  const MV: Record<string, any> = {
-    0:  { name: 'baseline (prod)' },
-    1:  { name: 'per-row stones', stones: 'row' },
-    2:  { name: 'per-row stones, tight pads', stones: 'row', pad: 3, tipPad: 1.5 },
-    3:  { name: 'per-line stones (text as masonry)', stones: 'line' },
-    4:  { name: 'survive the lanes (mortality relief)', thinRelief: true },
-    5:  { name: 'more origins, thin tips', nPMin: 10, tipPad: 1.5 },
-    6:  { name: 'canvas bleeds past the viewport', bleed: 140 },
-    7:  { name: 'per-line + bleed + relief', stones: 'line', bleed: 140, thinRelief: true, pad: 4 },
-    8:  { name: 'few bold taproots', nPMin: 3, nPMax: 3, wd: [3.5, 1.5], thinRelief: true, tipPad: 1.5 },
-    9:  { name: 'lateral entry from the edges', lateral: true, thinRelief: true },
-    10: { name: 'scaled organism', stepMul: 1.8, wd: [3.2, 1.2], nPMin: 4, nPMax: 6, thinRelief: true },
-    // Second round. mv=4 (relief alone) still hits zero while mv=5 (more
-    // origins) does not, so the zero is origin PLACEMENT failing, not roots
-    // dying: 5 origins retry a random x 12 times against 22px of lane and then
-    // give up on a blocked one. `lanes` computes the real free intervals and
-    // distributes origins across them, which makes starvation structurally
-    // impossible instead of improbable.
-    11: { name: 'lanes + per-row + relief', lanes: true, stones: 'row', thinRelief: true, nPMin: 8 },
-    12: { name: 'lanes + per-line + relief', lanes: true, stones: 'line', thinRelief: true, nPMin: 8 },
-    13: { name: 'lanes + relief (minimal change)', lanes: true, thinRelief: true, nPMin: 8 },
-    14: { name: 'lanes + per-row + relief + slight bleed', lanes: true, stones: 'row', thinRelief: true, nPMin: 8, bleed: 60 },
-    // Third round. Ink volume no longer discriminates — every lane variant has
-    // plenty — so these vary the FORM rather than the amount: sparse and
-    // graphic vs fine and woven. spawnMul is the ramification knob.
-    15: { name: 'lanes + bold and sparse', lanes: true, thinRelief: true, nPMin: 5, nPMax: 6, wd: [3.4, 1.2], stepMul: 1.4, spawnMul: 0.35 },
-    16: { name: 'lanes + per-line, quiet masonry', lanes: true, stones: 'line', thinRelief: true, nPMin: 6, spawnMul: 0.45 },
-    17: { name: 'lanes + per-row, woven fine', lanes: true, stones: 'row', thinRelief: true, nPMin: 12, wd: [1.6, 0.7], spawnMul: 1.6 },
-  };
-  // Every treatment is scoped to the phone. The brief was mobile, and desktop
-  // already works: above the 767px breakpoint the gutters are ~350px wide, so
-  // lane placement and finer stones would change a surface nobody asked to
-  // change. Wide viewports keep production behaviour exactly.
-  const MV_MAX_W = 767;
-  function mvOf() {
-    const v = new URLSearchParams(location.search).get('mv');
-    if (!v || !MV[v]) return { id: '0', ...MV[0] };
-    if (document.documentElement.clientWidth > MV_MAX_W) return { id: v, name: MV[v].name, desktopPassthrough: true };
-    return { id: v, ...MV[v] };
-  }
+  // Phone soil (2026-07-30, via /grill-me + a measured bake-off).
+  // At 390px the section-level stones left two 11px lanes down a 4432px
+  // document — 5.6% of the width navigable, because `main .writing-section` is
+  // a single 3346px stone that swallows every channel between rows. Three seeds
+  // in eight rendered essentially nothing and one rendered ZERO segments. On a
+  // phone the stones therefore become individual lines of text: the channels
+  // that opens contain no words, so this reads the doctrine more literally than
+  // the section rects ever did. Everything here is scoped to <=767px — desktop
+  // renders byte-identically, because its gutters are ~350px and it never had
+  // the problem. See DESIGN.md; scripts/mobile-eval.mjs is the gate.
+  const PHONE_MAX_W = 767;
+  const isPhone = () => document.documentElement.clientWidth <= PHONE_MAX_W;
+  const PHONE_ORIGINS = 6;    // floor on primaries; lanes place them, so none are wasted
+  const PHONE_SPAWN = 0.45;   // ramification damped: the masonry wants line, not thicket
 
   // Per-line rects: the stones become the actual words, which exposes the
   // ragged right edge of every title and the short date lines as real soil.
@@ -261,16 +229,15 @@ const startPicks = starts.map((s) => sortedPosts.find((p) => p.id === s)).filter
     return free.filter(([a, b]) => b - a > 2);
   }
 
-  function measureStones(w: number, mv: any = { id: '0' }) {
-    const basePx = w < 480 ? 7 : 12, basePy = w < 480 ? 6 : 9;
-    const px = mv.pad ?? basePx, py = mv.pad != null ? Math.max(2, mv.pad - 1) : basePy;
+  function measureStones(w: number, phone: boolean) {
+    const px = w < 480 ? 7 : 12, py = w < 480 ? 6 : 9;
     const sy = window.scrollY;
     const stones: { x0: number; y0: number; x1: number; y1: number; cx: number }[] = [];
     const push = (r: DOMRect) => {
       if (r.width < 2 || r.height < 2) return;
       stones.push({ x0: r.left - px, y0: r.top + sy - py, x1: r.right + px, y1: r.bottom + sy + py, cx: (r.left + r.right) / 2 });
     };
-    const mode = mv.stones || 'section';
+    const mode = phone ? 'line' : 'section';
     if (mode === 'line') {
       const rects: DOMRect[] = [];
       document.querySelectorAll(SEL_LINE).forEach((el) => lineRects(el, rects));
@@ -330,9 +297,8 @@ const startPicks = starts.map((s) => sortedPosts.find((p) => p.id === s)).filter
     };
   }
 
-  function makeSlices(vw: number, h: number, bleed = 0) {
+  function makeSlices(w: number, h: number) {
     if (!host) return;
-    const w = vw + bleed * 2; // drawing space; the host clips the overhang
     for (const s of slices) s.cv.remove();
     slices = [];
     let dpr = Math.min(window.devicePixelRatio || 1, 2);
@@ -343,7 +309,7 @@ const startPicks = starts.map((s) => sortedPosts.find((p) => p.id === s)).filter
       const cv = document.createElement('canvas');
       cv.width = Math.round(w * dpr);
       cv.height = Math.round(ch * dpr);
-      cv.style.cssText = `position:absolute;left:${-bleed}px;top:${top}px;width:${w}px;height:${ch}px;display:block;`;
+      cv.style.cssText = `position:absolute;left:0;top:${top}px;width:${w}px;height:${ch}px;display:block;`;
       const ctx = cv.getContext('2d')!;
       ctx.setTransform(dpr, 0, 0, dpr, 0, -top * dpr);
       host.insertBefore(cv, dotCv);
@@ -366,18 +332,14 @@ const startPicks = starts.map((s) => sortedPosts.find((p) => p.id === s)).filter
     const label = document.getElementById('p-seed');
     if (label) label.textContent = (seedInt >>> 0).toString(16).padStart(8, '0');
 
-    const mv = mvOf();
+    const phone = isPhone();
     const vw = document.documentElement.clientWidth;
-    // bleed grows the soil past the viewport on both sides: the organism is
-    // bigger than the phone and the screen is a window onto it
-    const bleed = mv.bleed || 0;
-    const w = vw + bleed * 2;
+    const w = vw;
     host.style.height = '0px';
     const h = Math.max(document.documentElement.scrollHeight, window.innerHeight);
     host.style.height = h + 'px';
-    makeSlices(vw, h, bleed);
-    const stones = measureStones(vw, mv).map((s) =>
-      bleed ? { ...s, x0: s.x0 + bleed, x1: s.x1 + bleed, cx: s.cx + bleed } : s);
+    makeSlices(vw, h);
+    const stones = measureStones(vw, phone);
     const counts = [...((host.dataset.counts as string) || '')].map((c) => parseInt(c, 36));
     const fieldAt = buildField(counts, seedInt, w, h);
 
@@ -391,23 +353,26 @@ const startPicks = starts.map((s) => sortedPosts.find((p) => p.id === s)).filter
     };
     // thin soil is the only ground there is on a phone; wall-following and
     // stone-face contact must stop being lethal or nothing reaches the bottom
-    const thin = mv.thinRelief ? { face: 0.0015, wall: 0.0018, stall: 160, header: 0.10 } : { face: 0.022, wall: 0.0015, stall: 50, header: 0.3 };
-    const STEP_V = STEP * (mv.stepMul || 1);
-    const wd0 = mv.wd ? mv.wd[0] : 2.2, wdR = mv.wd ? mv.wd[1] : 0.9;
-    const tipPad = mv.tipPad ?? (vw < 700 ? 4 : 9);
-    const spawnMul = mv.spawnMul ?? 1;
+    // On a phone the lanes ARE the ground, so contact and wall-following stop
+    // being lethal; on desktop the original taxes still kill the traced-border
+    // artifact, which wide soil can afford.
+    const thin = phone
+      ? { face: 0.0015, wall: 0.0018, stall: 160, header: 0.10 }
+      : { face: 0.022, wall: 0.0015, stall: 50, header: 0.3 };
+    const tipPad = vw < 700 ? 4 : 9;
+    const spawnMul = phone ? PHONE_SPAWN : 1;
 
     type Tip = { x: number; y: number; dev: number; wd: number; tier: number; born: number; alive: boolean; pad: number; age: number; maxAge: number; slide: number; stall: number; tone: number };
-    const nP = Math.max(mv.nPMin || 5, Math.min(mv.nPMax || 16, Math.round(w / 120)));
+    const nP = Math.max(phone ? PHONE_ORIGINS : 5, Math.min(16, Math.round(w / 120)));
     const tips: Tip[] = [];
     for (let i = 0; i < nP; i++) {
       // drop each origin into a gap between header stones so the curtain
       // doesn't scribble along the nav; in thin soil (narrow viewports) also
       // steer origins clear of the column corridor — the gutters are the
       // only ground that goes anywhere
-      const deepCheck = w < 900 && !mv.stones && !bleed && !mv.lanes;
+      const deepCheck = w < 900 && !phone;
       let ox = w * (0.03 + (0.94 * (i + 0.15 + rand() * 0.7)) / nP);
-      if (mv.lanes) {
+      if (phone) {
         // spread origins across the real free width, proportionally, so every
         // root starts in ground that goes somewhere
         const lanes = freeLanes(stones, w, 120, 3);
@@ -420,10 +385,6 @@ const startPicks = starts.map((s) => sortedPosts.find((p) => p.id === s)).filter
             want -= b - a;
           }
         }
-      } else if (mv.lateral) {
-        // enter along the left and right edges instead of across the top, and
-        // let the section gaps be the channels inward
-        ox = i % 2 ? w - 3 - rand() * 10 : 3 + rand() * 10;
       }
       for (let tries = 0; tries < 12 && (blocked(ox, 26, 4) || blocked(ox, 54, 4) || (deepCheck && blocked(ox, 110, 3))); tries++) {
         ox = w * (0.02 + rand() * 0.96);
@@ -431,8 +392,8 @@ const startPicks = starts.map((s) => sortedPosts.find((p) => p.id === s)).filter
       tips.push({
         x: ox,
         y: -3,
-        dev: mv.lateral ? (i % 2 ? -0.55 : 0.55) : (rand() - 0.5) * 0.2,
-        wd: wd0 + rand() * wdR,
+        dev: (rand() - 0.5) * 0.2,
+        wd: 2.2 + rand() * 0.9,
         tier: 0,
         born: Math.round(rand() * 220),
         alive: true,
@@ -449,7 +410,7 @@ const startPicks = starts.map((s) => sortedPosts.find((p) => p.id === s)).filter
     const iters: number[][][] = [];
     const frontier: number[] = [];
     const deepX: number[] = [], deepY: number[] = [];
-    const maxIter = Math.ceil((h / STEP_V) * 2.4) + 400;
+    const maxIter = Math.ceil((h / STEP) * 2.4) + 400;
     for (let it = 0; it < maxIter; it++) {
       const segs: number[][] = [];
       let anyAlive = false;
@@ -471,7 +432,7 @@ const startPicks = starts.map((s) => sortedPosts.find((p) => p.id === s)).filter
         const lim = t.tier === 0 ? 0.5 : t.tier === 1 ? 0.85 : 1.05;
         t.dev = Math.max(-1.75, Math.min(1.75, t.dev));
         if (Math.abs(t.dev) <= lim) t.dev = Math.max(-lim, Math.min(lim, t.dev));
-        let nx = t.x + Math.sin(t.dev) * STEP_V, ny = t.y + Math.cos(t.dev) * STEP_V;
+        let nx = t.x + Math.sin(t.dev) * STEP, ny = t.y + Math.cos(t.dev) * STEP;
         if (blocked(nx, ny, t.pad)) {
           // steer around the stone: prefer the side away from its center;
           // contact carries a mortality tax — steep against the little
@@ -485,7 +446,7 @@ const startPicks = starts.map((s) => sortedPosts.find((p) => p.id === s)).filter
           for (const d of DEVS) {
             for (const sgn of [pref, -pref]) {
               const dv = Math.max(-1.75, Math.min(1.75, t.dev + sgn * d));
-              const cx = t.x + Math.sin(dv) * STEP_V, cy = t.y + Math.cos(dv) * STEP_V;
+              const cx = t.x + Math.sin(dv) * STEP, cy = t.y + Math.cos(dv) * STEP;
               if (!blocked(cx, cy, t.pad)) { t.dev = dv; nx = cx; ny = cy; found = true; break; }
             }
             if (found) break;
@@ -539,12 +500,13 @@ const startPicks = starts.map((s) => sortedPosts.find((p) => p.id === s)).filter
       if (!anyAlive) break;
     }
     art = {
-      seedInt, iters, frontier, deepX, deepY, w, h, vw, bleed, mv: mv.id,
+      seedInt, iters, frontier, deepX, deepY, w, h, vw, phone,
       drawn: 0, target: 0, phase: 'arrive', elapsed: 0, arriveIt: 0, acc: 0, chaseRate: 0.12,
     };
-    // exploration handle — removed with the mv scaffold before merge
+    // read by scripts/mobile-eval.mjs, which is the regression gate for the
+    // blank-phone bug — keep it in sync if these names change
     (window as any).__sub = {
-      name: mv.name, id: mv.id, stones: stones.length, w, vw, bleed,
+      phone, stones: stones.length, w, vw,
       iters: iters.length, segs: iters.reduce((n, s) => n + s.length, 0),
     };
   }
@@ -586,7 +548,7 @@ const startPicks = starts.map((s) => sortedPosts.find((p) => p.id === s)).filter
     if (!art || !dotCv) return;
     const i = Math.max(0, Math.min(art.drawn, art.deepX.length) - 1);
     const x = art.deepX[i], y = art.deepY[i];
-    dotCv.style.transform = `translate(${(x - (art.bleed || 0) - 18).toFixed(1)}px, ${(y - 18).toFixed(1)}px)`;
+    dotCv.style.transform = `translate(${(x - 18).toFixed(1)}px, ${(y - 18).toFixed(1)}px)`;
     const ctx = dotCv.getContext('2d')!;
     const c = colors();
     ctx.setTransform(2, 0, 0, 2, 0, 0);

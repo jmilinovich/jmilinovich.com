@@ -25,11 +25,7 @@ export default defineConfig({
 
   integrations: [
     sitemap({
-      // Scaffold routes stay out of the sitemap the same way unlisted posts do —
-      // noindex alone still hands crawlers the URL.
-      filter: (page) =>
-        !unlistedPaths.some((p) => new URL(page).pathname === p) &&
-        new URL(page).pathname !== '/mobile-proof/',
+      filter: (page) => !unlistedPaths.some((p) => new URL(page).pathname === p),
     }),
   ],
 });

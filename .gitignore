@@ -33,3 +33,6 @@ public/og/
 
 # mobile substrate exploration output (branch substrate-mobile)
 .mobile-eval/
+
+# per-session git worktrees (embedded repos, never ours to commit)
+.claude/worktrees/
