@@ -58,6 +58,8 @@ Tokens are named by intent. There is no `primary`.
 | `hairline` | `#e6e6e6` | `#222222` | borders, separators |
 | `sig` | `#1a7f37` | `#53d339` | the signature colour |
 | `glyph` | `rgba(26,26,26,0.85)` | `#53d339` | stroke of every drawing (plotter ink / phosphor) |
+| `glyph-thin` | `rgba(26,26,26,0.85)` | `#53d339` | substrate stroke in thin soil |
+| `glyph-rich` | `rgba(20,74,44,0.85)` | `#53d339` | substrate stroke in rich soil |
 | `code-bg` | `#f5f5f5` | `#1a1a1a` | code blocks; code renders monochrome in `ink` |
 
 *Reason for `sig`:* derived from the commit chart's green but transposed off GitHub's
@@ -66,6 +68,23 @@ The two themes are two physical materials for the same algorithm: **dark = phosp
 (green glow on black), **light = plotter ink** (near-black hairlines on paper, moss-green
 accents) — the Casey Reas print citation. `muted` values replace the old `#999`/`#777`,
 which failed WCAG AA on every date on the site.
+
+*Reason for the `glyph-thin` → `glyph-rich` ramp* (2026-07-29, via /grill-me): light mode's
+substrate was grey scratches on white while dark's was a green organism — the asymmetry, not
+the absence of colour, was the complaint. The substrate now draws thin soil in `glyph-thin`
+and rich soil in `glyph-rich`, so **light gains a second pen of green-black ink** where the
+nutrient field is dense. It is one hue per theme varying in tone, so the "no second accent
+colour" rule stands untouched.
+
+**Dark's two tokens are deliberately equal, and that duplication is the decision.** Three
+contact sheets established that `#53d339` has no free variation: brighter is neon and drowns
+the sig dot; dimmer spends the presence that makes dark work; desaturating at matched
+luminance (`#8cb978`, measured at 0.412 relative luminance against phosphor's 0.489 — the
+"equal brightness" premise was simply wrong) turns the whole organism to sage, because most
+soil is thin. So the ramp collapses to one colour in dark, and dark renders byte-identical
+to its pre-2026-07-29 self. The themes were never symmetric in colour anyway: dark has
+carried hue since day one, and light is where the substrate had none. Same law, different
+headroom — not an exception.
 
 **Light is the default theme** (owner decision 2026-07-27): visitors without an explicit
 OS dark-mode preference get plotter ink on white. An explicit OS dark preference is
@@ -135,8 +154,21 @@ differential growth on 2026-07-28.
    2026-07-28: the caption makes no data claim). Arrival grows the first viewport
    once; the reader's scroll grows the rest (owner call: curtain origins across the
    whole top edge, not a single seed point — immersion over origin-story). Thin soil
-   on mobile: the gutters are the lanes. The only colour is the `sig` dot at the
-   deepest tip, leading the scroll. **A new random seed every load** (owner decision:
+   on mobile: the gutters are the lanes. **The nutrient field also drives tone**
+   (2026-07-29): each root's tone lags the field beneath it (`TONE_LAG`), so hue drifts
+   across ~100px into coherent regions rather than mottling per segment, and `TONE_GAMMA`
+   (>1) holds ordinary soil at the ink floor so only genuinely rich patches reach
+   `glyph-rich`. **Hue lives in the fine structure:** hairline rootlets take the full
+   ramp, tier-0 primaries only 35% of it. Without that gain a bold taproot crossing a
+   rich patch becomes one unmistakably green line — colour in a single stroke, which is
+   the bar this had to clear ("visible in the mass, invisible per stroke", owner call).
+   It is also the honest biology: fine roots absorb, primaries are structural. Light
+   mode's alpha floor is `0.22` against dark's `0.14`, because phosphor glows at low
+   alpha and plotter ink on white just disappears; the ceiling is unchanged, so
+   width-as-depth survives. The `sig` dot at the deepest tip remains the most saturated
+   point on the page — roots draw at 0.14–0.74 alpha against the dot's 1.0, so its
+   primacy needs no clamp, and the tier gain keeps the deepest primary in near-black
+   ink for it to read against. **A new random seed every load** (owner decision:
    the drawing should feel different each visit); the provenance line at the bottom
    of the soil shows the full 8-hex seed — nothing else — and `?seed=<hex>` replays
    any organism: determinism preserved per seed, surprise preserved per visit.
@@ -236,7 +268,12 @@ That's the whole kit; new surfaces compose these before inventing.
 
 - **No AI-generated imagery anywhere.** The ChatGPT hero PNGs are scheduled for deletion.
 - No gradients, no cards, no bento grids, no border-radius above 2px, no drop shadows.
-- No second accent colour; no colour in chrome; no coloured links.
+  The substrate's tone ramp is field-driven and therefore patchy — regions of warmth
+  where commit mass landed. **A depth-driven version of the same idea would be a vertical
+  gradient and is banned**; it was considered and rejected on exactly that ground
+  (2026-07-29). If the tint ever reads as a top-to-bottom fade, it has drifted — revert.
+- No second accent colour; no colour in chrome; no coloured links. The substrate ramp is
+  one hue per theme varying in tone, which is why it does not breach this.
 - No CDN-loaded assets of any kind (fonts, CSS, JS).
 - No infinite animation loops (sole exception: the living logo, see §Motion); nothing
   else animates on essay pages.

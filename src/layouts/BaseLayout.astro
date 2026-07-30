@@ -118,6 +118,10 @@ const viewTransition = { forwards, backwards };
     --code-bg: #f5f5f5;
     --sig: #1a7f37;
     --glyph: rgba(26, 26, 26, 0.85);
+    /* substrate ramp: thin soil -> rich soil. In light, --glyph IS the thin end
+       (plotter ink) and rich soil picks up a second pen of green-black. */
+    --glyph-thin: rgba(26, 26, 26, 0.85);
+    --glyph-rich: rgba(20, 74, 44, 0.85);
   }
   [data-theme="dark"] {
     color-scheme: dark;
@@ -129,6 +133,16 @@ const viewTransition = { forwards, backwards };
     --code-bg: #1a1a1a;
     --sig: #53d339;
     --glyph: #53d339;
+    /* Dark's ramp is deliberately flat, and this duplication is the decision,
+       not an oversight (2026-07-29, three contact sheets). Phosphor has no free
+       variation: brighter than #53d339 is neon and drowns the sig dot, dimmer
+       spends the presence that makes dark work, and desaturating at matched
+       luminance turns the whole organism to sage — it flips the material from
+       phosphor to moss, because most soil is thin. Dark already carries hue;
+       light is where the substrate had none. Do not "fix" these to differ
+       without re-running scripts/substrate-sheet.mjs. */
+    --glyph-thin: #53d339;
+    --glyph-rich: #53d339;
   }
   /* no-JS: honor an explicit OS dark preference (JS sets data-theme before paint when present) */
   @media (prefers-color-scheme: dark) {
@@ -142,6 +156,8 @@ const viewTransition = { forwards, backwards };
       --code-bg: #1a1a1a;
       --sig: #53d339;
       --glyph: #53d339;
+      --glyph-thin: #53d339; /* flat by decision — see the note above */
+      --glyph-rich: #53d339;
     }
   }
 

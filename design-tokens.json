@@ -71,7 +71,9 @@
       "hairline": "#e6e6e6",
       "code-bg": "#f5f5f5",
       "sig": "#1a7f37",
-      "glyph": "rgba(26, 26, 26, 0.85)"
+      "glyph": "rgba(26, 26, 26, 0.85)",
+      "glyph-thin": "rgba(26, 26, 26, 0.85)",
+      "glyph-rich": "rgba(20, 74, 44, 0.85)"
     },
     "dark": {
       "paper": "#0a0a0a",
@@ -81,10 +83,14 @@
       "hairline": "#222222",
       "code-bg": "#1a1a1a",
       "sig": "#53d339",
-      "glyph": "#53d339"
+      "glyph": "#53d339",
+      "glyph-thin": "#53d339",
+      "glyph-rich": "#53d339"
     },
     "rules": [
       "chrome is achromatic; sig appears only in drawings, ::selection, :focus-visible",
+      "the substrate ramps glyph-thin -> glyph-rich by nutrient density: one hue per theme varying in tone, not a second accent colour",
+      "dark's glyph-thin and glyph-rich are equal ON PURPOSE — phosphor has no headroom (brighter is neon, dimmer spends presence, desaturated reads sage); see DESIGN.md",
       "links carry a visible underline in muted (>= 3:1), darkening to ink-strong on hover; never coloured",
       "muted must hold >= 4.5:1 on paper in both themes",
       "code renders monochrome: ink on code-bg, no syntax colours",
@@ -107,6 +113,15 @@
       "scrollFed": "reveal target = scrollY + 1.7 viewports; chase rate 3.5x arrival; never regresses",
       "onSettle": "cancelAnimationFrame",
       "seed": "random per load, replayable via ?seed= (full 8-hex)",
+      "tone": {
+        "ramp": "glyph-thin -> glyph-rich in 8 buckets, lerped in sRGB",
+        "driver": "the commit nutrient field, sampled per segment",
+        "lag": 0.05,
+        "gamma": 1.8,
+        "tierGain": { "0": 0.35, "1": 0.75, "2+": 1 },
+        "bar": "visible in the mass, invisible per stroke"
+      },
+      "alphaFloor": { "light": 0.22, "dark": 0.14 },
       "accent": "sig dot at the deepest tip only",
       "dprCap": 2,
       "canvasSlices": "2048px css per slice, 42M device-px area budget"
