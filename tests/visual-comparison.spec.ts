@@ -211,6 +211,50 @@ test.describe('List structure consistency', () => {
     await expect(firstTalk.locator('.talk-date')).toBeVisible();
   });
 
+  // The attribution on /projects is load-bearing, not decorative: a bare product name
+  // like "Canva AI" on a personal projects page reads as a claim to have authored it.
+  // DESIGN.md §The projects page makes the role line a hard rule; this is the gate.
+  test('every "With teams" project states a sourced role', async ({ page }) => {
+    await page.goto(`${BASE}/projects`, { waitUntil: 'networkidle' });
+
+    const items = page.locator('.band[data-band="With teams"] .project-item');
+    const count = await items.count();
+    expect(count, 'the With teams band should have rows').toBeGreaterThan(0);
+
+    for (let i = 0; i < count; i++) {
+      const item = items.nth(i);
+      const name = (await item.locator('.project-name').textContent())?.trim();
+      const meta = item.locator('.project-meta');
+      await expect(meta, `${name} should have a provenance line`).toHaveCount(1);
+      // `company · role`, lowercase, before any secondary link
+      const text = (await meta.textContent())?.trim() ?? '';
+      expect(text, `${name} should open with "company · role"`).toMatch(/^[a-z][a-z.\-]* · \S/);
+    }
+  });
+
+  test('every project row has a name and a date', async ({ page }) => {
+    await page.goto(`${BASE}/projects`, { waitUntil: 'networkidle' });
+
+    const items = page.locator('.project-item');
+    const count = await items.count();
+    expect(count, 'projects page should have rows').toBeGreaterThan(0);
+
+    for (let i = 0; i < count; i++) {
+      await expect(items.nth(i).locator('.project-name')).toHaveCount(1);
+      await expect(items.nth(i).locator('.project-date')).toHaveCount(1);
+    }
+  });
+
+  // Star counts were removed 2026-08-03 — they are a scoreboard, which DESIGN.md bans.
+  test('projects page shows no star counts', async ({ page }) => {
+    await page.goto(`${BASE}/projects`, { waitUntil: 'networkidle' });
+    const main = (await page.locator('main').textContent()) ?? '';
+    expect(main, 'no star glyph on /projects').not.toContain('★');
+    // the old markup rendered the star via `.project-stars::before`, which textContent misses
+    const html = await page.content();
+    expect(html, 'no star-count element on /projects').not.toContain('project-stars');
+  });
+
   test('all pages render without errors', async ({ page }) => {
     for (const p of allPages) {
       const errors: string[] = [];

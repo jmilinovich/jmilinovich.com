@@ -24,6 +24,13 @@ superseded by this document.
 - **Willing to be bad at:** being a résumé (no case studies, no logo rows, bio stays five
   bullets) and trend coverage (no bento, no craft-demo playground — that genre belongs to
   design engineers selling interaction craft; this site's proof is dated writing).
+  *Amended 2026-08-03:* `/projects` now carries work shipped at Canva, Clubhouse, Pinterest,
+  Aesthetic and URX, which is the closest this site comes to that line. It stays on the
+  right side of it because it lists **artifacts, not roles**. A résumé says "Head of X at Y,
+  2019–2022"; the page says "In-room chat, 2022", describes the thing rather than the
+  person, and names the role only as provenance underneath. Still banned there: case
+  studies, logo rows, metrics, job durations, and any row whose role cannot be sourced.
+  See §The projects page.
 
 ## Typography
 
@@ -296,6 +303,57 @@ the flat-dash seedling on 2026-07-29, after the idea had already been agreed. Th
 frontmatter was ever implemented. Owner call 2026-07-29: build it only if a contact sheet
 actually turns up a dud worth overriding.
 
+## The projects page
+
+Rewritten 2026-08-03 (via /grill-me + /mili:ui). It had been a GitHub mirror — six repos
+with language tags and star counts — and adding echo.surf, fonts.mili.dev and the shipped
+company work exposed three things that were already wrong rather than creating them.
+
+**Star counts are gone.** A star count is a scoreboard, which §Anti-patterns bans outright,
+and it made `/projects` the only page on the site with no timestamps while the site's whole
+credibility claim is *timestamps, not claims*. Every row now carries a date, as every other
+list does. `scripts/update-stars.mjs` was deleted with them; do not reintroduce either.
+
+**Two bands, split on authorship** — `On my own` and `With teams`. That is the one
+distinction on this page that is load-bearing, and it is the one a flat list would hide.
+A first cut split the personal work again into `Running` (live sites) and `Open source`
+(repos) and it was merged back the same day on owner call: none of them are actively
+maintained, so a band called Running claimed activity that isn't happening. Kind of artifact
+is legible from the name anyway — a domain reads as a site, `goal-md` reads as a repo —
+whereas who built it is not. Newest first inside each band.
+
+**The type roles split exactly on the band boundary, and that is the point.** `On my own`
+is domains and repo names, which are machine identifiers, so they set in Berkeley Mono at
+1.6rem. `With teams` is product names, which are human words, so they set in Source Serif
+at 1.7rem, matching the row titles on `/writing` and `/talks`. The §Typography doctrine
+lands on the seam the bands already draw, so the split reinforces the structure instead of
+fighting it. Do not "fix" the inconsistency.
+
+**Every `With teams` row states its role, and this is a hard rule.** Six of seven entries
+came back from adversarial verification flagged high overclaim risk — not for their wording,
+which contains no first-person framing at all, but structurally: a bare "Canva AI" on a
+personal projects page reads as authorship of something two co-founders announced from a
+stadium stage. The fix is a mono line naming what John actually did (`canva · head of ai
+product`, `pinterest · product manager, taste graph`, `urx · co-founder & ceo`), sourced to
+public record — Canva's own newsroom, TechCrunch, Axios. It reads as a caption, not a
+disclaimer, and the variation down the list is itself the honest story. **Do not add a row
+whose role cannot be sourced.** Pinterest Lens was cut on exactly this test (2026-08-03):
+the Lens announcements name only the visual-search engineers, while the Taste Graph entry
+beside it has John quoted by name in TechCrunch and MarTech.
+
+**Dates in `With teams` are years, deliberately.** Nearly every one is an announcement date
+with a staged rollout behind it — Canva AI shipped as "be among the first to try", Lens as a
+US-only beta, the Clubhouse hallway's ML ranking was documented after the fact and never
+dated, and URX's October 2013 TechCrunch piece is a funding story about campaigns already
+running. A month would claim precision the public record does not support. Personal rows
+keep month + year, which is `/talks`' existing mixed-precision idiom.
+
+**No Process marks here.** A project's only text is a ~15-word description, and the
+contact sheet already established that under roughly 200 words every mark normalises to a
+flat dash. This page is typography. There is also no page subtitle: the band labels are the
+honest frame, and a line like "things I made, and things I helped make" is the
+punchy-founder register the `humanize` skill exists to catch.
+
 ## Component vocabulary
 
 `logo` (the living mili wordmark, `Logo.astro`) · `row` (glyph + serif title + mono date)
@@ -303,7 +361,9 @@ actually turns up a dud worth overriding.
 provenance line) · `fingerprint` (the essay's growth-fold in a hairline frame + mono
 caption — the contained instrument) · `facts` (the bio bullets) · `keep reading` (the
 essay foot: eyebrow + three `row`s + the mono `All writing →` line, `KeepReading.astro`)
-· `footer strip`.
+· `footer strip` · `project row` (name + right-aligned date, description, then one mono
+provenance line carrying the role and any second destination — `/projects` only, see §The
+projects page).
 That's the whole kit; new surfaces compose these before inventing.
 
 ## Anti-patterns (the audit checks these)
@@ -328,5 +388,9 @@ That's the whole kit; new surfaces compose these before inventing.
   idly or loses its seed line, it has become wallpaper — revert.
 - No self-scoreboards, badges, or "called it" marks — nothing that grades John's own
   work on his own site, and nothing that requires annual editorial upkeep to stay true.
+  **GitHub star counts are covered by this** and were removed from `/projects` on
+  2026-08-03; they had sat there since before the redesign because nobody read them as a
+  score. Third-party awards on a *product* are not self-scores and may appear as an ordinary
+  link (Magic Studio's TIME listing), but never as a badge, and never with a number.
 - Muted text never falls below WCAG AA (4.5:1).
 - No `#39d353` outside the `/commits` chart — the site's green is `sig`.

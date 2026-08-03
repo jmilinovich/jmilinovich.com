@@ -1,48 +1,167 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 
-const projects = [
+// The page stopped being a GitHub mirror on 2026-08-03 (via /grill-me + /mili:ui).
+// Star counts went with the rewrite: they are a scoreboard, which DESIGN.md bans, and
+// every other list on the site carries a date instead. See DESIGN.md §The projects page.
+//
+// Two bands, split on authorship — the one distinction on this page that is load-bearing.
+// A first cut separated live sites ("Running") from repos ("Open source") and was merged
+// back on owner call the same day: none of these are actively maintained, so a band called
+// Running claimed an activity that isn't happening. Kind of artifact is legible from the
+// name anyway (a domain reads as a site, `goal-md` reads as a repo); who built it is not.
+//
+// `mono: true` is not styling for its own sake. Domains and repo names are machine
+// identifiers and take Berkeley Mono; product names are human words and take Source
+// Serif. That seam falls exactly on the band boundary, so the type split reinforces
+// the structure rather than fighting it.
+//
+// Product-work dates are years, deliberately. Almost every one of these is an
+// announcement date with a staged rollout behind it (Canva AI "be among the first
+// to try", Lens shipped as a US beta, the Clubhouse hallway's ML ranking was
+// documented after the fact and never dated), so a month would claim a precision
+// the public record does not support.
+//
+// Every `role` line is what public sources actually attribute to John — Canva's own
+// newsroom names him Head of AI Product, TechCrunch names him the Taste Graph's PM,
+// TechCrunch names him URX's co-founder and CEO. Do not add a row here whose role
+// cannot be sourced; a bare product name on a personal projects page reads as a claim
+// of authorship, and these were shipped by teams.
+const bands = [
   {
-    name: "goal-md",
-    description: "A goal-specification file for autonomous coding agents. Generalizes Karpathy's autoresearch to domains with constructed metrics.",
-    url: "https://github.com/jmilinovich/goal-md",
-    language: "Shell",
-    stars: 151,
+    label: 'On my own',
+    mono: true,
+    items: [
+      {
+        name: 'fonts.mili.dev',
+        url: 'https://fonts.mili.dev',
+        date: 'July 2026',
+        description:
+          'A type foundry you steer by picking the specimens you like instead of describing the font you want. Each round breeds from the ones that survived.',
+        links: [{ label: 'source', url: 'https://github.com/jmilinovich/foundry' }],
+      },
+      {
+        name: 'goal-md',
+        url: 'https://github.com/jmilinovich/goal-md',
+        date: 'March 2026',
+        description:
+          "A goal-specification file for autonomous coding agents. It generalizes Karpathy's autoresearch to the domains where you have to construct the metric first.",
+        links: [],
+      },
+      {
+        name: 'browser-grid',
+        url: 'https://github.com/jmilinovich/browser-grid',
+        date: 'March 2026',
+        description: 'Tile Playwright browser windows in a grid so you can watch parallel tests run.',
+        links: [],
+      },
+      {
+        name: 'echo.surf',
+        url: 'https://echo.surf',
+        date: 'January 2026',
+        description:
+          'An autonomous agent given its own domain and a 30-minute heartbeat. It built the site and writes its own essays.',
+        links: [{ label: 'the agentic web', url: '/writing/the-agentic-web', internal: true }],
+      },
+      {
+        name: 'agents.json',
+        url: 'https://github.com/jmilinovich/agents.json',
+        date: 'January 2025',
+        description:
+          'A proposed standard for websites to declare how AI agents may interact with them, in the way robots.txt declares what crawlers can do.',
+        links: [],
+      },
+    ],
   },
   {
-    name: "stylegen",
-    description: "A Python library for generating cohesive Stable Diffusion prompts",
-    url: "https://github.com/jmilinovich/stylegen",
-    language: "Python",
-    stars: 9,
-  },
-  {
-    name: "agents.json",
-    description: "Teaching websites how to talk to AI agents",
-    url: "https://github.com/jmilinovich/agents.json",
-    language: null,
-    stars: 6,
-  },
-  {
-    name: "browser-grid",
-    description: "Tile Playwright browser windows in a grid for watching parallel tests run",
-    url: "https://github.com/jmilinovich/browser-grid",
-    language: "TypeScript",
-    stars: 0,
-  },
-  {
-    name: "comicgen",
-    description: "AI comic book generator using Google Gemini with character consistency",
-    url: "https://github.com/jmilinovich/comicgen",
-    language: "Python",
-    stars: 0,
-  },
-  {
-    name: "worldmorph",
-    description: "Multi-agent world simulations",
-    url: "https://github.com/jmilinovich/worldmorph",
-    language: "Python",
-    stars: 1,
+    label: 'With teams',
+    mono: false,
+    items: [
+      {
+        name: 'Canva AI 2.0',
+        url: 'https://www.canva.com/newsroom/news/canva-create-2026-ai/',
+        date: '2026',
+        description:
+          'A rebuild of Canva around conversation, where you describe a goal and it picks the tools it needs and runs them.',
+        role: 'canva · head of ai product',
+        links: [],
+      },
+      {
+        name: 'Canva AI',
+        url: 'https://www.canva.com/newsroom/news/canva-ai-launches/',
+        date: '2025',
+        description:
+          'A conversational assistant inside Canva that turns a typed or spoken prompt into an editable design, document, or image.',
+        role: 'canva · head of ai product',
+        links: [
+          {
+            label: 'one percent of the way there',
+            url: '/writing/canva-is-one-percent-of-the-way-there',
+            internal: true,
+          },
+        ],
+      },
+      {
+        name: 'Magic Studio',
+        url: 'https://www.canva.com/newsroom/news/magic-studio/',
+        date: '2023',
+        description:
+          "Canva's suite of AI design tools for generating and editing images, video, presentations, and copy inside the editor.",
+        role: 'canva · head of ai product',
+        links: [{ label: "time's best inventions 2024", url: 'https://time.com/7094550/canva-magic-studio/' }],
+      },
+      {
+        name: 'In-room chat',
+        // blog.clubhouse.com no longer resolves; the archive is the only primary source left
+        url: 'https://web.archive.org/web/20220224220856/https://blog.clubhouse.com/a-new-feature-has-entered-the-chat/',
+        date: '2022',
+        description:
+          "A text channel inside Clubhouse's live audio rooms, so listeners and hosts could type alongside the spoken conversation.",
+        role: 'clubhouse · head of discovery product',
+        links: [],
+      },
+      {
+        name: 'Home feed ranking',
+        url: 'https://web.archive.org/web/20250430200021/https://blog.clubhouse.com/making-the-hallway-more-relevant-with-machine-learning/',
+        date: '2022',
+        description:
+          "Machine-learning ranking of the live rooms in Clubhouse's hallway, its home feed, in place of the original heuristics.",
+        role: 'clubhouse · head of discovery product',
+        links: [],
+      },
+      {
+        name: 'Brand Essentials',
+        // DO NOT link aesthetic.com live: the domain resolves but is now an unrelated
+        // AI image gallery, so a reader would land on someone else's product. The Wayback
+        // snapshot is also the better citation — it is Aesthetic naming its own product,
+        // which Axios never does. Company lineage, easy to get wrong: URX (YC S13, sold to
+        // Pinterest 2016) → Plato Design (2018, useplato.com) → Aesthetic (rebranded 2020).
+        url: 'https://web.archive.org/web/20200812063704/https://www.aesthetic.com/brand_essentials',
+        date: '2020',
+        description:
+          'A brand identity built with a senior designer in four business days, delivered as an interactive web guide rather than a PDF.',
+        role: 'aesthetic · co-founder',
+        links: [{ label: 'axios', url: 'https://www.axios.com/2020/04/30/aesthetic-seed-funding-ai-brand-design' }],
+      },
+      {
+        name: 'Taste Graph',
+        url: 'https://techcrunch.com/2017/09/21/pinterest-opens-up-more-than-5000-interests-for-advertiser-targeting-through-its-taste-graph/',
+        date: '2017',
+        description:
+          "Pinterest's map of what people are interested in, built from the Pins they save, used to rank feeds and target ads.",
+        role: 'pinterest · product manager, taste graph',
+        links: [],
+      },
+      {
+        name: 'Deep-linked app ads',
+        url: 'https://techcrunch.com/2013/10/16/urx-ads/',
+        date: '2013',
+        description:
+          "Ads inside other phone apps that opened straight to a specific product page in the advertiser's own app.",
+        role: 'urx · co-founder & ceo',
+        links: [],
+      },
+    ],
   },
 ];
 ---
@@ -50,21 +169,56 @@ const projects = [
 <BaseLayout title="Projects - John Milinovich">
   <h1>Projects</h1>
 
-  <ul class="projects-list">
-    {projects.map(project => (
-      <li class="project-item">
-        <a href={project.url} target="_blank" rel="noopener" class="project-name">{project.name}</a>
-        {project.language && <span class="project-lang">{project.language}</span>}
-        {project.stars > 0 && <span class="project-stars">{project.stars}</span>}
-        <p class="project-description">{project.description}</p>
-      </li>
-    ))}
-  </ul>
+  {bands.map((band) => (
+    <section class="band" data-band={band.label}>
+      <h2 class="eyebrow">{band.label}</h2>
+      <ul class="projects-list">
+        {band.items.map((project) => (
+          <li class="project-item">
+            <div class="project-head">
+              <a
+                href={project.url}
+                target="_blank"
+                rel="noopener"
+                class:list={['project-name', band.mono ? 'is-mono' : 'is-serif']}
+              >{project.name}</a>
+              <span class="project-date">{project.date}</span>
+            </div>
+            <p class="project-description">{project.description}</p>
+            {(project.role || project.links.length > 0) && (
+              <p class="project-meta">
+                {project.role}
+                {project.links.map((link, i) => (
+                  <>
+                    {(project.role || i > 0) && <span aria-hidden="true"> &middot; </span>}
+                    <a
+                      href={link.url}
+                      {...(link.internal ? {} : { target: '_blank', rel: 'noopener' })}
+                    >{link.label} &rarr;</a>
+                  </>
+                ))}
+              </p>
+            )}
+          </li>
+        ))}
+      </ul>
+    </section>
+  ))}
 </BaseLayout>
 
 <style>
   h1 {
     margin-bottom: 2rem;
+  }
+
+  /* The site's section gap, as on the homepage's writing sections. The eyebrow
+     carries the separation — no rule, no frame. */
+  .band {
+    margin-bottom: 4rem;
+  }
+
+  .band:last-child {
+    margin-bottom: 0;
   }
 
   .projects-list {
@@ -76,31 +230,48 @@ const projects = [
     margin-bottom: 2rem;
   }
 
+  .project-item:last-child {
+    margin-bottom: 0;
+  }
+
+  /* The same baseline-aligned title/date pair every list on the site uses. */
+  .project-head {
+    display: flex;
+    align-items: baseline;
+    gap: 1.2rem;
+  }
+
   .project-name {
-    font-family: 'Berkeley Mono', monospace;
-    font-size: 1.6rem;
     font-weight: 400;
     text-decoration: none;
+    color: var(--ink-strong);
+  }
+
+  /* Machine identifiers — domains, repo names. */
+  .project-name.is-mono {
+    font-family: 'Berkeley Mono', monospace;
+    font-size: 1.6rem;
+  }
+
+  /* Human words — product names. Matches the row titles on /writing and /talks. */
+  .project-name.is-serif {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 1.7rem;
+    line-height: 1.4;
   }
 
   .project-name:hover {
     text-decoration: underline;
+    text-underline-offset: 0.2em;
   }
 
-  .project-lang {
+  .project-date {
+    font-family: 'Berkeley Mono', monospace;
     font-size: 1.2rem;
     color: var(--muted);
-    margin-left: 0.8rem;
-  }
-
-  .project-stars {
-    font-size: 1.2rem;
-    color: var(--muted);
-    margin-left: 0.5rem;
-  }
-
-  .project-stars::before {
-    content: "\2605 ";
+    margin-left: auto;
+    flex: none;
+    padding-left: 1.2rem;
   }
 
   .project-description {
@@ -108,5 +279,41 @@ const projects = [
     color: var(--ink);
     line-height: 1.5;
     margin-top: 0.3rem;
+  }
+
+  /* Role, then any second destination. Mono, because it is the instrument label
+     for the row: who did what, and where else to look. */
+  .project-meta {
+    font-family: 'Berkeley Mono', monospace;
+    font-size: 1.2rem;
+    color: var(--muted);
+    line-height: 1.5;
+    margin-top: 0.5rem;
+  }
+
+  /* The same mono-link treatment as the essay foot's "All writing →" and the
+     footer strip: no rule until hover, with the arrow carrying the affordance. */
+  .project-meta a {
+    color: var(--muted);
+    text-decoration: none;
+  }
+
+  .project-meta a:hover {
+    color: var(--ink);
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+  }
+
+  @media (max-width: 767px) {
+    .project-head {
+      flex-wrap: wrap;
+      gap: 0.2rem 1.2rem;
+    }
+
+    .project-date {
+      margin-left: 0;
+      padding-left: 0;
+      width: 100%;
+    }
   }
 </style>
