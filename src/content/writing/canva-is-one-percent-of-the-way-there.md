@@ -15,7 +15,7 @@ None of it makes sense without the origin story, which you've probably read: Per
 
 People at Canva are cheerful in a way that might take an American a while to trust, and underneath the cheerfulness is the hardest-working group I've been around. I started calling it laid-back intensity, and I still don't have a better phrase. Nobody is stressed for show. Everybody is moving extremely fast.
 
-## "Canvas Chef" becomes Canva AI
+## “Canvas Chef” becomes Canva AI
 
 Canva is the only place I've worked where a document written before the company existed still functions as a spec. When thousands of people can predict what the founder would say, they stop needing to ask, and she gets to choose where to be involved rather than being the bottleneck everywhere.
 
