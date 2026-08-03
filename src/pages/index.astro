@@ -229,6 +229,24 @@ const startPicks = starts.map((s) => sortedPosts.find((p) => p.id === s)).filter
     return free.filter(([a, b]) => b - a > 2);
   }
 
+  // Lanes at ONE depth are not enough. Origins were spread across the free
+  // intervals at y=120 and then tested by blocked() at y=26 and y=54; when
+  // those disagreed the retry re-randomised across the FULL width, threw the
+  // lane placement away, and after 12 misses kept a blocked origin — the
+  // starvation freeLanes() was added to end, just one step later. Intersecting
+  // the depths the placement actually tests makes a lane-placed origin viable
+  // everywhere it gets checked.
+  function intersectLanes(a: number[][], b: number[][]) {
+    const out: number[][] = [];
+    for (const [a0, a1] of a) {
+      for (const [b0, b1] of b) {
+        const lo = Math.max(a0, b0), hi = Math.min(a1, b1);
+        if (hi - lo > 2) out.push([lo, hi]);
+      }
+    }
+    return out;
+  }
+
   function measureStones(w: number, phone: boolean) {
     const px = w < 480 ? 7 : 12, py = w < 480 ? 6 : 9;
     const sy = window.scrollY;
@@ -364,6 +382,16 @@ const startPicks = starts.map((s) => sortedPosts.find((p) => p.id === s)).filter
 
     type Tip = { x: number; y: number; dev: number; wd: number; tier: number; born: number; alive: boolean; pad: number; age: number; maxAge: number; slide: number; stall: number; tone: number };
     const nP = Math.max(phone ? PHONE_ORIGINS : 5, Math.min(16, Math.round(w / 120)));
+    // Ground that is navigable at every depth the placement below tests, at the
+    // pads it tests them with. Computed once — it depends only on the stones.
+    // Falls back to the old single-depth lanes if the intersection is empty, so
+    // this can never place worse than before.
+    let phoneLanes: number[][] = [];
+    if (phone) {
+      const deep = freeLanes(stones, w, 120, 3);
+      phoneLanes = intersectLanes(intersectLanes(freeLanes(stones, w, 26, 4), freeLanes(stones, w, 54, 4)), deep);
+      if (!phoneLanes.length) phoneLanes = deep;
+    }
     const tips: Tip[] = [];
     for (let i = 0; i < nP; i++) {
       // drop each origin into a gap between header stones so the curtain
@@ -372,21 +400,25 @@ const startPicks = starts.map((s) => sortedPosts.find((p) => p.id === s)).filter
       // only ground that goes anywhere
       const deepCheck = w < 900 && !phone;
       let ox = w * (0.03 + (0.94 * (i + 0.15 + rand() * 0.7)) / nP);
+      let lanePlaced = false;
       if (phone) {
         // spread origins across the real free width, proportionally, so every
         // root starts in ground that goes somewhere
-        const lanes = freeLanes(stones, w, 120, 3);
+        const lanes = phoneLanes;
         if (lanes.length) {
           const total = lanes.reduce((n, [a, b]) => n + (b - a), 0);
           let want = ((i + 0.5) / nP) * total + (rand() - 0.5) * (total / nP) * 0.6;
           want = Math.max(0, Math.min(total - 0.001, want));
           for (const [a, b] of lanes) {
-            if (want <= b - a) { ox = a + want; break; }
+            if (want <= b - a) { ox = a + want; lanePlaced = true; break; }
             want -= b - a;
           }
         }
       }
-      for (let tries = 0; tries < 12 && (blocked(ox, 26, 4) || blocked(ox, 54, 4) || (deepCheck && blocked(ox, 110, 3))); tries++) {
+      // Only the unplaced fall through to the scattershot retry. A lane-placed
+      // origin is already viable at every tested depth, and re-rolling it
+      // across the full width is what used to strand it in a stone.
+      for (let tries = 0; !lanePlaced && tries < 12 && (blocked(ox, 26, 4) || blocked(ox, 54, 4) || (deepCheck && blocked(ox, 110, 3))); tries++) {
         ox = w * (0.02 + rand() * 0.96);
       }
       tips.push({
