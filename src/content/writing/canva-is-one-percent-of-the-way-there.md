@@ -1,7 +1,6 @@
 ---
 title: "Canva is one percent of the way there"
 date: "2026-07-27"
-unlisted: true
 ---
 
 **I spent three years inside the most ambitious company I've ever seen, and the way it works is a preview of how every company will soon have to work.**
