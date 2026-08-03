@@ -305,7 +305,13 @@ const viewTransition = { forwards, backwards };
 
   @media (max-width: 767px) {
     body {
-      padding-top: 64px;
+      /* 64px clears the fixed header; the 4rem section gap is the breathing
+         room. Without it the two numbers cancelled and content began at
+         exactly the header's bottom edge — a title touching a blurred, shadowed
+         bar. Desktop needs no equivalent: the static header carries its own
+         2rem bottom padding, and a fixed bar wants more clearance than a
+         static one. */
+      padding-top: calc(64px + 4rem);
     }
   }
 
