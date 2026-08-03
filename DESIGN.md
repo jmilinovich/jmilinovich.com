@@ -216,8 +216,16 @@ differential growth on 2026-07-28.
    **fingerprint**: a differential-growth line grown at build time from the essay's own
    text (`growthFoldSvg` in `src/lib/process.js`) — one growth epoch per paragraph,
    insertion budget ∝ paragraph words, question sentences buckling the line, em-dashes
-   striking kicks it absorbs; faint ghosts show three earlier growth states; the sig dot
-   rests where growth ended. It lives in the instrument container (hairline frame, mono
+   striking kicks it absorbs; faint ghosts show three earlier growth states; the line
+   simply stops where growth stopped. **The sig dot was removed 2026-08-03** — a reader
+   reported the mark as "a signature," and she was reading it correctly: a hand-drawn
+   line ending in a filled dot, sitting under the last paragraph, is the universal form
+   of one. Position was reconsidered and kept (owner call): the line is grown from the
+   *complete* essay, so anywhere mid-body it draws text the reader hasn't reached and
+   becomes ornament. The caption stayed bare for the same reason the dot went — the
+   failure was a **wrong** meaning, not a missing one, and only the dot was causing it.
+   This also aligns the two magnifications, since the index mark dropped its dot on
+   2026-07-29. It lives in the instrument container (hairline frame, mono
    caption) — the v3 frame reborn at essay scale — and the caption says one quiet number
    (`N words`), the gentlest decoder ring (owner call: craft over decodability; the
    mapping is feelable — more words, more folding — not labeled). Static, no JS, chosen

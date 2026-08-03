@@ -309,7 +309,7 @@ export function detailFromBody(slug, body) {
 }
 
 export function growthFoldSvg(slug, features, year) {
-  const { W, H, nodes, snapshots, paraFacts, maxPW, maxAS, lastInserted } = grownLine(slug, features);
+  const { W, H, nodes, snapshots, paraFacts, maxPW, maxAS } = grownLine(slug, features);
   const ageFactor = clamp(0.78 + ((year || 2026) - 2012) * (0.22 / 14), 0.7, 1.0);
   const parts = [];
   snapshots.forEach((snap, gi) => {
@@ -339,7 +339,10 @@ export function growthFoldSvg(slug, features, year) {
     parts.push(`<path d="${d}" fill="none" stroke="var(--glyph)" stroke-width="${sw.toFixed(1)}" stroke-opacity="${op.toFixed(2)}" stroke-linecap="round"/>`);
     prev = seg.length ? seg[seg.length - 1] : prev;
   }
-  parts.push(`<circle cx="${r1(lastInserted.x)}" cy="${r1(lastInserted.y)}" r="2.7" fill="var(--sig)"/>`);
+  // No sig dot (2026-08-03, owner call). A hand-drawn line ending in a filled dot,
+  // sitting under the last paragraph, is the universal form of a signature — a reader
+  // reported it as one. The line now simply stops where growth stopped, which is what
+  // it always meant. Matches the index mark, which dropped its dot on 2026-07-29.
 
   return `<svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="xMidYMid meet" style="display:block;width:100%;height:auto" aria-hidden="true">\n${parts.join('\n')}\n</svg>`;
 }
