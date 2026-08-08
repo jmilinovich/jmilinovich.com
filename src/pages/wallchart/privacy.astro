@@ -1,0 +1,98 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+// noindex until the app is actually on the App Store — the sitemap picks new pages up
+// automatically, and a privacy policy for an unreleased app has no business being crawled.
+const updated = 'August 2026';
+---
+
+<BaseLayout
+  title="Wallchart — Privacy Policy"
+  description="Wallchart keeps your habits on your device. Nothing is collected."
+  noindex={true}
+>
+  <p class="eyebrow">Wallchart</p>
+  <h1>Privacy Policy</h1>
+
+  <div class="prose">
+    <p class="lede">
+      Wallchart stores your habits on your iPhone. It does not send them to me, and there is
+      no server of mine for them to go to.
+    </p>
+
+    <h2>What is collected</h2>
+    <p>
+      Nothing. There are no accounts, no sign-in, no analytics, no advertising, no crash
+      reporting, and no third-party SDKs of any kind in the app. I receive no data about you
+      or your use of Wallchart, and I could not identify a user if I wanted to.
+    </p>
+
+    <h2>What is stored, and where</h2>
+    <p>
+      Your habits and every day you have logged are written to a container on your device that
+      is shared between the app and its Home Screen widget. That data stays on the device. It
+      is included in your device backups because your whole device is, and it is removed when
+      you delete the app.
+    </p>
+
+    <h2>Sync to your own server</h2>
+    <p>
+      Wallchart has an optional setting under <em>Settings → Sync to your own server</em>. It is
+      off, and empty, on a fresh install. If you enter a server address and an access token,
+      the app sends your habits and their logged days to <em>that</em> server as you log them —
+      a machine you run, at an address you chose. It goes nowhere else. I never see it, and no
+      part of the app talks to any other host.
+    </p>
+    <p>
+      If you turn the setting off, or clear the fields, the app stops sending anything
+      immediately. What your own server does with the data it has already received is between
+      you and your server.
+    </p>
+
+    <h2>Children</h2>
+    <p>
+      Wallchart collects nothing from anyone, including children.
+    </p>
+
+    <h2>Changes</h2>
+    <p>
+      If this policy ever changes, the date below changes with it. If a future version of the
+      app collects anything at all, that will be stated here plainly and in the App Store
+      privacy details before the version ships.
+    </p>
+
+    <h2>Contact</h2>
+    <p>
+      Questions about any of this: <a href="mailto:jrmilinovich@gmail.com">jrmilinovich@gmail.com</a>.
+    </p>
+
+    <p class="updated">Last updated {updated}</p>
+  </div>
+</BaseLayout>
+
+<style>
+  h1 {
+    margin-bottom: 2rem;
+  }
+
+  .prose :global(p) {
+    margin-bottom: 1.5rem;
+  }
+
+  .prose :global(h2) {
+    margin-top: 3rem;
+    margin-bottom: 1rem;
+    font-size: 1.05rem;
+  }
+
+  .lede {
+    color: var(--ink-strong);
+  }
+
+  .updated {
+    margin-top: 4rem;
+    font-family: 'Berkeley Mono', ui-monospace, monospace;
+    font-size: 0.8rem;
+    color: var(--muted);
+  }
+</style>
