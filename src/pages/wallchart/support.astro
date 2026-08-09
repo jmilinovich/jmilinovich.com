@@ -1,0 +1,104 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+// Apple requires the support URL to "lead to actual contact information", so the email is
+// the point of this page — everything else is here to answer the question before it's asked.
+const email = 'support@mili.family';
+---
+
+<BaseLayout
+  title="Wallchart — Support"
+  description="Help for Wallchart, the tap-to-track habit widget for iPhone."
+  noindex={true}
+>
+  <p class="eyebrow">Wallchart</p>
+  <h1>Support</h1>
+
+  <div class="prose">
+    <p class="lede">
+      Email <a href={`mailto:${email}`}>{email}</a> and I'll read it. Include your iPhone model
+      and iOS version if something is broken.
+    </p>
+
+    <h2>Adding the widget</h2>
+    <p>
+      The widget is the app. To add it: touch and hold an empty part of your Home Screen until
+      the icons jiggle, tap <em>Edit</em> in the top-left, tap <em>Add Widget</em>, search for
+      Wallchart, pick a size, and tap <em>Add Widget</em>. Tapping a habit on the widget logs it
+      without opening the app.
+    </p>
+
+    <h2>The three sizes hold different amounts</h2>
+    <p>
+      Small shows three habits, medium five, large ten. If you have more habits than the widget
+      can show, it lists as many as fit and says how many are hidden. Reorder your habits in the
+      app — touch and hold a row and drag — to choose which ones make the cut.
+    </p>
+
+    <h2>Counters wrap back to zero</h2>
+    <p>
+      A counter habit counts up one per tap. Tapping it again once it has reached its goal starts
+      the day over at zero, so one control can both add and reset. If you overshoot, keep tapping
+      round to the number you want.
+    </p>
+
+    <h2>Days reset at midnight</h2>
+    <p>
+      Each day is stored separately, so a new day starts empty on its own — there is nothing to
+      reset and nothing to remember. Past days are never overwritten. Tap a habit to open its
+      history, then tap any past day on the calendar to correct it.
+    </p>
+
+    <h2>Archive keeps history, delete does not</h2>
+    <p>
+      Swiping a habit away archives it: it disappears from Today and the widget, and everything
+      you logged is kept. <em>Delete Forever</em>, from the archived list, removes the habit and
+      every day you ever logged for it. That one cannot be undone.
+    </p>
+
+    <h2>Sync to your own server</h2>
+    <p>
+      Optional, off by default, and meant for people who already run a server. Under
+      <em>Settings → Sync to your own server</em>, enter a host and an access token and Wallchart
+      will POST your habits and logged days to <code>https://your-host/api/sync</code> as you log
+      them. <em>Restore from my server</em> pulls them back — useful on a new phone. Restore only
+      ever adds; it will not overwrite a day this phone already has.
+    </p>
+    <p>
+      If you don't run a server, ignore this entirely. Wallchart is complete without it and sends
+      nothing anywhere. See the <a href="/wallchart/privacy">privacy policy</a>.
+    </p>
+
+    <h2>Nothing here answers it</h2>
+    <p>
+      <a href={`mailto:${email}`}>{email}</a>.
+    </p>
+  </div>
+</BaseLayout>
+
+<style>
+  h1 {
+    margin-bottom: 2rem;
+  }
+
+  .prose :global(p) {
+    margin-bottom: 1.5rem;
+  }
+
+  .prose :global(h2) {
+    margin-top: 3rem;
+    margin-bottom: 1rem;
+    font-size: 1.05rem;
+  }
+
+  .lede {
+    color: var(--ink-strong);
+  }
+
+  .prose :global(code) {
+    font-family: 'Berkeley Mono', ui-monospace, monospace;
+    font-size: 0.85em;
+    background: var(--code-bg);
+    padding: 0.1em 0.35em;
+  }
+</style>

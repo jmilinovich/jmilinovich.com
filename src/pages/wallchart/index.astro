@@ -1,0 +1,85 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+// This page exists partly so /wallchart isn't a dead URL: netlify.toml redirects a bare
+// /:slug to /writing/:slug, which would 404. An existing path wins (force = false).
+---
+
+<BaseLayout
+  title="Wallchart"
+  description="A habit tracker you never open. Tap a habit on your Home Screen and it's logged."
+  noindex={true}
+>
+  <p class="eyebrow">iPhone</p>
+  <h1>Wallchart</h1>
+
+  <div class="prose">
+    <p class="lede">
+      A habit tracker you never open. The habits live on your Home Screen; you tap one and it's
+      logged. No app launch, no streak notifications, no account.
+    </p>
+
+    <p>
+      I wanted the wall calendar with the marks on it, on my phone, without the ceremony every
+      other habit app insists on. So the widget is the product and the app is where you go to
+      change things or look at the chain you've built.
+    </p>
+
+    <h2>What it does</h2>
+    <ul class="facts">
+      <li>Tap a habit on the Home Screen widget to log it — the app never opens.</li>
+      <li>Yes/no habits and counters ("water, 5 of 8").</li>
+      <li>A calendar per habit, with the current and longest streak, and a tap to fix any past day.</li>
+      <li>Everything stays on the device. Optionally, sync to a server you run yourself.</li>
+    </ul>
+
+    <h2>Where the data goes</h2>
+    <p>
+      Nowhere. There is no account and no server of mine. If you happen to run your own, there's
+      a setting for that, and it points wherever you tell it. The
+      <a href="/wallchart/privacy">privacy policy</a> is short because there's little to say.
+    </p>
+
+    <p class="links">
+      <a href="/wallchart/support">Support</a> · <a href="/wallchart/privacy">Privacy</a>
+    </p>
+  </div>
+</BaseLayout>
+
+<style>
+  h1 {
+    margin-bottom: 2rem;
+  }
+
+  .prose :global(p) {
+    margin-bottom: 1.5rem;
+  }
+
+  .prose :global(h2) {
+    margin-top: 3rem;
+    margin-bottom: 1rem;
+    font-size: 1.05rem;
+  }
+
+  .lede {
+    color: var(--ink-strong);
+  }
+
+  .facts {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1.5rem;
+    border-top: 1px solid var(--hairline);
+  }
+
+  .facts li {
+    padding: 0.75rem 0;
+    border-bottom: 1px solid var(--hairline);
+  }
+
+  .links {
+    margin-top: 4rem;
+    font-family: 'Berkeley Mono', ui-monospace, monospace;
+    font-size: 0.8rem;
+  }
+</style>
