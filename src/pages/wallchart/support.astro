@@ -30,7 +30,7 @@ const email = 'support@mili.family';
 
     <h2>The three sizes hold different amounts</h2>
     <p>
-      Small shows three habits, medium five, large ten. If you have more habits than the widget
+      Small shows three habits, medium four, large ten. If you have more habits than the widget
       can show, it lists as many as fit and says how many are hidden. Reorder your habits in the
       app — touch and hold a row and drag — to choose which ones make the cut.
     </p>
@@ -58,11 +58,12 @@ const email = 'support@mili.family';
 
     <h2>Sync to your own server</h2>
     <p>
-      Optional, off by default, and meant for people who already run a server. Under
+      Optional, off until you fill it in, and meant for people who already run a server. Under
       <em>Settings → Sync to your own server</em>, enter a host and an access token and Wallchart
       will POST your habits and logged days to <code>https://your-host/api/sync</code> as you log
-      them. <em>Restore from my server</em> pulls them back — useful on a new phone. Restore only
-      ever adds; it will not overwrite a day this phone already has.
+      them. <em>Restore from my server</em> pulls them back — useful on a new phone. Restore never
+      overwrites a day this phone already has. On a phone with no habits of its own yet, your
+      server's habits replace the starter examples.
     </p>
     <p>
       If you don't run a server, ignore this entirely. Wallchart is complete without it and sends

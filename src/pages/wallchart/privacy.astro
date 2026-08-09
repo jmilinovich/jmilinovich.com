@@ -32,21 +32,32 @@ const updated = 'August 2026';
       Your habits and every day you have logged are written to a container on your device that
       is shared between the app and its Home Screen widget. That data stays on the device. It
       is included in your device backups because your whole device is, and it is removed when
-      you delete the app.
+      you delete the app. One exception: the server address and token, if you set them, live in
+      the iOS Keychain, which survives deleting the app. Reinstalling and finding sync already
+      configured is that, not the app phoning home.
     </p>
 
     <h2>Sync to your own server</h2>
     <p>
       Wallchart has an optional setting under <em>Settings → Sync to your own server</em>. It is
-      off, and empty, on a fresh install. If you enter a server address and an access token,
+      off, and empty, until you fill it in. If you enter a server address and an access token,
       the app sends your habits and their logged days to <em>that</em> server as you log them —
       a machine you run, at an address you chose. It goes nowhere else. I never see it, and no
       part of the app talks to any other host.
     </p>
     <p>
-      If you turn the setting off, or clear the fields, the app stops sending anything
-      immediately. What your own server does with the data it has already received is between
-      you and your server.
+      To stop it, tap <em>Turn off sync</em> in Settings; the address and token are erased and
+      the app sends nothing further. (Clearing the two fields by hand isn't enough — the app
+      won't save an empty pair.) What your own server does with data it already received is
+      between you and your server.
+    </p>
+
+    <h2>This website</h2>
+    <p>
+      Everything above is about the app. This page itself is served from mili.dev, which uses
+      Cloudflare Web Analytics — it counts page views without cookies and without identifying
+      visitors. The app does not talk to it, and reading this page tells me nothing about your
+      habits.
     </p>
 
     <h2>Children</h2>
