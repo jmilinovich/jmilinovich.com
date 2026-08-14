@@ -83,7 +83,7 @@ Skeuomorphism ran the better part of two decades before [flat design arrived at 
 <path d="M78,128 H22 V48 H26"/><path d="M21,44 L27,48 L21,52"/>
 </g>
 </svg>
-<figcaption style="font-family:'Berkeley Mono',ui-monospace,monospace;font-size:1.15rem;color:var(--muted);letter-spacing:0.02em;margin-top:1rem;">Every style gives birth to its successor while it is still peaking.</figcaption>
+<figcaption style="font-family:'Berkeley Mono',ui-monospace,monospace;font-size:1.15rem;color:var(--muted);letter-spacing:0.02em;margin-top:1rem;">The loop has no exit, and the property that makes a style succeed is the one that ends it.</figcaption>
 </figure>
 
 [Paul Graham described the same convergence in March](https://paulgraham.com/brandage.html): branding is centrifugal, design is centripetal, because good design seeks the right answer and right answers converge. The stack says why. Design converges because its lower layers have measures, and brand is centrifugal because it lives where there is nothing to measure.
