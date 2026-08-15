@@ -333,11 +333,13 @@ fighting it. Do not "fix" the inconsistency.
 came back from adversarial verification flagged high overclaim risk — not for their wording,
 which contains no first-person framing at all, but structurally: a bare "Canva AI" on a
 personal projects page reads as authorship of something two co-founders announced from a
-stadium stage. The fix is a mono line naming what John actually did (`canva · head of ai
-product`, `pinterest · product manager, taste graph`, `urx · co-founder & ceo`), sourced to
-public record — Canva's own newsroom, TechCrunch, Axios. It reads as a caption, not a
-disclaimer, and the variation down the list is itself the honest story. **Do not add a row
-whose role cannot be sourced.** Pinterest Lens was cut on exactly this test (2026-08-03):
+stadium stage. The fix is a mono line naming what John actually did (`canva · head of
+generative ai product`, `pinterest · product manager, taste graph`, `urx · co-founder &
+ceo`), sourced to public record — TechCrunch, Axios, podcast episode billing. It reads as a
+caption, not a disclaimer, and the variation down the list is itself the honest story. **Do
+not add a row whose role cannot be sourced.** The Canva title is written out in full and
+never shortened to "head of ai product" (corrected 2026-08-14): someone else held that exact
+title at Canva, so the short form attributes their job to John. Pinterest Lens was cut on exactly this test (2026-08-03):
 the Lens announcements name only the visual-search engineers, while the Taste Graph entry
 beside it has John quoted by name in TechCrunch and MarTech.
 

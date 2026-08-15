@@ -22,11 +22,13 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 // documented after the fact and never dated), so a month would claim a precision
 // the public record does not support.
 //
-// Every `role` line is what public sources actually attribute to John — Canva's own
-// newsroom names him Head of AI Product, TechCrunch names him the Taste Graph's PM,
-// TechCrunch names him URX's co-founder and CEO. Do not add a row here whose role
-// cannot be sourced; a bare product name on a personal projects page reads as a claim
-// of authorship, and these were shipped by teams.
+// Every `role` line is what public sources actually attribute to John — the Canva title
+// is Head of Generative AI Product (The Cognitive Revolution's episode billing, his own
+// LinkedIn), TechCrunch names him the Taste Graph's PM, TechCrunch names him URX's
+// co-founder and CEO. Do not add a row here whose role cannot be sourced; a bare product
+// name on a personal projects page reads as a claim of authorship, and these were shipped
+// by teams. "Generative" is load-bearing, not verbosity: a different person held the
+// Head of AI Product title at Canva, so the short form is someone else's job.
 const bands = [
   {
     label: 'On my own',
@@ -91,7 +93,7 @@ const bands = [
         date: '2026',
         description:
           'A rebuild of Canva around conversation, where you describe a goal and it picks the tools it needs and runs them.',
-        role: 'canva · head of ai product',
+        role: 'canva · head of generative ai product',
         links: [],
       },
       {
@@ -100,7 +102,7 @@ const bands = [
         date: '2025',
         description:
           'A conversational assistant inside Canva that turns a typed or spoken prompt into an editable design, document, or image.',
-        role: 'canva · head of ai product',
+        role: 'canva · head of generative ai product',
         links: [
           {
             label: 'one percent of the way there',
@@ -115,7 +117,7 @@ const bands = [
         date: '2023',
         description:
           "Canva's suite of AI design tools for generating and editing images, video, presentations, and copy inside the editor.",
-        role: 'canva · head of ai product',
+        role: 'canva · head of generative ai product',
         links: [{ label: "time's best inventions 2024", url: 'https://time.com/7094550/canva-magic-studio/' }],
       },
       {
