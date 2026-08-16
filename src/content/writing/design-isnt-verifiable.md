@@ -15,7 +15,7 @@ But design is two things wearing one name. There's the artifact, which is the fi
 
 ## The checkable parts go first
 
-A machine can take over any part of the work where we can check the answer. Not where the work is easy, and not where it's boring. Where it's checkable.
+A machine can take over any part of the work where we can check the answer, which is not the same as the part that's easy or the part that's boring.
 
 At the bottom are the things with a number behind them. Contrast has a number, [4.5 to 1](https://webaim.org/projects/million/) for normal text. Spacing on a grid has a number. Whether a color is in the palette is a lookup, and whether the built thing matches the file is a diff. That layer is gone: contrast checking now happens [inside CSS itself](https://www.smashingmagazine.com/2026/05/building-self-correcting-color-systems-contrast-color/), and design systems ship with [token drift detection](https://techglock.com/blog/ai-in-design-what-actually-ships-in-mid-2026-and-what-still-falls-apart) that catches a hardcoded hex before it reaches an engineer. Above that sit the things you check against a rubric instead of a formula, like platform conventions, voice across forty screens, whether every state in a flow can be reached and escaped. No equation, but a written standard and a patient reader, and a model is a very patient reader. Above that is the empirical layer, does it convert and can people finish the task, always verifiable in principle and always too slow in practice, and there's now [a research literature on using models as synthetic users](https://arxiv.org/pdf/2606.05697) to run it before a human sees anything.
 
