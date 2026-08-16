@@ -94,7 +94,7 @@ Which explains something everyone has noticed. A model's default aesthetic is th
 
 ## And maybe the artifact itself
 
-The first two are cycles. They have happened before and they will happen again. This one only happens once.
+The first two are cycles, and I expect to watch both of them run again. The third isn't a cycle, because it depends on the cost of building the thing itself, and that cost keeps falling.
 
 I majored in architecture, and the thing about an architectural model is that it never becomes the building. It's made of different material. You can iterate on it for a year and somebody still has to pour concrete, and the concrete costs a thousand times more than the model and cannot be undone. That gap isn't a convention anyone chose. It's physics, and it's why architectural drawing has survived every tool that arrived to replace it, including the two I learned.
 
