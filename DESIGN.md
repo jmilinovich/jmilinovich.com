@@ -22,7 +22,8 @@ superseded by this document.
   (2026-07-27): it read as ego-forward and demands annual upkeep that will inevitably
   lapse. Do not reintroduce it.
 - **Willing to be bad at:** being a résumé (no case studies, no logo rows, bio stays five
-  bullets) and trend coverage (no bento, no craft-demo playground — that genre belongs to
+  bullets — when a new job arrived 2026-09-12 the room came from folding Google/Yahoo into
+  the "Previously" line, not from a sixth bullet) and trend coverage (no bento, no craft-demo playground — that genre belongs to
   design engineers selling interaction craft; this site's proof is dated writing).
   *Amended 2026-08-03:* `/projects` now carries work shipped at Canva, Clubhouse, Pinterest,
   Aesthetic and URX, which is the closest this site comes to that line. It stays on the
@@ -339,7 +340,10 @@ ceo`), sourced to public record — TechCrunch, Axios, podcast episode billing. 
 caption, not a disclaimer, and the variation down the list is itself the honest story. **Do
 not add a row whose role cannot be sourced.** The Canva title is written out in full and
 never shortened to "head of ai product" (corrected 2026-08-14): someone else held that exact
-title at Canva, so the short form attributes their job to John. Pinterest Lens was cut on exactly this test (2026-08-03):
+title at Canva, so the short form attributes their job to John. When Figma ships something
+attributable, its role line is `figma · senior director of product management` (joined
+August 2026 to help lead AI research and new product bets, per his own announcement); no row
+until there is an artifact. Pinterest Lens was cut on exactly this test (2026-08-03):
 the Lens announcements name only the visual-search engineers, while the Taste Graph entry
 beside it has John quoted by name in TechCrunch and MarTech.
 
