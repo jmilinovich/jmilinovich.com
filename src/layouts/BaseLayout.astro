@@ -13,6 +13,14 @@ interface Props {
 
 const { title, description = "John Milinovich - entrepreneur and technology executive", ogImage = '/og/default.png', noindex = false } = Astro.props;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+// Every generated card (scripts/generate-og.mjs) has a video twin: the same card
+// with the living logo performing one seamless loop. Deriving one from the other
+// means a page can't pair a card with someone else's video. og:type stays
+// "website": Discord plays og:video only for og:type video.*, and a play button
+// on an essay link would promise the essay is a video — so there it stays the
+// card, and iMessage, which autoplays muted inline, shows it come alive.
+const ogCard = ogImage?.startsWith('/og/') && ogImage.endsWith('.png');
+const ogVideo = ogCard ? ogImage.replace(/\.png$/, '.mp4') : undefined;
 
 const forwards: TransitionAnimationPair = {
   old: {
@@ -63,6 +71,14 @@ const viewTransition = { forwards, backwards };
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     {ogImage && <meta property="og:image" content={new URL(ogImage, Astro.site)} />}
+    {ogCard && <meta property="og:image:type" content="image/png" />}
+    {ogCard && <meta property="og:image:width" content="1200" />}
+    {ogCard && <meta property="og:image:height" content="630" />}
+    {ogVideo && <meta property="og:video" content={new URL(ogVideo, Astro.site)} />}
+    {ogVideo && <meta property="og:video:secure_url" content={new URL(ogVideo, Astro.site)} />}
+    {ogVideo && <meta property="og:video:type" content="video/mp4" />}
+    {ogVideo && <meta property="og:video:width" content="1200" />}
+    {ogVideo && <meta property="og:video:height" content="630" />}
     <meta name="twitter:card" content={ogImage ? "summary_large_image" : "summary"} />
     <meta name="twitter:site" content="@J_mili" />
     <meta name="twitter:title" content={title} />

@@ -289,6 +289,38 @@ differential growth on 2026-07-28.
    Owner decision 2026-07-27: the glyph trace was tried here and rejected — out of
    context it reads as an unexplained squiggle. Glyphs stay where they have context
    (index, pressmark); the logo carries identity off-site.
+   **og:video** (2026-10-24): every card has a video twin. It is the same card with the
+   living logo performing one 8-second loop: two eye actions, one of them always a blink,
+   and the smile drifting to one mood and back. It starts and ends on the poster. Eight
+   candidates were graded against a rubric. Animating the fingerprint, the substrate,
+   the pressmark or the title failed on standing decisions (glyph trace out of context,
+   nothing loops but the logo, no typing effects). The logo won because it is already
+   the one sanctioned infinite loop, so a platform that loops the video stays inside the
+   motion budget. Rules, each with its reason:
+   - **Poster = first frame = last frame** (seam measured ≥ 40 dB PSNR at encode). A
+     platform that swaps the og:image for the playing video shows no jump, and the loop
+     has no hitch. A platform that never plays it loses nothing.
+   - **The vocabulary is read, not copied.** Blink depth, transform origins, the eleven
+     smile moods and the breath come from the `logo-animations` source at build, and the
+     build fails if they can't be found. Only the cadence is compressed. Verified against
+     Chromium rendering the real CSS: every pose matched the rest pose's anti-aliasing
+     floor (~41.8 dB).
+   - **Seeded by the page slug.** Same page, same performance. Two mili.dev links in one
+     thread never blink in sync. The seed only chooses among the logo's own gestures; it
+     encodes nothing about the essay, because the logo is identity, not a data display.
+   - **`og:type` stays `website`.** Discord plays og:video only for `video.*` types, and
+     there it draws a play button. That promises an essay is a video, which is a wrong
+     meaning (the sig-dot lesson), so Discord keeps the still card. iMessage autoplays it
+     muted and inline, with no promise made. No `twitter:player`: X would gain nothing
+     and could drop the large card.
+   - **H.264 High@4.0, yuv420p, BT.709, faststart, no audio track** (nothing to hear, and
+     a mute toggle would promise sound). About 70 KB each. Byte-identical build to build:
+     ffmpeg-static is pinned exactly and bit-exact flags are set. That determinism is
+     what makes the content-addressed cache in `node_modules/.cache/og-video` safe.
+   Gate: `scripts/check-og.mjs` runs as `postbuild`. Every page with a card must carry its
+   own video's tags, and the MP4 must actually be what the tags claim. Human review:
+   `node scripts/og-video-sheet.mjs`, after touching `scripts/og-motion.mjs` or updating
+   `logo-animations`.
 
 **Determinism is law.** Same seed → same drawing, on every build, in both themes.
 **Quality gate:** `node scripts/check-phone-soil.mjs` after a build asserts the two
