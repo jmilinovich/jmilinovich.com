@@ -16,7 +16,8 @@
   "dependencies": {
     "@astrojs/sitemap": "^3.7.1",
     "astro": "^6.0.4",
-    "logo-animations": "https://github.com/jmilinovich/logo-animations.git"
+    "logo-animations": "https://github.com/jmilinovich/logo-animations.git",
+    "three": "0.186.0"
   },
   "devDependencies": {
     "@playwright/test": "^1.58.2",

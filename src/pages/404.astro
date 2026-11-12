@@ -1,0 +1,153 @@
+---
+import { readFileSync } from 'node:fs';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+// The wordmark's paths, read from the real component so this page can't drift
+// from the logo (scripts/generate-og.mjs does the same for the cards).
+const logoSource = readFileSync('src/components/Logo.astro', 'utf8');
+const paths = [...logoSource.matchAll(/<path[^>]*\bclass="([^"]+)"[^>]*\bd="([^"]+)"/g)].map((m) => ({ cls: m[1], d: m[2] }));
+const classes = new Set(paths.map((p) => p.cls));
+if (paths.length < 5 || !['smile', 'eye-left', 'eye-right'].every((c) => classes.has(c))) {
+  throw new Error('could not extract the logo paths (and their eye/smile classes) from Logo.astro');
+}
+---
+
+<BaseLayout title="Page not found - John Milinovich" noindex>
+  <h1>Page not found</h1>
+
+  <!-- The wordmark as a lit 3D object, drawn in characters (src/lib/ascii-logo.js).
+       The flat wordmark underneath is what shows without JS or WebGL. -->
+  <figure class="ascii-logo">
+    <div class="frame" id="ascii-stage">
+      <svg viewBox="0 0 3109 2091" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="mili">
+        {paths.map((p) => <path class={p.cls} d={p.d} />)}
+      </svg>
+    </div>
+    <figcaption id="ascii-caption">404</figcaption>
+  </figure>
+  <noscript><style>.ascii-logo .frame > svg { animation: none; opacity: 1; }</style></noscript>
+
+  <p class="onward"><a href="/writing">All writing &rarr;</a></p>
+</BaseLayout>
+
+<script>
+  let teardown: (() => void) | undefined;
+  let run = 0;
+
+  async function init() {
+    const stage = document.getElementById('ascii-stage');
+    const flat = stage?.querySelector('svg');
+    if (!stage || !flat) return;
+
+    // The caption names the address that led here, the way a seed line would.
+    const caption = document.getElementById('ascii-caption');
+    const at = decodeURI(location.pathname).replace(/\/$/, '');
+    if (caption && at && !/^\/404(\.html)?$/.test(at)) caption.textContent = `404 · ${at}`;
+
+    const mine = ++run;
+    try {
+      const { mountAsciiLogo } = await import('../lib/ascii-logo.js');
+      const stop = await mountAsciiLogo(stage, flat.outerHTML);
+      if (mine !== run) return stop();        // navigated away while it loaded
+      teardown = stop;
+      stage.dataset.state = 'live';
+    } catch {
+      if (mine === run) stage.dataset.state = 'flat';
+    }
+  }
+
+  document.addEventListener('astro:page-load', init);
+  document.addEventListener('astro:before-swap', () => {
+    run++;
+    teardown?.();
+    teardown = undefined;
+  });
+</script>
+
+<style is:global>
+  /* Global because the characters are built at runtime, outside Astro's scoping. */
+  .ascii-logo {
+    margin-top: 3rem;
+  }
+
+  .ascii-logo .frame {
+    position: relative;
+    aspect-ratio: 3 / 2;
+    overflow: hidden;
+    border: 1px solid var(--hairline);
+    cursor: grab;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: pan-y;
+  }
+  .ascii-logo .frame.grab {
+    cursor: grabbing;
+  }
+
+  /* AsciiEffect sizes the type and hard-codes Courier; the characters are
+     machine output, so they set in Berkeley Mono, and --ls trues the cell
+     width up to its advance. Ink in light, phosphor in dark — the drawings'
+     own colour. */
+  .ascii-logo .ascii {
+    position: absolute;
+    inset: 0;
+    color: var(--glyph);
+  }
+  .ascii-logo .ascii table {
+    margin: 0 auto !important;
+    font-family: 'Berkeley Mono', monospace !important;
+    letter-spacing: var(--ls) !important;
+  }
+
+  /* The flat wordmark. Held back while the 3D loads so it doesn't flash first;
+     if nothing has drawn by then (no WebGL, script blocked) it shows itself. */
+  .ascii-logo .frame > svg {
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    width: 62%;
+    height: auto;
+    opacity: 0;
+    animation: ascii-logo-flat 0s 5s forwards;
+  }
+  .ascii-logo .frame > svg path {
+    fill: var(--glyph);
+  }
+  .ascii-logo .frame[data-state='flat'] > svg {
+    animation: none;
+    opacity: 1;
+  }
+  .ascii-logo .frame[data-state='live'] > svg {
+    display: none;
+  }
+  @keyframes ascii-logo-flat {
+    to { opacity: 1; }
+  }
+
+  .ascii-logo figcaption {
+    font-family: 'Berkeley Mono', monospace;
+    font-size: 1.15rem;
+    color: var(--muted);
+    text-align: right;
+    margin-top: 0.7rem;
+    letter-spacing: 0.02em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .ascii-logo ~ .onward {
+    font-family: 'Berkeley Mono', monospace;
+    font-size: 1.2rem;
+    margin-top: 1.6rem;
+  }
+  .ascii-logo ~ .onward a {
+    color: var(--muted);
+    text-decoration: none;
+  }
+  .ascii-logo ~ .onward a:hover {
+    color: var(--ink);
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+  }
+</style>

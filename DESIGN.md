@@ -392,6 +392,39 @@ flat dash. This page is typography. There is also no page subtitle: the band lab
 honest frame, and a line like "things I made, and things I helped make" is the
 punchy-founder register the `humanize` skill exists to catch.
 
+## The 404 page
+
+Added 2026-11-11. The site had no 404 and served Netlify's default. A dead link now lands
+on the living logo as a lit 3D object drawn in characters (`src/pages/404.astro`,
+`src/lib/ascii-logo.js`): the wordmark's own paths, read from `Logo.astro` at build,
+extruded and rendered through three.js' `AsciiEffect`.
+
+This is the nearest the site comes to the craft-demo playground that §Voice rules out. It
+stays on the right side for three reasons, and loses its place if any of them stops being
+true:
+
+- **It is on the one page with no reading job.** Nothing links to it and no essay reader
+  loads it. three.js (about 154 KB gzipped) is bundled from npm into a chunk only this
+  route imports. **Do not move it to the header, the homepage, or an essay.**
+- **It is the logo, not a new system.** The vocabulary is the living logo's own (blink,
+  squint, glance, the eleven moods, the grin when held), so it falls under the logo's
+  standing exception in §Motion rather than adding a second one.
+- **It settles.** It turns in once (2.6s) and stops. Frames are drawn only while a gesture
+  or a drag is in progress, and the loop is cancelled in between. Moods run at a slower
+  cadence here (every 6–12s against the logo's 2–5s) so the page is asleep most of the
+  time: measured at about a third of an always-on loop's frames. Dragging turns it and
+  letting go returns it to rest. Hidden tabs draw nothing; `astro:before-swap` tears it
+  down; reduced motion gets the rest pose, still.
+
+Rules that follow from the rest of this file: the characters are machine output, so they
+set in Berkeley Mono (the effect's hard-coded Courier is overridden and the cell width is
+trued to the measured advance). They take `--glyph`, so dark is phosphor and light is
+plotter ink. No scanlines, glow, vignette, charset or tint controls: the standalone demo in
+`logo-animations/4-ascii.html` has those and this page must not grow them. The frame and
+caption are the `fingerprint` instrument reused, and the caption carries provenance the way
+the seed line does: `404 ·` and the address that was asked for. Without JS or WebGL the
+flat wordmark shows in the same frame.
+
 ## Component vocabulary
 
 `logo` (the living mili wordmark, `Logo.astro`) · `row` (glyph + serif title + mono date)
@@ -401,7 +434,8 @@ caption — the contained instrument) · `facts` (the bio bullets) · `keep read
 essay foot: eyebrow + three `row`s + the mono `All writing →` line, `KeepReading.astro`)
 · `footer strip` · `project row` (name + right-aligned date, description, then one mono
 provenance line carrying the role and any second destination — `/projects` only, see §The
-projects page).
+projects page). · `ascii logo` (the wordmark in characters inside the instrument frame —
+`/404` only, see §The 404 page).
 That's the whole kit; new surfaces compose these before inventing.
 
 ## Anti-patterns (the audit checks these)
@@ -416,7 +450,8 @@ That's the whole kit; new surfaces compose these before inventing.
   one hue per theme varying in tone, which is why it does not breach this.
 - No CDN-loaded assets of any kind (fonts, CSS, JS).
 - No infinite animation loops (sole exception: the living logo, see §Motion); nothing
-  else animates on essay pages.
+  else animates on essay pages The 404's ASCII logo is that same exception, not a second
+  one — see §The 404 page.
 - Links are identified by a visible underline in `muted` (≥3:1), darkening on hover —
   never by colour, and never by a hairline too faint to see.
 - No terminal-typing effects, no Matrix-rain framing — the substrate is data-fed,
