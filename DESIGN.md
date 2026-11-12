@@ -420,8 +420,9 @@ Rules that follow from the rest of this file: the characters are machine output,
 set in Berkeley Mono (the effect's hard-coded Courier is overridden and the cell width is
 trued to the measured advance). They take `--glyph`, so dark is phosphor and light is
 plotter ink. No scanlines, glow, vignette, charset or tint controls: the standalone demo in
-`logo-animations/4-ascii.html` has those and this page must not grow them. The frame and
-caption are the `fingerprint` instrument reused, and the caption carries provenance the way
+`logo-animations/4-ascii.html` has those and this page must not grow them. It sits
+unframed (owner call 2026-11-11: the hairline box borrowed from the `fingerprint` was tried
+and removed), with the fingerprint's mono caption beneath, and the caption carries provenance the way
 the seed line does: `404 ·` and the address that was asked for. Without JS or WebGL the
 flat wordmark shows in the same frame.
 
@@ -434,7 +435,7 @@ caption — the contained instrument) · `facts` (the bio bullets) · `keep read
 essay foot: eyebrow + three `row`s + the mono `All writing →` line, `KeepReading.astro`)
 · `footer strip` · `project row` (name + right-aligned date, description, then one mono
 provenance line carrying the role and any second destination — `/projects` only, see §The
-projects page). · `ascii logo` (the wordmark in characters inside the instrument frame —
+projects page). · `ascii logo` (the wordmark in characters, unframed, with a mono caption —
 `/404` only, see §The 404 page).
 That's the whole kit; new surfaces compose these before inventing.
 
